@@ -7,9 +7,8 @@
     "noImplicitThis": true,
     "alwaysStrict": true,
 
-    "module": "es2015",
-    "target": "es2017",
-    "jsx": "react",
+    "module": "commonjs",
+    "target": "es6",
     "allowJs": true,
     "sourceMap": true,
     "moduleResolution": "node",
@@ -17,21 +16,6 @@
     "lib": ["dom", "esnext"],
     "experimentalDecorators": true,
 
-    "typeRoots": ["./node_modules/@types"],
-
-    "baseUrl": "./",
-
-    "paths": {
-      "@client/*": ["src/client/*"],
-      "@server/*": ["src/server/*"],
-      "@/*": ["src/shared/*"],
-      "~/*": ["src/*"]
-    }
-  },
-  "awesomeTypescriptLoaderOptions": {
-    "reportFiles": ["src/**/*.{ts,tsx}"],
-    "useCache": true
-  },
-  "exclude": ["node_modules", "build", "public"],
-  "include": ["src/**/*"]
+    "baseUrl": "./"
+  }
 }

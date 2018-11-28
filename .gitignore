@@ -6,4 +6,5 @@ dist
 .vscode
 .vs
 .awcache
-server.bundle.js
+.fusebox
+server.js
