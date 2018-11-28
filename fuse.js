@@ -5,13 +5,14 @@ const {
   FuseBox,
   EnvPlugin,
   CSSPlugin,
+  SassPlugin,
   QuantumPlugin,
   WebIndexPlugin,
   CopyPlugin,
   JSONPlugin,
 } = require('fuse-box');
 
-const isProduction = process.env.NODE_ENV === 'production';
+const isProduction = process.env.NODE_ENV === 'prod';
 
 class Builder {
   constructor(name, target) {
@@ -83,6 +84,7 @@ class Builder {
 
     this.addWebIndexPlugin('index');
     this.addCopyPlugin();
+    this.config.plugins.push([SassPlugin(), CSSPlugin()]);
   }
 
   addWebIndexPlugin(name) {
@@ -105,27 +107,34 @@ class Builder {
   }
 }
 
-Sparky.task('clean', () => {
-  return Promise.all([
-    Sparky.src('./build')
-      .clean('build/')
-      .exec(),
-  ]);
+Sparky.task('clean', async () => {
+  await Sparky.src('./build')
+    .clean('build/')
+    .exec();
 });
 
-Sparky.task('full-server', ['client', 'server']);
+Sparky.task('full-server', [
+  (isProduction && 'clean') || '',
+  'client',
+  'server',
+]);
 
-Sparky.task('full-desktop', ['desktop', 'desktop-main']);
+Sparky.task('full-desktop', [
+  (isProduction && 'clean') || '',
+  'desktop',
+  'desktop-main',
+]);
 
 Sparky.task('server', () => {
   const builder = new Builder('server', 'server');
 
   builder.init('> [server/index.ts]', 'server/**');
 
-  spawn('npm', ['run', 'start-server'], {
-    shell: true,
-    stdio: 'inherit',
-  });
+  !isProduction &&
+    spawn('npm', ['run', 'start-server'], {
+      shell: true,
+      stdio: 'inherit',
+    });
 });
 
 Sparky.task('client', () => {
@@ -142,10 +151,11 @@ Sparky.task('desktop-main', () => {
 
   builder.init('> [main/index.ts]', 'main/**');
 
-  spawn('npm', ['run', 'start-desktop'], {
-    shell: true,
-    stdio: 'inherit',
-  });
+  !isProduction &&
+    spawn('npm', ['run', 'start-desktop'], {
+      shell: true,
+      stdio: 'inherit',
+    });
 });
 
 Sparky.task('desktop', () => {

@@ -1,4 +1,4 @@
-const webIcon = require('../shared/resources/icons/web.svg');
+import './styles.scss';
 
 window.onload = () => {
   const app = document.getElementById('app');

@@ -27,10 +27,12 @@
   },
   "main": "./build/main.js",
   "scripts": {
+    "start-server": "cross-env NODE_ENV='dev' node build/server.js",
+    "start-desktop": "cross-env ENV='dev' electron .",
     "dev-server": "cross-env NODE_ENV='dev' node fuse.js full-server",
     "dev-desktop": "cross-env NODE_ENV='dev' node fuse.js full-desktop",
-    "start-server": "cross-env NODE_ENV='prod' node build/server.js",
-    "start-desktop": "cross-env ENV='dev' electron .",
+    "build-server": "cross-env NODE_ENV='prod' node fuse.js full-server",
+    "build-desktop": "cross-env NODE_ENV='prod' node fuse.js full-desktop",
     "clean": "node fuse.js clean"
   },
   "devDependencies": {
@@ -39,6 +41,7 @@
     "electron-react-devtools": "0.5.3",
     "fuse-box": "3.5.0",
     "fuse-box-typechecker": "2.11.0",
+    "node-sass": "4.10.0",
     "tslint": "5.11.0",
     "tslint-config-airbnb": "5.11.0",
     "tslint-config-prettier": "1.15.0",
