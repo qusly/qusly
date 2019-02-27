@@ -1,7 +1,7 @@
 {
-  "name": "universal-node-boilerplate",
+  "name": "wexond-ftp-client",
   "version": "1.0.0",
-  "description": "🌐🗔 Write once, run on desktop and web. FuseBox, React, Electron and Sass",
+  "description": "A FTP client",
   "keywords": [
     "typescript",
     "react",
@@ -9,9 +9,9 @@
     "electron",
     "fuse-box",
     "boilerplate",
-    "starter-kit",
-    "nodejs",
-    "express"
+    "wexond",
+    "ftp",
+    "client"
   ],
   "author": {
     "name": "Mikołaj Palkiewicz",
@@ -20,10 +20,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xnerhu/universal-node-boilerplate.git"
+    "url": "git+https://github.com/xnerhu/wexond-ftp-client.git"
   },
   "bugs": {
-    "url": "https://github.com/xnerhu/universal-node-boilerplate#issues"
+    "url": "https://github.com/xnerhu/wexond-ftp-client#issues"
   },
   "main": "./build/main.js",
   "scripts": {
