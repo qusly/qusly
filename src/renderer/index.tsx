@@ -1,7 +1,11 @@
-import './styles.scss';
+import * as React from 'react';
+import { render } from 'react-dom';
 
-window.onload = () => {
-  const app = document.getElementById('app');
+import App from './components/App';
 
-  app.append(process.env.desktop ? 'desktop (electron)' : 'client');
-};
+render(<App />, document.getElementById('app'));
+
+// react-hot-loader
+if ((module as any).hot) {
+  (module as any).hot.accept();
+}

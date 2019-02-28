@@ -1,165 +1,135 @@
 const { join } = require('path');
-const { spawn } = require('child_process');
+const { TypeChecker } = require('fuse-box-typechecker');
 const {
-  Sparky,
   FuseBox,
   EnvPlugin,
-  CSSPlugin,
-  SassPlugin,
   QuantumPlugin,
-  WebIndexPlugin,
-  CopyPlugin,
   JSONPlugin,
+  Sparky,
+  WebIndexPlugin,
 } = require('fuse-box');
 
-const isProduction = process.env.NODE_ENV === 'prod';
+const production = process.env.NODE_ENV === 'prod';
+const outputDir = 'build';
+
+const testWatch = TypeChecker({
+  tsConfig: './tsconfig.json',
+  tsLint: './tslint.json',
+  basePath: './',
+  yellowOnLint: true,
+  shortenFilenames: true,
+});
+
+if (!production) {
+  testWatch.runWatch('./src/');
+}
 
 class Builder {
-  constructor(name, target) {
-    this.name = name;
-    this.target = target;
-
-    let desktop = false;
-    let output = '$name.js';
-
-    if (target === 'electron') {
-      output = join('desktop', output);
-      desktop = true;
-    } else if (name === 'client') {
-      output = join('client', output);
-    }
-
-    this.config = Builder.getConfig(target, name, output, desktop);
-    this.addPlugins(target !== 'server');
+  constructor(
+    config = {
+      target: '',
+      name: '',
+      output: '',
+      instructions: '',
+      watch: '',
+      watchFilter,
+      runWhenCompleted: false,
+      devServerOptions: {},
+      plugins: [],
+    },
+  ) {
+    const { target, name, output, plugins } = config;
+    this.config = config;
+    this.fuseConfig = Builder.getFuseConfig(target, name, output, plugins);
   }
 
-  static getConfig(target, name, output = '$name.js', desktop = false) {
+  static getFuseConfig(target, name, output = '$name.js', plugins = []) {
     return {
-      target: target,
+      target,
       homeDir: 'src/',
-      output: join('build', output),
+      output: join(outputDir, output),
       tsConfig: './tsconfig.json',
       useTypescriptCompiler: true,
       sourceMaps: target !== 'server',
-      hash: isProduction,
-      cache: !isProduction,
+      cache: !production,
       plugins: [
         EnvPlugin({
-          NODE_ENV: isProduction ? 'production' : 'development',
-          DESKTOP: desktop,
+          NODE_ENV: production ? 'production' : 'development',
         }),
-        isProduction &&
+        JSONPlugin(),
+        production &&
           QuantumPlugin({
             bakeApiIntoBundle: name,
             treeshake: true,
             removeExportsInterop: false,
-            target: target,
             uglify: {
               es6: true,
             },
           }),
-      ],
+      ].concat(plugins),
+      alias: {
+        '~': '~/',
+      },
+      log: {
+        showBundledFiles: false,
+      },
     };
   }
 
-  init(instructions, watch, devServerOptions = {}) {
-    this.fuse = FuseBox.init(this.config);
-    this.app = this.fuse.bundle(this.name).instructions(instructions);
+  async init() {
+    const {
+      name,
+      target,
+      instructions,
+      watch,
+      watchFilter,
+      runWhenCompleted,
+      devServerOptions,
+    } = this.config;
+    const fuse = FuseBox.init(this.fuseConfig);
+    const app = fuse.bundle(name).instructions(instructions);
 
-    if (!isProduction) {
-      if (this.target !== 'server') {
-        this.fuse.dev(devServerOptions);
-        this.app.hmr();
+    if (!production) {
+      app.watch(watch, watchFilter);
+
+      if (target !== 'server') {
+        fuse.dev(devServerOptions);
+        app.hmr();
+      } else if (runWhenCompleted) {
+        app.completed(proc => proc.start());
       }
-
-      this.app.watch(watch);
     }
 
-    this.fuse.run();
-  }
-
-  addPlugins(renderer = false) {
-    this.config.plugins.push(JSONPlugin());
-    if (!renderer) return;
-
-    this.addWebIndexPlugin('index');
-    this.addCopyPlugin();
-    this.config.plugins.push([SassPlugin(), CSSPlugin()]);
-  }
-
-  addWebIndexPlugin(name) {
-    this.config.plugins.push(
-      WebIndexPlugin({
-        template: `src/shared/resources/pages/${name}.html`,
-        path: './',
-      }),
-    );
-  }
-
-  addCopyPlugin() {
-    this.config.plugins.push(
-      CopyPlugin({
-        files: ['*.woff2', '*.png', '*.svg'],
-        dest: '../assets',
-        resolve: isProduction ? './assets' : '/assets',
-      }),
-    );
+    return await fuse.run();
   }
 }
 
-Sparky.task('clean', async () => {
-  await Sparky.src('./build')
-    .clean('build/')
-    .exec();
+Sparky.task('default', ['renderer', 'main']);
+
+Sparky.task('main', async () => {
+  await new Builder({
+    name: 'main',
+    target: 'server',
+    instructions: '> [main/index.ts]',
+    watch: '[main/index.ts]',
+  }).init();
 });
 
-Sparky.task('full-server', [
-  (isProduction && 'clean') || '',
-  'client',
-  'server',
-]);
-
-Sparky.task('full-desktop', [
-  (isProduction && 'clean') || '',
-  'desktop',
-  'desktop-main',
-]);
-
-Sparky.task('server', () => {
-  const builder = new Builder('server', 'server');
-
-  builder.init('> [server/index.ts]', 'server/**');
-
-  !isProduction &&
-    spawn('npm', ['run', 'start-server'], {
-      shell: true,
-      stdio: 'inherit',
-    });
-});
-
-Sparky.task('client', () => {
-  const builder = new Builder('client', 'browser@es6');
-
-  builder.init('> renderer/index.tsx', 'renderer/**', {
-    port: 3000,
-    fallback: 'index.html',
-  });
-});
-
-Sparky.task('desktop-main', () => {
-  const builder = new Builder('main', 'server');
-
-  builder.init('> [main/index.ts]', 'main/**');
-
-  !isProduction &&
-    spawn('npm', ['run', 'start-desktop'], {
-      shell: true,
-      stdio: 'inherit',
-    });
-});
-
-Sparky.task('desktop', () => {
-  const builder = new Builder('app', 'electron');
-
-  builder.init('> renderer/index.tsx', 'renderer/**');
+Sparky.task('renderer', async () => {
+  await new Builder({
+    name: 'app',
+    target: 'browser@es6',
+    instructions: '> renderer/index.tsx',
+    watch: 'renderer/**',
+    devServerOptions: {
+      httpServer: true,
+    },
+    plugins: [
+      WebIndexPlugin({
+        target: `index.html`,
+        template: `src/renderer/resources/pages/index.html`,
+        path: production ? '.' : '/',
+      }),
+    ],
+  }).init();
 });

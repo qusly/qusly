@@ -27,29 +27,25 @@
   },
   "main": "./build/main.js",
   "scripts": {
-    "start-server": "cross-env NODE_ENV='dev' node build/server.js",
-    "start-desktop": "cross-env ENV='dev' electron .",
-    "dev-server": "cross-env NODE_ENV='dev' node fuse.js full-server",
-    "dev-desktop": "cross-env NODE_ENV='dev' node fuse.js full-desktop",
-    "build-server": "cross-env NODE_ENV='prod' node fuse.js full-server",
-    "build-desktop": "cross-env NODE_ENV='prod' node fuse.js full-desktop",
-    "clean": "node fuse.js clean"
+    "dev": "cross-env NODE_ENV='dev' node fuse",
+    "start": "cross-env ENV='dev' electron .",
+    "build": "cross-env NODE_ENV='prod' node fuse"
   },
   "devDependencies": {
+    "@types/node": "11.10.0",
+    "@types/react": "16.8.6",
+    "@types/react-dom": "16.8.2",
     "cross-env": "5.2.0",
-    "electron": "3.0.10",
-    "electron-react-devtools": "0.5.3",
-    "fuse-box": "3.5.0",
-    "fuse-box-typechecker": "2.11.0",
-    "node-sass": "4.10.0",
-    "tslint": "5.11.0",
-    "tslint-config-airbnb": "5.11.0",
-    "tslint-config-prettier": "1.15.0",
-    "typescript": "3.1.3",
+    "electron": "4.0.6",
+    "fuse-box": "3.7.1",
+    "fuse-box-typechecker": "2.12.0",
+    "react": "16.8.3",
+    "react-dom": "16.8.3",
+    "tslint": "5.13.1",
+    "tslint-config-airbnb": "5.11.1",
+    "tslint-config-prettier": "1.18.0",
+    "typescript": "3.3.3333",
     "uglify-es": "3.3.9",
     "uglify-js": "3.4.9"
-  },
-  "dependencies": {
-    "express": "4.16.4"
   }
 }

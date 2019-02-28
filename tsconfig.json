@@ -10,12 +10,18 @@
     "module": "commonjs",
     "target": "es6",
     "allowJs": true,
+    "jsx": "react",
     "sourceMap": true,
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "lib": ["dom", "esnext"],
     "experimentalDecorators": true,
 
-    "baseUrl": "./"
-  }
+    "baseUrl": "./",
+
+    "paths": {
+      "~/*": ["src/*"]
+    }
+  },
+  "exclude": ["node_modules", "build"]
 }
