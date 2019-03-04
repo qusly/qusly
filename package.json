@@ -1,5 +1,5 @@
 {
-  "name": "wexond-ftp-client",
+  "name": "ftp-client",
   "version": "1.0.0",
   "description": "A FTP client",
   "keywords": [
@@ -20,10 +20,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xnerhu/wexond-ftp-client.git"
+    "url": "git+https://github.com/xNerhu/ftp-client.git"
   },
   "bugs": {
-    "url": "https://github.com/xnerhu/wexond-ftp-client#issues"
+    "url": "https://github.com/xNerhu/ftp-client#issues"
   },
   "main": "./build/main.js",
   "scripts": {
