@@ -1,28 +1,16 @@
 const { join } = require('path');
-const { TypeChecker } = require('fuse-box-typechecker');
 const {
   FuseBox,
   EnvPlugin,
   QuantumPlugin,
   JSONPlugin,
   Sparky,
+  CopyPlugin,
   WebIndexPlugin,
 } = require('fuse-box');
 
 const production = process.env.NODE_ENV === 'prod';
 const outputDir = 'build';
-
-const testWatch = TypeChecker({
-  tsConfig: './tsconfig.json',
-  tsLint: './tslint.json',
-  basePath: './',
-  yellowOnLint: true,
-  shortenFilenames: true,
-});
-
-if (!production) {
-  testWatch.runWatch('./src/');
-}
 
 class Builder {
   constructor(
@@ -69,9 +57,11 @@ class Builder {
       ].concat(plugins),
       alias: {
         '~': '~/',
+        '@renderer': '~/renderer/',
       },
       log: {
         showBundledFiles: false,
+        clearTerminalOnBundle: true,
       },
     };
   }
@@ -125,6 +115,11 @@ Sparky.task('renderer', async () => {
       httpServer: true,
     },
     plugins: [
+      CopyPlugin({
+        files: ['*.woff2', '*.svg'],
+        dest: 'assets',
+        resolve: production ? './assets' : '/assets',
+      }),
       WebIndexPlugin({
         target: `index.html`,
         template: `src/renderer/resources/pages/index.html`,

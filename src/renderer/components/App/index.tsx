@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { IconTest } from './styles';
 
 export default class App extends React.Component {
   render() {
@@ -7,6 +8,7 @@ export default class App extends React.Component {
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos totam aut
         repellat ex, sunt placeat voluptas accusamus provident! Est, harum
         explicabo tenetur dicta quis aperiam. Cum culpa deleniti natus illum!
+        <IconTest />
       </div>
     );
   }
