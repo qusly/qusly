@@ -1,8 +1,11 @@
 import { observable } from 'mobx';
+
 import { TabsStore } from './tabs';
+import { AddTabStore } from './add-tab';
 
 export class Store {
   public tabsStore = new TabsStore();
+  public addTabStore = new AddTabStore();
 
   @observable
   public isFullscreen = false;

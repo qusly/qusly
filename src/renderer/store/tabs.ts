@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { observable } from 'mobx';
 import { TweenLite } from 'gsap';
-import { ipcRenderer } from 'electron';
 
 import { Tab } from '@renderer/models';
 
@@ -65,43 +64,6 @@ export class TabsStore {
       }
       this.rearrangeTabsTimer.time++;
     }, 1000);
-
-    ipcRenderer.on('add-tab', (e: any, options: any) => {
-      const tab = this.tabs.find(x => x.id === options.id);
-
-      if (tab) {
-        tab.isClosing = false;
-        store.tabsStore.updateTabsBounds(true);
-        clearTimeout(tab.removeTimeout);
-
-        if (options.active) {
-          tab.select();
-        }
-      } else {
-        this.addTab(options.id, options.title);
-      }
-    });
-
-    ipcRenderer.on('remove-tab', (e: any, id: number) => {
-      const tab = this.getTabById(id);
-      if (tab) {
-        tab.close();
-      }
-    });
-
-    ipcRenderer.on('update-tab-title', (e: any, data: any) => {
-      const tab = this.getTabById(data.id);
-      if (tab) {
-        tab.title = data.title;
-      }
-    });
-
-    ipcRenderer.on('select-tab', (e: any, id: number) => {
-      const tab = this.getTabById(id);
-      if (tab) {
-        tab.select();
-      }
-    });
   }
 
   public resetRearrangeTabsTimer() {
@@ -134,8 +96,8 @@ export class TabsStore {
     return this.tabs.find(x => x.id === id && !x.isClosing);
   }
 
-  public addTab(id: number, title: string, select = true) {
-    const tab = new Tab(id, title);
+  public addTab(title: string, select = true) {
+    const tab = new Tab(title);
     this.tabs.push(tab);
 
     requestAnimationFrame(() => {
@@ -187,6 +149,11 @@ export class TabsStore {
 
       left += tab.width + TABS_PADDING;
     }
+
+    store.addTabStore.setLeft(
+      Math.min(left, this.containerWidth + TABS_PADDING),
+      animation,
+    );
   }
 
   public replaceTab(firstTab: Tab, secondTab: Tab) {

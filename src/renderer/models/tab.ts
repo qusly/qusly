@@ -73,7 +73,7 @@ export class Tab {
     return this.favicon !== '';
   }
 
-  constructor(id: number, title: string) {
+  constructor(title: string) {
     this.title = title;
   }
 
