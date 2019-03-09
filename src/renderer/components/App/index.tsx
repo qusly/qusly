@@ -1,21 +1,19 @@
 import * as React from 'react';
 
-import Ripple from '../Ripple';
-import { IconTest, Btn } from './styles';
+import { Toolbar } from '../Toolbar';
+import store from '~/renderer/store';
 
 export default class App extends React.Component {
+  public onClick = () => {
+    store.tabsStore.addTab(0, 'Tab');
+  };
+
   render() {
     return (
-      <div>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos totam aut
-        repellat ex, sunt placeat voluptas accusamus provident! Est, harum
-        explicabo tenetur dicta quis aperiam. Cum culpa deleniti natus illum!
-        <IconTest />
-        <Btn>
-          BUTTON
-          <Ripple />
-        </Btn>
-      </div>
+      <React.Fragment>
+        <Toolbar />
+        <div onClick={this.onClick}>Add</div>
+      </React.Fragment>
     );
   }
 }

@@ -108,8 +108,8 @@ Sparky.task('main', async () => {
 Sparky.task('renderer', async () => {
   await new Builder({
     name: 'app',
-    target: 'browser@es6',
-    instructions: '> renderer/index.tsx',
+    target: 'electron',
+    instructions: '> [renderer/index.tsx]',
     watch: 'renderer/**',
     devServerOptions: {
       httpServer: true,
