@@ -106,6 +106,7 @@ export const StyledContent = styled.div`
   display: flex;
   will-change: max-width, transform;
   transition: 0.1s max-width, 0.1s transform;
+  -webkit-font-smoothing: antialiased;
 
   ${({ hovered }: { hovered: boolean }) => {
     return css`

@@ -80,8 +80,8 @@ export default class ToolbarButton extends React.Component<Props, {}> {
         }}
         disabled={disabled}
       >
-        <Icon icon={icon} size={size} disabled={disabled} opacity={opacity} />
         <Circle>
+          <Icon icon={icon} size={size} disabled={disabled} opacity={opacity} />
           <Ripple
             ref={this.ripple}
             color="#000"

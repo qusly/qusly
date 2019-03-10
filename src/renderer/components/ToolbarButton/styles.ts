@@ -15,6 +15,8 @@ export const Icon = styled.div`
   height: 100%;
   will-change: background-image;
   transition: 0.15s background-image;
+  -webkit-backface-visibility: hidden;
+  transform: translate3d(0, 0, 0) translateZ(0);
 
   ${({ size, disabled, icon, opacity }: IconProps) => css`
     ${centerImage(`${size}px`, `${size}px`)};
@@ -45,6 +47,7 @@ export const Circle = styled.div`
   transform: translate(-50%, -50%);
   overflow: hidden;
   transition: 0.2s background-color;
+
   &:hover {
     background-color: rgba(0, 0, 0, 0.06);
   }
