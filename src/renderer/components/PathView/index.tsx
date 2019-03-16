@@ -25,23 +25,29 @@ const Label = ({ chevron, children }: { chevron: boolean; children: any }) => (
   </React.Fragment>
 );
 
-export const PathView = observer(() => {
+const Container = observer(() => {
   const { inputVisible } = store.pathViewStore;
 
   return (
+    <StyledContainer onDoubleClick={onDoubleClick}>
+      {mockPath.map((item, index) => (
+        <Label key={index} chevron={index < mockPath.length - 1}>
+          {item}
+        </Label>
+      ))}
+      <StyledInput
+        visible={inputVisible}
+        onMouseDown={e => e.stopPropagation()}
+        defaultValue="/home/documents"
+      />
+    </StyledContainer>
+  );
+});
+
+export const PathView = observer(() => {
+  return (
     <StyledPathView>
-      <StyledContainer onDoubleClick={onDoubleClick}>
-        {mockPath.map((item, index) => (
-          <Label key={index} chevron={index < mockPath.length - 1}>
-            {item}
-          </Label>
-        ))}
-        <StyledInput
-          visible={inputVisible}
-          onMouseDown={e => e.stopPropagation()}
-          defaultValue="/home/documents"
-        />
-      </StyledContainer>
+      <Container />
       {platform() !== 'darwin' && <WindowsButtons />}
     </StyledPathView>
   );

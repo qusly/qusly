@@ -13,7 +13,6 @@ export const StyledContainer = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  flex-direction: row;
   position: relative;
   user-select: none;
 `;

@@ -8,7 +8,7 @@ import {
 
 export const Root = styled.div`
   width: ${NAVIGATION_DRAWER_PERSISTENT_WIDTH}px;
-  height: calc(100vh - ${APPBAR_HEIGHT}px);
+  height: 100vh;
   position: absolute;
   left: 0;
   bottom: 0;
