@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { PATHVIEW_HEIGHT, icons, transparency } from '~/renderer/constants';
 import { robotoRegular, centerImage, robotoMedium } from '~/renderer/mixins';
@@ -9,6 +9,7 @@ export const StyledPathView = styled.div`
   display: flex;
   align-items: center;
   flex-direction: row;
+  position: relative;
 `;
 
 export const StyledLabel = styled.div`
@@ -16,6 +17,7 @@ export const StyledLabel = styled.div`
   padding: 4px 6px;
   border-radius: 6px;
   cursor: pointer;
+  text-transform: capitalize;
   ${robotoRegular()};
 
   &:hover {
@@ -33,4 +35,24 @@ export const StyledChevron = styled.div`
   opacity: ${transparency.icons.inactive};
   background-image: url(${icons.chevron});
   ${centerImage('24px', 'auto')};
+`;
+
+export const StyledInput = styled.input`
+  width: 100%;
+  height: 32px;
+  background-color: #eee;
+  outline: none;
+  border: none;
+  position: absolute;
+  left: 0;
+  border-radius: 32px;
+  padding: 0 16px;
+  font-size: 14px;
+  transition: 0.15s opacity;
+  ${robotoRegular()};
+
+  ${({ visible }: { visible: boolean }) => css`
+    opacity: ${visible ? 1 : 0};
+    pointer-events: ${visible ? 'all' : 'none'};
+  `}
 `;
