@@ -10,6 +10,7 @@ export const StyledPathView = styled.div`
   align-items: center;
   flex-direction: row;
   position: relative;
+  user-select: none;
 `;
 
 export const StyledLabel = styled.div`
@@ -17,11 +18,15 @@ export const StyledLabel = styled.div`
   padding: 4px 6px;
   border-radius: 6px;
   cursor: pointer;
-  text-transform: capitalize;
+  text-transform: lowercase;
   ${robotoRegular()};
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.04);
+  }
+
+  &::first-letter {
+    text-transform: uppercase;
   }
 
   &:last-child {

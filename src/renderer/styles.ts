@@ -11,9 +11,7 @@ export const Style = css`
     padding: 0;
     cursor: default;
     overflow: hidden;
-    user-select: none;
-    background-color: white;
-    -webkit-app-region: drag;
+    background-color: #fff;
     ${body2()};
   }
 
