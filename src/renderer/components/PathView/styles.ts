@@ -7,6 +7,11 @@ export const StyledPathView = styled.div`
   width: 100%;
   height: ${PATHVIEW_HEIGHT}px;
   display: flex;
+`;
+
+export const StyledContainer = styled.div`
+  width: 100%;
+  display: flex;
   align-items: center;
   flex-direction: row;
   position: relative;
@@ -53,6 +58,7 @@ export const StyledInput = styled.input`
   border-radius: 32px;
   padding: 0 16px;
   font-size: 14px;
+  will-change: opacity;
   transition: 0.15s opacity;
   ${robotoRegular()};
 

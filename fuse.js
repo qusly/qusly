@@ -7,6 +7,7 @@ const {
   Sparky,
   CopyPlugin,
   WebIndexPlugin,
+  StyledComponentsPlugin,
 } = require('fuse-box');
 
 const production = process.env.NODE_ENV === 'prod';
@@ -115,6 +116,7 @@ Sparky.task('renderer', async () => {
       httpServer: true,
     },
     plugins: [
+      StyledComponentsPlugin(),
       CopyPlugin({
         files: ['*.woff2', '*.svg'],
         dest: 'assets',

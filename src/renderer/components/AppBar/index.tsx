@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import PathView from '../PathView';
+import { PathView } from '../PathView';
 import { StyledAppBar } from './styles';
 
-export default () => (
+export const AppBar = () => (
   <StyledAppBar>
     <PathView />
   </StyledAppBar>
