@@ -1,12 +1,16 @@
 import styled from 'styled-components';
 
 import {
+  APPBAR_HEIGHT,
   NAVIGATION_DRAWER_PERSISTENT_WIDTH,
   transparency,
 } from '~/renderer/constants';
 
 export const Root = styled.div`
   width: ${NAVIGATION_DRAWER_PERSISTENT_WIDTH}px;
-  height: calc(100vh - 96px);
+  height: calc(100vh - ${APPBAR_HEIGHT}px);
+  position: absolute;
+  left: 0;
+  bottom: 0;
   border-right: 1px solid rgba(0, 0, 0, ${transparency.dividers});
 `;

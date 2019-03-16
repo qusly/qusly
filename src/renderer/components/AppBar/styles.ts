@@ -1,19 +1,10 @@
 import styled from 'styled-components';
 
-import {
-  transparency,
-  TOOLBAR_HEIGHT,
-  PATHVIEW_HEIGHT,
-} from '~/renderer/constants';
+import { transparency, TOOLBAR_HEIGHT } from '~/renderer/constants';
 
 export const StyledAppBar = styled.div`
   width: 100vw;
   border-bottom: 1px solid rgba(0, 0, 0, ${transparency.dividers});
-`;
-
-export const StyledPathView = styled.div`
-  width: 100%;
-  height: ${PATHVIEW_HEIGHT}px;
 `;
 
 export const StyledToolbar = styled.div`
