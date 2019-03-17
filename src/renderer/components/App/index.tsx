@@ -4,7 +4,7 @@ import { createGlobalStyle } from 'styled-components';
 import { AppBar } from '../AppBar';
 import store from '~/renderer/store';
 import { Style } from '~/renderer/styles';
-import { NavDrawer } from '../NavDrawer';
+import { Menu } from '../Menu';
 
 const GlobalStyle = createGlobalStyle`${Style}`;
 
@@ -17,7 +17,7 @@ export default class App extends React.Component {
     return (
       <React.Fragment>
         <GlobalStyle />
-        <NavDrawer />
+        <Menu />
       </React.Fragment>
     );
   }

@@ -15,7 +15,7 @@ export const StyledNavDrawerItem = styled.div`
   align-items: center;
   user-select: none;
   will-change: background-color;
-  transition: 0.15s background-color;
+  transition: 0.2s background-color;
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.04);
@@ -27,9 +27,10 @@ export const StyledNavDrawerItem = styled.div`
     height: 100%;
     position: absolute;
     border-radius: 4px;
-    opacity: 0.15;
     overflow: hidden;
     background-color: ${PRIMARY_COLOR};
+    will-change: opacity;
+    transition: 0.2s opacity;
     ${centerBoth()};
   }
 
@@ -37,7 +38,7 @@ export const StyledNavDrawerItem = styled.div`
     pointer-events: ${selected ? 'none' : 'auto'};
 
     &::before {
-      display: ${selected ? 'block' : 'none'};
+      opacity: ${selected ? 0.15 : 0};
     }
   `};
 `;

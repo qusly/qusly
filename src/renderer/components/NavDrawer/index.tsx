@@ -1,14 +1,16 @@
 import * as React from 'react';
+import { observer } from 'mobx-react';
 
-import { NavDrawerItem } from '../NavDrawerItem';
+import store from '~/renderer/store';
 import { StyledNavDrawer } from './styles';
-import { icons } from '~/renderer/constants';
 
-export const NavDrawer = () => (
+export const NavDrawer = observer(({ children }: { children?: any }) => (
   <StyledNavDrawer>
-    <NavDrawerItem icon={icons.home} selected>
-      Home
-    </NavDrawerItem>
-    <NavDrawerItem icon={icons.harddisk}>Disks</NavDrawerItem>
+    {React.Children.map(children, (e: React.ReactElement<any>, index) => {
+      return React.cloneElement(e, {
+        id: index,
+        selected: index === store.navDrawerStore.selectedItem,
+      });
+    })}
   </StyledNavDrawer>
-);
+));
