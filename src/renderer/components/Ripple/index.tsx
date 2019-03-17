@@ -9,6 +9,7 @@ export interface IProps {
   rippleTime?: number;
   opacity?: number;
   color?: string;
+  disabled?: boolean;
 }
 
 export interface IRipple {
@@ -53,6 +54,7 @@ export default class Ripple extends React.PureComponent<IProps, IState> {
     opacity: 0.2,
     color: '#000',
     rippleTime: 0.6,
+    disabled: false,
   };
 
   public state: IState = {
@@ -83,6 +85,8 @@ export default class Ripple extends React.PureComponent<IProps, IState> {
   };
 
   public onMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    const { disabled } = this.props;
+    if (disabled) return;
     this.makeRipple(e.pageX, e.pageY);
   };
 
@@ -120,7 +124,7 @@ export default class Ripple extends React.PureComponent<IProps, IState> {
   }
 
   public render() {
-    const { color, fadeOutTime, rippleTime, style } = this.props;
+    const { className, color, fadeOutTime, rippleTime, style } = this.props;
 
     const {
       rippleX,
@@ -133,6 +137,7 @@ export default class Ripple extends React.PureComponent<IProps, IState> {
 
     return (
       <Root
+        className={className || ''}
         onMouseDown={this.onMouseDown}
         ref={this.root}
         style={style}
