@@ -76,14 +76,14 @@ export default class Resizable extends React.Component<IProps> {
     const delta = e.clientX - this.prevPos.x;
     const elWidth = pos === 'left' ? this.width - delta : this.width + delta;
 
+    if (elWidth < minWidth || elWidth > maxWidth) {
+      return;
+    }
+
     this.prevPos = {
       x: e.clientX,
       y: e.clientY,
     };
-
-    if (elWidth < minWidth || elWidth > maxWidth) {
-      return;
-    }
 
     this.width = elWidth;
     this.updateWidth();
