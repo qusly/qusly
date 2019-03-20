@@ -13,8 +13,8 @@ interface ButtonProps {
 }
 
 export const StyledButton = styled.div`
-  height: 100%;
   width: 45px;
+  height: 42px;
   min-width: 45px;
   position: relative;
   margin-right: 1px;

@@ -47,7 +47,7 @@ export const StyledChevron = styled.div`
 `;
 
 export const StyledInput = styled.input`
-  width: 100%;
+  width: calc(100% - 24px);
   height: 32px;
   background-color: #eee;
   outline: none;
