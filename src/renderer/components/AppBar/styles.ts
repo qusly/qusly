@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { transparency, TOOLBAR_HEIGHT } from '~/renderer/constants';
 
 export const StyledAppBar = styled.div`
-  width: 100vw;
   border-bottom: 1px solid rgba(0, 0, 0, ${transparency.dividers});
 `;
 

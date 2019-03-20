@@ -7,6 +7,7 @@ interface IProps {
   defaultWidth?: number;
   minWidth?: number;
   maxWidth?: number;
+  onResize?: (width: number) => void;
 }
 
 export default class Resizable extends React.Component<IProps> {
@@ -70,7 +71,7 @@ export default class Resizable extends React.Component<IProps> {
   public onWindowMouseMove = (e: MouseEvent) => {
     if (!this.mouseDown) return;
 
-    const { pos, minWidth, maxWidth } = this.props;
+    const { pos, minWidth, maxWidth, onResize } = this.props;
 
     const delta = e.clientX - this.prevPos.x;
     const elWidth = pos === 'left' ? this.width - delta : this.width + delta;
@@ -80,9 +81,15 @@ export default class Resizable extends React.Component<IProps> {
       y: e.clientY,
     };
 
-    if (elWidth >= minWidth && elWidth <= maxWidth) {
-      this.width = elWidth;
-      this.updateWidth();
+    if (elWidth < minWidth || elWidth > maxWidth) {
+      return;
+    }
+
+    this.width = elWidth;
+    this.updateWidth();
+
+    if (typeof onResize === 'function') {
+      onResize(this.width);
     }
   };
 
