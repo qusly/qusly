@@ -2,26 +2,24 @@ import * as React from 'react';
 
 import { StyledWrapper, StyledAnchor } from './styles';
 
-interface IState {
-  width: number;
-}
-
 interface IProps {
   pos?: 'left' | 'right';
+  defaultWidth?: number;
   minWidth?: number;
   maxWidth?: number;
 }
 
-export default class Resizable extends React.Component<IProps, IState> {
+export default class Resizable extends React.PureComponent<IProps> {
   static defaultProps: IProps = {
     pos: 'right',
+    defaultWidth: 256,
     minWidth: 128,
     maxWidth: 512,
   };
 
-  public state: IState = {
-    width: 256,
-  };
+  public wrapper = React.createRef<HTMLDivElement>();
+
+  public width: number;
 
   private mouseDown = false;
 
@@ -29,6 +27,12 @@ export default class Resizable extends React.Component<IProps, IState> {
     x: 0,
     y: 0,
   };
+
+  componentDidMount() {
+    const { defaultWidth } = this.props;
+    this.width = defaultWidth;
+    this.updateWidth();
+  }
 
   componentWillUnmount() {
     this.removeEvents();
@@ -42,6 +46,10 @@ export default class Resizable extends React.Component<IProps, IState> {
   private removeEvents() {
     window.removeEventListener('mouseup', this.onWindowMouseUp);
     window.removeEventListener('mousemove', this.onWindowMouseMove);
+  }
+
+  private updateWidth() {
+    this.wrapper.current.style.width = `${this.width}px`;
   }
 
   public onMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -62,33 +70,29 @@ export default class Resizable extends React.Component<IProps, IState> {
   public onWindowMouseMove = (e: MouseEvent) => {
     if (!this.mouseDown) return;
 
-    const { width } = this.state;
     const { pos, minWidth, maxWidth } = this.props;
 
     const delta = e.clientX - this.prevPos.x;
-    const elWidth = pos === 'left' ? width - delta : width + delta;
+    const elWidth = pos === 'left' ? this.width - delta : this.width + delta;
 
     this.prevPos = {
       x: e.clientX,
       y: e.clientY,
     };
 
-    if (elWidth < minWidth || elWidth > maxWidth) {
-      return;
+    if (elWidth >= minWidth && elWidth <= maxWidth) {
+      this.width = elWidth;
+      this.updateWidth();
     }
-
-    this.setState({ width: elWidth });
   };
 
   render() {
-    const { width } = this.state;
-    const { pos, minWidth, maxWidth } = this.props;
-
-    const wrapperStyle = { width, minWidth, maxWidth };
+    const { pos, minWidth, maxWidth, children } = this.props;
 
     return (
-      <StyledWrapper style={wrapperStyle}>
+      <StyledWrapper ref={this.wrapper} minWidth={minWidth} maxWidth={maxWidth}>
         <StyledAnchor pos={pos} onMouseDown={this.onMouseDown} />
+        {children}
       </StyledWrapper>
     );
   }

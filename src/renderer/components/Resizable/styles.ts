@@ -1,10 +1,20 @@
 import styled, { css } from 'styled-components';
 
+interface IWrapperProps {
+  minWidth: number;
+  maxWidth: number;
+}
+
 export const StyledWrapper = styled.div`
-  width: 256px;
   height: 100vh;
   background-color: green;
   position: relative;
+
+  ${({ minWidth, maxWidth }: IWrapperProps) =>
+    css`
+      min-width: ${minWidth}px;
+      max-width: ${maxWidth}px;
+    `}
 `;
 
 interface IAnchorProps {
