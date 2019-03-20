@@ -7,12 +7,14 @@ interface IState {
 }
 
 interface IProps {
-  minWidth: number;
-  maxWidth: number;
+  pos?: 'left' | 'right';
+  minWidth?: number;
+  maxWidth?: number;
 }
 
 export default class Resizable extends React.Component<IProps, IState> {
   static defaultProps: IProps = {
+    pos: 'right',
     minWidth: 128,
     maxWidth: 512,
   };
@@ -28,12 +30,17 @@ export default class Resizable extends React.Component<IProps, IState> {
     y: 0,
   };
 
-  componentDidMount() {
+  componentWillUnmount() {
+    this.removeEvents();
+  }
+
+  private addEvents() {
     window.addEventListener('mouseup', this.onWindowMouseUp);
     window.addEventListener('mousemove', this.onWindowMouseMove);
   }
 
-  componentWillUnmount() {
+  private removeEvents() {
+    window.removeEventListener('mouseup', this.onWindowMouseUp);
     window.removeEventListener('mousemove', this.onWindowMouseMove);
   }
 
@@ -43,20 +50,23 @@ export default class Resizable extends React.Component<IProps, IState> {
       x: e.clientX,
       y: e.clientY,
     };
+
+    this.addEvents();
   };
 
   public onWindowMouseUp = () => {
     this.mouseDown = false;
+    this.removeEvents();
   };
 
   public onWindowMouseMove = (e: MouseEvent) => {
     if (!this.mouseDown) return;
 
     const { width } = this.state;
-    const { minWidth, maxWidth } = this.props;
+    const { pos, minWidth, maxWidth } = this.props;
 
     const delta = e.clientX - this.prevPos.x;
-    const elWidth = width + delta;
+    const elWidth = pos === 'left' ? width - delta : width + delta;
 
     this.prevPos = {
       x: e.clientX,
@@ -72,10 +82,13 @@ export default class Resizable extends React.Component<IProps, IState> {
 
   render() {
     const { width } = this.state;
-    const { minWidth, maxWidth } = this.props;
+    const { pos, minWidth, maxWidth } = this.props;
+
+    const wrapperStyle = { width, minWidth, maxWidth };
+
     return (
-      <StyledWrapper style={{ width, minWidth, maxWidth }}>
-        <StyledAnchor onMouseDown={this.onMouseDown} />
+      <StyledWrapper style={wrapperStyle}>
+        <StyledAnchor pos={pos} onMouseDown={this.onMouseDown} />
       </StyledWrapper>
     );
   }

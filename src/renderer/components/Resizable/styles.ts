@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const StyledWrapper = styled.div`
   width: 256px;
@@ -6,6 +6,10 @@ export const StyledWrapper = styled.div`
   background-color: green;
   position: relative;
 `;
+
+interface IAnchorProps {
+  pos: 'left' | 'right';
+}
 
 export const StyledAnchor = styled.div`
   width: 4px;
@@ -15,4 +19,8 @@ export const StyledAnchor = styled.div`
   right: 0;
   background-color: red;
   cursor: ew-resize;
+
+  ${({ pos }: IAnchorProps) => css`
+    left: ${pos === 'left' ? 0 : 'unset'};
+  `}
 `;
