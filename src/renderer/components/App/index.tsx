@@ -5,6 +5,7 @@ import { AppBar } from '../AppBar';
 import store from '~/renderer/store';
 import { Style } from '~/renderer/styles';
 import { Menu } from '../Menu';
+import Resizable from '../Resizable';
 
 const GlobalStyle = createGlobalStyle`${Style}`;
 
@@ -17,10 +18,11 @@ export default class App extends React.Component {
     return (
       <React.Fragment>
         <GlobalStyle />
-        <Menu />
+        <Resizable />
       </React.Fragment>
     );
   }
 }
 
 // <AppBar />
+// <Menu />
