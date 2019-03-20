@@ -7,7 +7,6 @@ interface IWrapperProps {
 
 export const StyledWrapper = styled.div`
   height: 100vh;
-  background-color: green;
   position: relative;
 
   ${({ minWidth, maxWidth }: IWrapperProps) =>
@@ -27,7 +26,7 @@ export const StyledAnchor = styled.div`
   position: absolute;
   top: 0;
   right: 0;
-  background-color: red;
+  z-index: 2;
   cursor: ew-resize;
 
   ${({ pos }: IAnchorProps) => css`

@@ -9,7 +9,7 @@ interface IProps {
   maxWidth?: number;
 }
 
-export default class Resizable extends React.PureComponent<IProps> {
+export default class Resizable extends React.Component<IProps> {
   static defaultProps: IProps = {
     pos: 'right',
     defaultWidth: 256,

@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-import { DEFAULT_NAV_DRAWER_WIDTH, transparency } from '~/renderer/constants';
+import { transparency } from '~/renderer/constants';
 
 export const StyledNavDrawer = styled.div`
-  width: ${DEFAULT_NAV_DRAWER_WIDTH}px;
+  width: 100%;
   height: 100vh;
   position: absolute;
   left: 0;

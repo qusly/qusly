@@ -18,7 +18,7 @@ export default class App extends React.Component {
     return (
       <React.Fragment>
         <GlobalStyle />
-        <Resizable />
+        <Menu />
       </React.Fragment>
     );
   }
