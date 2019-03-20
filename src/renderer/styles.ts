@@ -12,6 +12,7 @@ export const Style = css`
     cursor: default;
     overflow: hidden;
     background-color: #fff;
+    user-select: none;
     ${body2()};
   }
 

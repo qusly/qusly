@@ -13,7 +13,6 @@ export const StyledNavDrawerItem = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  user-select: none;
   will-change: background-color;
   transition: 0.2s background-color;
 

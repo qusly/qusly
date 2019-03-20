@@ -14,7 +14,6 @@ export const StyledContainer = styled.div`
   display: flex;
   align-items: center;
   position: relative;
-  user-select: none;
 `;
 
 export const StyledLabel = styled.div`

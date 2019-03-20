@@ -57,7 +57,6 @@ export const StyledTab = styled.div`
   width: 0;
   left: 0;
   will-change: width;
-  user-select: none;
   display: inline-flex;
   align-items: center;
   backface-visibility: hidden;
