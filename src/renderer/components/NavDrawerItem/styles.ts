@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 import { centerImage, robotoMedium, centerBoth } from '~/renderer/mixins';
-import { transparency, icons, PRIMARY_COLOR } from '~/renderer/constants';
+import { transparency, PRIMARY_COLOR } from '~/renderer/constants';
 
 export const StyledNavDrawerItem = styled.div`
   width: calc(100% - 16px);
@@ -68,6 +68,7 @@ export const StyledLabel = styled.div`
   margin-left: 32px;
   white-space: nowrap;
   text-overflow: ellipsis;
+  overflow: hidden;
   ${robotoMedium()};
 
   ${({ selected }: { selected: boolean }) => css`
