@@ -2,8 +2,8 @@ import * as React from 'react';
 import { observer } from 'mobx-react';
 
 import { PathView } from '../PathView';
-import { Tabbar } from '../Tabbar';
 import store from '~/renderer/store';
+import { Toolbar } from '../Toolbar';
 import { StyledAppBar } from './styles';
 
 export const AppBar = observer(() => {
@@ -17,7 +17,7 @@ export const AppBar = observer(() => {
   return (
     <StyledAppBar style={style}>
       <PathView />
-      <Tabbar />
+      <Toolbar />
     </StyledAppBar>
   );
 });

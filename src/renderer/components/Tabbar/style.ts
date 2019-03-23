@@ -1,15 +1,11 @@
 import styled from 'styled-components';
 
 import ToolbarButton from '../ToolbarButton';
-import {
-  PRIMARY_COLOR,
-  TOOLBAR_BUTTON_WIDTH,
-  TOOLBAR_HEIGHT,
-} from '~/renderer/constants';
+import { PRIMARY_COLOR, TOOLBAR_BUTTON_WIDTH } from '~/renderer/constants';
 
 export const StyledTabbar = styled.div`
   width: 100%;
-  height: ${TOOLBAR_HEIGHT}px;
+  height: 100%;
   position: relative;
   overflow: hidden;
   transition: 0.3s opacity, 0.3s transform;
@@ -41,4 +37,5 @@ export const AddTab = styled(ToolbarButton)`
   position: absolute;
   left: 0;
   top: 0;
+  margin-right: 0px;
 `;

@@ -9,6 +9,7 @@ import viewList from '~/renderer/resources/icons/view-list.svg';
 import chevron from '~/renderer/resources/icons/chevron.svg';
 import home from '~/renderer/resources/icons/home.svg';
 import harddisk from '~/renderer/resources/icons/harddisk.svg';
+import refresh from '~/renderer/resources/icons/refresh.svg';
 
 export const icons = {
   windowsMaximize,
@@ -22,4 +23,5 @@ export const icons = {
   chevron,
   home,
   harddisk,
+  refresh,
 };

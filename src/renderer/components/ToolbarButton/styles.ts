@@ -26,11 +26,12 @@ export const Icon = styled.div`
 `;
 
 export const Button = styled.div`
+  width: ${TOOLBAR_BUTTON_WIDTH}px;
   height: 100%;
+  margin-right: 8px;
   -webkit-app-region: no-drag;
   position: relative;
   transition: 0.2s background-color;
-  width: ${TOOLBAR_BUTTON_WIDTH}px;
 
   ${({ disabled }: { disabled: boolean }) => css`
     pointer-events: ${disabled ? 'none' : 'auto'};
