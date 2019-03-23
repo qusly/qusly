@@ -12,6 +12,7 @@ import harddisk from '~/renderer/resources/icons/harddisk.svg';
 import refresh from '~/renderer/resources/icons/refresh.svg';
 import download from '~/renderer/resources/icons/download.svg';
 import upload from '~/renderer/resources/icons/upload.svg';
+import folder from '~/renderer/resources/icons/folder.svg';
 
 export const icons = {
   windowsMaximize,
@@ -28,4 +29,5 @@ export const icons = {
   refresh,
   download,
   upload,
+  folder,
 };

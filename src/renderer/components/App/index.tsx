@@ -10,6 +10,7 @@ import { BottomNavItem } from '../BottomNavItem';
 import { icons } from '~/renderer/constants';
 import { ProgressBar } from '../ProgressBar';
 import { Header } from '../Header';
+import { Folder } from '../Folder';
 
 const GlobalStyle = createGlobalStyle`${Style}`;
 
