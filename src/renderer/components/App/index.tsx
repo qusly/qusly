@@ -9,6 +9,7 @@ import store from '~/renderer/store';
 import { BottomNavItem } from '../BottomNavItem';
 import { icons } from '~/renderer/constants';
 import { ProgressBar } from '../ProgressBar';
+import { Header } from '../Header';
 
 const GlobalStyle = createGlobalStyle`${Style}`;
 
