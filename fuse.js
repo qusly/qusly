@@ -39,7 +39,7 @@ class Builder {
       output: join(outputDir, output),
       tsConfig: './tsconfig.json',
       useTypescriptCompiler: true,
-      sourceMaps: target !== 'server',
+      sourceMaps: !production,
       cache: !production,
       plugins: [
         EnvPlugin({

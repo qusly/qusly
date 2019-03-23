@@ -1,0 +1,28 @@
+{
+  "appId": "org.wfc.wfc",
+  "productName": "Wexond FTP Client",
+  "asar": true,
+  "directories": {
+    "output": "dist",
+    "buildResources": "static"
+  },
+  "linux": {
+    "category": "FileTransfer",
+    "target": [
+      {
+        "target": "deb",
+        "arch": ["ia32", "x64"]
+      },
+      {
+        "target": "AppImage",
+        "arch": ["ia32", "x64"]
+      }
+    ]
+  },
+  "win": {
+    "target": ["zip", "nsis"]
+  },
+  "mac": {
+    "category": "public.app-category.utilities"
+  }
+}

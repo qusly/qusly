@@ -23,7 +23,7 @@ const createWindow = () => {
   if (process.env.ENV === 'dev') {
     window.loadURL('http://localhost:4444');
   } else {
-    window.loadURL(join('file://', app.getAppPath(), 'build/desktop/app.html'));
+    window.loadURL(join('file://', app.getAppPath(), 'build/index.html'));
   }
 
   window.once('ready-to-show', () => {

@@ -29,7 +29,10 @@
   "scripts": {
     "dev": "concurrently \"rimraf ./build\" \"cross-env NODE_ENV='dev' node fuse\"",
     "start": "cross-env ENV='dev' electron .",
-    "build": "cross-env NODE_ENV='prod' node fuse"
+    "build": "concurrently \"rimraf ./build\" \"cross-env NODE_ENV='prod' node fuse\"",
+    "compile-win32": "npm run build && electron-builder -w -p always",
+    "compile-darwin": "npm run build && electron-builder -m -p always",
+    "compile-linux": "npm run build && electron-builder -l -p always"
   },
   "devDependencies": {
     "@types/gsap": "1.20.2",
@@ -40,6 +43,7 @@
     "concurrently": "4.1.0",
     "cross-env": "5.2.0",
     "electron": "4.0.6",
+    "electron-builder": "20.39.0",
     "fuse-box": "3.7.1",
     "rimraf": "2.6.3",
     "tslint": "5.13.1",
