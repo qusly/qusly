@@ -11,6 +11,7 @@ import { icons } from '~/renderer/constants';
 import { ProgressBar } from '../ProgressBar';
 import { Header } from '../Header';
 import { Folder } from '../Folder';
+import { File } from '../File';
 
 const GlobalStyle = createGlobalStyle`${Style}`;
 
