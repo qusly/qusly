@@ -6,7 +6,6 @@ export const StyledToolbar = styled.div`
   width: 100%;
   height: ${TOOLBAR_HEIGHT}px;
   display: flex;
-  flex-flow: row;
   position: relative;
   -webkit-app-region: drag;
 `;

@@ -26,9 +26,9 @@ export const Icon = styled.div`
 `;
 
 export const Button = styled.div`
-  width: ${TOOLBAR_BUTTON_WIDTH}px;
+  min-width: ${TOOLBAR_BUTTON_WIDTH}px;
   height: 100%;
-  margin-right: 8px;
+  margin-right: 4px;
   -webkit-app-region: no-drag;
   position: relative;
   transition: 0.2s background-color;
