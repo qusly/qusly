@@ -13,6 +13,7 @@ export const StyledNavDrawerItem = styled.div`
   position: relative;
   display: flex;
   align-items: center;
+  flex-wrap: nowrap;
   will-change: background-color;
   transition: 0.2s background-color;
 
@@ -48,8 +49,8 @@ interface IIconProps {
 }
 
 export const StyledIcon = styled.div`
-  width: 24px;
-  height: 24px;
+  min-width: 24px;
+  min-height: 24px;
   margin-left: 8px;
   ${centerImage('24px', 'auto')};
 
@@ -65,6 +66,8 @@ export const StyledIcon = styled.div`
 export const StyledLabel = styled.div`
   font-size: 14px;
   margin-left: 32px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   ${robotoMedium()};
 
   ${({ selected }: { selected: boolean }) => css`

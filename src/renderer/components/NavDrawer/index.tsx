@@ -14,7 +14,7 @@ export const NavDrawer = observer(({ children }: { children?: any }) => (
   <StyledNavDrawer>
     <Resizable
       defaultWidth={DEFAULT_NAV_DRAWER_WIDTH}
-      minWidth={196}
+      minWidth={56}
       maxWidth={360}
       onResize={onResize}
     >
