@@ -6,7 +6,9 @@ interface IWrapperProps {
 }
 
 export const StyledWrapper = styled.div`
-  height: 100vh;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   position: relative;
 
   ${({ minWidth, maxWidth }: IWrapperProps) =>

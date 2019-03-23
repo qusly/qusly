@@ -13,6 +13,7 @@ import { Header } from '../Header';
 import { Folder } from '../Folder';
 import { File } from '../File';
 import { Content } from '../Content';
+import { InfoPanel } from '../InfoPanel';
 
 const GlobalStyle = createGlobalStyle`${Style}`;
 
@@ -27,6 +28,7 @@ export default class App extends React.Component {
         <GlobalStyle />
         <AppBar />
         <Menu />
+        <InfoPanel />
         <Content />
       </React.Fragment>
     );

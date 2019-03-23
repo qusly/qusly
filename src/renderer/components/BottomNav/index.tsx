@@ -6,10 +6,24 @@ interface IState {
   selectedItem: number;
 }
 
-export default class BottomNav extends React.PureComponent<{}, IState> {
+interface IProps {
+  defaultSelected?: number;
+  style?: any;
+}
+
+export default class BottomNav extends React.PureComponent<IProps, IState> {
+  static defaultProps: IProps = {
+    defaultSelected: 0,
+  };
+
   public state: IState = {
     selectedItem: 0,
   };
+
+  componentDidMount() {
+    const { defaultSelected } = this.props;
+    this.setState({ selectedItem: defaultSelected });
+  }
 
   private onItemClick = (id: number) => {
     this.setState({ selectedItem: id });
@@ -17,10 +31,10 @@ export default class BottomNav extends React.PureComponent<{}, IState> {
 
   render() {
     const { selectedItem } = this.state;
-    const { children } = this.props;
+    const { children, style } = this.props;
 
     return (
-      <StyledContainer>
+      <StyledContainer style={style}>
         {React.Children.map(children, (e: React.ReactElement<any>, index) => {
           return React.cloneElement(e, {
             id: index,

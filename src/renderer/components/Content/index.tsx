@@ -8,11 +8,13 @@ import { Folder } from '../Folder';
 import { File } from '../File';
 
 export const Content = observer(() => {
-  const { width } = store.navDrawerStore;
+  const { navDrawerStore, infoPanelStore } = store;
+
+  const width = navDrawerStore.width + infoPanelStore.width;
 
   const style = {
     width: `calc(100vw - ${width}px)`,
-    marginLeft: width,
+    marginLeft: navDrawerStore.width,
   };
 
   return (
