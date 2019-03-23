@@ -1,7 +1,7 @@
 {
   "name": "ftp-client",
-  "version": "1.0.0",
-  "description": "A FTP client",
+  "version": "0.0.1",
+  "description": "Wexond FTP Client",
   "keywords": [
     "typescript",
     "react",
