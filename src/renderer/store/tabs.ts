@@ -196,6 +196,8 @@ export class TabsStore {
   }
 
   public onMouseUp = () => {
+    if (!this.isDragging) return;
+
     const selectedTab = this.selectedTab;
 
     this.isDragging = false;
@@ -214,59 +216,58 @@ export class TabsStore {
   };
 
   public onMouseMove = (e: any) => {
+    if (!this.isDragging) return;
+
     const { selectedTab } = store.tabsStore;
+    const container = this.containerRef;
+    const {
+      tabStartX,
+      mouseStartX,
+      lastMouseX,
+      lastScrollLeft,
+    } = store.tabsStore;
 
-    if (this.isDragging) {
-      const container = this.containerRef;
-      const {
-        tabStartX,
-        mouseStartX,
-        lastMouseX,
-        lastScrollLeft,
-      } = store.tabsStore;
+    const boundingRect = container.current.getBoundingClientRect();
 
-      const boundingRect = container.current.getBoundingClientRect();
-
-      if (Math.abs(e.pageX - mouseStartX) < 5) {
-        return;
-      }
-
-      selectedTab.isDragging = true;
-
-      const newLeft =
-        tabStartX +
-        e.pageX -
-        mouseStartX -
-        (lastScrollLeft - container.current.scrollLeft);
-
-      let left = Math.max(0, newLeft);
-
-      if (
-        newLeft + selectedTab.width >
-        boundingRect.width +
-          boundingRect.left +
-          container.current.scrollLeft -
-          2 * TABS_PADDING
-      ) {
-        left =
-          boundingRect.width +
-          boundingRect.left +
-          container.current.scrollLeft -
-          selectedTab.width -
-          2 * TABS_PADDING;
-      }
-
-      selectedTab.setLeft(left, false);
-
-      this.getTabsToReplace(
-        selectedTab,
-        lastMouseX - e.pageX >= 1 ? 'left' : 'right',
-      );
-
-      this.lastMouseX = e.pageX;
-
-      this.moveIndicator(selectedTab, false);
+    if (Math.abs(e.pageX - mouseStartX) < 5) {
+      return;
     }
+
+    selectedTab.isDragging = true;
+
+    const newLeft =
+      tabStartX +
+      e.pageX -
+      mouseStartX -
+      (lastScrollLeft - container.current.scrollLeft);
+
+    let left = Math.max(0, newLeft);
+
+    if (
+      newLeft + selectedTab.width >
+      boundingRect.width +
+        boundingRect.left +
+        container.current.scrollLeft -
+        2 * TABS_PADDING
+    ) {
+      left =
+        boundingRect.width +
+        boundingRect.left +
+        container.current.scrollLeft -
+        selectedTab.width -
+        2 * TABS_PADDING;
+    }
+
+    selectedTab.setLeft(left, false);
+
+    this.getTabsToReplace(
+      selectedTab,
+      lastMouseX - e.pageX >= 1 ? 'left' : 'right',
+    );
+
+    this.lastMouseX = e.pageX;
+
+    this.moveIndicator(selectedTab, false);
   };
 
   public animateProperty(
