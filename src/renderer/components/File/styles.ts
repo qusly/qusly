@@ -5,7 +5,9 @@ import { coverImage, centerImage } from '~/renderer/mixins';
 
 export const StyledContainer = styled.div`
   width: 144px;
-  margin: 64px;
+  display: inline-flex;
+  margin-right: 24px;
+  flex-direction: column;
   border-radius: 8px;
   border: 1px solid rgba(0, 0, 0, ${transparency.dividers});
   overflow: hidden;

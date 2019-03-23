@@ -12,6 +12,7 @@ import { ProgressBar } from '../ProgressBar';
 import { Header } from '../Header';
 import { Folder } from '../Folder';
 import { File } from '../File';
+import { Content } from '../Content';
 
 const GlobalStyle = createGlobalStyle`${Style}`;
 
@@ -26,6 +27,7 @@ export default class App extends React.Component {
         <GlobalStyle />
         <AppBar />
         <Menu />
+        <Content />
       </React.Fragment>
     );
   }

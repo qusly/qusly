@@ -8,9 +8,9 @@ export const StyledContainer = styled.div`
   min-width: 144px;
   max-width: 196px;
   height: 48px;
-  display: flex;
+  display: inline-flex;
+  margin-right: 24px;
   align-items: center;
-  margin: 64px;
   border-radius: 8px;
   border: 1px solid rgba(0, 0, 0, ${transparency.dividers});
   overflow: hidden;
