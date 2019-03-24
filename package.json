@@ -1,16 +1,16 @@
 {
-  "name": "ftp-client",
+  "name": "qusly",
   "version": "0.0.1",
-  "description": "Wexond FTP Client",
+  "description": "A FTP, SFTP Client",
   "keywords": [
     "typescript",
     "react",
-    "sass",
+    "styled-components",
     "electron",
     "fuse-box",
-    "boilerplate",
     "wexond",
     "ftp",
+    "sftp",
     "client"
   ],
   "author": {
