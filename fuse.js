@@ -116,7 +116,7 @@ Sparky.task('renderer', async () => {
       httpServer: true,
     },
     plugins: [
-      !prod && StyledComponentsPlugin(),
+      !production && StyledComponentsPlugin(),
       CopyPlugin({
         files: ['*.woff2', '*.svg'],
         dest: 'assets',
