@@ -1,7 +1,7 @@
 {
   "name": "qusly",
   "version": "0.0.1",
-  "description": "A FTP, SFTP Client",
+  "description": "An FTP/SFTP client.",
   "keywords": [
     "typescript",
     "react",
