@@ -2,17 +2,16 @@ import { observable, action } from 'mobx';
 import * as React from 'react';
 import { TweenLite } from 'gsap';
 
-import { Tab } from '~/renderer/app/models';
+import { Tab } from '~/renderer/models';
 
 import {
   TAB_ANIMATION_DURATION,
   defaultTabOptions,
   TABS_PADDING,
-  TOOLBAR_HEIGHT,
   TAB_ANIMATION_EASING,
-} from '~/renderer/app/constants';
+} from '~/renderer/constants';
 
-import HorizontalScrollbar from '~/renderer/app/components/HorizontalScrollbar';
+import HorizontalScrollbar from '~/renderer/components/HorizontalScrollbar';
 import store from '.';
 import { ipcRenderer } from 'electron';
 
@@ -31,6 +30,9 @@ export class TabsStore {
 
   @observable
   public scrollable = false;
+
+  @observable
+  public selectedTabId = 0;
 
   public removedTabs: number = 0;
 
@@ -92,7 +94,7 @@ export class TabsStore {
   }
 
   public get selectedTab() {
-    return this.getTabById(store.tabGroups.currentGroup.selectedTabId);
+    return this.getTabById(this.selectedTabId);
   }
 
   public get hoveredTab() {
@@ -104,27 +106,15 @@ export class TabsStore {
   }
 
   @action
-  public addTab(options = defaultTabOptions, isWindow: boolean = false) {
-    if (isWindow) {
-      store.overlay.visible = false;
-    }
-
-    if (options.active) {
-      store.overlay.visible = false;
-    }
-
+  public addTab(options = defaultTabOptions) {
     this.removedTabs = 0;
 
-    const tab = new Tab(options, store.tabGroups.currentGroupId, isWindow);
+    const tab = new Tab(options);
 
     if (options.index !== undefined) {
       this.list.splice(options.index, 0, tab);
     } else {
       this.list.push(tab);
-    }
-
-    if (!isWindow) {
-      this.emitEvent('onCreated', tab.getApiTab());
     }
 
     requestAnimationFrame(() => {
@@ -149,9 +139,7 @@ export class TabsStore {
 
   @action
   public setTabsWidths(animation: boolean) {
-    const tabs = this.list.filter(
-      x => !x.isClosing && x.tabGroupId === store.tabGroups.currentGroupId,
-    );
+    const tabs = this.list.filter(x => !x.isClosing);
 
     const containerWidth = this.containerWidth;
 
@@ -165,11 +153,9 @@ export class TabsStore {
 
   @action
   public setTabsLefts(animation: boolean) {
-    const tabs = this.list.filter(
-      x => !x.isClosing && x.tabGroupId === store.tabGroups.currentGroupId,
-    );
+    const tabs = this.list.filter(x => !x.isClosing);
 
-    const { containerWidth } = store.tabs;
+    const { containerWidth } = this;
 
     let left = 0;
 
@@ -236,9 +222,6 @@ export class TabsStore {
 
   @action
   public onMouseMove = (e: any) => {
-    const tabGroup = store.tabGroups.currentGroup;
-    if (!tabGroup) return;
-
     const { selectedTab } = store.tabs;
 
     if (this.isDragging) {
@@ -251,7 +234,6 @@ export class TabsStore {
         return;
       }
 
-      store.canToggleMenu = false;
       selectedTab.isDragging = true;
 
       const newLeft =
@@ -271,15 +253,6 @@ export class TabsStore {
       }
 
       selectedTab.setLeft(left, false);
-
-      if (
-        e.pageY > TOOLBAR_HEIGHT + 16 ||
-        e.pageY < -16 ||
-        e.pageX < boundingRect.left ||
-        e.pageX - boundingRect.left > store.addTab.left
-      ) {
-        // TODO: Create a new window
-      }
 
       this.getTabsToReplace(
         selectedTab,
@@ -303,9 +276,5 @@ export class TabsStore {
       props[property] = value;
       TweenLite.to(obj, animation ? TAB_ANIMATION_DURATION : 0, props);
     }
-  }
-
-  public emitEvent(name: string, ...data: any[]) {
-    ipcRenderer.send('emit-tabs-event', name, ...data);
   }
 }

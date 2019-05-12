@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import store from '~/renderer/app/store';
+import store from '~/renderer/store';
 
 export class AddTabStore {
   public left = 0;

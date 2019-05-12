@@ -1,28 +1,15 @@
 import { observable, computed, action } from 'mobx';
 import * as React from 'react';
 import { ipcRenderer } from 'electron';
-import * as Vibrant from 'node-vibrant';
 
-import store from '~/renderer/app/store';
+import store from '~/renderer/store';
 import {
   TABS_PADDING,
-  TOOLBAR_HEIGHT,
   defaultTabOptions,
   TAB_ANIMATION_DURATION,
-} from '~/renderer/app/constants';
-import { closeWindow, getColorBrightness } from '../utils';
-import { colors } from '~/renderer/constants';
-import { makeId } from '~/shared/utils/string';
+} from '~/renderer/constants';
 
 let id = 1;
-
-const isColorAcceptable = (color: string) => {
-  if (store.theme['tab.allowLightBackground']) {
-    return getColorBrightness(color) > 120;
-  }
-
-  return getColorBrightness(color) < 170;
-};
 
 export class Tab {
   @observable
@@ -41,52 +28,11 @@ export class Tab {
   public favicon: string = '';
 
   @observable
-  public tabGroupId: number;
-
-  @observable
   public width: number = 0;
-
-  @observable
-  public background: string = store.theme.accentColor;
-
-  @observable
-  public url = '';
-
-  @observable
-  private _findVisible = false;
-
-  @observable
-  public findOccurrences = '0/0';
-
-  @observable
-  public findText = '';
-
-  @observable
-  public blockedAds = 0;
-
-  @computed
-  public get findVisible() {
-    return this._findVisible;
-  }
-
-  public set findVisible(val: boolean) {
-    this._findVisible = val;
-
-    if (val) {
-      ipcRenderer.send('window-focus');
-    }
-
-    requestAnimationFrame(() => {
-      store.tabs.updateTabsBounds(true);
-      if (val && store.findInputRef.current) {
-        store.findInputRef.current.focus();
-      }
-    });
-  }
 
   @computed
   public get isSelected() {
-    return store.tabGroups.currentGroup.selectedTabId === this.id;
+    return store.tabs.selectedTabId === this.id;
   }
 
   @computed
@@ -96,7 +42,7 @@ export class Tab {
 
   @computed
   public get borderVisible() {
-    const tabs = this.tabGroup.tabs;
+    const tabs = store.tabs.list;
 
     const i = tabs.indexOf(this);
     const nextTab = tabs[i + 1];
@@ -133,189 +79,14 @@ export class Tab {
   public removeTimeout: any;
   public isWindow: boolean = false;
 
-  constructor(
-    { url, active } = defaultTabOptions,
-    tabGroupId: number,
-    isWindow: boolean,
-  ) {
-    this.isWindow = isWindow;
-    this.tabGroupId = tabGroupId;
-
-    if (isWindow) return;
-
-    ipcRenderer.send('browserview-create', { tabId: this.id, url });
-
-    ipcRenderer.once(`browserview-created-${this.id}`, (e: any, id: number) => {
-      this.webContentsId = id;
-      if (active) {
-        this.select();
-      }
-    });
-
-    ipcRenderer.on(
-      `browserview-data-updated-${this.id}`,
-      async (e: any, { title, url }: any) => {
-        let updated = null;
-
-        if (url !== this.url) {
-          this.lastHistoryId = await store.history.addItem({
-            title: this.title,
-            url,
-            favicon: this.favicon,
-            date: new Date().toString(),
-          });
-
-          updated = {
-            url,
-          };
-        }
-
-        if (title !== this.title) {
-          updated = {
-            title,
-          };
-        }
-
-        if (updated) {
-          this.emitOnUpdated(updated);
-        }
-
-        this.title = title;
-        this.url = url;
-
-        this.updateData();
-      },
-    );
-
-    ipcRenderer.on(
-      `load-commit-${this.id}`,
-      (
-        e: any,
-        event: any,
-        url: string,
-        isInPlace: boolean,
-        isMainFrame: boolean,
-      ) => {
-        if (isMainFrame) {
-          this.blockedAds = 0;
-        }
-      },
-    );
-
-    ipcRenderer.on(
-      `browserview-favicon-updated-${this.id}`,
-      async (e: any, favicon: string) => {
-        try {
-          this.favicon = favicon;
-
-          const fav = await store.favicons.addFavicon(favicon);
-          const buf = Buffer.from(fav.split('base64,')[1], 'base64');
-
-          if (!this.hasThemeColor) {
-            const palette = await Vibrant.from(buf).getPalette();
-
-            if (!palette.Vibrant) return;
-
-            if (isColorAcceptable(palette.Vibrant.hex)) {
-              this.background = palette.Vibrant.hex;
-            } else {
-              this.background = store.theme.accentColor;
-            }
-          }
-        } catch (e) {
-          this.favicon = '';
-          console.error(e);
-        }
-        this.updateData();
-      },
-    );
-
-    ipcRenderer.on(`blocked-ad-${this.id}`, () => {
-      this.blockedAds++;
-    });
-
-    ipcRenderer.on(
-      `browserview-theme-color-updated-${this.id}`,
-      (e: any, themeColor: string) => {
-        if (themeColor && isColorAcceptable(themeColor)) {
-          this.background = themeColor;
-          this.hasThemeColor = true;
-        } else {
-          this.background = store.theme.accentColor;
-          this.hasThemeColor = false;
-        }
-      },
-    );
-
-    ipcRenderer.on(`view-loading-${this.id}`, (e: any, loading: boolean) => {
-      this.loading = loading;
-
-      this.emitOnUpdated({
-        status: loading ? 'loading' : 'complete',
-      });
-    });
-
-    const { defaultBrowserActions, browserActions } = store.extensions;
-
-    for (const item of defaultBrowserActions) {
-      const browserAction = { ...item };
-      browserAction.tabId = this.id;
-      browserActions.push(browserAction);
-    }
-  }
-
-  @action
-  public updateData() {
-    if (this.lastHistoryId) {
-      const { title, url, favicon } = this;
-
-      const item = store.history.getById(this.lastHistoryId);
-
-      if (item) {
-        item.title = title;
-        item.url = url;
-        item.favicon = favicon;
-      }
-
-      store.history.db.update(
-        {
-          _id: this.lastHistoryId,
-        },
-        {
-          $set: {
-            title,
-            url,
-            favicon,
-          },
-        },
-      );
-    }
-  }
-
-  public get tabGroup() {
-    return store.tabGroups.getGroupById(this.tabGroupId);
+  constructor({ active } = defaultTabOptions) {
+    if (active) this.select();
   }
 
   @action
   public select() {
     if (!this.isClosing) {
-      store.canToggleMenu = this.isSelected;
-
-      this.tabGroup.selectedTabId = this.id;
-
-      if (this.isWindow) {
-        ipcRenderer.send('browserview-hide');
-        ipcRenderer.send('select-window', this.id);
-      } else {
-        ipcRenderer.send('hide-window');
-        ipcRenderer.send('browserview-show');
-        ipcRenderer.send('browserview-select', this.id);
-
-        store.tabs.emitEvent('onActivated', {
-          tabId: this.id,
-          windowId: 0,
-        });
-      }
+      store.tabs.selectedTabId = this.id;
 
       requestAnimationFrame(() => {
         store.tabs.updateTabsBounds(true);
@@ -329,9 +100,7 @@ export class Tab {
     }
 
     if (tabs === null) {
-      tabs = store.tabs.list.filter(
-        x => x.tabGroupId === this.tabGroupId && !x.isClosing,
-      );
+      tabs = store.tabs.list.filter(x => !x.isClosing);
     }
 
     const width =
@@ -348,7 +117,7 @@ export class Tab {
   }
 
   public getLeft(calcNewLeft: boolean = false) {
-    const tabs = this.tabGroup.tabs.slice();
+    const tabs = store.tabs.list.slice();
 
     const index = tabs.indexOf(this);
 
@@ -374,10 +143,9 @@ export class Tab {
 
   @action
   public close() {
-    const tabGroup = this.tabGroup;
-    const { tabs } = tabGroup;
+    const tabs = store.tabs.list;
 
-    const selected = tabGroup.selectedTabId === this.id;
+    const selected = store.tabs.selectedTabId === this.id;
 
     store.tabs.removedTabs++;
 
@@ -420,59 +188,8 @@ export class Tab {
       }
     }
 
-    if (this.tabGroup.tabs.length === 1) {
-      store.overlay.isNewTab = true;
-      store.overlay.visible = true;
-    }
-
     this.removeTimeout = setTimeout(() => {
       store.tabs.removeTab(this.id);
     }, TAB_ANIMATION_DURATION * 1000);
-  }
-
-  public emitOnUpdated = (data: any) => {
-    store.tabs.emitEvent('onUpdated', this.id, data, this.getApiTab());
-  };
-
-  callViewMethod = (scope: string, ...args: any[]): Promise<any> => {
-    return new Promise(resolve => {
-      const callId = makeId(32);
-      ipcRenderer.send('browserview-call', {
-        args,
-        scope,
-        tabId: this.id,
-        callId,
-      });
-
-      ipcRenderer.once(
-        `browserview-call-result-${callId}`,
-        (e: any, result: any) => {
-          resolve(result);
-        },
-      );
-    });
-  };
-
-  public getApiTab(): chrome.tabs.Tab {
-    const selected = this.isSelected;
-
-    return {
-      id: this.id,
-      index: this.tabGroup.tabs.indexOf(this),
-      title: this.title,
-      pinned: false,
-      favIconUrl: this.favicon,
-      url: this.url,
-      status: this.loading ? 'loading' : 'complete',
-      width: this.width,
-      height: TOOLBAR_HEIGHT,
-      active: selected,
-      highlighted: selected,
-      selected,
-      windowId: 0,
-      discarded: false,
-      incognito: false,
-      autoDiscardable: false,
-    };
   }
 }
