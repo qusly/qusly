@@ -117,6 +117,8 @@ export class TabsStore {
       this.list.push(tab);
     }
 
+    console.log(this.list);
+
     requestAnimationFrame(() => {
       tab.setLeft(tab.getLeft(), false);
       this.updateTabsBounds(true);

@@ -44,7 +44,6 @@ export const StyledClose = styled.div`
 
 interface TabProps {
   selected: boolean;
-  visible?: boolean;
 }
 
 export const StyledTab = styled.div`
@@ -55,9 +54,10 @@ export const StyledTab = styled.div`
   align-items: center;
   will-change: width;
   -webkit-app-region: no-drag;
-  ${({ selected, visible }: TabProps) => css`
+  display: flex;
+
+  ${({ selected }: TabProps) => css`
     z-index: ${selected ? 2 : 1};
-    display: ${visible ? 'flex' : 'none'};
   `};
 `;
 
@@ -123,7 +123,6 @@ export const StyledBorder = styled.div`
   position: absolute;
   width: 1px;
   height: 16px;
-
   right: -1px;
   top: 50%;
   transform: translateY(-50%);
