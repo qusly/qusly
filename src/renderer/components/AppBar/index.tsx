@@ -1,7 +1,12 @@
 import * as React from 'react';
 
-import { StyledAppBar } from './styles';
+import Tabbar from '../Tabbar';
+import { StyledAppbar } from './styles';
 
 export default () => {
-  return <StyledAppBar>xd</StyledAppBar>;
+  return (
+    <StyledAppbar>
+      <Tabbar />
+    </StyledAppbar>
+  );
 };
