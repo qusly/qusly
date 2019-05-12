@@ -45,6 +45,13 @@ export class Tab {
     const tabs = store.tabs.list;
 
     const i = tabs.indexOf(this);
+
+    if (i === tabs.length - 1) {
+      if (this.isSelected || this.isHovered) return false;
+
+      return true;
+    }
+
     const nextTab = tabs[i + 1];
 
     if (
@@ -80,17 +87,15 @@ export class Tab {
   public isWindow: boolean = false;
 
   constructor({ active } = defaultTabOptions) {
-    if (active) this.select();
+    if (active) {
+      this.select();
+    }
   }
 
   @action
   public select() {
     if (!this.isClosing) {
       store.tabs.selectedTabId = this.id;
-
-      requestAnimationFrame(() => {
-        store.tabs.updateTabsBounds(true);
-      });
     }
   }
 
@@ -147,8 +152,6 @@ export class Tab {
 
     const selected = store.tabs.selectedTabId === this.id;
 
-    store.tabs.removedTabs++;
-
     if (this.isWindow) {
       ipcRenderer.send('detach-window', this.id);
     } else {
@@ -167,6 +170,8 @@ export class Tab {
         this.setLeft(previousTab.getLeft(true) + this.getWidth(), true);
       }
       store.tabs.updateTabsBounds(true);
+    } else {
+      store.tabs.removedTabs++;
     }
 
     this.setWidth(0, true);

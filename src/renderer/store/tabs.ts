@@ -67,10 +67,6 @@ export class TabsStore {
       }
       this.rearrangeTabsTimer.time++;
     }, 1000);
-
-    ipcRenderer.on('tabs-resize', (e: any) => {
-      this.updateTabsBounds(false);
-    });
   }
 
   public resetRearrangeTabsTimer() {
@@ -116,8 +112,6 @@ export class TabsStore {
     } else {
       this.list.push(tab);
     }
-
-    console.log(this.list);
 
     requestAnimationFrame(() => {
       tab.setLeft(tab.getLeft(), false);
