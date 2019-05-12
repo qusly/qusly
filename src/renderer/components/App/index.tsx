@@ -24,13 +24,10 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
+      <>
         <GlobalStyle />
-        <AppBar />
-        <Menu />
-        <InfoPanel />
-        <Content />
-      </React.Fragment>
+        test
+      </>
     );
   }
 }

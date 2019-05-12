@@ -1,6 +1,6 @@
 {
-  "appId": "org.wfc.wfc",
-  "productName": "Wexond FTP Client",
+  "appId": "org.wexond.qusly",
+  "productName": "Qusly",
   "asar": true,
   "directories": {
     "output": "dist",
