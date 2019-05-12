@@ -13,6 +13,9 @@ const createWindow = () => {
     titleBarStyle: 'hiddenInset',
     webPreferences: {
       plugins: true,
+      nodeIntegration: true,
+      contextIsolation: false,
+      experimentalFeatures: true,
     },
   };
 
