@@ -1,6 +1,7 @@
-import { BrowserWindow, app } from 'electron';
+import { BrowserWindow, app, ipcMain, IpcMessageEvent } from 'electron';
 import { join } from 'path';
 import { platform } from 'os';
+import { getExtIcon } from 'electron-ext-icon';
 
 const createWindow = () => {
   const windowData: Electron.BrowserWindowConstructorOptions = {
@@ -61,3 +62,12 @@ app.on('window-all-closed', () => {
     app.quit();
   }
 });
+
+ipcMain.on('get-ext-icon', async (e: IpcMessageEvent, ext: string) => {
+  const icon = await getExtIcon(ext, { size: 'normal' });
+
+  e.sender.send('get-ext-icon', {
+    data: icon.toDataURL(),
+    ext,
+  });
+})

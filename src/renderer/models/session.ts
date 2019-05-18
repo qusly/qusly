@@ -1,6 +1,7 @@
 import { observable } from 'mobx';
-import { Client, IConnectionConfig } from 'qusly-core';
-import { sep } from 'path';
+import { Client, IConnectionConfig, File, FileType } from 'qusly-core';
+
+import store from '../store';
 
 export class Session {
   public client = new Client();
@@ -10,6 +11,9 @@ export class Session {
 
   @observable
   public path: string[] = [];
+
+  @observable
+  public files: File[] = [];
 
   public async connect(config: IConnectionConfig) {
     this.status = 'connecting';
@@ -23,6 +27,7 @@ export class Session {
     }
 
     await this.updatePath();
+    await this.loadFiles();
 
     this.status = 'connected';
   }
@@ -31,5 +36,17 @@ export class Session {
     const { path } = await this.client.pwd();
     const slash = path.startsWith('/') ? '/' : '';
     this.path = [slash, ...path.split(/\\|\//).filter(v => v !== '')];
+  }
+
+  public async loadFiles() {
+    const { files } = await this.client.ls('./');
+
+    for (const file of files) {
+      if (file.type === FileType.File) {
+        store.loadIcon(file.ext);
+      }
+    }
+
+    this.files = files;
   }
 }

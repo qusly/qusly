@@ -436,9 +436,9 @@ base@^0.11.1:
     mixin-deep "^1.2.0"
     pascalcase "^0.1.1"
 
-"basic-ftp@https://github.com/xnerhu/basic-ftp":
+"basic-ftp@git+https://github.com/xnerhu/basic-ftp.git":
   version "3.4.4"
-  resolved "https://github.com/xnerhu/basic-ftp#759aaf8d2ce5aa34d8103b53ec2835ae6f7088e6"
+  resolved "git+https://github.com/xnerhu/basic-ftp.git#759aaf8d2ce5aa34d8103b53ec2835ae6f7088e6"
 
 bcrypt-pbkdf@^1.0.0, bcrypt-pbkdf@^1.0.2:
   version "1.0.2"
@@ -1140,6 +1140,11 @@ electron-download@^4.1.0:
     rc "^1.2.1"
     semver "^5.4.1"
     sumchecker "^2.0.2"
+
+electron-ext-icon@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/electron-ext-icon/-/electron-ext-icon-1.0.1.tgz#ae4ed126314bc2aec547c5b7bb91dfec1021ef98"
+  integrity sha512-MbpAaObhluKQadWzM/6Mz8U2sz8tOTCtZG/IpANP87tfjjHSkW18NXsDJi7p1tfe++l1fI7T/W42zSP1m0UYKg==
 
 electron-osx-sign@0.4.11:
   version "0.4.11"
@@ -3165,10 +3170,10 @@ qs@~6.5.2:
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
   integrity sha512-N5ZAX4/LxJmF+7wN74pUD6qAh9/wnvdQcjq9TZjevvXzSUo7bfmw91saqMjzGS2xq91/odN2dW/WOl7qQHNDGA==
 
-qusly-core@1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/qusly-core/-/qusly-core-1.0.2.tgz#d5ebb2e8f6cf0764a71655a998b060ac188821c0"
-  integrity sha512-uJ1EHd/+uFD6ztgpIgSw1fD3R8Pj3nusaGQTiKglOeNk10PXeVYAZo54+iSHbUY/sxj5I1PVdbCf90u6JDSWSA==
+qusly-core@1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/qusly-core/-/qusly-core-1.0.4.tgz#95f28b2dfa71c5ee3411e0899e153765db6698f1"
+  integrity sha512-tmUKGPeVaVNIBa2ExF5D4TvSYeOCRL8BeOOlZwLz2Qg8MNP0l1JrIxw1ryd5g2+vG5/cPQVp20f8k4iCU7w9Sg==
   dependencies:
     basic-ftp "https://github.com/xnerhu/basic-ftp"
     ssh2 "0.8.2"

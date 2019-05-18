@@ -110,7 +110,7 @@ Sparky.task('main', async () => {
     name: 'main',
     target: 'server',
     instructions: '> [main/index.ts]',
-    watch: '[main/index.ts]',
+    watch: 'main/**',
   }).init();
 });
 
