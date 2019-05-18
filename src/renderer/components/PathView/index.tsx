@@ -1,21 +1,19 @@
 import * as React from 'react';
+import { observer } from 'mobx-react';
 
-import { StyledPathView, StyledPathItem, Chevron } from './styles';
+import store from '~/renderer/store';
+import { StyledPathView, StyledPathItem } from './styles';
 
-export const PathItem = ({ last }: { last: boolean }) => {
-  return (
-    <>
-      <StyledPathItem last={last}>Item</StyledPathItem>
-      {!last && <Chevron />}
-    </>
-  );
+export const PathItem = ({ label }: { label: string }) => {
+  return <StyledPathItem>{label}</StyledPathItem>;
 };
 
-export default () => {
+export default observer(() => {
   return (
     <StyledPathView>
-      <PathItem last={false} />
-      <PathItem last />
+      {store.session.path.map(label => (
+        <PathItem key={label} label={label} />
+      ))}
     </StyledPathView>
   );
-};
+});
