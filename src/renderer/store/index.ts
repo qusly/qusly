@@ -4,6 +4,8 @@ import { AddTabStore } from './add-tab';
 import { TabsStore } from './tabs';
 import { ExtIcons } from '../models';
 
+ipcRenderer.setMaxListeners(0);
+
 export class Store {
   public addTab = new AddTabStore();
   public tabs = new TabsStore();

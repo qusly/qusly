@@ -6,6 +6,7 @@ import close from '~/renderer/resources/icons/close.svg';
 import chevronLeft from '~/renderer/resources/icons/chevron-left.svg';
 import chevronRight from '~/renderer/resources/icons/chevron-right.svg';
 import refresh from '~/renderer/resources/icons/refresh.svg';
+import folder from '~/renderer/resources/icons/folder.svg';
 
 export const icons = {
   windowsMaximize,
@@ -16,4 +17,5 @@ export const icons = {
   chevronLeft,
   chevronRight,
   refresh,
+  folder
 };
