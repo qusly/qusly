@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { centerIcon } from '~/renderer/mixins';
 import { icons, transparency } from '~/renderer/constants';
@@ -7,15 +7,17 @@ export const StyledFileItem = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  max-height: 64px;
 `;
 
 export const Icon = styled.div`
   width: 48px;
   height: 48px;
-  opacity: ${transparency.icons.inactive};
   background-image: url(${icons.folder});
-  ${centerIcon(48)};
+  ${centerIcon(32)};
+
+  ${({ icon }: { icon: any }) => css`
+    background-image: url(${icon});
+  `};
 `;
 
 export const Label = styled.div`

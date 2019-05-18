@@ -9,7 +9,7 @@ export const StyledFilesView = styled.div`
 
 export const FilesContainer = styled.div`
   display: grid;
-  grid-gap: 32px;
+  grid-gap: 24px;
   grid-template-rows: 1fr;
   grid-template-columns: repeat(auto-fit, minmax(64px, 1fr));
 `;
