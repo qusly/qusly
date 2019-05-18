@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { TOOLBAR_BUTTON_WIDTH } from '~/renderer/constants';
+import { TOOLBAR_BUTTON_WIDTH, TOOLBAR_HEIGHT } from '~/renderer/constants';
 import { centerIcon } from '~/renderer/mixins';
 
 export const Icon = styled.div`
@@ -8,29 +8,30 @@ export const Icon = styled.div`
   height: 100%;
   will-change: background-image;
   transition: 0.15s background-image;
+
   ${({
-    size,
-    disabled,
-    opacity,
-  }: {
-    size: number;
-    disabled: boolean;
-    opacity: number;
-  }) => css`
+  size,
+  disabled,
+  opacity,
+}: {
+  size: number;
+  disabled: boolean;
+  opacity: number;
+}) => css`
     ${centerIcon(size)};
     opacity: ${disabled ? 0.25 : opacity};
   `};
 `;
 
 export const Button = styled.div`
-  height: 100%;
+  height: ${TOOLBAR_HEIGHT}px;
   -webkit-app-region: no-drag;
   position: relative;
   transition: 0.2s background-color;
   width: ${TOOLBAR_BUTTON_WIDTH}px;
-  ${({ disabled, invert }: { disabled: boolean; invert: boolean }) => css`
+
+  ${({ disabled }: { disabled: boolean; }) => css`
     pointer-events: ${disabled ? 'none' : 'auto'};
-    filter: ${invert ? 'invert(100%)' : 'none'};
   `};
 `;
 
@@ -44,6 +45,7 @@ export const Circle = styled.div`
   transform: translate(-50%, -50%);
   overflow: hidden;
   transition: 0.2s background-color;
+
   &:hover {
     background-color: rgba(0, 0, 0, 0.06);
   }

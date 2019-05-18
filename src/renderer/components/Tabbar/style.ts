@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import { TOOLBAR_BUTTON_WIDTH } from '~/renderer/constants';
 import ToolbarButton from '../ToolbarButton';
@@ -26,6 +26,7 @@ export const TabsContainer = styled.div`
 `;
 
 export const AddTab = styled(ToolbarButton)`
+  height: 32px;
   position: absolute;
   left: 0;
   top: 0;

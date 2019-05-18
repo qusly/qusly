@@ -4,8 +4,8 @@ import * as React from 'react';
 import HorizontalScrollbar from '../HorizontalScrollbar';
 import store from '~/renderer/store';
 import { icons } from '~/renderer/constants/icons';
-import { AddTab, StyledTabbar, TabsContainer } from './style';
 import { Tabs } from '../Tabs';
+import { AddTab, StyledTabbar, TabsContainer } from './style';
 
 const getContainer = () => store.tabs.containerRef.current;
 
@@ -18,7 +18,7 @@ const onAddTabClick = () => {
   store.tabs.addTab({ active: true });
 };
 
-export const Tabbar = observer(() => {
+export default observer(() => {
   return (
     <StyledTabbar>
       <TabsContainer

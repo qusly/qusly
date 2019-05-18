@@ -1,6 +1,7 @@
 import { observer } from 'mobx-react';
 import * as React from 'react';
 
+import Ripple from '~/renderer/components/Ripple';
 import { transparency } from '~/renderer/constants/transparency';
 import { Button, Icon, Circle } from './style';
 
@@ -24,6 +25,8 @@ export default class ToolbarButton extends React.Component<Props, {}> {
     size: 20,
     opacity: transparency.icons.inactive,
   };
+
+  private ripple = React.createRef<Ripple>();
 
   private ref: HTMLDivElement;
 
@@ -58,7 +61,6 @@ export default class ToolbarButton extends React.Component<Props, {}> {
       divRef,
       children,
       opacity,
-      invert,
     } = this.props;
 
     let { style } = this.props;
@@ -71,7 +73,6 @@ export default class ToolbarButton extends React.Component<Props, {}> {
         onClick={onClick}
         className={className}
         style={style}
-        invert={invert}
         ref={(r: HTMLDivElement) => {
           this.ref = r;
           if (typeof divRef === 'function') {
@@ -86,7 +87,14 @@ export default class ToolbarButton extends React.Component<Props, {}> {
           disabled={disabled}
           opacity={opacity}
         />
-        <Circle />
+        <Circle>
+          <Ripple
+            ref={this.ripple}
+            color="#000"
+            rippleTime={0.8}
+            opacity={0.1}
+          />
+        </Circle>
         {children}
       </Button>
     );
