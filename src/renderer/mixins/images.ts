@@ -1,7 +1,7 @@
 export const centerIcon = (size: number | 'contain' = 'contain') => {
   let s: string = size.toString();
 
-  if (typeof size === 'number') s += 'px';
+  if (typeof size === 'number') s = `${s}px auto`;
 
   return `
     background-size: ${s};
