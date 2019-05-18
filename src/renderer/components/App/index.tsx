@@ -1,10 +1,38 @@
 import * as React from 'react';
 import { createGlobalStyle } from 'styled-components';
+import { observer } from 'mobx-react';
 
 import AppBar from '../AppBar';
 import { Style } from '~/renderer/styles';
+import { Container } from './styles';
+import store from '~/renderer/store';
+import { Preloader } from '../Preloader';
+import FilesView from '../FilesView';
 
 const GlobalStyle = createGlobalStyle`${Style}`;
+
+const Content = observer(() => {
+  const { status } = store.session;
+
+  return (
+    <Container>
+      {status === 'connecting' && (
+        <div
+          style={{
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <Preloader />
+        </div>
+      )}
+      {status === 'connected' && <FilesView />}
+    </Container>
+  );
+});
 
 export default class App extends React.Component {
   render() {
@@ -12,6 +40,7 @@ export default class App extends React.Component {
       <>
         <GlobalStyle />
         <AppBar />
+        <Content />
       </>
     );
   }

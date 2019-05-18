@@ -35,14 +35,17 @@
     "compile-linux": "npm run build && electron-builder -l -p always"
   },
   "devDependencies": {
+    "@types/dotenv": "6.1.1",
     "@types/gsap": "1.20.2",
     "@types/react": "16.8.17",
     "@types/react-dom": "16.8.4",
     "@types/styled-components": "4.1.14",
     "cross-env": "5.2.0",
+    "dotenv": "8.0.0",
     "electron": "5.0.1",
     "electron-builder": "20.40.2",
     "fuse-box": "3.7.1",
+    "qusly-core": "1.0.2",
     "rimraf": "2.6.3",
     "tslint": "5.16.0",
     "tslint-config-airbnb": "5.11.1",

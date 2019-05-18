@@ -2,18 +2,15 @@ import { observable, action } from 'mobx';
 import * as React from 'react';
 import { TweenLite } from 'gsap';
 
-import { Tab } from '~/renderer/models';
-
+import { Tab, Session } from '~/renderer/models';
 import {
   TAB_ANIMATION_DURATION,
   defaultTabOptions,
   TABS_PADDING,
   TAB_ANIMATION_EASING,
 } from '~/renderer/constants';
-
 import HorizontalScrollbar from '~/renderer/components/HorizontalScrollbar';
 import store from '.';
-import { ipcRenderer } from 'electron';
 
 export class TabsStore {
   @observable
@@ -118,6 +115,18 @@ export class TabsStore {
       this.updateTabsBounds(true);
 
       this.scrollbarRef.current.scrollToEnd(TAB_ANIMATION_DURATION * 1000);
+    });
+
+    const { HOSTNAME, LOGIN, PASSWORD } = process.env;
+
+    tab.session = new Session();
+
+    tab.session.connect({
+      host: HOSTNAME,
+      password: PASSWORD,
+      user: LOGIN,
+      port: 22,
+      protocol: 'sftp',
     });
 
     return tab;

@@ -9,9 +9,12 @@ const {
   WebIndexPlugin,
   StyledComponentsPlugin,
 } = require('fuse-box');
+const dotenv = require('dotenv');
 
 const production = process.env.NODE_ENV === 'prod';
 const outputDir = 'build';
+
+dotenv.config();
 
 class Builder {
   constructor(
@@ -33,6 +36,8 @@ class Builder {
   }
 
   static getFuseConfig(target, name, output = '$name.js', plugins = []) {
+    const { HOSTNAME, LOGIN, PASSWORD } = process.env;
+
     return {
       target,
       homeDir: 'src/',
@@ -44,6 +49,9 @@ class Builder {
       plugins: [
         EnvPlugin({
           NODE_ENV: production ? 'production' : 'development',
+          HOSTNAME,
+          LOGIN,
+          PASSWORD,
         }),
         JSONPlugin(),
         production &&

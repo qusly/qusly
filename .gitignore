@@ -8,3 +8,4 @@ dist
 .awcache
 .fusebox
 server.js
+.env

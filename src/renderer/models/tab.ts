@@ -8,6 +8,7 @@ import {
   defaultTabOptions,
   TAB_ANIMATION_DURATION,
 } from '~/renderer/constants';
+import { Session } from './session';
 
 let id = 1;
 
@@ -29,6 +30,8 @@ export class Tab {
 
   @observable
   public width: number = 0;
+
+  public session: Session;
 
   @computed
   public get isSelected() {
