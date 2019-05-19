@@ -4,10 +4,11 @@ import { observer } from 'mobx-react';
 
 import AppBar from '../AppBar';
 import { Style } from '~/renderer/styles';
-import { Container } from './styles';
+import { Container, Menu, StyledApp, Search, SearchContainer } from './styles';
 import store from '~/renderer/store';
 import { Preloader } from '../Preloader';
 import FilesView from '../FilesView';
+import NavigationButtons from '../NavigationButtons';
 
 const GlobalStyle = createGlobalStyle`${Style}`;
 
@@ -37,11 +38,16 @@ const Content = observer(() => {
 export default class App extends React.Component {
   render() {
     return (
-      <>
+      <StyledApp>
         <GlobalStyle />
-        <AppBar />
-        <Content />
-      </>
+        <Menu>
+          <NavigationButtons />
+        </Menu>
+        <div style={{ flex: 1 }}>
+          <AppBar />
+          <Content />
+        </div>
+      </StyledApp>
     );
   }
 }

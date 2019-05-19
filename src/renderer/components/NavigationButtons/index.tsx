@@ -9,12 +9,29 @@ export default observer(() => {
   return (
     <StyledContainer>
       <ToolbarButton
-        size={24}
-        icon={icons.chevronLeft}
-        style={{ marginLeft: 8 }}
+        style={{ flex: 1 }}
+        size={20}
+        icon={icons.back}
         disabled={true}
       />
-      <ToolbarButton size={24} icon={icons.chevronRight} disabled={true} />
+      <ToolbarButton
+        style={{ flex: 1 }}
+        size={20}
+        icon={icons.forward}
+        disabled={true}
+      />
+      <ToolbarButton
+        style={{ flex: 1 }}
+        size={20}
+        icon={icons.refresh}
+        disabled={true}
+      />
+      <ToolbarButton
+        style={{ flex: 1 }}
+        size={20}
+        icon={icons.star}
+        disabled={true}
+      />
     </StyledContainer>
   );
 });

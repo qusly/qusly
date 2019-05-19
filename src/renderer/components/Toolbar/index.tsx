@@ -2,13 +2,13 @@ import * as React from 'react';
 
 import NavigationButtons from '../NavigationButtons';
 import PathView from '../PathView';
-import { StyledToolbar } from './styles';
+import { StyledToolbar, Search } from './styles';
 
 export default () => {
   return (
     <StyledToolbar>
-      <NavigationButtons />
       <PathView />
+      <Search />
     </StyledToolbar>
   );
 };

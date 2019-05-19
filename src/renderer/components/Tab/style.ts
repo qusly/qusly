@@ -10,12 +10,12 @@ interface CloseProps {
 export const StyledClose = styled.div`
   position: absolute;
   right: 6px;
-  height: 24px;
-  width: 24px;
+  height: 22px;
+  width: 22px;
   background-image: url('${icons.close}');
   transition: 0.1s opacity;
   z-index: 10;
-  ${centerIcon(16)};
+  ${centerIcon(15)};
 
     ${({ visible }: CloseProps) => css`
       opacity: ${visible ? transparency.icons.inactive : 0};
@@ -79,7 +79,7 @@ interface TitleProps {
 
 export const StyledTitle = styled.div`
   ${body2()};
-  font-size: 13px;
+  font-size: 12px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
