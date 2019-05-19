@@ -20,18 +20,8 @@ export default observer(() => {
         icon={icons.forward}
         disabled={true}
       />
-      <ToolbarButton
-        style={{ flex: 1 }}
-        size={20}
-        icon={icons.refresh}
-        disabled={true}
-      />
-      <ToolbarButton
-        style={{ flex: 1 }}
-        size={20}
-        icon={icons.star}
-        disabled={true}
-      />
+      <ToolbarButton style={{ flex: 1 }} size={20} icon={icons.refresh} />
+      <ToolbarButton style={{ flex: 1 }} size={20} icon={icons.star} />
     </StyledContainer>
   );
 });

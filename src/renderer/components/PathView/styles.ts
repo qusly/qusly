@@ -12,6 +12,7 @@ export const StyledPathView = styled.div`
   overflow: hidden;
   border: 1px solid rgba(0, 0, 0, 0.12);
   padding-left: 8px;
+  border-radius: 32px;
 `;
 
 export const StyledPathItem = styled.div`
