@@ -7,6 +7,7 @@ import {
   TABS_PADDING,
   defaultTabOptions,
   TAB_ANIMATION_DURATION,
+  ADD_TAB_MARGIN_LEFT,
 } from '~/renderer/constants';
 import { Session } from './session';
 
@@ -112,7 +113,9 @@ export class Tab {
     }
 
     const width =
-      containerWidth / (tabs.length + store.tabs.removedTabs) - TABS_PADDING;
+      containerWidth / (tabs.length + store.tabs.removedTabs) -
+      TABS_PADDING -
+      ADD_TAB_MARGIN_LEFT;
 
     if (width > 200) {
       return 200;

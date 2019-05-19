@@ -16,7 +16,6 @@ export const StyledClose = styled.div`
   transition: 0.1s opacity;
   z-index: 10;
   ${centerIcon(16)};
-  
 
     ${({ visible }: CloseProps) => css`
       opacity: ${visible ? transparency.icons.inactive : 0};
@@ -141,4 +140,6 @@ export const TabContainer = styled.div`
   display: flex;
   align-items: center;
   backface-visibility: hidden;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
 `;

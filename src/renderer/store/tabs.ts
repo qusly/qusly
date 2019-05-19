@@ -8,6 +8,7 @@ import {
   defaultTabOptions,
   TABS_PADDING,
   TAB_ANIMATION_EASING,
+  ADD_TAB_MARGIN_LEFT,
 } from '~/renderer/constants';
 import HorizontalScrollbar from '~/renderer/components/HorizontalScrollbar';
 import store from '.';
@@ -171,7 +172,10 @@ export class TabsStore {
     }
 
     store.addTab.setLeft(
-      Math.min(left, containerWidth + TABS_PADDING),
+      Math.min(
+        left + ADD_TAB_MARGIN_LEFT,
+        containerWidth + TABS_PADDING + ADD_TAB_MARGIN_LEFT,
+      ),
       animation,
     );
   }

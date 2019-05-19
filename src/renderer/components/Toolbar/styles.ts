@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const StyledToolbar = styled.div`
   width: 100%;
-  height: 48px;
+  height: 40px;
   position: relative;
   display: flex;
   flex-flow: row;

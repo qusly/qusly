@@ -10,14 +10,14 @@ export const Icon = styled.div`
   transition: 0.15s background-image;
 
   ${({
-  size,
-  disabled,
-  opacity,
-}: {
-  size: number;
-  disabled: boolean;
-  opacity: number;
-}) => css`
+    size,
+    disabled,
+    opacity,
+  }: {
+    size: number;
+    disabled: boolean;
+    opacity: number;
+  }) => css`
     ${centerIcon(size)};
     opacity: ${disabled ? 0.25 : opacity};
   `};
@@ -30,15 +30,15 @@ export const Button = styled.div`
   transition: 0.2s background-color;
   width: ${TOOLBAR_BUTTON_WIDTH}px;
 
-  ${({ disabled }: { disabled: boolean; }) => css`
+  ${({ disabled }: { disabled: boolean }) => css`
     pointer-events: ${disabled ? 'none' : 'auto'};
   `};
 `;
 
 export const Circle = styled.div`
   border-radius: 50%;
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   position: absolute;
   top: 50%;
   left: 50%;

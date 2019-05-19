@@ -1,17 +1,15 @@
 import styled, { css } from 'styled-components';
 
 import { transparency, icons } from '~/renderer/constants';
-import { robotoMedium, centerIcon, robotoRegular } from '~/renderer/mixins';
+import { robotoMedium, centerIcon } from '~/renderer/mixins';
 
 export const StyledPathView = styled.div`
   width: 100%;
-  height: 36px;
-  border: 1px solid rgba(0, 0, 0, ${transparency.dividers});
+  height: 32px;
   border-radius: 32px;
   display: flex;
   align-items: center;
   margin-left: 8px;
-  padding-left: 12px;
   overflow: hidden;
 `;
 
