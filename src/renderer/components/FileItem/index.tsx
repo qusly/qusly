@@ -6,7 +6,7 @@ import { icons, transparency } from '~/renderer/constants';
 import store from '~/renderer/store';
 import { StyledFileItem, Icon, Label } from './styles';
 
-const onClick = ({ name, type }: File) => () => {
+const onDoubleClick = ({ name, type }: File) => () => {
   if (type === FileType.Directory && store.session.status === 'ok') {
     store.session.path.push(name);
     store.session.loadFiles();
@@ -28,7 +28,7 @@ export default observer(({ data }: { data: File }) => {
   }
 
   return (
-    <StyledFileItem onClick={onClick(data)}>
+    <StyledFileItem onDoubleClick={onDoubleClick(data)}>
       <Icon icon={icon} style={{ opacity }} />
       <Label>{name}</Label>
     </StyledFileItem>

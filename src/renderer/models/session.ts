@@ -2,6 +2,7 @@ import { observable } from 'mobx';
 import { Client, IConnectionConfig, File, FileType } from 'qusly-core';
 
 import store from '../store';
+import { sortFiles } from '../utils';
 
 export class Session {
   public client = new Client();
@@ -50,7 +51,7 @@ export class Session {
       }
     }
 
-    this.files = files;
+    this.files = sortFiles(files);
     this.status = 'ok';
   }
 }
