@@ -10,7 +10,7 @@ export const TabbarBackground = styled.div`
   overflow: hidden;
   margin-right: 32px;
   display: flex;
-  background-color: #e6eaed;
+  background-color: rgba(0, 0, 0, 0.1);
 `;
 
 export const StyledTabbar = styled.div`
@@ -20,6 +20,7 @@ export const StyledTabbar = styled.div`
   overflow: hidden;
   transition: 0.3s opacity, 0.3s transform;
   display: flex;
+  margin-left: 6px;
 `;
 
 export const TabsContainer = styled.div`

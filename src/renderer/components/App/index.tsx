@@ -4,7 +4,7 @@ import { observer } from 'mobx-react';
 
 import AppBar from '../AppBar';
 import { Style } from '~/renderer/styles';
-import { Container, Menu, StyledApp, Search, SearchContainer } from './styles';
+import { Container, Menu, StyledApp, AppContent } from './styles';
 import store from '~/renderer/store';
 import { Preloader } from '../Preloader';
 import FilesView from '../FilesView';
@@ -40,13 +40,11 @@ export default class App extends React.Component {
     return (
       <StyledApp>
         <GlobalStyle />
-        <Menu>
-          <NavigationButtons />
-        </Menu>
-        <div style={{ flex: 1 }}>
+        <Menu />
+        <AppContent>
           <AppBar />
           <Content />
-        </div>
+        </AppContent>
       </StyledApp>
     );
   }

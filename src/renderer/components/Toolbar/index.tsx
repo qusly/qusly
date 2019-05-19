@@ -7,6 +7,7 @@ import { StyledToolbar, Search } from './styles';
 export default () => {
   return (
     <StyledToolbar>
+      <NavigationButtons />
       <PathView />
       <Search />
     </StyledToolbar>

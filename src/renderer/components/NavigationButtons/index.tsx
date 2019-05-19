@@ -8,20 +8,9 @@ import { StyledContainer } from './style';
 export default observer(() => {
   return (
     <StyledContainer>
-      <ToolbarButton
-        style={{ flex: 1 }}
-        size={20}
-        icon={icons.back}
-        disabled={true}
-      />
-      <ToolbarButton
-        style={{ flex: 1 }}
-        size={20}
-        icon={icons.forward}
-        disabled={true}
-      />
-      <ToolbarButton style={{ flex: 1 }} size={20} icon={icons.refresh} />
-      <ToolbarButton style={{ flex: 1 }} size={20} icon={icons.star} />
+      <ToolbarButton size={20} icon={icons.back} disabled={true} />
+      <ToolbarButton size={20} icon={icons.forward} disabled={true} />
+      <ToolbarButton size={20} icon={icons.refresh} />
     </StyledContainer>
   );
 });

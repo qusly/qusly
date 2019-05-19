@@ -140,6 +140,6 @@ export const TabContainer = styled.div`
   display: flex;
   align-items: center;
   backface-visibility: hidden;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
 `;
