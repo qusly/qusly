@@ -37,8 +37,8 @@ export const Button = styled.div`
 
 export const Circle = styled.div`
   border-radius: 50%;
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   position: absolute;
   top: 50%;
   left: 50%;
