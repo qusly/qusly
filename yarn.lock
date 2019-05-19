@@ -436,9 +436,9 @@ base@^0.11.1:
     mixin-deep "^1.2.0"
     pascalcase "^0.1.1"
 
-"basic-ftp@git+https://github.com/xnerhu/basic-ftp.git":
+"basic-ftp@https://github.com/xnerhu/basic-ftp":
   version "3.4.4"
-  resolved "git+https://github.com/xnerhu/basic-ftp.git#759aaf8d2ce5aa34d8103b53ec2835ae6f7088e6"
+  resolved "https://github.com/xnerhu/basic-ftp#759aaf8d2ce5aa34d8103b53ec2835ae6f7088e6"
 
 bcrypt-pbkdf@^1.0.0, bcrypt-pbkdf@^1.0.2:
   version "1.0.2"
