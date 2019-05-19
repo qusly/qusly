@@ -1,8 +1,8 @@
-# Qusly
-
-📁 An FTP/FTPS/SFTP client with Material Design UI. It's based on Electron, React and [Qusly-Core](https://www.github.com/xnerhu/qusly-core).
-
-**`Qusly is in very early state.`**
+<div align="center">
+  <img src="static/app-icons/icon.png" width="256">
+  <h1>Qusly</h1>
+  📁 An FTP/FTPS/SFTP client with Material Design UI, based on Electron, React and <a href="https://www.github.com/xnerhu/qusly-core">Qusly-Core</a>.
+</div>
 
 ### Mockup
 
