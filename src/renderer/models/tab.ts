@@ -150,9 +150,8 @@ export class Tab {
   }
 
   @action
-  public close() {
+  public async close() {
     const tabs = store.tabs.list;
-
     const selected = store.tabs.selectedTabId === this.id;
 
     if (this.isWindow) {
@@ -195,6 +194,8 @@ export class Tab {
         prevTab.select();
       }
     }
+
+    await this.session.close();
 
     this.removeTimeout = setTimeout(() => {
       store.tabs.removeTab(this.id);

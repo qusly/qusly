@@ -29,7 +29,7 @@ const Content = observer(() => {
           <Preloader />
         </div>
       )}
-      {status === 'ok' && <FilesView />}
+      <FilesView />
     </Container>
   );
 });

@@ -33,6 +33,10 @@ export class Session {
     }
   }
 
+  public async close() {
+    return this.client.disconnect();
+  }
+
   private async updatePath() {
     const { path } = await this.client.pwd();
     const slash = path.startsWith('/') ? '/' : '';
