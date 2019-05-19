@@ -11,5 +11,5 @@ export const FilesContainer = styled.div`
   display: grid;
   grid-gap: 24px;
   grid-template-rows: 1fr;
-  grid-template-columns: repeat(auto-fit, minmax(64px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
 `;

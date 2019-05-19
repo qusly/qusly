@@ -7,7 +7,7 @@ export class Session {
   public client = new Client();
 
   @observable
-  public status: 'disconnected' | 'connecting' | 'connected' | 'error' = 'disconnected';
+  public status: 'ok' | 'loading' | 'error' | 'disconnected' = 'disconnected';
 
   @observable
   public path: string[] = [];
@@ -16,30 +16,33 @@ export class Session {
   public files: File[] = [];
 
   public async connect(config: IConnectionConfig) {
-    this.status = 'connecting';
+    this.status = 'loading';
+    console.log(config);
 
     const res = await this.client.connect(config);
 
-    if (!res.success) {
+    if (res.success) {
+      await this.updatePath();
+      await this.loadFiles();
+
+      this.status = 'ok';
+    } else {
       console.log('Cant connect', config);
       this.status = 'error';
-      return;
     }
-
-    await this.updatePath();
-    await this.loadFiles();
-
-    this.status = 'connected';
   }
 
-  public async updatePath() {
+  private async updatePath() {
     const { path } = await this.client.pwd();
     const slash = path.startsWith('/') ? '/' : '';
     this.path = [slash, ...path.split(/\\|\//).filter(v => v !== '')];
   }
 
   public async loadFiles() {
-    const { files } = await this.client.ls('./');
+    this.status = 'loading';
+
+    const { files, error } = await this.client.ls(this.path.join('/'));
+    console.log(error);
 
     for (const file of files) {
       if (file.type === FileType.File) {
@@ -48,5 +51,6 @@ export class Session {
     }
 
     this.files = files;
+    this.status = 'ok';
   }
 }

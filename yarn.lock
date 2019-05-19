@@ -3170,10 +3170,10 @@ qs@~6.5.2:
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
   integrity sha512-N5ZAX4/LxJmF+7wN74pUD6qAh9/wnvdQcjq9TZjevvXzSUo7bfmw91saqMjzGS2xq91/odN2dW/WOl7qQHNDGA==
 
-qusly-core@1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/qusly-core/-/qusly-core-1.0.4.tgz#95f28b2dfa71c5ee3411e0899e153765db6698f1"
-  integrity sha512-tmUKGPeVaVNIBa2ExF5D4TvSYeOCRL8BeOOlZwLz2Qg8MNP0l1JrIxw1ryd5g2+vG5/cPQVp20f8k4iCU7w9Sg==
+qusly-core@1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/qusly-core/-/qusly-core-1.0.5.tgz#0faecbfc348b837153d4bcb50ae3aa156696b537"
+  integrity sha512-sUg6nfNiu3ocNhDQkhtQEcUjSyI16URMu6uBRq6xsUGr4NaDh87xWJ+ZgKFLysvIQ9u8KBREfqNEEXmALpBV6w==
   dependencies:
     basic-ftp "https://github.com/xnerhu/basic-ftp"
     ssh2 "0.8.2"

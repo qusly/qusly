@@ -16,7 +16,7 @@ const Content = observer(() => {
 
   return (
     <Container>
-      {status === 'connecting' && (
+      {status === 'loading' && (
         <div
           style={{
             width: '100%',
@@ -29,7 +29,7 @@ const Content = observer(() => {
           <Preloader />
         </div>
       )}
-      {status === 'connected' && <FilesView />}
+      {status === 'ok' && <FilesView />}
     </Container>
   );
 });
