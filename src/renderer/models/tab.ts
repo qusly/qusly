@@ -113,9 +113,9 @@ export class Tab {
     }
 
     const width =
-      containerWidth / (tabs.length + store.tabs.removedTabs) -
-      TABS_PADDING -
-      ADD_TAB_MARGIN_LEFT;
+      (containerWidth - ADD_TAB_MARGIN_LEFT) /
+        (tabs.length + store.tabs.removedTabs) -
+      TABS_PADDING;
 
     if (width > 200) {
       return 200;
