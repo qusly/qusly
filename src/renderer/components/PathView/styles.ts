@@ -6,7 +6,6 @@ import { robotoMedium, centerIcon } from '~/renderer/mixins';
 export const StyledPathView = styled.div`
   width: 100%;
   height: 32px;
-  border-radius: 32px;
   display: flex;
   align-items: center;
   margin-left: 8px;
