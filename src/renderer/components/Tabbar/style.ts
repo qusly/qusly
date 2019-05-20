@@ -4,13 +4,13 @@ import { TOOLBAR_BUTTON_WIDTH } from '~/renderer/constants';
 import ToolbarButton from '../ToolbarButton';
 
 export const TabbarBackground = styled.div`
-  height: 38px;
+  height: 42px;
   width: 100%;
   position: relative;
   overflow: hidden;
   margin-right: 32px;
   display: flex;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.06);
 `;
 
 export const StyledTabbar = styled.div`
@@ -24,7 +24,7 @@ export const StyledTabbar = styled.div`
 `;
 
 export const TabsContainer = styled.div`
-  height: calc(100% - 6px);
+  height: calc(100% - 10px);
   width: calc(100% - ${TOOLBAR_BUTTON_WIDTH}px);
   bottom: 0;
   position: absolute;

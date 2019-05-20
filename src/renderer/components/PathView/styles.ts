@@ -10,16 +10,16 @@ export const StyledPathView = styled.div`
   align-items: center;
   margin-left: 8px;
   overflow: hidden;
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  background-color: rgba(0, 0, 0, 0.04);
   padding-left: 8px;
-  border-radius: 32px;
+  border-radius: 4px;
 `;
 
 export const StyledPathItem = styled.div`
   height: calc(100% - 6px);
   display: flex;
   align-items: center;
-  font-size: 12px;
+  font-size: 13px;
   color: rgba(0, 0, 0, 0.54);
   margin-left: 16px;
   padding: 0px 6px;

@@ -9,7 +9,6 @@ export default () => {
     <StyledToolbar>
       <NavigationButtons />
       <PathView />
-      <Search />
     </StyledToolbar>
   );
 };

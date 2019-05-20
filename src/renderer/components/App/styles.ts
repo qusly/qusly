@@ -12,27 +12,42 @@ export const StyledApp = styled.div`
 `;
 
 export const Menu = styled.div`
-  min-width: 250px;
+  min-width: 300px;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.06);
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-top: 16px;
+  background-color: rgba(0, 0, 0, 0.04);
 `;
 
 export const Search = styled.div`
-  height: 30px;
-  background-color: rgba(0, 0, 0, 0.06);
-  width: 100%;
-  border-radius: 20px;
+  height: 32px;
+  background-color: rgba(0, 0, 0, 0.04);
+  border-radius: 4px;
+  margin-left: 24px;
+  margin-right: 24px;
+  margin-top: 24px;
 `;
 
 export const SearchContainer = styled.div`
-  height: 40px;
+  height: 92px;
   display: flex;
   align-items: center;
+  margin-left: 24px;
+  margin-right: 24px;
 `;
 
 export const AppContent = styled.div`
   flex: 1;
+  box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.1);
+`;
+
+export const Title = styled.div`
+  font-size: 11px;
+  margin-left: 24px;
+  display: flex;
+  align-items: center;
+  height: 42px;
+`;
+
+export const Menu2 = styled.div`
+  width: 56px;
+  background-color: rgba(0, 0, 0, 0.08);
 `;
