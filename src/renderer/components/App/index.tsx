@@ -4,20 +4,12 @@ import { observer } from 'mobx-react';
 
 import AppBar from '../AppBar';
 import { Style } from '~/renderer/styles';
-import {
-  Container,
-  Menu,
-  StyledApp,
-  AppContent,
-  Search,
-  Title,
-  SearchContainer,
-  Menu2,
-} from './styles';
 import store from '~/renderer/store';
 import { Preloader } from '../Preloader';
 import FilesView from '../FilesView';
-import NavigationButtons from '../NavigationButtons';
+import ActivityBar from '../ActivityBar';
+import NavDrawer from '../NavDrawer';
+import { Container, StyledApp, AppContent } from './styles';
 
 const GlobalStyle = createGlobalStyle`${Style}`;
 
@@ -47,8 +39,8 @@ export default class App extends React.Component {
     return (
       <StyledApp>
         <GlobalStyle />
-        <Menu2 />
-        <Menu />
+        <ActivityBar />
+        <NavDrawer />
         <AppContent>
           <AppBar />
           <Content />

@@ -11,12 +11,6 @@ export const StyledApp = styled.div`
   height: 100vh;
 `;
 
-export const Menu = styled.div`
-  min-width: 300px;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.04);
-`;
-
 export const Search = styled.div`
   height: 32px;
   background-color: rgba(0, 0, 0, 0.04);
@@ -45,9 +39,4 @@ export const Title = styled.div`
   display: flex;
   align-items: center;
   height: 42px;
-`;
-
-export const Menu2 = styled.div`
-  width: 56px;
-  background-color: rgba(0, 0, 0, 0.08);
 `;
