@@ -1,20 +1,21 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
-import { IFile } from 'qusly-core';
+import { IFile, IFileType } from 'qusly-core';
 
 import store from '~/renderer/store';
 import { StyledFileItem, Icon, Label } from './styles';
 
-const onClick = (name: string) => () => {
+const onClick = (type: IFileType, name: string) => () => {
+  if (type !== 'directory') return;
   store.session.pathManager.push(name);
 };
 
 export default observer(({ data }: { data: IFile }) => {
-  const { name } = data;
+  const { name, type } = data;
   const { icon, opacity } = store.icons.get(data);
 
   return (
-    <StyledFileItem onClick={onClick(name)}>
+    <StyledFileItem onClick={onClick(type, name)}>
       <Icon icon={icon} style={{ opacity }} />
       <Label>{name}</Label>
     </StyledFileItem>
