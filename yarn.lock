@@ -436,9 +436,9 @@ base@^0.11.1:
     mixin-deep "^1.2.0"
     pascalcase "^0.1.1"
 
-"basic-ftp@https://github.com/xnerhu/basic-ftp":
+"basic-ftp@git+https://github.com/xnerhu/basic-ftp.git":
   version "3.4.4"
-  resolved "https://github.com/xnerhu/basic-ftp#759aaf8d2ce5aa34d8103b53ec2835ae6f7088e6"
+  resolved "git+https://github.com/xnerhu/basic-ftp.git#759aaf8d2ce5aa34d8103b53ec2835ae6f7088e6"
 
 bcrypt-pbkdf@^1.0.0, bcrypt-pbkdf@^1.0.2:
   version "1.0.2"
@@ -3170,10 +3170,10 @@ qs@~6.5.2:
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
   integrity sha512-N5ZAX4/LxJmF+7wN74pUD6qAh9/wnvdQcjq9TZjevvXzSUo7bfmw91saqMjzGS2xq91/odN2dW/WOl7qQHNDGA==
 
-qusly-core@1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/qusly-core/-/qusly-core-1.0.5.tgz#0faecbfc348b837153d4bcb50ae3aa156696b537"
-  integrity sha512-sUg6nfNiu3ocNhDQkhtQEcUjSyI16URMu6uBRq6xsUGr4NaDh87xWJ+ZgKFLysvIQ9u8KBREfqNEEXmALpBV6w==
+qusly-core@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/qusly-core/-/qusly-core-1.1.1.tgz#6d9e5612b455a2dfc29953850bef55771487045e"
+  integrity sha512-K5ejnojqQn1roSugGjrcNbkHiu4W4VYcdgpBfrXCciGp/8IDgtic4ATNK3lzCfmx6hHQOgik6/x5Nogsqmar7w==
   dependencies:
     basic-ftp "https://github.com/xnerhu/basic-ftp"
     ssh2 "0.8.2"

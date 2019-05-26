@@ -1,61 +1,39 @@
 import { observable } from 'mobx';
-import { Client, IConnectionConfig, File, FileType } from 'qusly-core';
+import { Client, IConfig, IFile } from 'qusly-core';
 
-import store from '../store';
-import { sortFiles } from '../utils';
+import { PathManager } from './path';
 
 export class Session {
+  @observable
+  public status: 'disconnected' | 'loading' | 'ok' = 'disconnected';
+
+  @observable
+  public files: IFile[] = [];
+
   public client = new Client();
 
-  @observable
-  public status: 'ok' | 'loading' | 'error' | 'disconnected' = 'disconnected';
+  public pathManager = new PathManager();
 
-  @observable
-  public path: string[] = [];
-
-  @observable
-  public files: File[] = [];
-
-  public async connect(config: IConnectionConfig) {
+  public async connect(config: IConfig) {
     this.status = 'loading';
-    console.log(config);
 
     const res = await this.client.connect(config);
+    if (!res.success) throw res.error;
 
-    if (res.success) {
-      await this.updatePath();
-      await this.loadFiles();
+    await this.pathManager.init();
+    await this.fetchFiles();
+  }
 
-      this.status = 'ok';
-    } else {
-      console.log('Cant connect', config);
-      this.status = 'error';
-    }
+  public async fetchFiles() {
+    this.status = 'loading';
+
+    const res = await this.client.readDir(this.pathManager.path);
+
+    this.files = res.files;
+    this.status = 'ok';
   }
 
   public async close() {
-    return this.client.disconnect();
-  }
-
-  private async updatePath() {
-    const { path } = await this.client.pwd();
-    const slash = path.startsWith('/') ? '/' : '';
-    this.path = [slash, ...path.split(/\\|\//).filter(v => v !== '')];
-  }
-
-  public async loadFiles() {
-    this.status = 'loading';
-
-    const { files, error } = await this.client.ls(this.path.join('/'));
-    console.log(error);
-
-    for (const file of files) {
-      if (file.type === FileType.File) {
-        store.loadIcon(file.ext);
-      }
-    }
-
-    this.files = sortFiles(files);
-    this.status = 'ok';
+    await this.client.disconnect();
   }
 }

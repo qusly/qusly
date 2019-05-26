@@ -22,11 +22,9 @@ import NavigationButtons from '../NavigationButtons';
 const GlobalStyle = createGlobalStyle`${Style}`;
 
 const Content = observer(() => {
-  const { status } = store.session;
-
   return (
     <Container>
-      {status === 'loading' && (
+      {store.session.status === 'loading' && (
         <div
           style={{
             width: '100%',
@@ -50,9 +48,7 @@ export default class App extends React.Component {
       <StyledApp>
         <GlobalStyle />
         <Menu2 />
-        <Menu>
-          <Search />
-        </Menu>
+        <Menu />
         <AppContent>
           <AppBar />
           <Content />

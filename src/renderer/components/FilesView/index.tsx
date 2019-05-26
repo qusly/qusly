@@ -4,7 +4,6 @@ import { observer } from 'mobx-react';
 import store from '~/renderer/store';
 import FileItem from '../FileItem';
 import { StyledFilesView, FilesContainer } from './styles';
-import { FileType } from 'qusly-core';
 
 export default observer(() => {
   return (
