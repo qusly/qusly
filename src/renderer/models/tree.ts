@@ -21,6 +21,14 @@ export class Tree {
 
   public searchDepth = 0;
 
+  public blackList = [
+    'etc',
+    'lost+found',
+    'proc',
+    'sys',
+    'srv'
+  ]
+
   public async init(config: IConfig) {
     const { error } = await this.client.connect(config);
     if (error) throw error;
@@ -32,21 +40,25 @@ export class Tree {
 
     for (const item of this.queue) {
       const res = await this.client.readDir(item.path);
-      if (res.error) throw res.error;
+
+      if (res.error) {
+        console.error(res.error, item.path);
+        continue;
+      }
 
       for (const file of res.files) {
-        if (file.type === 'directory') {
-          const root = item.parent == null ? this.items : item.parent.children;
+        if (file.type === 'directory' && this.blackList.indexOf(file.name) === -1) {
+          const list = item.parent == null ? this.items : item.parent.children;
 
-          root.push({
+          list.push({
             _id: makeId(10),
             name: file.name,
             children: [],
-          });
+          })
 
           this.tempQueue.push({
-            path: `${item.path}/${file.name}`,
-            parent: this.items[this.items.length - 1],
+            path: `${item.path}/${file.name}/`,
+            parent: list[list.length - 1],
           });
         }
       }
