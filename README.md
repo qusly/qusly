@@ -1,7 +1,13 @@
 <div align="center">
   <img src="static/app-icons/icon.png" width="256">
   <h1>Qusly</h1>
-  Qusly is an FTP/FTPS/SFTP client built on top of Electron, React, Styled-Components and <a href="https://www.github.com/xnerhu/qusly-core">Qusly-Core</a>, focused on user-experience and features.
+  📁 Qusly is an FTP/FTPS/SFTP client built on top of Electron, React, Styled-Components and <a href="https://www.github.com/xnerhu/qusly-core">Qusly-Core</a>, focused on User-Experience and features.
+</div>
+
+## Screenshots
+
+<div style="text-align: center">
+<img src="screenshots/ss.png" style="width: 100%; max-width: 896px;" />
 </div>
 
 ## Roadmap
@@ -20,12 +26,6 @@
 - [x] File icon
 - [ ] Settings panel
 - [ ] Theming API
-
-## Screenshots
-
-<div style="text-align: center">
-<img src="screenshots/ss.png" style="width: 100%; max-width: 896px;" />
-</div>
 
 ### Running
 
