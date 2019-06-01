@@ -8,7 +8,7 @@ import store from '~/renderer/store';
 import { Preloader } from '../Preloader';
 import FilesView from '../FilesView';
 import ActivityBar from '../ActivityBar';
-import NavDrawer from '../NavDrawer';
+import Menu from '../Menu';
 import { Container, StyledApp, AppContent } from './styles';
 
 const GlobalStyle = createGlobalStyle`${Style}`;
@@ -40,7 +40,7 @@ export default class App extends React.Component {
       <StyledApp>
         <GlobalStyle />
         <ActivityBar />
-        <NavDrawer />
+        <Menu />
         <AppContent>
           <AppBar />
           <Content />

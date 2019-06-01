@@ -30,7 +30,6 @@ export const SearchContainer = styled.div`
 
 export const AppContent = styled.div`
   flex: 1;
-  box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.1);
 `;
 
 export const Title = styled.div`

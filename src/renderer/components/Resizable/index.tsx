@@ -7,6 +7,7 @@ interface Props {
   defaultWidth?: number;
   minWidth?: number;
   maxWidth?: number;
+  style?: any;
 }
 
 interface State {
@@ -87,7 +88,14 @@ export default class Resizable extends React.PureComponent<Props, State> {
   };
 
   render() {
-    const { pos, minWidth, maxWidth, children, defaultWidth } = this.props;
+    const {
+      pos,
+      minWidth,
+      maxWidth,
+      children,
+      defaultWidth,
+      style,
+    } = this.props;
     const { width } = this.state;
 
     return (
@@ -95,7 +103,7 @@ export default class Resizable extends React.PureComponent<Props, State> {
         ref={this.root}
         minWidth={minWidth}
         maxWidth={maxWidth}
-        style={{ width: width || defaultWidth }}
+        style={{ ...style, width: width || defaultWidth }}
       >
         <StyledAnchor pos={pos} onMouseDown={this.onMouseDown} />
         {children}
