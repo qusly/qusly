@@ -16,7 +16,7 @@ export const WindowsButton = ({ icon, onClick, isClose }: IButtonProps) => (
   </StyledButton>
 );
 
-export const WindowsButtons = () => {
+export default () => {
   return (
     <StyledWindowButtons>
       <WindowsButton icon={icons.windowsMinimize} onClick={minimizeWindow} />

@@ -5,6 +5,7 @@ import HorizontalScrollbar from '../HorizontalScrollbar';
 import store from '~/renderer/store';
 import { icons } from '~/renderer/constants/icons';
 import { Tabs } from '../Tabs';
+import WindowsButton from '../WindowsButtons';
 import { AddTab, StyledTabbar, TabsContainer, TabbarBackground } from './style';
 
 const getContainer = () => store.tabs.containerRef.current;
@@ -14,7 +15,6 @@ const onMouseEnter = () => (store.tabs.scrollbarVisible = true);
 const onMouseLeave = () => (store.tabs.scrollbarVisible = false);
 
 const onAddTabClick = () => {
-  // TODO(xnerhu)
   store.tabs.addTab({ active: true });
 };
 
@@ -41,6 +41,7 @@ export default observer(() => {
           getContainer={getContainer}
         />
       </StyledTabbar>
+      <WindowsButton />
     </TabbarBackground>
   );
 });

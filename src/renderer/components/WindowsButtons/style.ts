@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { centerImage } from '~/renderer/mixins';
+import { centerIcon } from '~/renderer/mixins';
 
 export const StyledWindowButtons = styled.div`
   display: flex;
@@ -14,7 +14,7 @@ interface ButtonProps {
 
 export const StyledButton = styled.div`
   width: 45px;
-  height: 44px;
+  height: 32px;
   min-width: 45px;
   position: relative;
   margin-right: 1px;
@@ -27,7 +27,7 @@ export const StyledButton = styled.div`
 
   &:hover {
     background-color: ${({ isClose }: ButtonProps) =>
-      !isClose ? 'rgba(196, 196, 196, 0.4)' : '#e81123'};
+    !isClose ? 'rgba(196, 196, 196, 0.4)' : '#e81123'};
   }
 `;
 
@@ -40,7 +40,7 @@ export const StyledIcon = styled.div`
   width: 100%;
   height: 100%;
   transition: 0.2s filter;
-  ${centerImage('11px', 'auto')};
+  ${centerIcon(11)};
 
   ${({ icon, isClose }: IconProps) => css`
     background-image: url(${icon});
