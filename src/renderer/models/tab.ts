@@ -9,7 +9,7 @@ import {
   TAB_ANIMATION_DURATION,
   ADD_TAB_MARGIN_LEFT,
 } from '~/renderer/constants';
-import { Session } from './session';
+import { Page } from './page';
 
 let id = 1;
 
@@ -31,8 +31,6 @@ export class Tab {
 
   @observable
   public width: number = 0;
-
-  public session: Session;
 
   @computed
   public get isSelected() {
@@ -114,7 +112,7 @@ export class Tab {
 
     const width =
       (containerWidth - ADD_TAB_MARGIN_LEFT) /
-        (tabs.length + store.tabs.removedTabs) -
+      (tabs.length + store.tabs.removedTabs) -
       TABS_PADDING;
 
     if (width > 200) {
@@ -198,7 +196,7 @@ export class Tab {
       }
     }
 
-    await this.session.close();
+    //await this.session.close();
 
     this.removeTimeout = setTimeout(() => {
       store.tabs.removeTab(this.id);

@@ -7,7 +7,11 @@ import { StyledFileItem, Icon, Label } from './styles';
 
 const onClick = (type: IFileType, name: string) => () => {
   if (type !== 'directory') return;
-  store.session.pathManager.push(name);
+
+  const page = store.pages.current;
+
+  page.pathItems.push(name);
+  page.fetchFiles();
 };
 
 export default observer(({ data }: { data: IFile }) => {

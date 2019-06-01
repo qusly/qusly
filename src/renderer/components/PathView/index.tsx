@@ -8,7 +8,7 @@ import { StyledPathView } from './styles';
 export default observer(() => {
   return (
     <StyledPathView>
-      {store.session.pathManager.list.map((label, index) => (
+      {store.pages.current.pathItems.map((label, index) => (
         <PathItem key={index} pathIndex={index} label={label} />
       ))}
     </StyledPathView>

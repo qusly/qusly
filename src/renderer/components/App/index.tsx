@@ -1,51 +1,24 @@
 import * as React from 'react';
 import { createGlobalStyle } from 'styled-components';
-import { observer } from 'mobx-react';
-
 import AppBar from '../AppBar';
 import { Style } from '~/renderer/styles';
-import store from '~/renderer/store';
-import { Preloader } from '../Preloader';
-import FilesView from '../FilesView';
 import ActivityBar from '../ActivityBar';
 import Menu from '../Menu';
-import { Container, StyledApp, AppContent } from './styles';
+import { StyledApp, AppContent } from './styles';
+import Content from '../Content';
 
 const GlobalStyle = createGlobalStyle`${Style}`;
 
-const Content = observer(() => {
+export default () => {
   return (
-    <Container>
-      {store.session.status === 'loading' && (
-        <div
-          style={{
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <Preloader />
-        </div>
-      )}
-      <FilesView />
-    </Container>
+    <StyledApp>
+      <GlobalStyle />
+      <ActivityBar />
+      <Menu />
+      <AppContent>
+        <AppBar />
+        <Content />
+      </AppContent>
+    </StyledApp>
   );
-});
-
-export default class App extends React.Component {
-  render() {
-    return (
-      <StyledApp>
-        <GlobalStyle />
-        <ActivityBar />
-        <Menu />
-        <AppContent>
-          <AppBar />
-          <Content />
-        </AppContent>
-      </StyledApp>
-    );
-  }
-}
+};

@@ -1,17 +1,19 @@
 import { AddTabStore } from './add-tab';
 import { TabsStore } from './tabs';
 import { IconsStore } from './icons';
+import { SessionsStore } from './sessions';
+import { PagesStore } from './pages';
 
 export class Store {
   public addTab = new AddTabStore();
 
   public tabs = new TabsStore();
 
-  public icons = new IconsStore();
+  public sessions = new SessionsStore();
 
-  public get session() {
-    return this.tabs.selectedTab.session;
-  }
+  public pages = new PagesStore();
+
+  public icons = new IconsStore();
 }
 
 export default new Store();

@@ -2,7 +2,7 @@ import { observable, action } from 'mobx';
 import * as React from 'react';
 import { TweenLite } from 'gsap';
 
-import { Tab, Session } from '~/renderer/models';
+import { Tab, Page } from '~/renderer/models';
 import {
   TAB_ANIMATION_DURATION,
   defaultTabOptions,
@@ -120,15 +120,13 @@ export class TabsStore {
 
     const { HOSTNAME, LOGIN, PASSWORD } = process.env;
 
-    tab.session = new Session();
-
-    tab.session.connect({
+    store.pages.add({
       host: HOSTNAME,
       password: PASSWORD,
       user: LOGIN,
       port: 22,
       protocol: 'sftp',
-    });
+    })
 
     return tab;
   }
