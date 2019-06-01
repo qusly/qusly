@@ -11,6 +11,9 @@ import folder from '~/renderer/resources/icons/folder.svg';
 import file from '~/renderer/resources/icons/file.svg';
 import star from '~/renderer/resources/icons/star.svg';
 import dropDown from '~/renderer/resources/icons/drop-down.svg';
+import fileMultiple from '~/renderer/resources/icons/file-multiple.svg';
+import search from '~/renderer/resources/icons/search.svg';
+import fileTree from '~/renderer/resources/icons/file-tree.svg';
 
 export const icons = {
   windowsMaximize,
@@ -26,4 +29,7 @@ export const icons = {
   forward,
   star,
   dropDown,
+  fileMultiple,
+  search,
+  fileTree
 };
