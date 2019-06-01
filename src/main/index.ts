@@ -1,4 +1,4 @@
-import { BrowserWindow, app, ipcMain, IpcMessageEvent } from 'electron';
+import { BrowserWindow, app, ipcMain, IpcMessageEvent, NativeImage } from 'electron';
 import { join } from 'path';
 import { platform } from 'os';
 import { getExtIcon } from 'electron-ext-icon';
@@ -63,11 +63,15 @@ app.on('window-all-closed', () => {
   }
 });
 
-ipcMain.on('get-ext-icon', async (e: IpcMessageEvent, ext: string) => {
-  const icon = await getExtIcon(ext, { size: 'normal' });
+ipcMain.on('get-extensions-icons', async (e: IpcMessageEvent, exts: string[]) => {
+  const icons: { [key: string]: string } = {};
 
-  e.sender.send('get-ext-icon', {
-    data: icon.toDataURL(),
-    ext,
-  });
+  for (const ext of exts) {
+    if (icons[ext] == null) {
+      const img = await getExtIcon(ext, { size: 'normal' });
+      icons[ext] = img.toDataURL();
+    }
+  }
+
+  e.sender.send('get-extensions-icons', icons);
 })

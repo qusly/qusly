@@ -34,9 +34,11 @@ export class Page {
   public async fetchFiles() {
     this.loading = true;
 
-    const res = await store.sessions.current.client.readDir(this.path);
+    const { files } = await store.sessions.current.client.readDir(this.path);
 
-    this.files = res.files;
+    await store.icons.load(files);
+
+    this.files = files;
     this.loading = false;
   }
 }

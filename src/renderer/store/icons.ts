@@ -4,24 +4,20 @@ import { IFile } from 'qusly-core';
 
 import { icons, transparency } from '../constants';
 
-export interface ExtIcons {
-  [key: string]: string;
-}
-
 export class IconsStore {
   @observable
-  public map: ExtIcons = {};
+  public map: { [key: string]: string } = {};
 
-  constructor() {
-    ipcRenderer.on('get-ext-icon', (e: any, { ext, data }: any) => {
-      this.map[ext] = data;
-    });
-  }
+  public load(files: IFile[]) {
+    return new Promise((resolve) => {
+      ipcRenderer.once('get-extensions-icons', (e: any, data: any) => {
+        this.map = { ...this.map, ...data };
+        resolve();
+      });
 
-  public load(ext: string) {
-    if (this.map[ext] == null) {
-      ipcRenderer.send('get-ext-icon', ext);
-    }
+      const list = files.filter(e => this.map[e.ext] == null && e.ext !== '').map((e) => e.ext);
+      ipcRenderer.send('get-extensions-icons', list);
+    })
   }
 
   public get(file: IFile) {
