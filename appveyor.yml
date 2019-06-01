@@ -7,7 +7,7 @@ platform:
 install:
   - ps: Install-Product node $env:nodejs_version x64
   - set CI=true
-  - npm ci
+  - npm install
 matrix:
   fast_finish: true
 build: off
