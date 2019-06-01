@@ -1,11 +1,14 @@
 import styled, { css } from 'styled-components';
 
+import { noButtons } from '~/renderer/mixins';
+
 export const StyledFilesView = styled.div`
   width: 100%;
   height: 100%;
   overflow-y: auto;
   padding: 24px;
   transition: 0.1s opacity;
+  ${noButtons()};
 
   ${({ visible }: { visible: boolean }) => css`
     opacity: ${visible ? 1 : 0};
