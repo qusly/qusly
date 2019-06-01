@@ -1,10 +1,15 @@
 export const noButtons = (
-  width: string = '6px',
+  size: string = '6px',
   color: string = 'rgba(0, 0, 0, 0.38)',
   hoverColor: string = 'rgba(0, 0, 0, 0.54)',
 ) => `
+    &:hover::-webkit-scrollbar-thumb {
+      background-color: ${color};
+    }
+
     &::-webkit-scrollbar {
-      width: ${width};
+      width: ${size};
+      height: ${size};
     }
 
     &::-webkit-scrollbar-button {
@@ -13,16 +18,18 @@ export const noButtons = (
     }
 
     &::-webkit-scrollbar-thumb {
-      background: ${color};
-      border: 0px none #ffffff;
+      background-color: inherit;
+      border: none;
       border-radius: 0px;
+      opacity: 0 !important;
+      transition: 2s background-color;
     }
 
     &::-webkit-scrollbar-thumb:hover {
-      background: ${hoverColor};
+      background-color: ${hoverColor};
     }
 
     &::-webkit-scrollbar-corner {
-      background: transparent;
+      background-color: transparent;
     }
   `;

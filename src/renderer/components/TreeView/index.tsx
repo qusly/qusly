@@ -1,11 +1,15 @@
 import * as React from 'react';
+import { observer } from 'mobx-react';
 
-export default () => {
+import store from '~/renderer/store';
+import TreeItem from '../TreeItem';
+
+export default observer(() => {
   return (
-    <div>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora possimus
-      repellat illo eum laborum incidunt ab voluptas iure, numquam unde hic,
-      veniam accusamus atque culpa recusandae aliquam quae dolores enim.
-    </div>
+    <React.Fragment>
+      {store.sessions.current.tree.items.map(item => (
+        <TreeItem key={item._id} data={item} />
+      ))}
+    </React.Fragment>
   );
-};
+});

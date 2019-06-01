@@ -1,2 +1,2 @@
 export * from './windows';
-export * from './files';
+export * from './string';

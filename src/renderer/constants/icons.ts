@@ -10,6 +10,7 @@ import refresh from '~/renderer/resources/icons/refresh.svg';
 import folder from '~/renderer/resources/icons/folder.svg';
 import file from '~/renderer/resources/icons/file.svg';
 import star from '~/renderer/resources/icons/star.svg';
+import dropDown from '~/renderer/resources/icons/drop-down.svg';
 
 export const icons = {
   windowsMaximize,
@@ -24,4 +25,5 @@ export const icons = {
   back,
   forward,
   star,
+  dropDown,
 };

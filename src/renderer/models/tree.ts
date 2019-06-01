@@ -2,6 +2,7 @@ import { observable } from "mobx";
 import { Client, IConfig } from "qusly-core";
 
 import { TreeItem } from "./tree-item";
+import { makeId } from "../utils";
 
 interface QueueItem {
   parent?: TreeItem;
@@ -18,15 +19,16 @@ export class Tree {
 
   public tempQueue: QueueItem[] = [];
 
-  public depth = 0;
+  public searchDepth = 0;
 
   public async init(config: IConfig) {
-    await this.client.connect(config);
+    const { error } = await this.client.connect(config);
+    if (error) throw error;
     this.search();
   }
 
-  public async search(maxDepth = 0) {
-    if (this.depth > maxDepth) return;
+  public async search(maxDepth = 1) {
+    if (this.searchDepth > maxDepth) return;
 
     for (const item of this.queue) {
       const res = await this.client.readDir(item.path);
@@ -37,6 +39,7 @@ export class Tree {
           const root = item.parent == null ? this.items : item.parent.children;
 
           root.push({
+            _id: makeId(10),
             name: file.name,
             children: [],
           });
@@ -51,7 +54,7 @@ export class Tree {
 
     this.queue = this.tempQueue;
     this.tempQueue = [];
-    this.depth++;
+    this.searchDepth++;
     this.search(maxDepth);
   }
 

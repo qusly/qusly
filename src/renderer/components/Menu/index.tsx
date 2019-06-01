@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import Resizable from '../Resizable';
 import TreeView from '../TreeView';
+import { Container } from './styles';
 
 export default () => {
   const style = {
@@ -10,7 +11,9 @@ export default () => {
 
   return (
     <Resizable style={style}>
-      <TreeView />
+      <Container>
+        <TreeView />
+      </Container>
     </Resizable>
   );
 };
