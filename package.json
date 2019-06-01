@@ -44,7 +44,7 @@
     "@types/styled-components": "4.1.14",
     "cross-env": "5.2.0",
     "dotenv": "8.0.0",
-    "electron": "5.0.1",
+    "electron": "5.0.2",
     "electron-builder": "20.41.0",
     "electron-ext-icon": "1.0.1",
     "fuse-box": "3.7.1",
