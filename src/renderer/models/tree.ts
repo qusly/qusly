@@ -32,7 +32,9 @@ export class Tree {
   public async init(config: IConfig) {
     const { error } = await this.client.connect(config);
     if (error) throw error;
-    this.search();
+
+    await this.search();
+    this.stop();
   }
 
   public async search(maxDepth = 1) {
@@ -67,10 +69,13 @@ export class Tree {
     this.queue = this.tempQueue;
     this.tempQueue = [];
     this.searchDepth++;
-    this.search(maxDepth);
+
+    await this.search(maxDepth);
   }
 
-  public async stop() {
-    await this.client.disconnect();
+  public stop() {
+    this.client.disconnect();
+    this.queue = [];
+    this.tempQueue = [];
   }
 }
