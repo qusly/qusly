@@ -50,12 +50,12 @@
     "fuse-box": "3.7.1",
     "qusly-core": "1.1.1",
     "rimraf": "2.6.3",
+    "terser": "4.0.0",
     "tslint": "5.17.0",
     "tslint-config-airbnb": "5.11.1",
     "tslint-config-prettier": "1.18.0",
     "typescript": "3.5.1",
-    "typescript-plugin-styled-components": "1.4.2",
-    "uglify-es": "3.3.9"
+    "typescript-plugin-styled-components": "1.4.2"
   },
   "dependencies": {
     "gsap": "2.1.2",
