@@ -5,6 +5,7 @@ import { StyledTextfield, Input, Label, Indicator } from './styles';
 interface Props {
   color?: string;
   label?: string;
+  placeholder?: string;
 }
 
 interface State {
@@ -47,8 +48,10 @@ export default class Textfield extends React.PureComponent<Props, State> {
   };
 
   render() {
-    const { color } = this.props;
+    const { color, label, placeholder } = this.props;
     const { activated, focused } = this.state;
+
+    const isLabel = label != null && label !== '';
 
     return (
       <StyledTextfield onClick={this.onClick}>
@@ -57,10 +60,14 @@ export default class Textfield extends React.PureComponent<Props, State> {
           color={color}
           onFocus={this.onFocus}
           onBlur={this.onBlur}
+          isLabel={isLabel}
+          placeholder={placeholder}
         />
-        <Label activated={activated} focused={focused} color={color}>
-          Label
-        </Label>
+        {isLabel && (
+          <Label activated={activated} focused={focused} color={color}>
+            {label}
+          </Label>
+        )}
         <Indicator focused={focused} color={color} />
       </StyledTextfield>
     );

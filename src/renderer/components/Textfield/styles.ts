@@ -12,6 +12,7 @@ export const StyledTextfield = styled.div`
   background-color: #f5f5f5;
   margin: 64px;
   cursor: text;
+  user-select: none;
 `;
 
 export const Input = styled.input`
@@ -20,14 +21,19 @@ export const Input = styled.input`
   font-size: 16px;
   color: #000;
   padding: 0px 12px;
-  padding-top: 12px;
   border: none;
   outline: none;
   background-color: transparent;
   border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+  user-select: auto;
   ${robotoRegular()};
 
-  ${({ color }: { color: string }) => css`
+  &::placeholder {
+    text-shadow: 0px 0px 0px rgba(0, 0, 0, ${transparency.text.medium});
+  }
+
+  ${({ color, isLabel }: { color: string, isLabel: boolean }) => css`
+    padding-top: ${isLabel ? 12 : 0}px;
     ${coloredCursor(color)}
   `}
 `;
