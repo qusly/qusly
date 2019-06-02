@@ -54,7 +54,8 @@
     "tslint-config-airbnb": "5.11.1",
     "tslint-config-prettier": "1.18.0",
     "typescript": "3.5.1",
-    "typescript-plugin-styled-components": "1.4.2"
+    "typescript-plugin-styled-components": "1.4.2",
+    "uglify-es": "3.3.9"
   },
   "dependencies": {
     "gsap": "2.1.2",
