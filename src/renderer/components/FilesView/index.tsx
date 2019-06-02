@@ -6,12 +6,10 @@ import FileItem from '../FileItem';
 import { StyledFilesView, FilesContainer } from './styles';
 
 export default observer(() => {
-  const page = store.pages.current;
-
   return (
-    <StyledFilesView visible={!page.loading}>
+    <StyledFilesView visible={!store.pages.current.loading}>
       <FilesContainer>
-        {page.files.map((file, index) => (
+        {store.pages.current.files.map((file, index) => (
           <FileItem data={file} key={index} />
         ))}
       </FilesContainer>

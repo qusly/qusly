@@ -13,7 +13,7 @@ export class Tree {
   @observable
   public items: TreeItem[] = [];
 
-  public client = new Client();
+  public client: Client;
 
   public queue: QueueItem[] = [{ path: '/' }];
 
@@ -30,6 +30,7 @@ export class Tree {
   ]
 
   public async init(config: IConfig) {
+    this.client = new Client();
     const { error } = await this.client.connect(config);
     if (error) throw error;
 

@@ -15,7 +15,12 @@ export default observer(() => {
     <StyledContainer>
       <ToolbarButton size={20} icon={icons.back} disabled={true} />
       <ToolbarButton size={20} icon={icons.forward} disabled={true} />
-      <ToolbarButton size={20} icon={icons.refresh} onClick={onRefresh} />
+      <ToolbarButton
+        size={20}
+        icon={icons.refresh}
+        onClick={onRefresh}
+        disabled={!store.sessions.current.connected}
+      />
     </StyledContainer>
   );
 });

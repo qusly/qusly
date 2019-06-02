@@ -9,16 +9,21 @@ export class Session {
   @observable
   public id = id++;
 
-  public client = new Client();
+  @observable
+  public connected = false;
 
-  public hostname = '';
+  public client: Client;
 
   public tree = new Tree();
 
+  public hostname = '';
+
   public async connect(config: IConfig) {
+    this.client = new Client();
     const res = await this.client.connect(config);
     if (!res.success) throw res.error;
 
+    this.connected = true;
     this.tree.init(config);
   }
 

@@ -118,15 +118,7 @@ export class TabsStore {
       this.scrollbarRef.current.scrollToEnd(TAB_ANIMATION_DURATION * 1000);
     });
 
-    const { HOSTNAME, LOGIN, PASSWORD } = process.env;
-
-    store.pages.add({
-      host: HOSTNAME,
-      password: PASSWORD,
-      user: LOGIN,
-      port: 22,
-      protocol: 'sftp',
-    })
+    store.pages.add();
 
     return tab;
   }

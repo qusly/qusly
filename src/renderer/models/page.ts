@@ -8,18 +8,20 @@ export class Page {
   public tabId = store.tabs.selectedTab.id;
 
   @observable
+  public sessionId: number;
+
+  @observable
   public files: IFile[] = [];
 
   @observable
   public pathItems: string[] = [];
 
   @observable
-  public sessionId: number;
-
-  @observable
-  public loading = true;
+  public loading = false;
 
   public async init() {
+    this.loading = true;
+
     const { path } = await store.sessions.current.client.pwd();
     const slash = path.startsWith('/') ? '/' : '';
 
