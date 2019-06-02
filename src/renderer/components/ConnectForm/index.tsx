@@ -1,5 +1,10 @@
 import * as React from 'react';
 
 import { StyledForm } from './styles';
+import Textfield from '../Textfield';
 
-export default () => <StyledForm />;
+export default () => (
+  <StyledForm>
+    <Textfield />
+  </StyledForm>
+);
