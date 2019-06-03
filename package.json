@@ -58,7 +58,7 @@
     "typescript-plugin-styled-components": "1.4.3"
   },
   "dependencies": {
-    "gsap": "2.1.2",
+    "gsap": "2.1.3",
     "mobx": "5.9.4",
     "mobx-react": "6.0.2",
     "react": "16.8.6",
