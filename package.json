@@ -48,7 +48,7 @@
     "electron-builder": "20.41.0",
     "electron-ext-icon": "1.0.1",
     "fuse-box": "3.7.1",
-    "qusly-core": "1.1.1",
+    "qusly-core": "1.1.2",
     "rimraf": "2.6.3",
     "terser": "4.0.0",
     "tslint": "5.17.0",
