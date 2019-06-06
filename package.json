@@ -34,7 +34,7 @@
     "compile-darwin": "npm run build && electron-builder -m -p always",
     "compile-linux": "npm run build && electron-builder -l -p always",
     "lint": "tslint \"src/**/*.ts*\"",
-    "lint-fix": "prettier --write \"src/**/*.ts*\" && tslint \"src/**/*.ts*\" --fix"
+    "lint-fix": "prettier --write \"src/**/*.ts*\" -&& tslint \"src/**/*.ts*\" --fix"
   },
   "devDependencies": {
     "@types/dotenv": "6.1.1",
@@ -48,7 +48,7 @@
     "electron-builder": "20.41.0",
     "electron-ext-icon": "1.0.1",
     "fuse-box": "3.7.1",
-    "qusly-core": "1.1.1",
+    "qusly-core": "1.1.4",
     "rimraf": "2.6.3",
     "terser": "4.0.0",
     "tslint": "5.17.0",
