@@ -61,7 +61,7 @@ export default class Textfield extends React.PureComponent<Props, State> {
           onFocus={this.onFocus}
           onBlur={this.onBlur}
           isLabel={isLabel}
-          placeholder={placeholder}
+          placeholder={(label == null || focused) && placeholder}
         />
         {isLabel && (
           <Label activated={activated} focused={focused} color={color}>

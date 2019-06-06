@@ -5,6 +5,6 @@ import Textfield from '../Textfield';
 
 export default () => (
   <StyledForm>
-    <Textfield placeholder="Input text" />
+    <Textfield label="Label" />
   </StyledForm>
 );

@@ -17,7 +17,7 @@ export const StyledTextfield = styled.div`
 
 export const Input = styled.input`
   width: 100%;
-  height: 56px;
+  height: 48px;
   font-size: 16px;
   color: #000;
   padding: 0px 12px;
