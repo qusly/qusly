@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { robotoRegular, coloredCursor, centerVertical, robotoMedium } from '~/renderer/mixins';
+import { robotoRegular, coloredCursor, centerVertical, robotoMedium, centerIcon } from '~/renderer/mixins';
 import { transparency, EASING_FUNCTION } from '~/renderer/constants';
 
 export const StyledTextfield = styled.div`
@@ -15,12 +15,18 @@ export const StyledTextfield = styled.div`
   user-select: none;
 `;
 
+interface InputProps {
+  color: string;
+  hasLabel: boolean;
+  hasIcon: boolean;
+}
+
 export const Input = styled.input`
   width: 100%;
   height: 48px;
   font-size: 16px;
   color: #000;
-  padding: 0px 12px;
+  padding-left: 12px;
   border: none;
   outline: none;
   background-color: transparent;
@@ -32,8 +38,9 @@ export const Input = styled.input`
     text-shadow: 0px 0px 0px rgba(0, 0, 0, ${transparency.text.medium});
   }
 
-  ${({ color, isLabel }: { color: string, isLabel: boolean }) => css`
-    padding-top: ${isLabel ? 12 : 0}px;
+  ${({ color, hasLabel, hasIcon }: InputProps) => css`
+    padding-top: ${hasLabel ? 12 : 0}px;
+    padding-right: ${hasIcon ? 48 : 12}px;
     ${coloredCursor(color)}
   `}
 `;
@@ -70,4 +77,25 @@ export const Indicator = styled.div`
     width: ${focused ? 100 : 0}%;
     background-color: ${color};
   `}
+`;
+
+export const Icon = styled.div`
+  width: 36px;
+  height: 36px;
+  position: absolute;
+  right: 8px;
+  opacity: ${transparency.icons.inactive};
+  border-radius: 100%;
+  overflow: hidden;
+  cursor: pointer;
+  ${centerVertical()};
+  ${centerIcon(24)};
+
+  ${({ src }: { src: any }) => css`
+    background-image: url(${src});
+  `}
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.12);
+  }
 `;

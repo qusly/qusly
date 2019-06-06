@@ -14,6 +14,8 @@ import dropDown from '~/renderer/resources/icons/drop-down.svg';
 import fileMultiple from '~/renderer/resources/icons/file-multiple.svg';
 import search from '~/renderer/resources/icons/search.svg';
 import fileTree from '~/renderer/resources/icons/file-tree.svg';
+import visible from '~/renderer/resources/icons/visible.svg';
+import invisible from '~/renderer/resources/icons/invisible.svg';
 
 export const icons = {
   windowsMaximize,
@@ -31,5 +33,7 @@ export const icons = {
   dropDown,
   fileMultiple,
   search,
-  fileTree
+  fileTree,
+  visible,
+  invisible
 };
