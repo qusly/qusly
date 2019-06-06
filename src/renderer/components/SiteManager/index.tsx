@@ -1,11 +1,12 @@
 import * as React from 'react';
 
-import { StyledForm } from './styles';
 import Textfield from '../Textfield';
 import { icons } from '~/renderer/constants/icons';
+import Dialog from '../Dialog';
+import { StyledForm } from './styles';
 
 export default () => (
-  <StyledForm>
+  <Dialog title="Site manager">
     <Textfield label="Label" icon={icons.visible} />
-  </StyledForm>
+  </Dialog>
 );

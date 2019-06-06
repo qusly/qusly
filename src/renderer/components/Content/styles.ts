@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { centerBoth } from '~/renderer/mixins';
+import { centerBoth, robotoMedium } from '~/renderer/mixins';
 
 export const StyledContent = styled.div`
   width: 100%;

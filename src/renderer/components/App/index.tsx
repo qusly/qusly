@@ -4,8 +4,9 @@ import AppBar from '../AppBar';
 import { Style } from '~/renderer/styles';
 import ActivityBar from '../ActivityBar';
 import Menu from '../Menu';
-import { StyledApp, AppContent } from './styles';
 import Content from '../Content';
+import Overlay from '../Overlay';
+import { StyledApp, AppContent } from './styles';
 
 const GlobalStyle = createGlobalStyle`${Style}`;
 
@@ -19,6 +20,7 @@ export default () => {
         <AppBar />
         <Content />
       </AppContent>
+      <Overlay />
     </StyledApp>
   );
 };

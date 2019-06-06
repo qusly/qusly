@@ -10,7 +10,6 @@ export const StyledTextfield = styled.div`
   border-top-left-radius: 4px;
   overflow: hidden;
   background-color: #f5f5f5;
-  margin: 64px;
   cursor: text;
   user-select: none;
 `;

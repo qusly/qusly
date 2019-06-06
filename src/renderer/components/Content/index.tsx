@@ -4,8 +4,12 @@ import { observer } from 'mobx-react';
 import FilesView from '../FilesView';
 import store from '~/renderer/store';
 import { Preloader } from '../Preloader';
-import ConnectForm from '../ConnectForm';
+import Button from '../Button';
 import { StyledContent, PreloaderContainer } from './styles';
+
+const onConnectClick = () => {
+  store.overlay.show('site-manager');
+};
 
 export default observer(() => {
   const connected = store.sessions.current.connected;
@@ -20,7 +24,7 @@ export default observer(() => {
           </PreloaderContainer>
         </React.Fragment>
       )}
-      {!connected && <ConnectForm />}
+      {!connected && <Button onClick={onConnectClick}>CONNECT</Button>}
     </StyledContent>
   );
 });
