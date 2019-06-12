@@ -1,8 +1,7 @@
 import styled, { css } from 'styled-components';
+import { centerIcon, transparency } from 'wexond-ui';
 
-import { centerIcon, maxLines } from '~/renderer/mixins';
 import { icons } from '~/renderer/constants/icons';
-import { transparency } from '~/renderer/constants';
 
 export const StyledTreeItem = styled.div`
   width: 100%;
@@ -40,7 +39,7 @@ export const Label = styled.div`
   margin-left: 12px;
   overflow: hidden;
   text-overflow: ellipsis;
-  ${maxLines(1)};
+  white-space: nowrap;
 `;
 
 export const ItemsContainer = styled.div`

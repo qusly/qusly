@@ -1,14 +1,5 @@
 import styled, { css } from 'styled-components';
-
-import { noButtons, centerIcon } from '~/renderer/mixins';
-import { transparency } from '~/renderer/constants';
-
-export const Container = styled.div`
-  width: calc(100% - 2px);
-  height: 100%;
-  overflow: auto;
-  ${noButtons()};
-`;
+import { noButtons, centerIcon, transparency } from 'wexond-ui';
 
 export const StyledButtons = styled.div`
   width: 56px;
@@ -24,11 +15,25 @@ export const StyledButton = styled.div`
   ${centerIcon(24)};
 
   &:hover {
-    opacity: 0.8;
+    opacity: 0.7;
   }
 
   ${({ icon, selected }: { icon: any, selected: boolean }) => css`
-    opacity: ${selected ? 0.8 : transparency.icons.inactive};
+    opacity: ${selected ? 0.7 : transparency.icons.inactive};
     background-image: url(${icon});
   `}
 `;
+
+export const Container = styled.div`
+  width: calc(100% - 2px);
+  height: 100%;
+  overflow: auto;
+  ${noButtons()};
+`;
+
+export const StyledItem = styled.div`
+  ${({ visible }: { visible: boolean }) => css`
+    pointer-events: ${visible ? 'unset' : 'none'};
+    opacity: ${visible ? 1 : 0};
+  `}
+`

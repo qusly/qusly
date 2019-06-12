@@ -118,7 +118,7 @@ Sparky.task('renderer', async () => {
   await new Builder({
     name: 'app',
     target: 'electron',
-    instructions: '> [renderer/index.tsx]',
+    instructions: '> [renderer/index.tsx] +wexond-ui',
     watch: 'renderer/**',
     devServerOptions: {
       httpServer: true,

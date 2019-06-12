@@ -110,7 +110,6 @@ export default observer(({ tab }: { tab: Tab }) => {
       >
         <Content tab={tab} />
         <Close tab={tab} />
-
         <Overlay tab={tab} />
       </TabContainer>
       <Border tab={tab} />

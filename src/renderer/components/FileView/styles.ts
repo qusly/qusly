@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
-
-import { noButtons } from '~/renderer/mixins';
+import { noButtons } from 'wexond-ui';
 
 export const StyledFilesView = styled.div`
   width: 100%;

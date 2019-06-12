@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
+import { centerIcon } from 'wexond-ui';
 
-import { centerIcon } from '~/renderer/mixins';
-import { icons, transparency } from '~/renderer/constants';
+import { icons } from '~/renderer/constants';
 
 export const StyledFileItem = styled.div`
   display: flex;

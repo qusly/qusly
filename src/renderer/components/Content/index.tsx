@@ -1,15 +1,10 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
+import { Preloader } from 'wexond-ui';
 
 import FileView from '../FileView';
 import store from '~/renderer/store';
-import { Preloader } from '../Preloader';
-import Button from '../Button';
 import { StyledContent, PreloaderContainer } from './styles';
-
-const onConnectClick = () => {
-  store.overlay.show('site-manager');
-};
 
 export default observer(() => {
   const connected = store.sessions.current.connected;
@@ -24,7 +19,6 @@ export default observer(() => {
           </PreloaderContainer>
         </React.Fragment>
       )}
-      {!connected && <Button onClick={onConnectClick}>CONNECT</Button>}
     </StyledContent>
   );
 });

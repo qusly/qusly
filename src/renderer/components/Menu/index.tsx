@@ -5,7 +5,8 @@ import Resizable from '../Resizable';
 import FileTree from '../FileTree';
 import store from '~/renderer/store';
 import { MENU_PAGE, icons } from '~/renderer/constants';
-import { Container, StyledButton, StyledButtons } from './styles';
+import SiteView from '../SiteView';
+import { Container, StyledButton, StyledButtons, StyledItem } from './styles';
 
 const onClick = (page: MENU_PAGE) => () => {
   store.menu.selected = page;
@@ -23,12 +24,21 @@ export const Button = observer(
   },
 );
 
+export const Item = observer(
+  ({ children, page }: { children?: any; page: MENU_PAGE }) => {
+    return (
+      <StyledItem visible={store.menu.selected === page}>{children}</StyledItem>
+    );
+  },
+);
+
 export const Buttons = () => {
   return (
     <StyledButtons>
       <Button page="tree" icon={icons.fileTree} />
       <Button page="transfer" icon={icons.fileMultiple} />
       <Button page="search" icon={icons.search} />
+      <Button page="sites" icon={icons.server} />
     </StyledButtons>
   );
 };
@@ -43,7 +53,12 @@ export default () => {
       <Buttons />
       <Resizable style={style}>
         <Container>
-          <FileTree />
+          <Item page="tree">
+            <FileTree />
+          </Item>
+          <Item page="sites">
+            <SiteView />
+          </Item>
         </Container>
       </Resizable>
     </React.Fragment>

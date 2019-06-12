@@ -1,7 +1,7 @@
 import styled from 'styled-components';
+import { transparency, centerIcon } from 'wexond-ui';
 
-import { transparency, icons } from '~/renderer/constants';
-import { centerIcon } from '~/renderer/mixins';
+import { icons } from '~/renderer/constants';
 
 export const StyledPathItem = styled.div`
   height: calc(100% - 6px);

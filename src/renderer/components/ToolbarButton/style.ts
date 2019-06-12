@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
+import { centerIcon } from 'wexond-ui';
 
 import { TOOLBAR_BUTTON_WIDTH, TOOLBAR_HEIGHT } from '~/renderer/constants';
-import { centerIcon } from '~/renderer/mixins';
 
 export const Icon = styled.div`
   width: 100%;

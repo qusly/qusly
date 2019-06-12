@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
-
-import { centerIcon } from '~/renderer/mixins';
+import { centerIcon } from 'wexond-ui';
 
 export const StyledWindowButtons = styled.div`
   display: flex;

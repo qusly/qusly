@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
+import { transparency, centerIcon, body2 } from 'wexond-ui';
 
-import { transparency, icons } from '~/renderer/constants';
-import { centerIcon, body2 } from '~/renderer/mixins';
+import { icons } from '~/renderer/constants';
 
 interface CloseProps {
   visible: boolean;

@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
-
-import { centerBoth, robotoMedium } from '~/renderer/mixins';
+import { centerBoth } from 'wexond-ui';
 
 export const StyledContent = styled.div`
   width: 100%;

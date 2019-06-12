@@ -1,8 +1,7 @@
-import { observer } from 'mobx-react';
 import * as React from 'react';
+import { observer } from 'mobx-react';
+import { Ripple, transparency } from 'wexond-ui';
 
-import Ripple from '~/renderer/components/Ripple';
-import { transparency } from '~/renderer/constants/transparency';
 import { Button, Icon, Circle } from './style';
 
 interface Props {

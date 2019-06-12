@@ -1,1 +1,1 @@
-export type MENU_PAGE = 'tree' | 'transfer' | 'search';
+export type MENU_PAGE = 'tree' | 'transfer' | 'search' | 'sites';
