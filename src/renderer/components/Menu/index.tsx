@@ -1,70 +1,44 @@
 import * as React from 'react';
-import { observer } from 'mobx-react';
 
+import { icons } from '~/renderer/constants/icons';
 import Resizable from '../Resizable';
+import MenuButton from '../MenuButton';
+import MenuPage from '../MenuPage';
 import FileTree from '../FileTree';
-import store from '~/renderer/store';
-import { MENU_PAGE, icons } from '~/renderer/constants';
-import SiteView from '../SiteView';
-import {
-  Container,
-  StyledButton,
-  Icon,
-  StyledButtons,
-  StyledItem,
-} from './styles';
+import SiteManager from '../SiteManager';
+import { ButtonsBar, Container } from './styles';
 
-const onClick = (page: MENU_PAGE) => () => {
-  store.menu.selected = page;
+const Buttons = () => {
+  return (
+    <ButtonsBar>
+      <MenuButton page="file-tree" icon={icons.fileTree} />
+      <MenuButton page="transfer" icon={icons.fileOutline} />
+      <MenuButton page="search" icon={icons.search} />
+      <MenuButton page="site-manager" icon={icons.siteManager} />
+    </ButtonsBar>
+  );
 };
 
-export const Button = observer(
-  ({ page, icon }: { page: MENU_PAGE; icon: any }) => {
-    return (
-      <StyledButton onClick={onClick(page)}>
-        <Icon icon={icon} selected={store.menu.selected === page} />
-      </StyledButton>
-    );
-  },
-);
-
-export const Item = observer(
-  ({ children, page }: { children?: any; page: MENU_PAGE }) => {
-    return (
-      <StyledItem visible={store.menu.selected === page}>{children}</StyledItem>
-    );
-  },
-);
-
-export const Buttons = () => {
+const Pages = () => {
   return (
-    <StyledButtons>
-      <Button page="tree" icon={icons.fileTree} />
-      <Button page="transfer" icon={icons.fileOutline} />
-      <Button page="search" icon={icons.search} />
-      <Button page="sites" icon={icons.siteManager} />
-    </StyledButtons>
+    <Resizable>
+      <Container>
+        <MenuPage page="file-tree">
+          <FileTree />
+        </MenuPage>
+        <MenuPage page="site-manager">
+          <SiteManager />
+        </MenuPage>
+      </Container>
+    </Resizable>
   );
 };
 
 export default () => {
-  const style = {
-    backgroundColor: 'rgba(0, 0, 0, 0.04)',
-  };
-
   return (
     <React.Fragment>
       <Buttons />
-      <Resizable style={style}>
-        <Container>
-          <Item page="tree">
-            <FileTree />
-          </Item>
-          <Item page="sites">
-            <SiteView />
-          </Item>
-        </Container>
-      </Resizable>
+      <Pages />
     </React.Fragment>
   );
 };
