@@ -3,7 +3,7 @@ import { centerIcon } from 'wexond-ui';
 
 import { icons } from '~/renderer/constants';
 
-export const StyledFileItem = styled.div`
+export const StyledFile = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;

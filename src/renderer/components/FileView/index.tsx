@@ -2,17 +2,15 @@ import * as React from 'react';
 import { observer } from 'mobx-react';
 
 import store from '~/renderer/store';
-import FileItem from '../FileItem';
-import { StyledFilesView, FilesContainer } from './styles';
+import File from '../File';
+import { StyledFilesView } from './styles';
 
 export default observer(() => {
   return (
     <StyledFilesView visible={!store.pages.current.loading}>
-      <FilesContainer>
-        {store.pages.current.files.map((file, index) => (
-          <FileItem data={file} key={index} />
-        ))}
-      </FilesContainer>
+      {store.pages.current.files.map((file, index) => (
+        <File data={file} key={index} />
+      ))}
     </StyledFilesView>
   );
 });

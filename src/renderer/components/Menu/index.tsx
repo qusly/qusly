@@ -6,7 +6,13 @@ import FileTree from '../FileTree';
 import store from '~/renderer/store';
 import { MENU_PAGE, icons } from '~/renderer/constants';
 import SiteView from '../SiteView';
-import { Container, StyledButton, StyledButtons, StyledItem } from './styles';
+import {
+  Container,
+  StyledButton,
+  Icon,
+  StyledButtons,
+  StyledItem,
+} from './styles';
 
 const onClick = (page: MENU_PAGE) => () => {
   store.menu.selected = page;
@@ -15,11 +21,9 @@ const onClick = (page: MENU_PAGE) => () => {
 export const Button = observer(
   ({ page, icon }: { page: MENU_PAGE; icon: any }) => {
     return (
-      <StyledButton
-        icon={icon}
-        selected={store.menu.selected === page}
-        onClick={onClick(page)}
-      />
+      <StyledButton onClick={onClick(page)}>
+        <Icon icon={icon} selected={store.menu.selected === page} />
+      </StyledButton>
     );
   },
 );
@@ -36,9 +40,9 @@ export const Buttons = () => {
   return (
     <StyledButtons>
       <Button page="tree" icon={icons.fileTree} />
-      <Button page="transfer" icon={icons.fileMultiple} />
+      <Button page="transfer" icon={icons.fileOutline} />
       <Button page="search" icon={icons.search} />
-      <Button page="sites" icon={icons.server} />
+      <Button page="sites" icon={icons.siteManager} />
     </StyledButtons>
   );
 };

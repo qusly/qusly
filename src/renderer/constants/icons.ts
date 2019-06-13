@@ -11,12 +11,12 @@ import folder from '~/renderer/resources/icons/folder.svg';
 import file from '~/renderer/resources/icons/file.svg';
 import star from '~/renderer/resources/icons/star.svg';
 import dropDown from '~/renderer/resources/icons/drop-down.svg';
-import fileMultiple from '~/renderer/resources/icons/file-multiple.svg';
+import fileOutline from '~/renderer/resources/icons/file-outline.svg';
 import search from '~/renderer/resources/icons/search.svg';
 import fileTree from '~/renderer/resources/icons/file-tree.svg';
 import visible from '~/renderer/resources/icons/visible.svg';
 import invisible from '~/renderer/resources/icons/invisible.svg';
-import server from '~/renderer/resources/icons/server.svg';
+import siteManager from '~/renderer/resources/icons/site-manager.svg';
 
 export const icons = {
   windowsMaximize,
@@ -32,10 +32,10 @@ export const icons = {
   forward,
   star,
   dropDown,
-  fileMultiple,
+  fileOutline,
   search,
   fileTree,
   visible,
   invisible,
-  server
+  siteManager,
 };
