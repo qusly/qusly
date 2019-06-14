@@ -21,16 +21,14 @@ const Buttons = () => {
 
 const Pages = () => {
   return (
-    <Resizable>
-      <Container>
-        <MenuPage page="file-tree">
-          <FileTree />
-        </MenuPage>
-        <MenuPage page="site-manager">
-          <SiteManager />
-        </MenuPage>
-      </Container>
-    </Resizable>
+    <React.Fragment>
+      <MenuPage page="file-tree">
+        <FileTree />
+      </MenuPage>
+      <MenuPage page="site-manager">
+        <SiteManager />
+      </MenuPage>
+    </React.Fragment>
   );
 };
 
@@ -38,7 +36,11 @@ export default () => {
   return (
     <React.Fragment>
       <Buttons />
-      <Pages />
+      <Resizable>
+        <Container>
+          <Pages />
+        </Container>
+      </Resizable>
     </React.Fragment>
   );
 };

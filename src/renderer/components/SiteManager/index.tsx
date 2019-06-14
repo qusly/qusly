@@ -1,3 +1,12 @@
 import * as React from 'react';
 
-export default () => <div>Site manager</div>;
+import SiteItem from '../SiteItem';
+
+export default () => (
+  <React.Fragment>
+    <SiteItem label="wexond.net" user="root" />
+    <SiteItem label="qusly.app" user="root" />
+    <SiteItem label="mystore.j.pl" user="admin" />
+    <SiteItem label="my vps" user="root" />
+  </React.Fragment>
+);
