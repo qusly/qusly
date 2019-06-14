@@ -10,9 +10,10 @@ export const ButtonsBar = styled.div`
 `;
 
 export const Container = styled.div`
-  width: calc(100% - 2px);
+  width: 100%;
   height: 100%;
   overflow: auto;
+  padding-right: 2px;
   background-color: rgba(0, 0, 0, 0.04);
   ${noButtons()};
 `;
