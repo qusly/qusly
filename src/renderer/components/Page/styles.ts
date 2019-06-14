@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { centerBoth } from 'wexond-ui';
 
-export const StyledContent = styled.div`
+export const StyledPage = styled.div`
   width: 100%;
   height: calc(100% - 80px);
   position: relative;

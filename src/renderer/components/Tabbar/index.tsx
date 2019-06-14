@@ -18,29 +18,37 @@ const onAddTabClick = () => {
   store.tabs.addTab({ active: true });
 };
 
-export default observer(() => {
+const Tabbar = observer(() => {
   return (
-    <TabbarBackground>
-      <StyledTabbar>
-        <TabsContainer
-          onMouseEnter={onMouseEnter}
-          onMouseLeave={onMouseLeave}
-          ref={store.tabs.containerRef}
-        >
-          <Tabs />
-        </TabsContainer>
-        <AddTab
-          icon={icons.add}
-          onClick={onAddTabClick}
-          divRef={(r: any) => (store.addTab.ref = r)}
-        />
-        <HorizontalScrollbar
-          ref={store.tabs.scrollbarRef}
-          enabled={store.tabs.scrollable}
-          visible={store.tabs.scrollbarVisible}
-          getContainer={getContainer}
-        />
-      </StyledTabbar>
+    <StyledTabbar>
+      <TabsContainer
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+        ref={store.tabs.containerRef}
+      >
+        <Tabs />
+      </TabsContainer>
+      <AddTab
+        icon={icons.add}
+        onClick={onAddTabClick}
+        divRef={(r: any) => (store.addTab.ref = r)}
+      />
+      <HorizontalScrollbar
+        ref={store.tabs.scrollbarRef}
+        enabled={store.tabs.scrollable}
+        visible={store.tabs.scrollbarVisible}
+        getContainer={getContainer}
+      />
+    </StyledTabbar>
+  );
+});
+
+export default observer(() => {
+  const session = store.sessions.current;
+
+  return (
+    <TabbarBackground white={session == null}>
+      {session && <Tabbar />}
       <WindowsButton />
     </TabbarBackground>
   );

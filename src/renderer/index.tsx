@@ -7,6 +7,4 @@ import App from './components/App';
 
 ipcRenderer.setMaxListeners(0);
 
-store.tabs.addTab({ active: true });
-
 render(<App />, document.getElementById('app'));

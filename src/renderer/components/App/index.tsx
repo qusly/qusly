@@ -3,7 +3,7 @@ import { GlobalStyle } from 'wexond-ui';
 
 import AppBar from '../AppBar';
 import Menu from '../Menu';
-import Content from '../Content';
+import Page from '../Page';
 import { StyledApp, AppContent } from './styles';
 
 export default () => {
@@ -13,7 +13,7 @@ export default () => {
       <Menu />
       <AppContent>
         <AppBar />
-        <Content />
+        <Page />
       </AppContent>
     </StyledApp>
   );

@@ -4,15 +4,17 @@ import { Preloader } from 'wexond-ui';
 
 import store from '~/renderer/store';
 import FileView from '../FileView';
-import { StyledContent, PreloaderContainer } from './styles';
+import { StyledPage, PreloaderContainer } from './styles';
 
 export default observer(() => {
+  const session = store.sessions.current;
+
   return (
-    <StyledContent>
-      {store.sessions.current.connected && <FileView />}
-      <PreloaderContainer visible={store.pages.current.loading}>
+    <StyledPage>
+      {session && session.connected && <FileView />}
+      <PreloaderContainer visible={session && store.pages.current.loading}>
         <Preloader />
       </PreloaderContainer>
-    </StyledContent>
+    </StyledPage>
   );
 });

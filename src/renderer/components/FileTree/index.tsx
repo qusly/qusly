@@ -5,11 +5,12 @@ import store from '~/renderer/store';
 import Item from '../FileTreeItem';
 
 export default observer(() => {
+  const session = store.sessions.current;
+
   return (
     <React.Fragment>
-      {store.sessions.current.tree.items.map(item => (
-        <Item key={item._id} data={item} />
-      ))}
+      {session &&
+        session.tree.items.map(item => <Item key={item._id} data={item} />)}
     </React.Fragment>
   );
 });
