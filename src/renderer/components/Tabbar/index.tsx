@@ -5,7 +5,7 @@ import HorizontalScrollbar from '../HorizontalScrollbar';
 import store from '~/renderer/store';
 import { icons } from '~/renderer/constants/icons';
 import { Tabs } from '../Tabs';
-import WindowsButton from '../WindowsButtons';
+import { WindowsControls } from 'react-windows-controls';
 import { AddTab, StyledTabbar, TabsContainer, TabbarBackground } from './style';
 
 const getContainer = () => store.tabs.containerRef.current;
@@ -49,7 +49,7 @@ export default observer(() => {
   return (
     <TabbarBackground white={session == null}>
       {session && <Tabbar />}
-      <WindowsButton />
+      <WindowsControls />
     </TabbarBackground>
   );
 });
