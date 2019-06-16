@@ -7,6 +7,7 @@ import { icons } from '~/renderer/constants/icons';
 import { Tabs } from '../Tabs';
 import { WindowsControls } from 'react-windows-controls';
 import { AddTab, StyledTabbar, TabsContainer, TabbarBackground } from './style';
+import { closeWindow, maximizeWindow, minimizeWindow } from '~/renderer/utils';
 
 const getContainer = () => store.tabs.containerRef.current;
 
@@ -49,7 +50,11 @@ export default observer(() => {
   return (
     <TabbarBackground white={session == null}>
       {session && <Tabbar />}
-      <WindowsControls />
+      <WindowsControls
+        onClose={closeWindow}
+        onMaximize={maximizeWindow}
+        onMinimize={minimizeWindow}
+      />
     </TabbarBackground>
   );
 });
