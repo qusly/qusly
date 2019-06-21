@@ -2,8 +2,8 @@ import { observer } from 'mobx-react';
 import * as React from 'react';
 import { WindowsControls } from 'react-windows-controls';
 
-import HorizontalScrollbar from '../HorizontalScrollbar';
 import store from '~/renderer/store';
+import HorizontalScrollbar from '../HorizontalScrollbar';
 import { icons } from '~/renderer/constants/icons';
 import { Tabs } from '../Tabs';
 import { closeWindow, maximizeWindow, minimizeWindow } from '~/renderer/utils';

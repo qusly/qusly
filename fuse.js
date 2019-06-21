@@ -10,6 +10,7 @@ const {
   StyledComponentsPlugin,
 } = require('fuse-box');
 const dotenv = require('dotenv');
+const { spawn } = require('child_process');
 
 const production = process.env.NODE_ENV === 'prod';
 const outputDir = 'build';
@@ -103,7 +104,7 @@ class Builder {
   }
 }
 
-Sparky.task('default', ['renderer', 'main']);
+Sparky.task('default', ['main', 'renderer']);
 
 Sparky.task('main', async () => {
   await new Builder({
@@ -137,4 +138,9 @@ Sparky.task('renderer', async () => {
       }),
     ],
   }).init();
+
+  spawn('npm', ['start'], {
+    shell: true,
+    stdio: 'inherit',
+  });
 });
