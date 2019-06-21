@@ -4,6 +4,7 @@ import { FaviconsStore } from './favicons';
 import { SessionsStore } from './sessions';
 import { PagesStore } from './pages';
 import { MenuStore } from './menu';
+import { SitesStore } from './sites';
 
 export class Store {
   public addTab = new AddTabStore();
@@ -12,6 +13,7 @@ export class Store {
   public pages = new PagesStore();
   public favicons = new FaviconsStore();
   public menu = new MenuStore();
+  public sites = new SitesStore();
 }
 
 export default new Store();

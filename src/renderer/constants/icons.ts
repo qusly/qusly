@@ -16,7 +16,7 @@ import search from '~/renderer/resources/icons/search.svg';
 import fileTree from '~/renderer/resources/icons/file-tree.svg';
 import visible from '~/renderer/resources/icons/visible.svg';
 import invisible from '~/renderer/resources/icons/invisible.svg';
-import siteManager from '~/renderer/resources/icons/site-manager.svg';
+import sitesManager from '~/renderer/resources/icons/sites-manager.svg';
 
 export const icons = {
   windowsMaximize,
@@ -37,5 +37,5 @@ export const icons = {
   fileTree,
   visible,
   invisible,
-  siteManager,
+  sitesManager,
 };

@@ -1,12 +1,13 @@
 import * as React from 'react';
 
+import { Site } from '~/renderer/models';
 import { StyledItem, Label, User } from './styles';
 
-export default ({ label, user }: { label: string; user: string }) => {
+export default ({ data }: { data: Site }) => {
   return (
     <StyledItem>
-      <Label>{label}</Label>
-      <User>{user}</User>
+      <Label>{data.title}</Label>
+      <User>{data.user}</User>
     </StyledItem>
   );
 };

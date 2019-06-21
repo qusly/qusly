@@ -5,7 +5,7 @@ import Resizable from '../Resizable';
 import MenuButton from '../MenuButton';
 import MenuPage from '../MenuPage';
 import FileTree from '../FileTree';
-import SiteManager from '../SiteManager';
+import SitesManager from '../SitesManager';
 import { ButtonsBar, Container } from './styles';
 
 const Buttons = () => {
@@ -14,7 +14,7 @@ const Buttons = () => {
       <MenuButton page="file-tree" icon={icons.fileTree} />
       <MenuButton page="transfer" icon={icons.fileOutline} />
       <MenuButton page="search" icon={icons.search} />
-      <MenuButton page="site-manager" icon={icons.siteManager} />
+      <MenuButton page="sites" icon={icons.sitesManager} />
     </ButtonsBar>
   );
 };
@@ -25,8 +25,8 @@ const Pages = () => {
       <MenuPage page="file-tree">
         <FileTree />
       </MenuPage>
-      <MenuPage page="site-manager">
-        <SiteManager />
+      <MenuPage page="sites">
+        <SitesManager />
       </MenuPage>
     </React.Fragment>
   );
