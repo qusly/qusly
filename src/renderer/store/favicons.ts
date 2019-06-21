@@ -1,10 +1,11 @@
 import { observable } from 'mobx';
 import { ipcRenderer } from 'electron';
 import { IFile } from 'qusly-core';
+import { transparency } from 'wexond-ui';
 
-import { icons, transparency } from '../constants';
+import { icons } from '../constants';
 
-export class IconsStore {
+export class FaviconsStore {
   @observable
   public map: { [key: string]: string } = {};
 
@@ -16,6 +17,7 @@ export class IconsStore {
       });
 
       const list = files.filter(e => this.map[e.ext] == null && e.ext !== '').map((e) => e.ext);
+
       ipcRenderer.send('get-extensions-icons', list);
     })
   }
@@ -37,4 +39,4 @@ export class IconsStore {
   }
 }
 
-export default new IconsStore();
+export default new FaviconsStore();
