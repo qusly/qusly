@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react';
 import * as React from 'react';
-const { WindowsControls } = require('react-windows-controls');
+import { WindowsControls } from 'react-windows-controls';
 
 import HorizontalScrollbar from '../HorizontalScrollbar';
 import store from '~/renderer/store';
