@@ -3,8 +3,10 @@
   <h1>Qusly</h1>
 
 [![Travis](https://img.shields.io/travis/qusly/qusly.svg?style=flat-square)](https://travis-ci.com/qusly/qusly)
+[![Discord](https://img.shields.io/discord/591624973609730059.svg?style=flat-square)](https://discord.gg/rNyNYFn)
+[![Downloads](https://img.shields.io/github/downloads/qusly/qusly/total.svg?style=flat-square)](https://github.com/qusly/qusly/releases)
 
-📁 Qusly is an FTP/FTPS/SFTP client built on top of Electron, React, Styled-Components and <a href="https://www.github.com/xnerhu/qusly-core">Qusly-Core</a>, focused on User-Experience and features.
+📁 Qusly is an innovative __FTP/FTPS/SFTP__ client built on top of Electron, React, Styled-Components and <a href="https://www.github.com/xnerhu/qusly-core">Qusly-Core</a>. It's aim is to raise the standards.
 
 </div>
 
@@ -33,12 +35,10 @@
 
 ### Running
 
-```bash
-$ npm run dev
-```
+Before running Qusly, you need to have [Node.js](https://nodejs.org) installed.
 
 ```bash
-$ npm run start
+$ npm run dev
 ```
 
 You can configure `.env` file for better development experience. It will automatically create a new session on hot reload.
@@ -48,11 +48,11 @@ Copy `.env.example`, then change it's name to `.env`.
 ```
 HOSTNAME=www.example.com
 LOGIN=root
-PASSWORD=toor
+PASSWORD=passwd
 PROTOCOL=sftp
 ```
 
-You can change the protocol property to `sftp` or `ftp`.
+You can set the protocol to `sftp`, `ftp` or `ftps`.
 
 ### Other commands
 
@@ -72,7 +72,10 @@ $ npm run <command>
 | `compile-win32`  | Compiles binaries for Windows.              |
 | `compile-darwin` | Compiles binaries for macOS.                |
 | `compile-linux`  | Compiles binaries for Linux.                |
-| `lint`           | Lints code.                                 |
-| `lint-fix`       | Fixes eslint errors if any                  |
-| `start`          | Starts Qusly.                               |
+| `lint`           | Lints the source code.                                 |
+| `lint-fix`       | Fixes eslint errors                                               |
 | `dev`            | Starts Qusly in the development mode        |
+
+<a href="https://www.patreon.com/bePatron?u=2749531">
+    <img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160">
+</a>
