@@ -5,6 +5,7 @@ import { SessionsStore } from './sessions';
 import { PagesStore } from './pages';
 import { MenuStore } from './menu';
 import { SitesStore } from './sites';
+import { OverlayStore } from './overlay';
 
 export class Store {
   public addTab = new AddTabStore();
@@ -14,6 +15,7 @@ export class Store {
   public favicons = new FaviconsStore();
   public menu = new MenuStore();
   public sites = new SitesStore();
+  public overlay = new OverlayStore();
 }
 
 export default new Store();

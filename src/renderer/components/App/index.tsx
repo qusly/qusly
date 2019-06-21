@@ -4,6 +4,7 @@ import { GlobalStyle } from 'wexond-ui';
 import AppBar from '../AppBar';
 import Menu from '../Menu';
 import Page from '../Page';
+import Overlay from '../Overlay';
 import { StyledApp, AppContent } from './styles';
 
 export default () => {
@@ -15,6 +16,7 @@ export default () => {
         <AppBar />
         <Page />
       </AppContent>
+      <Overlay />
     </StyledApp>
   );
 };

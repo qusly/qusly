@@ -22,7 +22,7 @@ export const Add = styled.div`
   background-image: url(${icons.add});
   opacity: ${transparency.icons.inactive};
   margin-left: auto;
-  margin-right: 4px;
+  margin-right: 12px;
   cursor: pointer;
   ${centerIcon(20)};
 
