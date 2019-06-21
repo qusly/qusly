@@ -4,7 +4,7 @@ export type OverlayContent = 'add-site';
 
 export class OverlayStore {
   @observable
-  public content: OverlayContent = 'add-site';
+  public content: OverlayContent;
 
   @observable
   public visible = false;

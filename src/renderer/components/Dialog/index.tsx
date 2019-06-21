@@ -3,27 +3,22 @@ import { observer } from 'mobx-react';
 
 import store from '~/renderer/store';
 import { Button } from '../Button';
-import { OverlayContent } from '~/renderer/store/overlay';
 import { StyledDialog, Title, Content, Buttons } from './styles';
 
 const onHideClick = () => store.overlay.hide();
 
-const onClick = (e: React.MouseEvent<any>) => {
-  e.stopPropagation();
-};
-
 export default observer(
   ({
     title,
-    type,
+    visible,
     children,
   }: {
     title: string;
-    type: OverlayContent;
+    visible?: boolean;
     children?: any;
   }) => {
     return (
-      <StyledDialog visible={store.overlay.content === type} onClick={onClick}>
+      <StyledDialog visible={visible}>
         <Title>{title}</Title>
         <Content>{children}</Content>
         <Buttons>

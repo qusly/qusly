@@ -8,7 +8,6 @@ export const StyledDialog = styled.div`
   position: fixed;
   background-color: #fff;
   border-radius: 8px;
-  overflow: hidden;
   padding-bottom: 8px;
   ${robotoRegular()};
 
