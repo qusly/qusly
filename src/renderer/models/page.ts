@@ -38,7 +38,7 @@ export class Page {
 
     const { files } = await store.sessions.current.client.readDir(this.path);
 
-    await store.icons.load(files);
+    await store.favicons.load(files);
 
     this.files = files;
     this.loading = false;

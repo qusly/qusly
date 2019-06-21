@@ -7,16 +7,16 @@ import { icons } from '../constants';
 
 export class FaviconsStore {
   @observable
-  public map: { [key: string]: string } = {};
+  public favicons: { [key: string]: string } = {};
 
   public load(files: IFile[]) {
     return new Promise((resolve) => {
       ipcRenderer.once('get-extensions-icons', (e: any, data: any) => {
-        this.map = { ...this.map, ...data };
+        this.favicons = { ...this.favicons, ...data };
         resolve();
       });
 
-      const list = files.filter(e => this.map[e.ext] == null && e.ext !== '').map((e) => e.ext);
+      const list = files.filter(e => this.favicons[e.ext] == null && e.ext !== '').map((e) => e.ext);
 
       ipcRenderer.send('get-extensions-icons', list);
     })
@@ -30,8 +30,8 @@ export class FaviconsStore {
 
     if (type === 'directory') {
       icon = icons.folder;
-    } else if (ext !== '' && this.map[ext] != null) {
-      icon = this.map[ext];
+    } else if (ext !== '' && this.favicons[ext] != null) {
+      icon = this.favicons[ext];
       opacity = 1;
     }
 

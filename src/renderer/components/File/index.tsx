@@ -16,7 +16,7 @@ const onClick = (type: IFileType, name: string) => () => {
 
 export default observer(({ data }: { data: IFile }) => {
   const { name, type } = data;
-  const { icon, opacity } = store.icons.get(data);
+  const { icon, opacity } = store.favicons.get(data);
 
   return (
     <StyledFile onClick={onClick(type, name)}>
