@@ -67,12 +67,13 @@ export const Menu = styled.div`
   z-index: 1000;
   padding: 8px 0px;
   background-color: #fff;
-  transition: 0.15s opacity;
+  transition: 0.15s opacity, 0.15s margin-top ${EASING_FUNCTION};
   box-shadow: ${shadows(3)};
 
   ${({ visible }: { visible: boolean }) => css`
     pointer-events: ${visible ? 'auto' : 'none'};
     opacity: ${visible ? 1 : 0};
+    margin-top: ${visible ? 0 : -16}px;
   `}
 `;
 
