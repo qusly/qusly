@@ -90,6 +90,7 @@ export const Icon = styled.div`
   border-radius: 100%;
   overflow: hidden;
   cursor: pointer;
+  transition: 0.2s background-image;
   ${centerVertical()};
   ${centerIcon(24)};
 

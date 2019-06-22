@@ -6,6 +6,7 @@ import store from '~/renderer/store';
 import { MenuItem } from '../MenuItem';
 import { Dropdown } from '../Dropdown';
 import { Textfield } from '../Textfield';
+import { PasswordInput } from '../PasswordInput';
 import { Form } from './styles';
 
 export default observer(() => {
@@ -34,7 +35,7 @@ export default observer(() => {
       </Form>
       <Textfield label="Hostname" style={inputStyle} />
       <Textfield label="Username" style={inputStyle} />
-      <Textfield label="Password" inputType="password" style={inputStyle} />
+      <PasswordInput style={inputStyle} />
     </Dialog>
   );
 });
