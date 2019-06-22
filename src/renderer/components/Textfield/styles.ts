@@ -42,6 +42,10 @@ export const Input = styled.input`
   &::placeholder {
     text-shadow: 0px 0px 0px rgba(0, 0, 0, ${transparency.text.medium});
   }
+
+  &[type=number]::-webkit-inner-spin-button, &[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+  }
 `;
 
 interface LabelProps {

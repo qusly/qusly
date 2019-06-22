@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
-import { Textfield } from 'wexond-ui';
 
 import Dialog from '../Dialog';
 import store from '~/renderer/store';
 import { MenuItem } from '../MenuItem';
 import { Dropdown } from '../Dropdown';
+import { Textfield } from '../Textfield';
 import { Form } from './styles';
 
 export default observer(() => {
@@ -26,7 +26,11 @@ export default observer(() => {
           <MenuItem label="FTPS" />
           <MenuItem label="SFTP" />
         </Dropdown>
-        <Textfield label="Port" style={{ width: '100%', marginLeft: 24 }} />
+        <Textfield
+          label="Port"
+          inputType="number"
+          style={{ width: '100%', marginLeft: 24 }}
+        />
       </Form>
       <Textfield label="Hostname" style={inputStyle} />
       <Textfield label="Username" style={inputStyle} />
