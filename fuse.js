@@ -139,8 +139,10 @@ Sparky.task('renderer', async () => {
     ],
   }).init();
 
-  spawn('npm', ['start'], {
-    shell: true,
-    stdio: 'inherit',
-  });
+  if (!production) {
+    spawn('npm', ['start'], {
+      shell: true,
+      stdio: 'inherit',
+    });
+  }
 });
