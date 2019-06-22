@@ -32,6 +32,7 @@ export const Label = styled.div`
   position: absolute;
   transition: 0.2s font-size, 0.2s color, 0.2s margin-top;
   transition-timing-function: ${EASING_FUNCTION};
+  -webkit-font-smoothing: antialiased;
   ${centerVertical()};
 
   ${({ activated, focused, color }: LabelProps) => css`

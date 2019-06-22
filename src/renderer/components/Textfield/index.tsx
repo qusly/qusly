@@ -1,6 +1,9 @@
 import * as React from 'react';
 
+import { ERROR_COLOR } from '~/renderer/constants';
 import { StyledTextfield, Input, Label, Indicator, Icon } from './styles';
+
+export type ValidationFunction = (str: string) => boolean;
 
 interface Props {
   color?: string;
@@ -15,6 +18,7 @@ interface Props {
 interface State {
   activated: boolean;
   focused: boolean;
+  error: boolean;
 }
 
 export class Textfield extends React.PureComponent<Props, State> {
@@ -28,6 +32,7 @@ export class Textfield extends React.PureComponent<Props, State> {
   public state: State = {
     activated: false,
     focused: false,
+    error: true,
   };
 
   public get value() {
@@ -63,19 +68,27 @@ export class Textfield extends React.PureComponent<Props, State> {
     }
   };
 
+  public validate(fn: ValidationFunction) {
+    const correct = fn(this.value.trim());
+    this.setState({ error: !correct });
+    return correct;
+  }
+
   render() {
     const { color, label, placeholder, icon, inputType, style } = this.props;
-    const { activated, focused } = this.state;
+    const { activated, focused, error } = this.state;
 
     const hasLabel = label != null && label !== '';
     const hasIcon = icon != null && icon !== '';
+
+    const primaryColor = error ? ERROR_COLOR : color;
 
     return (
       <StyledTextfield onClick={this.onClick} style={style}>
         <Input
           ref={this.inputRef}
           type={inputType}
-          color={color}
+          color={primaryColor}
           onFocus={this.onFocus}
           onBlur={this.onBlur}
           hasLabel={hasLabel}
@@ -84,12 +97,12 @@ export class Textfield extends React.PureComponent<Props, State> {
           spellCheck={false}
         />
         {hasLabel && (
-          <Label activated={activated} focused={focused} color={color}>
+          <Label activated={activated} focused={focused} color={primaryColor}>
             {label}
           </Label>
         )}
         {hasIcon && <Icon src={icon} onClick={this.onIconClick} />}
-        <Indicator focused={focused} color={color} />
+        <Indicator focused={focused} color={primaryColor} />
       </StyledTextfield>
     );
   }
