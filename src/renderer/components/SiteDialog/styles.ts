@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Form = styled.div`
+export const Column = styled.div`
   display: flex;
   margin-top: 24px;
 `;

@@ -3,59 +3,40 @@ import { observer } from 'mobx-react';
 import { IProtocol } from 'qusly-core';
 
 import store from '~/renderer/store';
+import { Form, digitsOnly, notEmpty } from '~/renderer/models';
 import { MenuItem } from '../MenuItem';
 import { Dropdown } from '../Dropdown';
 import { Textfield } from '../Textfield';
 import { PasswordInput } from '../PasswordInput';
-import { Form } from './styles';
 import { Button } from '../Button';
 import { CloseButton, Dialog, Title, Content, Buttons } from '../Dialog';
+import { Column } from './styles';
 
-const digitsOnly = (str: string) => notEmpty(str) && /^\d+$/.test(str);
-
-const notEmpty = (str: string) => str.trim().length !== 0;
-
-const inputs = {
+const form = new Form({
   protocol: React.createRef<Dropdown>(),
   port: React.createRef<Textfield>(),
   title: React.createRef<Textfield>(),
-  hostname: React.createRef<Textfield>(),
-  username: React.createRef<Textfield>(),
+  host: React.createRef<Textfield>(),
+  user: React.createRef<Textfield>(),
   password: React.createRef<PasswordInput>(),
-};
-
-const iterate = (fn: (input: any) => void) => {
-  for (const key in inputs) {
-    fn((inputs as any)[key].current);
-  }
-};
-
-const validate = () => {
-  let error = false;
-  iterate(input => {
-    if (!input.test()) {
-      error = true;
-    }
-  });
-  return !error;
-};
-
-const clear = () => iterate(input => input.clear());
+});
 
 const onClick = async () => {
-  if (!validate()) return;
-  const host = inputs.hostname.current.value;
+  if (!form.validate()) return;
+
+  const { title, protocol, port, host, user, password } = form.values;
 
   await store.sites.add({
-    title: inputs.title.current.value || host,
-    protocol: inputs.protocol.current.value as IProtocol,
-    port: parseInt(inputs.port.current.value, 10),
+    title: title || host,
+    protocol: protocol as IProtocol,
+    port: parseInt(port, 10),
     host,
-    user: inputs.username.current.value,
-    password: inputs.password.current.value,
+    user,
+    password,
   });
 
-  clear();
+  store.overlay.hide();
+  form.clear();
 };
 
 export default observer(() => {
@@ -72,13 +53,13 @@ export default observer(() => {
       <Title>Add a new site</Title>
       <Content>
         <Textfield
-          ref={inputs.title}
+          ref={form.fields.title}
           label="Title (optional)"
           style={{ width: '100%' }}
         />
-        <Form>
+        <Column>
           <Dropdown
-            ref={inputs.protocol}
+            ref={form.fields.protocol}
             label="Protocol"
             style={{ width: '100%' }}
           >
@@ -87,26 +68,26 @@ export default observer(() => {
             <MenuItem label="FTPS" />
           </Dropdown>
           <Textfield
-            ref={inputs.port}
+            ref={form.fields.port}
             label="Port"
             inputType="number"
             test={digitsOnly}
             style={{ width: '100%', marginLeft: 24 }}
           />
-        </Form>
+        </Column>
         <Textfield
-          ref={inputs.hostname}
+          ref={form.fields.host}
           label="Hostname"
           test={notEmpty}
           style={inputStyle}
         />
         <Textfield
-          ref={inputs.username}
+          ref={form.fields.user}
           label="Username"
           test={notEmpty}
           style={inputStyle}
         />
-        <PasswordInput ref={inputs.password} style={inputStyle} />
+        <PasswordInput ref={form.fields.password} style={inputStyle} />
       </Content>
       <Buttons>
         <CloseButton />
