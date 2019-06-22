@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
-import { Dropdown, MenuItem, Textfield } from 'wexond-ui';
+import { Textfield } from 'wexond-ui';
 
 import Dialog from '../Dialog';
 import store from '~/renderer/store';
+import { MenuItem } from '../MenuItem';
+import { Dropdown } from '../Dropdown';
 import { Form } from './styles';
 
 export default observer(() => {
