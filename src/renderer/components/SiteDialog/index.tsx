@@ -55,7 +55,6 @@ export default observer(() => {
         <Textfield
           ref={inputs.title}
           label="Title (optional)"
-          test={notEmpty}
           style={{ width: '100%' }}
         />
         <Form>

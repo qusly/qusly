@@ -75,6 +75,8 @@ export class Textfield extends React.PureComponent<Props, State> {
 
   public test(fn?: TestFunction) {
     const { test } = this.props;
+    if (fn == null && test == null) return true;
+
     const correct = fn != null ? fn(this.value) : test(this.value);
 
     this.setState({

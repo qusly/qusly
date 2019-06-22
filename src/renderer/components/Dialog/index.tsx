@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled, { css } from 'styled-components';
-import { robotoRegular, robotoMedium } from 'wexond-ui';
+import { robotoRegular, robotoMedium, EASING_FUNCTION } from 'wexond-ui';
 
 import store from '../../store';
 import { Button } from '../Button';
@@ -23,10 +23,12 @@ export const Dialog = styled.div`
   background-color: #fff;
   border-radius: 8px;
   padding-bottom: 8px;
+  transition: 0.15s transform ${EASING_FUNCTION};
   ${robotoRegular()};
 
   ${({ visible }: { visible: boolean }) => css`
     pointer-events: ${visible ? 'auto' : 'none'};
+    transform: ${visible ? 'translateY(0)' : 'translateY(-24px)'};
   `}
 `;
 
