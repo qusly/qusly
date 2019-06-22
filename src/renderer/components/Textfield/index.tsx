@@ -3,7 +3,7 @@ import * as React from 'react';
 import { ERROR_COLOR } from '~/renderer/constants';
 import { StyledTextfield, Input, Label, Indicator, Icon } from './styles';
 
-export type ValidationFunction = (str: string) => boolean;
+export type TestFunction = (str: string) => boolean;
 
 interface Props {
   color?: string;
@@ -13,6 +13,7 @@ interface Props {
   onIconClick?: (target: Textfield) => void;
   inputType?: 'text' | 'email' | 'password' | 'number';
   style?: any;
+  test?: TestFunction;
 }
 
 interface State {
@@ -32,11 +33,15 @@ export class Textfield extends React.PureComponent<Props, State> {
   public state: State = {
     activated: false,
     focused: false,
-    error: true,
+    error: false,
   };
 
   public get value() {
     return this.inputRef.current.value;
+  }
+
+  public set value(str: string) {
+    this.inputRef.current.value = str;
   }
 
   onClick = () => {
@@ -68,10 +73,31 @@ export class Textfield extends React.PureComponent<Props, State> {
     }
   };
 
-  public validate(fn: ValidationFunction) {
-    const correct = fn(this.value.trim());
-    this.setState({ error: !correct });
+  public test(fn?: TestFunction) {
+    const { test } = this.props;
+    const correct = fn != null ? fn(this.value) : test(this.value);
+
+    this.setState({
+      error: !correct,
+      focused: !correct,
+      activated: this.value.length !== 0 || !correct,
+    });
+
     return correct;
+  }
+
+  public onInput = () => {
+    this.setState({ error: false });
+  };
+
+  public clear() {
+    this.value = '';
+
+    this.setState({
+      activated: false,
+      error: false,
+      focused: false,
+    });
   }
 
   render() {
@@ -94,6 +120,7 @@ export class Textfield extends React.PureComponent<Props, State> {
           hasLabel={hasLabel}
           hasIcon={hasIcon}
           placeholder={label == null || focused ? placeholder : null}
+          onInput={this.onInput}
           spellCheck={false}
         />
         {hasLabel && (

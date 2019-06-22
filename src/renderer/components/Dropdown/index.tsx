@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { ERROR_COLOR } from '~/renderer/constants';
 import {
   StyledDropdown,
   Label,
@@ -20,6 +21,8 @@ interface Props {
 interface State {
   activated: boolean;
   selected?: string;
+  error: boolean;
+  visible: boolean;
 }
 
 export class Dropdown extends React.PureComponent<Props, State> {
@@ -30,6 +33,8 @@ export class Dropdown extends React.PureComponent<Props, State> {
 
   public state: State = {
     activated: false,
+    error: false,
+    visible: false,
   };
 
   public componentWillUnmount() {
@@ -37,7 +42,11 @@ export class Dropdown extends React.PureComponent<Props, State> {
   }
 
   public onClick = () => {
-    this.setState({ activated: true });
+    this.setState({
+      activated: true,
+      error: false,
+      visible: true,
+    });
 
     requestAnimationFrame(() => {
       window.addEventListener('click', this.onWindowClick);
@@ -49,7 +58,10 @@ export class Dropdown extends React.PureComponent<Props, State> {
     e.preventDefault();
 
     requestAnimationFrame(() => {
-      this.setState({ activated: false });
+      this.setState({
+        activated: false,
+        visible: false,
+      });
 
       window.removeEventListener('click', this.onWindowClick);
     });
@@ -67,9 +79,31 @@ export class Dropdown extends React.PureComponent<Props, State> {
     return selected || defaultValue;
   }
 
+  public test() {
+    const error = this.value == null;
+
+    this.setState({
+      activated: error,
+      error,
+    });
+
+    return !error;
+  }
+
+  public clear() {
+    this.setState({
+      activated: false,
+      error: false,
+      selected: null,
+      visible: false,
+    });
+  }
+
   render() {
     const { label, color, children, style } = this.props;
-    const { activated, selected } = this.state;
+    const { activated, selected, error, visible } = this.state;
+
+    const primaryColor = error ? ERROR_COLOR : color;
 
     return (
       <StyledDropdown
@@ -78,15 +112,15 @@ export class Dropdown extends React.PureComponent<Props, State> {
         style={style}
       >
         <Label
-          color={color}
+          color={primaryColor}
           activated={activated}
           focused={selected != null || activated}
         >
           {label}
         </Label>
         <Value>{selected}</Value>
-        <DropIcon activated={activated} />
-        <Menu visible={activated}>
+        <DropIcon activated={visible} />
+        <Menu visible={visible}>
           {React.Children.map(children, child => {
             const { label } = child.props;
             return React.cloneElement(child, {
@@ -95,7 +129,7 @@ export class Dropdown extends React.PureComponent<Props, State> {
             });
           })}
         </Menu>
-        <Indicator activated={activated} color={color} />
+        <Indicator activated={activated} color={primaryColor} />
       </StyledDropdown>
     );
   }

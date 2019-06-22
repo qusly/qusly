@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Textfield } from '../Textfield';
+import { Textfield, TestFunction } from '../Textfield';
 import { icons } from '~/renderer/constants';
 
 interface Props {
@@ -25,6 +25,10 @@ export class PasswordInput extends React.PureComponent<Props, State> {
 
   public get value() {
     return this.ref.current.value;
+  }
+
+  public test() {
+    return this.ref.current.test(str => str.trim().length !== 0);
   }
 
   render() {
