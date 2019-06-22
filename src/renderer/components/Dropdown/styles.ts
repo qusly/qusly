@@ -4,7 +4,7 @@ import { centerVertical, transparency, robotoMedium, robotoRegular, centerIcon, 
 import { EASING_FUNCTION, icons } from '~/renderer/constants';
 
 export const StyledDropdown = styled.div`
-  width: 112px;
+  min-width: 112px;
   height: 48px;
   position: relative;
   border-top-right-radius: 4px;
@@ -49,7 +49,12 @@ export const DropIcon = styled.div`
   margin-right: 8px;
   opacity: ${transparency.icons.inactive};
   background-image: url(${icons.dropDown});
+  transition: 0.2s ${EASING_FUNCTION} transform;
   ${centerIcon(24)};
+
+  ${({ activated }: { activated: boolean }) => css`
+    transform: ${activated ? 'rotate(180deg)' : 'rotate(0deg)'};
+  `}
 `;
 
 export const Menu = styled.div`
@@ -92,6 +97,6 @@ export const Value = styled.div`
   left: 12px;
   position: absolute;
   margin-top: 6px;
-  color: #000;
+  color: rgba(0, 0, 0, ${transparency.text.high});
   ${centerVertical()};
 `;

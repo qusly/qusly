@@ -14,6 +14,7 @@ interface Props {
   color?: string;
   defaultValue?: string;
   children?: any;
+  style?: any;
 }
 
 interface State {
@@ -67,11 +68,15 @@ export class Dropdown extends React.PureComponent<Props, State> {
   }
 
   render() {
-    const { label, color, children } = this.props;
+    const { label, color, children, style } = this.props;
     const { activated, selected } = this.state;
 
     return (
-      <StyledDropdown activated={activated} onClick={this.onClick}>
+      <StyledDropdown
+        activated={activated}
+        onClick={this.onClick}
+        style={style}
+      >
         <Label
           color={color}
           activated={activated}
@@ -80,7 +85,7 @@ export class Dropdown extends React.PureComponent<Props, State> {
           {label}
         </Label>
         <Value>{selected}</Value>
-        <DropIcon />
+        <DropIcon activated={activated} />
         <Menu visible={activated}>
           {React.Children.map(children, child => {
             const { label } = child.props;

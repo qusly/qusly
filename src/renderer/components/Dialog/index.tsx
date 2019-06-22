@@ -12,13 +12,15 @@ export default observer(
     title,
     visible,
     children,
+    style,
   }: {
     title: string;
     visible?: boolean;
     children?: any;
+    style?: any;
   }) => {
     return (
-      <StyledDialog visible={visible}>
+      <StyledDialog visible={visible} style={style}>
         <Title>{title}</Title>
         <Content>{children}</Content>
         <Buttons>
