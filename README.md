@@ -75,7 +75,3 @@ $ npm run <command>
 | `lint`           | Lints the source code.                                 |
 | `lint-fix`       | Fixes eslint errors                                               |
 | `dev`            | Starts Qusly in the development mode        |
-
-<a href="https://www.patreon.com/bePatron?u=2749531">
-    <img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160">
-</a>
