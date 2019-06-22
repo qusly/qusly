@@ -31,6 +31,10 @@ export class PasswordInput extends React.PureComponent<Props, State> {
     return this.ref.current.test(str => str.trim().length !== 0);
   }
 
+  public clear() {
+    this.ref.current.clear();
+  }
+
   render() {
     const { style } = this.props;
     const { visible } = this.state;

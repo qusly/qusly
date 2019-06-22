@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
+import { IProtocol } from 'qusly-core';
 
 import store from '~/renderer/store';
 import { MenuItem } from '../MenuItem';
@@ -23,20 +24,38 @@ const inputs = {
   password: React.createRef<PasswordInput>(),
 };
 
-const validateInputs = () => {
-  let error = false;
+const iterate = (fn: (input: any) => void) => {
   for (const key in inputs) {
-    if (!(inputs as any)[key].current.test()) {
+    fn((inputs as any)[key].current);
+  }
+};
+
+const validate = () => {
+  let error = false;
+  iterate(input => {
+    if (!input.test()) {
       error = true;
     }
-  }
+  });
   return !error;
 };
 
-const onClick = () => {
-  if (validateInputs()) {
-    console.log('yes!');
-  }
+const clear = () => iterate(input => input.clear());
+
+const onClick = async () => {
+  if (!validate()) return;
+  const host = inputs.hostname.current.value;
+
+  await store.sites.add({
+    title: inputs.title.current.value || host,
+    protocol: inputs.protocol.current.value as IProtocol,
+    port: parseInt(inputs.port.current.value, 10),
+    host,
+    user: inputs.username.current.value,
+    password: inputs.password.current.value,
+  });
+
+  clear();
 };
 
 export default observer(() => {
@@ -63,9 +82,9 @@ export default observer(() => {
             label="Protocol"
             style={{ width: '100%' }}
           >
+            <MenuItem label="SFTP" />
             <MenuItem label="FTP" />
             <MenuItem label="FTPS" />
-            <MenuItem label="SFTP" />
           </Dropdown>
           <Textfield
             ref={inputs.port}
