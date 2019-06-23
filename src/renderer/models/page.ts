@@ -49,11 +49,13 @@ export class Page {
     this.loading = true;
 
     const path = this.path;
-    const { files } = await this.session.client.readDir(path);
+    const { files, error } = await this.session.client.readDir(path);
 
-    await store.favicons.load(files);
+    if (error) console.error(error);
 
-    this.files = files;
+    files && await store.favicons.load(files);
+
+    this.files = files || [];
     this.loading = false;
 
     store.tabs.getTabById(this.tabId).title = this.title;
