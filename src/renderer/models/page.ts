@@ -26,6 +26,10 @@ export class Page {
 
   public async load() {
     const { path } = await this.session.client.pwd();
+    await this.updatePath(path);
+  }
+
+  public async updatePath(path: string) {
     const slash = path.startsWith('/') ? '/' : '';
 
     this.pathItems = [slash, ...path.split(/\\|\//).filter(v => v !== '')];

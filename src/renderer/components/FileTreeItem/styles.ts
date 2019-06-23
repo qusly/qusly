@@ -18,12 +18,17 @@ export const DropIcon = styled.div`
   margin: 0px 8px;
   background-image: url(${icons.dropDown});
   transition: 0.2s transform;
+  border-radius: 100%;
   ${centerIcon(20)};
 
   ${({ visible, selected }: { visible: boolean, selected: boolean }) => css`
     opacity: ${visible ? transparency.icons.inactive : 0};
     transform: ${selected ? 'rotate(-90deg)' : 'rotate(0deg)'};
   `};
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
 `;
 
 export const FolderIcon = styled.div`
