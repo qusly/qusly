@@ -47,12 +47,15 @@ Copy `.env.example`, then change it's name to `.env`.
 
 ```
 HOSTNAME=www.example.com
-LOGIN=root
-PASSWORD=passwd
+USER=root
+PASSWORD=password
 PROTOCOL=sftp
+PORT=22
+ENABLED=true
 ```
 
 You can set the protocol to `sftp`, `ftp` or `ftps`.
+Port is usually `21` for FTP and `22` for SFTP.
 
 ### Other commands
 
