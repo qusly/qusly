@@ -1,8 +1,8 @@
-import { observable } from "mobx";
-import { Client, IConfig } from "qusly-core";
+import { observable } from 'mobx';
+import { Client, IConfig } from 'qusly-core';
 
-import { TreeItem } from "./tree-item";
-import { makeId } from "../utils";
+import { TreeItem } from './tree-item';
+import { makeId } from '../utils';
 
 interface QueueItem {
   parent?: TreeItem;
@@ -26,11 +26,12 @@ export class Tree {
     'lost+found',
     'proc',
     'sys',
-    'srv'
+    'srv',
   ]
 
   public async init(config: IConfig) {
     this.client = new Client();
+
     const { error } = await this.client.connect(config);
     if (error) throw error;
 
