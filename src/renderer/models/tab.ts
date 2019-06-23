@@ -152,8 +152,8 @@ export class Tab {
   }
 
   @action
-  public async close() {
-    await this.page.close();
+  public close() {
+    this.page.close();
 
     const tabs = store.tabs.list;
     const selected = store.tabs.selectedTabId === this.id;

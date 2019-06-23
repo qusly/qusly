@@ -11,7 +11,7 @@ export class Page {
   public id = id++;
 
   @observable
-  public tabId = store.tabs.selectedTab.id;
+  public tabId: number;
 
   @observable
   public files: IFile[] = [];
@@ -51,15 +51,17 @@ export class Page {
     return this.pathItems.join('/');
   }
 
-  public async close() {
-    store.pages.list = store.pages.list.filter(r => r !== this);
+  public close() {
+    store.pages.list = store.pages.list.filter(r => r.id !== this.id);
 
     const page = store.pages.list.find(r => r.session === this.session);
 
     if (page == null) {
-      await this.session.close();
-    } else {
-      store.tabs.getTabById(this.tabId - 1).select();
+      this.session.close();
+    } else if (store.tabs.nextTab != null) {
+      store.tabs.nextTab.select();
+    } else if (store.tabs.previousTab != null) {
+      store.tabs.previousTab.select();
     }
   }
 }

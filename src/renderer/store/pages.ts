@@ -17,8 +17,10 @@ export class PagesStore {
     const session = store.sessions.create(site);
     const page = new Page(session);
 
+    page.tabId = tab.id;
     tab.page = page;
     tab.title = site.title;
+    store.sessions.currentId = session.id;
 
     this.list.push(page);
 

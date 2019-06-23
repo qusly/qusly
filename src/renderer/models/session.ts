@@ -34,9 +34,8 @@ export class Session {
     this.connected = true;
   }
 
-  public async close() {
-    store.sessions.list = store.sessions.list.filter(r => r !== this);
-
-    await this.client.disconnect();
+  public close() {
+    store.sessions.list = store.sessions.list.filter(r => r.id !== this.id);
+    this.client.disconnect();
   }
 }

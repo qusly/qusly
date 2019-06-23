@@ -274,4 +274,16 @@ export class TabsStore {
       TweenLite.to(obj, animation ? TAB_ANIMATION_DURATION : 0, props);
     }
   }
+
+  public get previousTab() {
+    const index = this.list.indexOf(this.selectedTab);
+    if (index - 1 === -1) return null;
+    return this.list[index - 1];
+  }
+
+  public get nextTab() {
+    const index = this.list.indexOf(this.selectedTab);
+    if (index + 1 >= this.list.length) return null;
+    return this.list[index + 1];
+  }
 }
