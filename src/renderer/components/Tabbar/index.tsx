@@ -1,12 +1,11 @@
 import { observer } from 'mobx-react';
 import * as React from 'react';
-import { WindowsControls } from 'react-windows-controls';
 
 import store from '~/renderer/store';
 import HorizontalScrollbar from '../HorizontalScrollbar';
 import { icons } from '~/renderer/constants/icons';
 import { Tabs } from '../Tabs';
-import { closeWindow, maximizeWindow, minimizeWindow } from '~/renderer/utils';
+
 import { AddTab, StyledTabbar, TabsContainer, TabbarBackground } from './style';
 
 const getContainer = () => store.tabs.containerRef.current;
@@ -50,12 +49,6 @@ export default observer(() => {
   return (
     <TabbarBackground white={session == null}>
       {session && <Tabbar />}
-      <WindowsControls
-        onClose={closeWindow}
-        onMaximize={maximizeWindow}
-        onMinimize={minimizeWindow}
-        style={{ marginLeft: 'auto' }}
-      />
     </TabbarBackground>
   );
 });

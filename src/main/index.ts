@@ -1,11 +1,32 @@
-import { BrowserWindow, app, ipcMain, IpcMessageEvent, NativeImage } from 'electron';
+import {
+  BrowserWindow,
+  app,
+  ipcMain,
+  IpcMessageEvent,
+  NativeImage,
+  Menu,
+} from 'electron';
 import { join } from 'path';
 import { platform } from 'os';
 import { getExtIcon } from 'electron-ext-icon';
+import { getMainMenu } from './menus/main';
+
+const gotTheLock = app.requestSingleInstanceLock();
+
+if (!gotTheLock) {
+  app.quit();
+} else {
+  app.on('second-instance', (e, argv) => {
+    if (mainWindow) {
+      if (mainWindow.isMinimized()) mainWindow.restore();
+      mainWindow.focus();
+    }
+  });
+}
 
 const createWindow = () => {
   const windowData: Electron.BrowserWindowConstructorOptions = {
-    frame: process.env.ENV === 'dev' || platform() === 'darwin',
+    frame: false,
     minWidth: 400,
     minHeight: 450,
     width: 900,
@@ -22,9 +43,10 @@ const createWindow = () => {
 
   const window = new BrowserWindow(windowData);
 
-  window.webContents.openDevTools({ mode: 'right' });
+  Menu.setApplicationMenu(getMainMenu(window));
 
   if (process.env.ENV === 'dev') {
+    window.webContents.openDevTools({ mode: 'right' });
     window.loadURL('http://localhost:4444');
   } else {
     window.loadURL(join('file://', app.getAppPath(), 'build/index.html'));
@@ -63,15 +85,18 @@ app.on('window-all-closed', () => {
   }
 });
 
-ipcMain.on('get-extensions-icons', async (e: IpcMessageEvent, exts: string[]) => {
-  const icons: { [key: string]: string } = {};
+ipcMain.on(
+  'get-extensions-icons',
+  async (e: IpcMessageEvent, exts: string[]) => {
+    const icons: { [key: string]: string } = {};
 
-  for (const ext of exts) {
-    if (icons[ext] == null) {
-      const img = await getExtIcon(ext, { size: 'normal' });
-      icons[ext] = img.toDataURL();
+    for (const ext of exts) {
+      if (icons[ext] == null) {
+        const img = await getExtIcon(ext, { size: 'normal' });
+        icons[ext] = img.toDataURL();
+      }
     }
-  }
 
-  e.sender.send('get-extensions-icons', icons);
-})
+    e.sender.send('get-extensions-icons', icons);
+  },
+);
