@@ -25,6 +25,7 @@ if (!gotTheLock) {
 
 const createWindow = () => {
   const windowData: Electron.BrowserWindowConstructorOptions = {
+    title: 'Qusly',
     frame: false,
     minWidth: 400,
     minHeight: 450,

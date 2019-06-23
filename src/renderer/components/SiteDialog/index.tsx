@@ -25,11 +25,12 @@ const onClick = async () => {
   if (!form.validate()) return;
 
   const { title, protocol, port, host, user, password } = form.values;
+  const defaultPort = protocol === 'sftp' ? 22 : 21;
 
   await store.sites.add({
     title: title || host,
     protocol: protocol.toLowerCase() as IProtocol,
-    port: parseInt(port, 10),
+    port: port == null ? defaultPort : parseInt(port, 10),
     host,
     user,
     password,
@@ -69,7 +70,7 @@ export default observer(() => {
           </Dropdown>
           <Textfield
             ref={form.fields.port}
-            label="Port"
+            label="Port (optional)"
             inputType="number"
             test={digitsOnly}
             style={{ width: '100%', marginLeft: 24 }}

@@ -14,7 +14,7 @@ interface Values {
   [key: string]: string;
 }
 
-export const digitsOnly = (str: string) => notEmpty(str) && /^\d+$/.test(str);
+export const digitsOnly = (str: string) => str.trim().length === 0 || /^\d+$/.test(str);
 
 export const notEmpty = (str: string) => str.trim().length !== 0;
 
