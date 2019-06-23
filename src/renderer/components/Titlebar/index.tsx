@@ -12,7 +12,7 @@ export const Titlebar = observer(() => {
   return (
     <StyledTitlebar>
       <Handle />
-      <Title>{tab == null ? 'Qusly' : tab.title}</Title>
+      <Title>{tab == null ? 'Qusly' : `${tab.title} - Qusly`}</Title>
       <WindowsControls
         onClose={closeWindow}
         onMaximize={maximizeWindow}
