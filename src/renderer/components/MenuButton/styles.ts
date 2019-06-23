@@ -10,7 +10,7 @@ export const StyledButton = styled.div`
   position: relative;
 
   &::before {
-    content: "";
+    content: '';
     display: block;
     position: absolute;
     width: 40px;
@@ -33,7 +33,7 @@ export const Icon = styled.div`
   transition: 0.15s opacity;
   ${centerIcon(24)};
 
-  ${({ icon, selected }: { icon: any, selected: boolean }) => css`
+  ${({ icon, selected }: { icon: any; selected: boolean }) => css`
     background-image: url(${icon});
     opacity: ${selected ? 0.8 : transparency.icons.inactive};
   `}
