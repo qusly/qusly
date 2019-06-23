@@ -52,12 +52,14 @@ export class Page {
   }
 
   public async close() {
-    const exist = store.pages.list.find(r => r !== this && r.session === this.session);
-
-    if (!exist) {
-      await this.session.close();
-    }
-
     store.pages.list = store.pages.list.filter(r => r !== this);
+
+    const page = store.pages.list.find(r => r.session === this.session);
+
+    if (page == null) {
+      await this.session.close();
+    } else {
+      store.tabs.getTabById(this.tabId - 1).select();
+    }
   }
 }
