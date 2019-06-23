@@ -34,3 +34,7 @@ export const Icon = styled.div`
   ${centerIcon()};
   background-image: url(${quslyIcon});
 `;
+
+export const TrafficButtons = styled.div`
+  width: 72px;
+`;
