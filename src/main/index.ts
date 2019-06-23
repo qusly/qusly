@@ -3,10 +3,9 @@ import {
   app,
   ipcMain,
   IpcMessageEvent,
-  NativeImage,
   Menu,
 } from 'electron';
-import { join } from 'path';
+import { join, resolve } from 'path';
 import { platform } from 'os';
 import { getExtIcon } from 'electron-ext-icon';
 import { getMainMenu } from './menus/main';
@@ -39,6 +38,7 @@ const createWindow = () => {
       contextIsolation: false,
       experimentalFeatures: true,
     },
+    icon: resolve(app.getAppPath(), 'static/app-icons/icon.png'),
   };
 
   const window = new BrowserWindow(windowData);

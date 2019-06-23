@@ -22,14 +22,26 @@ export class Page {
   @observable
   public loading = true;
 
+  @observable
+  public pathInputVisible = false;
+
   constructor(public session: Session) { }
+
+  public get path() {
+    return this.pathItems.join('/').slice(this.pathItems.length > 1 && this.pathItems[0] === '/' ? 1 : 0);
+  }
+
+  public get title() {
+    return `${this.session.site.title} - ${this.path}`;
+  }
 
   public async load() {
     const { path } = await this.session.client.pwd();
-    const slash = path.startsWith('/') ? '/' : '';
+    await this.updatePath(path);
+  }
 
-    this.pathItems = [slash, ...path.split(/\\|\//).filter(v => v !== '')];
-
+  public async updatePath(path: string) {
+    this.pathItems = ['/', ...path.split(/\\|\//).filter(v => v !== '')];
     await this.fetchFiles();
   }
 
@@ -37,18 +49,16 @@ export class Page {
     this.loading = true;
 
     const path = this.path;
-    const { files } = await this.session.client.readDir(path);
+    const { files, error } = await this.session.client.readDir(path);
 
-    await store.favicons.load(files);
+    if (error) console.error(error);
 
-    this.files = files;
+    files && await store.favicons.load(files);
+
+    this.files = files || [];
     this.loading = false;
 
-    store.tabs.getTabById(this.tabId).title = `${this.session.site.title} - ${path.substring(1)}`;
-  }
-
-  public get path() {
-    return this.pathItems.join('/');
+    store.tabs.getTabById(this.tabId).title = this.title;
   }
 
   public close() {

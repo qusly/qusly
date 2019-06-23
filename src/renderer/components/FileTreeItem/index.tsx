@@ -9,8 +9,15 @@ import {
   Label,
   ItemsContainer,
 } from './styles';
+import store from '~/renderer/store';
 
 const onClick = (item: TreeItem) => () => {
+  store.pages.current.updatePath(item.path);
+};
+
+const onDropClick = (item: TreeItem) => (e: React.MouseEvent) => {
+  e.stopPropagation();
+
   if (item.children.length) {
     item.selected = !item.selected;
   }
@@ -23,6 +30,7 @@ const TreeItem = observer(({ data }: { data: TreeItem }) => {
         <DropIcon
           visible={data.children.length !== 0}
           selected={data.selected}
+          onClick={onDropClick(data)}
         />
         <FolderIcon />
         <Label>{data.name}</Label>

@@ -53,16 +53,18 @@ export class Tree {
       for (const file of res.files) {
         if (file.type === 'directory' && this.blackList.indexOf(file.name) === -1) {
           const list = item.parent == null ? this.items : item.parent.children;
+          const path = `${item.path}/${file.name}/`;
 
           list.push({
             _id: makeId(10),
             name: file.name,
             children: [],
+            path,
           })
 
           this.tempQueue.push({
-            path: `${item.path}/${file.name}/`,
             parent: list[list.length - 1],
+            path,
           });
         }
       }
