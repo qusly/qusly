@@ -3,6 +3,7 @@ import { IFile } from 'qusly-core';
 
 import store from '../store';
 import { Session } from './session';
+import { sortFiles } from '../utils';
 
 let id = 0;
 
@@ -55,7 +56,7 @@ export class Page {
 
     files && await store.favicons.load(files);
 
-    this.files = files || [];
+    this.files = sortFiles(files);
     this.loading = false;
 
     store.tabs.getTabById(this.tabId).title = this.title;
