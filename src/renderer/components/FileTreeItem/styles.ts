@@ -5,7 +5,7 @@ import { icons } from '~/renderer/constants/icons';
 
 export const StyledTreeItem = styled.div`
   width: 100%;
-  min-height: 40px;
+  min-height: 32px;
   display: flex;
   margin-top: 4px;
   align-items: center;
@@ -20,7 +20,7 @@ export const DropIcon = styled.div`
   transition: 0.2s transform;
   ${centerIcon(20)};
 
-  ${({ visible, selected }: { visible: boolean, selected: boolean }) => css`
+  ${({ visible, selected }: { visible: boolean; selected: boolean }) => css`
     opacity: ${visible ? transparency.icons.inactive : 0};
     transform: ${selected ? 'rotate(-90deg)' : 'rotate(0deg)'};
   `};
