@@ -11,7 +11,6 @@ export const StyledToolbar = styled.div`
   align-items: center;
   padding-right: 24px;
   background-color: #fff;
-  -webkit-app-region: drag;
 `;
 
 export const Search = styled.div`
