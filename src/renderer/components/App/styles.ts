@@ -43,4 +43,5 @@ export const Handle = styled.div`
   top: 3px;
   bottom: 0px;
   right: 3px;
+  -webkit-app-region: drag;
 `;

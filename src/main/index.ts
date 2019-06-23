@@ -1,11 +1,17 @@
-import { BrowserWindow, app, ipcMain, IpcMessageEvent, NativeImage } from 'electron';
+import {
+  BrowserWindow,
+  app,
+  ipcMain,
+  IpcMessageEvent,
+  NativeImage,
+} from 'electron';
 import { join } from 'path';
 import { platform } from 'os';
 import { getExtIcon } from 'electron-ext-icon';
 
 const createWindow = () => {
   const windowData: Electron.BrowserWindowConstructorOptions = {
-    frame: process.env.ENV === 'dev' || platform() === 'darwin',
+    frame: false,
     minWidth: 400,
     minHeight: 450,
     width: 900,
@@ -63,15 +69,18 @@ app.on('window-all-closed', () => {
   }
 });
 
-ipcMain.on('get-extensions-icons', async (e: IpcMessageEvent, exts: string[]) => {
-  const icons: { [key: string]: string } = {};
+ipcMain.on(
+  'get-extensions-icons',
+  async (e: IpcMessageEvent, exts: string[]) => {
+    const icons: { [key: string]: string } = {};
 
-  for (const ext of exts) {
-    if (icons[ext] == null) {
-      const img = await getExtIcon(ext, { size: 'normal' });
-      icons[ext] = img.toDataURL();
+    for (const ext of exts) {
+      if (icons[ext] == null) {
+        const img = await getExtIcon(ext, { size: 'normal' });
+        icons[ext] = img.toDataURL();
+      }
     }
-  }
 
-  e.sender.send('get-extensions-icons', icons);
-})
+    e.sender.send('get-extensions-icons', icons);
+  },
+);
