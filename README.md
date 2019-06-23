@@ -6,7 +6,7 @@
 [![Discord](https://img.shields.io/discord/591624973609730059.svg?style=flat-square)](https://discord.gg/rNyNYFn)
 [![Downloads](https://img.shields.io/github/downloads/qusly/qusly/total.svg?style=flat-square)](https://github.com/qusly/qusly/releases)
 
-📁 Qusly is an innovative __FTP/FTPS/SFTP__ client built on top of Electron, React, Styled-Components and <a href="https://www.github.com/xnerhu/qusly-core">Qusly-Core</a>. It's aim is to raise the standards.
+📁 Qusly is an innovative __FTP/FTPS/SFTP__ client built on top of Electron, React, Styled-Components and <a href="https://www.github.com/xnerhu/qusly-core">Qusly-Core</a>. It aims to raise the standards.
 
 </div>
 
