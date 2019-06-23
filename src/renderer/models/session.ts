@@ -32,6 +32,7 @@ export class Session {
     if (!res.success) throw res.error;
 
     this.connected = true;
+    this.tree.init(config);
   }
 
   public close() {

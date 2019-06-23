@@ -5,7 +5,7 @@ import { icons } from '~/renderer/constants/icons';
 
 export const StyledTreeItem = styled.div`
   width: 100%;
-  height: 40px;
+  min-height: 40px;
   display: flex;
   margin-top: 4px;
   align-items: center;
