@@ -21,6 +21,6 @@ export const Icon = styled.div`
 
   ${({ icon, selected }: { icon: any; selected: boolean }) => css`
     background-image: url(${icon});
-    opacity: ${selected ? 0.8 : transparency.icons.inactive};
+    opacity: ${selected ? 1 : transparency.icons.inactive};
   `}
 `;
