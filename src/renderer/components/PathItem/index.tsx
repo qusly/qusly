@@ -3,7 +3,9 @@ import * as React from 'react';
 import store from '~/renderer/store';
 import { StyledPathItem } from './styles';
 
-const onClick = (index: number) => () => {
+const onClick = (index: number) => (e: React.MouseEvent) => {
+  e.stopPropagation();
+
   const page = store.pages.current;
 
   page.pathItems = page.pathItems.slice(0, index + 1);

@@ -22,7 +22,18 @@ export class Page {
   @observable
   public loading = true;
 
+  @observable
+  public pathInputVisible = false;
+
   constructor(public session: Session) { }
+
+  public get path() {
+    return this.pathItems.join('/').slice(this.pathItems.length > 1 && this.pathItems[0] === '/' ? 1 : 0);
+  }
+
+  public get title() {
+    return `${this.session.site.title} - ${this.path}`;
+  }
 
   public async load() {
     const { path } = await this.session.client.pwd();
@@ -30,10 +41,7 @@ export class Page {
   }
 
   public async updatePath(path: string) {
-    const slash = path.startsWith('/') ? '/' : '';
-
-    this.pathItems = [slash, ...path.split(/\\|\//).filter(v => v !== '')];
-
+    this.pathItems = ['/', ...path.split(/\\|\//).filter(v => v !== '')];
     await this.fetchFiles();
   }
 
@@ -51,10 +59,6 @@ export class Page {
     store.tabs.getTabById(this.tabId).title = this.title;
   }
 
-  public get path() {
-    return this.pathItems.join('/');
-  }
-
   public close() {
     store.pages.list = store.pages.list.filter(r => r.id !== this.id);
 
@@ -67,11 +71,5 @@ export class Page {
     } else if (store.tabs.previousTab != null) {
       store.tabs.previousTab.select();
     }
-  }
-
-  public get title() {
-    let path = this.path;
-    if (this.pathItems.length > 1) path = path.substring(1);
-    return `${this.session.site.title} - ${path}`;
   }
 }
