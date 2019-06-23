@@ -11,6 +11,7 @@ export const PreloaderContainer = styled.div`
   position: absolute;
   pointer-events: none;
   transition: 0.1s opacity;
+  margin-top: -50px;
   ${centerBoth()};
 
   ${({ visible }: { visible: boolean }) => css`
