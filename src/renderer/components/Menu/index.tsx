@@ -11,10 +11,10 @@ import { ButtonsBar, Container } from './styles';
 const Buttons = () => {
   return (
     <ButtonsBar>
+      <MenuButton page="sites" icon={icons.sitesManager} />
       <MenuButton page="file-tree" icon={icons.fileTree} />
       <MenuButton page="transfer" icon={icons.fileOutline} />
       <MenuButton page="search" icon={icons.search} />
-      <MenuButton page="sites" icon={icons.sitesManager} />
     </ButtonsBar>
   );
 };
