@@ -4,10 +4,12 @@ import {
   ipcMain,
   IpcMessageEvent,
   NativeImage,
+  Menu,
 } from 'electron';
 import { join } from 'path';
 import { platform } from 'os';
 import { getExtIcon } from 'electron-ext-icon';
+import { getMainMenu } from './menus/main';
 
 const gotTheLock = app.requestSingleInstanceLock();
 
@@ -40,6 +42,8 @@ const createWindow = () => {
   };
 
   const window = new BrowserWindow(windowData);
+
+  Menu.setApplicationMenu(getMainMenu(window));
 
   if (process.env.ENV === 'dev') {
     window.webContents.openDevTools({ mode: 'right' });
