@@ -44,7 +44,7 @@ export class Page {
     this.files = files;
     this.loading = false;
 
-    store.tabs.getTabById(this.tabId).title = `${this.session.site.title} - ${path.substring(1)}`;
+    store.tabs.getTabById(this.tabId).title = this.title;
   }
 
   public get path() {
@@ -63,5 +63,11 @@ export class Page {
     } else if (store.tabs.previousTab != null) {
       store.tabs.previousTab.select();
     }
+  }
+
+  public get title() {
+    let path = this.path;
+    if (this.pathItems.length > 1) path = path.substring(1);
+    return `${this.session.site.title} - ${path}`;
   }
 }

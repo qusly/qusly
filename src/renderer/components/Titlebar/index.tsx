@@ -1,15 +1,18 @@
 import * as React from 'react';
+import { observer } from 'mobx-react';
 import { WindowsControls } from 'react-windows-controls';
 
+import store from '~/renderer/store';
 import { closeWindow, maximizeWindow, minimizeWindow } from '~/renderer/utils';
-import { StyledTitlebar, Handle, Title, Icon } from './style';
+import { StyledTitlebar, Handle, Title } from './style';
 
-export const Titlebar = () => {
+export const Titlebar = observer(() => {
+  const tab = store.tabs.selectedTab;
+
   return (
     <StyledTitlebar>
       <Handle />
-      <Icon />
-      <Title>Qusly</Title>
+      <Title>{tab == null ? 'Qusly' : tab.title}</Title>
       <WindowsControls
         onClose={closeWindow}
         onMaximize={maximizeWindow}
@@ -18,4 +21,4 @@ export const Titlebar = () => {
       />
     </StyledTitlebar>
   );
-};
+});
