@@ -6,9 +6,11 @@ import File from '../File';
 import { StyledFilesView } from './styles';
 
 export default observer(() => {
+  const page = store.pages.current;
+
   return (
-    <StyledFilesView visible={!store.pages.current.loading}>
-      {store.pages.current.files.map((file, index) => (
+    <StyledFilesView visible={!page.loading}>
+      {page.files.map((file, index) => (
         <File data={file} key={index} />
       ))}
     </StyledFilesView>

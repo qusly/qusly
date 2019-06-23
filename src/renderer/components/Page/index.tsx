@@ -8,11 +8,12 @@ import { StyledPage, PreloaderContainer } from './styles';
 
 export default observer(() => {
   const session = store.sessions.current;
+  const page = store.pages.current;
 
   return (
     <StyledPage>
       {session && session.connected && <FileView />}
-      <PreloaderContainer visible={session && store.pages.current.loading}>
+      <PreloaderContainer visible={page && page.loading}>
         <Preloader />
       </PreloaderContainer>
     </StyledPage>

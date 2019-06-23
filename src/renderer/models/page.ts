@@ -4,7 +4,12 @@ import { IFile } from 'qusly-core';
 import store from '../store';
 import { Session } from './session';
 
+let id = 0;
+
 export class Page {
+  @observable
+  public id = id++;
+
   @observable
   public tabId = store.tabs.selectedTab.id;
 
@@ -44,5 +49,15 @@ export class Page {
 
   public get path() {
     return this.pathItems.join('/');
+  }
+
+  public async close() {
+    const exist = store.pages.list.find(r => r !== this && r.session === this.session);
+
+    if (!exist) {
+      await this.session.close();
+    }
+
+    store.pages.list = store.pages.list.filter(r => r !== this);
   }
 }

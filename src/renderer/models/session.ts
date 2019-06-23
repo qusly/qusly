@@ -3,6 +3,7 @@ import { Client } from 'qusly-core';
 
 import { Tree } from './tree';
 import { Site } from './site';
+import store from '../store';
 
 let id = 0;
 
@@ -34,6 +35,8 @@ export class Session {
   }
 
   public async close() {
+    store.sessions.list = store.sessions.list.filter(r => r !== this);
+
     await this.client.disconnect();
   }
 }

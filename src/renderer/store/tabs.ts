@@ -100,7 +100,7 @@ export class TabsStore {
   }
 
   @action
-  public addTab(site?: Site, options = defaultTabOptions) {
+  public addTab(site: Site, options = defaultTabOptions) {
     this.removedTabs = 0;
 
     const tab = new Tab(options);
@@ -118,7 +118,7 @@ export class TabsStore {
       this.scrollbarRef.current.scrollToEnd(TAB_ANIMATION_DURATION * 1000);
     });
 
-    store.pages.add(site || store.sessions.current.site, tab);
+    store.pages.add(site, tab);
 
     return tab;
   }

@@ -8,14 +8,18 @@ export class PagesStore {
   public list: Page[] = [];
 
   public get current() {
-    return this.list.find(e => e.tabId === store.tabs.selectedTab.id);
+    const tab = store.tabs.selectedTab;
+    if (tab == null) return null;
+    return this.list.find(e => e.tabId === tab.id);
   }
 
   public async add(site: Site, tab: Tab) {
     const session = store.sessions.create(site);
     const page = new Page(session);
 
+    tab.page = page;
     tab.title = site.title;
+
     this.list.push(page);
 
     await session.connect(site);

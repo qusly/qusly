@@ -9,6 +9,7 @@ import {
   TAB_ANIMATION_DURATION,
   ADD_TAB_MARGIN_LEFT,
 } from '~/renderer/constants';
+import { Page } from './page';
 
 let id = 1;
 
@@ -86,6 +87,7 @@ export class Tab {
   public findRequestId: number;
   public removeTimeout: any;
   public isWindow: boolean = false;
+  public page: Page;
 
   constructor({ active } = defaultTabOptions) {
     if (active) {
@@ -151,6 +153,8 @@ export class Tab {
 
   @action
   public async close() {
+    await this.page.close();
+
     const tabs = store.tabs.list;
     const selected = store.tabs.selectedTabId === this.id;
 
@@ -194,8 +198,6 @@ export class Tab {
         prevTab.select();
       }
     }
-
-    //await this.session.close();
 
     this.removeTimeout = setTimeout(() => {
       store.tabs.removeTab(this.id);
