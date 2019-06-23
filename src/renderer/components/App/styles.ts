@@ -20,4 +20,13 @@ export const Titlebar = styled.div`
   height: 32px;
   display: flex;
   background-color: rgba(0, 0, 0, 0.1);
+  position: relative;
+`;
+
+export const Handle = styled.div`
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  bottom: 0px;
+  right: 3px;
 `;

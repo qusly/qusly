@@ -13,6 +13,7 @@ import {
   HorizontalLayout,
   AppContent,
   Titlebar,
+  Handle,
 } from './styles';
 import { closeWindow, maximizeWindow, minimizeWindow } from '~/renderer/utils';
 
@@ -49,8 +50,9 @@ export default class App extends React.Component {
             onClose={closeWindow}
             onMaximize={maximizeWindow}
             onMinimize={minimizeWindow}
-            style={{ marginLeft: 'auto' }}
+            style={{ marginLeft: 'auto', WebkitAppRegion: 'no-drag' }}
           />
+          <Handle />
         </Titlebar>
         <HorizontalLayout>
           <Menu />
