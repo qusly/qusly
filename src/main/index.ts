@@ -28,9 +28,8 @@ const createWindow = () => {
 
   const window = new BrowserWindow(windowData);
 
-  window.webContents.openDevTools({ mode: 'right' });
-
   if (process.env.ENV === 'dev') {
+    window.webContents.openDevTools({ mode: 'right' });
     window.loadURL('http://localhost:4444');
   } else {
     window.loadURL(join('file://', app.getAppPath(), 'build/index.html'));
