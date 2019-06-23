@@ -9,6 +9,19 @@ import { join } from 'path';
 import { platform } from 'os';
 import { getExtIcon } from 'electron-ext-icon';
 
+const gotTheLock = app.requestSingleInstanceLock();
+
+if (!gotTheLock) {
+  app.quit();
+} else {
+  app.on('second-instance', (e, argv) => {
+    if (mainWindow) {
+      if (mainWindow.isMinimized()) mainWindow.restore();
+      mainWindow.focus();
+    }
+  });
+}
+
 const createWindow = () => {
   const windowData: Electron.BrowserWindowConstructorOptions = {
     frame: false,
