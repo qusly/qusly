@@ -1,23 +1,13 @@
 import * as React from 'react';
 import { IProtocol } from 'qusly-core';
 import { GlobalStyle } from 'wexond-ui';
-import { WindowsControls } from 'react-windows-controls';
-
 import AppBar from '../AppBar';
 import Menu from '../Menu';
 import Page from '../Page';
 import Overlay from '../Overlay';
 import store from '~/renderer/store';
-import {
-  VerticalLayout,
-  HorizontalLayout,
-  AppContent,
-  Titlebar,
-  Handle,
-  Title,
-  Icon,
-} from './styles';
-import { closeWindow, maximizeWindow, minimizeWindow } from '~/renderer/utils';
+import { VerticalLayout, HorizontalLayout, AppContent } from './styles';
+import { Titlebar } from '../Titlebar';
 
 export default class App extends React.Component {
   componentDidMount() {
@@ -47,17 +37,7 @@ export default class App extends React.Component {
     return (
       <VerticalLayout>
         <GlobalStyle />
-        <Titlebar>
-          <Handle />
-          <Icon />
-          <Title>Qusly</Title>
-          <WindowsControls
-            onClose={closeWindow}
-            onMaximize={maximizeWindow}
-            onMinimize={minimizeWindow}
-            style={{ WebkitAppRegion: 'no-drag', height: '100%' }}
-          />
-        </Titlebar>
+        <Titlebar />
         <HorizontalLayout>
           <Menu />
           <AppContent>
