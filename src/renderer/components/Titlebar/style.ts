@@ -1,4 +1,7 @@
 import styled from 'styled-components';
+import { centerIcon } from 'wexond-ui';
+
+import quslyIcon from '../../resources/icons/qusly.png';
 
 export const StyledTitlebar = styled.div`
   height: 32px;
@@ -6,6 +9,7 @@ export const StyledTitlebar = styled.div`
   background-color: rgba(0, 0, 0, 0.1);
   position: relative;
   align-items: center;
+  justify-content: space-between;
 `;
 
 export const Title = styled.div`
@@ -21,4 +25,12 @@ export const Handle = styled.div`
   bottom: 0px;
   right: 3px;
   -webkit-app-region: drag;
+`;
+
+export const Icon = styled.div`
+  margin-left: 8px;
+  width: 20px;
+  height: 20px;
+  ${centerIcon()};
+  background-image: url(${quslyIcon});
 `;
