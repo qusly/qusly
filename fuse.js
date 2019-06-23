@@ -15,7 +15,9 @@ const { spawn } = require('child_process');
 const production = process.env.NODE_ENV === 'prod';
 const outputDir = 'build';
 
-dotenv.config();
+if (!production) {
+  dotenv.config();
+}
 
 class Builder {
   constructor(
