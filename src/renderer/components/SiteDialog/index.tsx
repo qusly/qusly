@@ -25,12 +25,12 @@ const onClick = async () => {
   if (!form.validate()) return;
 
   const { title, protocol, port, host, user, password } = form.values;
-  const defaultPort = protocol === 'sftp' ? 22 : 21;
+  const defaultPort = protocol === 'SFTP' ? 22 : 21;
 
   await store.sites.add({
     title: title || host,
     protocol: protocol.toLowerCase() as IProtocol,
-    port: port == null ? defaultPort : parseInt(port, 10),
+    port: port.trim().length ? parseInt(port, 10) : defaultPort,
     host,
     user,
     password,
