@@ -12,26 +12,11 @@
 
 ## Screenshots
 
-<div style="text-align: center">
-<img src="screenshots/ss.png" style="width: 100%; max-width: 896px;" />
-</div>
+![](https://wexond.net/img/qusly/explorer.png)
 
-## Roadmap
+![](https://wexond.net/img/qusly/explorer.gif)
 
-- [ ] Connection dialog
-- [ ] Path input
-- [ ] Transfer list
-- [x] Directory tree
-- [ ] Context menu
-- [ ] Search
-- [ ] Bookmarks
-- [ ] Details panel
-- [ ] File list view
-- [x] File grid view
-- [ ] Transfer action
-- [x] File icon
-- [ ] Settings panel
-- [ ] Theming API
+![](https://wexond.net/img/qusly/dialog.gif)
 
 ### Running
 

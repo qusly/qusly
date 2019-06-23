@@ -6,6 +6,8 @@ import { icons } from '~/renderer/constants/icons';
 export const Pagebar = styled.div`
   width: 100%;
   height: 48px;
+  min-height: 48px;
+  max-height: 48px;
   display: flex;
   align-items: center;
 `;
