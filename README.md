@@ -63,3 +63,5 @@ $ npm run <command>
 | `lint`           | Lints the source code.                                 |
 | `lint-fix`       | Fixes eslint errors                                               |
 | `dev`            | Starts Qusly in the development mode        |
+
+<a href="https://www.patreon.com/bePatron?u=21429620" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://c6.patreon.com/becomePatronButton.bundle.js"></script>
