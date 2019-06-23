@@ -14,6 +14,8 @@ import {
   AppContent,
   Titlebar,
   Handle,
+  Title,
+  Icon,
 } from './styles';
 import { closeWindow, maximizeWindow, minimizeWindow } from '~/renderer/utils';
 
@@ -46,13 +48,15 @@ export default class App extends React.Component {
       <VerticalLayout>
         <GlobalStyle />
         <Titlebar>
+          <Handle />
+          <Icon />
+          <Title>Qusly</Title>
           <WindowsControls
             onClose={closeWindow}
             onMaximize={maximizeWindow}
             onMinimize={minimizeWindow}
-            style={{ marginLeft: 'auto', WebkitAppRegion: 'no-drag' }}
+            style={{ WebkitAppRegion: 'no-drag', height: '100%' }}
           />
-          <Handle />
         </Titlebar>
         <HorizontalLayout>
           <Menu />
