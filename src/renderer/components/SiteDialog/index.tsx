@@ -28,7 +28,7 @@ const onClick = async () => {
 
   await store.sites.add({
     title: title || host,
-    protocol: protocol as IProtocol,
+    protocol: protocol.toLowerCase() as IProtocol,
     port: parseInt(port, 10),
     host,
     user,

@@ -54,9 +54,6 @@ const Content = observer(({ tab }: { tab: Tab }) => {
           style={{ backgroundImage: `url(${tab.favicon})` }}
         />
       )}
-      {tab.loading && (
-        <></> // TODO: cc @xnerhu
-      )}
       <StyledTitle
         isIcon={tab.isIconSet}
         style={{

@@ -2,7 +2,7 @@ import { observable, action } from 'mobx';
 import * as React from 'react';
 import { TweenLite } from 'gsap';
 
-import { Tab, Page } from '~/renderer/models';
+import { Tab, Site } from '~/renderer/models';
 import {
   TAB_ANIMATION_DURATION,
   defaultTabOptions,
@@ -100,7 +100,7 @@ export class TabsStore {
   }
 
   @action
-  public addTab(options = defaultTabOptions) {
+  public addTab(site?: Site, options = defaultTabOptions) {
     this.removedTabs = 0;
 
     const tab = new Tab(options);
@@ -118,7 +118,7 @@ export class TabsStore {
       this.scrollbarRef.current.scrollToEnd(TAB_ANIMATION_DURATION * 1000);
     });
 
-    store.pages.add();
+    store.pages.add(site || store.sessions.current.site, tab);
 
     return tab;
   }
@@ -151,8 +151,6 @@ export class TabsStore {
   public setTabsLefts(animation: boolean) {
     const tabs = this.list.filter(x => !x.isClosing);
 
-    const { containerWidth } = this;
-
     let left = 0;
 
     for (const tab of tabs) {
@@ -164,7 +162,7 @@ export class TabsStore {
     store.addTab.setLeft(
       Math.min(
         left + ADD_TAB_MARGIN_LEFT,
-        containerWidth + TABS_PADDING + ADD_TAB_MARGIN_LEFT,
+        this.containerWidth + TABS_PADDING + ADD_TAB_MARGIN_LEFT,
       ),
       animation,
     );
@@ -181,7 +179,7 @@ export class TabsStore {
   }
 
   public getTabsToReplace(callingTab: Tab, direction: string) {
-    let tabs = this.list;
+    const tabs = this.list;
 
     const index = tabs.indexOf(callingTab);
 

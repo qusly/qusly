@@ -26,7 +26,6 @@ export class SitesStore {
 
   public add(site: Site) {
     return new Promise((resolve) => {
-      console.log(site);
       this.db.insert(site, (err, doc) => {
         if (err) throw err;
 

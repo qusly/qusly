@@ -14,3 +14,4 @@ export const getPath = (...relativePaths: string[]) => {
 
   return resolve(path, ...relativePaths).replace(/\\/g, '/');
 };
+

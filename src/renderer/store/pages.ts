@@ -1,7 +1,7 @@
-import { observable } from "mobx";
+import { observable } from 'mobx';
 
-import { Page, Session } from "../models";
-import store from ".";
+import { Page, Site, Tab } from '../models';
+import store from '.';
 
 export class PagesStore {
   @observable
@@ -11,13 +11,14 @@ export class PagesStore {
     return this.list.find(e => e.tabId === store.tabs.selectedTab.id);
   }
 
-  public add() {
-    const page = new Page();
-    const session = new Session();
+  public async add(site: Site, tab: Tab) {
+    const session = store.sessions.create(site);
+    const page = new Page(session);
 
-    store.sessions.list.push(session);
-    page.sessionId = session.id;
-
+    tab.title = site.title;
     this.list.push(page);
+
+    await session.connect(site);
+    await page.load();
   }
 }

@@ -9,7 +9,6 @@ import {
   TAB_ANIMATION_DURATION,
   ADD_TAB_MARGIN_LEFT,
 } from '~/renderer/constants';
-import { Page } from './page';
 
 let id = 1;
 

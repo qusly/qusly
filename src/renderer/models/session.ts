@@ -1,7 +1,8 @@
-import { observable } from "mobx";
-import { Client, IConfig } from "qusly-core";
+import { observable } from 'mobx';
+import { Client } from 'qusly-core';
 
-import { Tree } from "./tree";
+import { Tree } from './tree';
+import { Site } from './site';
 
 let id = 0;
 
@@ -12,19 +13,24 @@ export class Session {
   @observable
   public connected = false;
 
-  public client: Client;
+  public client = new Client();
 
   public tree = new Tree();
 
-  public hostname = '';
+  public site: Site;
 
-  public async connect(config: IConfig) {
-    this.client = new Client();
+  public connecting = false;
+
+  public async connect(config: Site) {
+    if (this.connecting) return;
+
+    this.connecting = true;
+    this.site = config;
+
     const res = await this.client.connect(config);
     if (!res.success) throw res.error;
 
     this.connected = true;
-    this.tree.init(config);
   }
 
   public async close() {

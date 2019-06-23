@@ -85,6 +85,7 @@ export const StyledTitle = styled.div`
   white-space: nowrap;
   transition: 0.2s margin-left;
   margin-left: 8px;
+  -webkit-font-smoothing: antialiased;
 
   ${({ isIcon }: TitleProps) => css`
     margin-left: ${!isIcon ? 0 : 12}px;

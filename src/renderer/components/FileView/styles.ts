@@ -5,7 +5,7 @@ export const StyledFilesView = styled.div`
   width: 100%;
   height: 100%;
   overflow-y: auto;
-  padding: 24px;
+  padding: 8px 24px 24px 24px;
   transition: 0.1s opacity;
   display: grid;
   grid-gap: 24px;
