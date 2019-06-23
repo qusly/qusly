@@ -130,7 +130,7 @@ Sparky.task('renderer', async () => {
     plugins: [
       !production && StyledComponentsPlugin(),
       CopyPlugin({
-        files: ['*.woff2', '*.svg'],
+        files: ['*.woff2', '*.svg', '*.png'],
         dest: 'assets',
         resolve: production ? './assets' : '/assets',
       }),
