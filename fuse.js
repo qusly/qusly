@@ -37,7 +37,7 @@ class Builder {
   }
 
   static getFuseConfig(target, name, output = '$name.js', plugins = []) {
-    const { HOSTNAME, LOGIN, PASSWORD } = process.env;
+    const { HOSTNAME, USER, PASSWORD, PROTOCOL, PORT, ENABLED } = process.env;
 
     return {
       target,
@@ -51,8 +51,11 @@ class Builder {
         EnvPlugin({
           NODE_ENV: production ? 'production' : 'development',
           HOSTNAME,
-          LOGIN,
+          USER,
           PASSWORD,
+          PROTOCOL,
+          PORT,
+          ENABLED,
         }),
         JSONPlugin(),
         production &&
