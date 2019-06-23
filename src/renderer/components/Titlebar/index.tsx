@@ -15,12 +15,14 @@ export const Titlebar = observer(() => {
       <Handle />
       {platform() === 'darwin' ? <TrafficButtons /> : <Icon />}
       <Title>{tab == null ? 'Qusly' : `${tab.title} - Qusly`}</Title>
-      <WindowsControls
-        onClose={closeWindow}
-        onMaximize={maximizeWindow}
-        onMinimize={minimizeWindow}
-        style={{ WebkitAppRegion: 'no-drag', height: '100%' }}
-      />
+      {platform() !== 'darwin' && (
+        <WindowsControls
+          onClose={closeWindow}
+          onMaximize={maximizeWindow}
+          onMinimize={minimizeWindow}
+          style={{ WebkitAppRegion: 'no-drag', height: '100%' }}
+        />
+      )}
     </StyledTitlebar>
   );
 });
