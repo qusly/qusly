@@ -18,7 +18,13 @@
 
 ![](https://wexond.net/img/qusly/dialog.gif)
 
-### Running
+## Components
+
+Without these components Qusly wouldn't exist:
+- [Qusly Core](https://github.com/qusly/qusly-core) - An API wrapper around ssh2 and basic-ftp for building FTP/FTPS/SFTP clients.
+- Tab system from [Wexond](https://github.com/wexond/wexond)
+
+## Running
 
 Before running Qusly, you need to have [Node.js](https://nodejs.org) installed.
 
@@ -60,8 +66,8 @@ $ npm run <command>
 | `compile-win32`  | Compiles binaries for Windows.              |
 | `compile-darwin` | Compiles binaries for macOS.                |
 | `compile-linux`  | Compiles binaries for Linux.                |
-| `lint`           | Lints the source code.                                 |
-| `lint-fix`       | Fixes eslint errors                                               |
+| `lint`           | Lints the source code.                      |
+| `lint-fix`       | Fixes eslint errors                         |
 | `dev`            | Starts Qusly in the development mode        |
 
 <a href="https://www.patreon.com/bePatron?u=21429620">
