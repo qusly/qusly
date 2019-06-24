@@ -20,8 +20,7 @@
 
 ## Components
 
-Without these components Qusly wouldn't exist:
-- [Qusly Core](https://github.com/qusly/qusly-core) - An API wrapper around ssh2 and basic-ftp for building FTP/FTPS/SFTP clients.
+- [Qusly Core](https://github.com/qusly/qusly-core) - An API wrapper around [ssh2](https://github.com/mscdex/ssh2) and [basic-ftp](https://github.com/patrickjuchli/basic-ftp).
 - Tab system from [Wexond](https://github.com/wexond/wexond)
 
 ## Running
