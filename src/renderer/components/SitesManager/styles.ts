@@ -1,22 +1,7 @@
 import styled from 'styled-components';
-import { robotoMedium, centerIcon, transparency } from 'wexond-ui';
+import {  centerIcon, transparency } from 'wexond-ui';
 
 import { icons } from '~/renderer/constants/icons';
-
-export const Pagebar = styled.div`
-  width: 100%;
-  height: 48px;
-  min-height: 48px;
-  max-height: 48px;
-  display: flex;
-  align-items: center;
-`;
-
-export const PageTitle = styled.div`
-  margin-left: 24px;
-  font-size: 14px;
-  ${robotoMedium()};
-`;
 
 export const Add = styled.div`
   width: 32px;
