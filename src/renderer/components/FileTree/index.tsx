@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 
 import store from '~/renderer/store';
 import Item from '../FileTreeItem';
-import { Pagebar, PageTitle } from '../Page/styles';
+import { Pagebar, PageTitle } from '../MenuPage/styles';
 
 export default observer(() => {
   const session = store.sessions.current;

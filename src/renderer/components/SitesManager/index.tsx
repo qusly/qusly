@@ -3,8 +3,8 @@ import { observer } from 'mobx-react';
 
 import SiteItem from '../SiteItem';
 import store from '~/renderer/store';
-import { Pagebar, PageTitle } from '../Page/styles';
 import { Add } from './styles';
+import { Pagebar, PageTitle } from '../MenuPage/styles';
 
 const onAddClick = () => store.overlay.show('add-site');
 

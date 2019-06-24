@@ -13,12 +13,8 @@ export const Container = styled.div`
   width: 100%;
   height: 100%;
   overflow: auto;
-
   padding-right: 2px;
+  padding-bottom: 12px;
   background-color: rgba(0, 0, 0, 0.04);
-  display: flex;
-  flex-direction: column;
   ${noButtons()};
 `;
-
-//   padding-top: 8px;
