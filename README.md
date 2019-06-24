@@ -6,7 +6,7 @@
 [![Discord](https://img.shields.io/discord/591624973609730059.svg?style=flat-square)](https://discord.gg/rNyNYFn)
 [![Downloads](https://img.shields.io/github/downloads/qusly/qusly/total.svg?style=flat-square)](https://github.com/qusly/qusly/releases)
 
-📁 Qusly is an innovative __FTP/FTPS/SFTP__ client built on top of Electron, React, Styled-Components and <a href="https://www.github.com/xnerhu/qusly-core">Qusly-Core</a>. It's aim is to raise the standards.
+📁 Qusly is an innovative __FTP/FTPS/SFTP__ client built on top of Electron, React, Styled-Components and <a href="https://www.github.com/xnerhu/qusly-core">Qusly-Core</a>. It aims to raise the standards.
 
 </div>
 
@@ -18,7 +18,12 @@
 
 ![](https://wexond.net/img/qusly/dialog.gif)
 
-### Running
+## Components
+
+- [Qusly Core](https://github.com/qusly/qusly-core) - An API wrapper around [ssh2](https://github.com/mscdex/ssh2) and [basic-ftp](https://github.com/patrickjuchli/basic-ftp).
+- Tab system from [Wexond](https://github.com/wexond/wexond)
+
+## Running
 
 Before running Qusly, you need to have [Node.js](https://nodejs.org) installed.
 
@@ -60,8 +65,8 @@ $ npm run <command>
 | `compile-win32`  | Compiles binaries for Windows.              |
 | `compile-darwin` | Compiles binaries for macOS.                |
 | `compile-linux`  | Compiles binaries for Linux.                |
-| `lint`           | Lints the source code.                                 |
-| `lint-fix`       | Fixes eslint errors                                               |
+| `lint`           | Lints the source code.                      |
+| `lint-fix`       | Fixes eslint errors                         |
 | `dev`            | Starts Qusly in the development mode        |
 
 <a href="https://www.patreon.com/bePatron?u=21429620">
