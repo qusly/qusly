@@ -44,7 +44,7 @@ export default observer(() => {
   return (
     <StyledPathView onClick={onClick}>
       <Container visible={!page.pathInputVisible}>
-        {page.location.history.map((label, index) => (
+        {page.location.pathItems.map((label, index) => (
           <PathItem key={index} pathIndex={index} label={label} />
         ))}
       </Container>
