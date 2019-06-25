@@ -3,7 +3,7 @@ import { centerBoth } from 'wexond-ui';
 
 export const StyledPage = styled.div`
   width: 100%;
-  height: 100%;
+  height: calc(100% - 82px);
   position: relative;
 `;
 
