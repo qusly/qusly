@@ -42,8 +42,6 @@ export class Location {
 
   @action
   public push(...items: string[]) {
-    if (items.length === 1 && items[0] === this.history[this.history.length - 1]) return;
-
     this.pos += items.length;
     this.history = this.history.slice(0, this.pos);
     this.history = [...this.history, ...items];
