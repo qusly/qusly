@@ -6,15 +6,37 @@ import ToolbarButton from '../ToolbarButton';
 import { icons } from '~/renderer/constants';
 import { StyledContainer } from './style';
 
+const onBack = () => {
+  store.pages.current.location.back();
+  store.pages.current.fetchFiles();
+};
+
+const onForward = () => {
+  store.pages.current.location.forward();
+  store.pages.current.fetchFiles();
+};
+
 const onRefresh = () => {
   store.pages.current.fetchFiles();
 };
 
 export default observer(() => {
+  const location = store.pages.current.location;
+
   return (
     <StyledContainer>
-      <ToolbarButton size={20} icon={icons.back} disabled={true} />
-      <ToolbarButton size={20} icon={icons.forward} disabled={true} />
+      <ToolbarButton
+        size={20}
+        icon={icons.back}
+        disabled={!location.canGoBack}
+        onClick={onBack}
+      />
+      <ToolbarButton
+        size={20}
+        icon={icons.forward}
+        disabled={!location.canGoForward}
+        onClick={onForward}
+      />
       <ToolbarButton
         size={20}
         icon={icons.refresh}

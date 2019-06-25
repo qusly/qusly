@@ -1,13 +1,16 @@
-import { observable } from 'mobx';
+import { observable, action } from 'mobx';
 
 export class Location {
   @observable
   public history: string[] = [];
 
-  private pos = -1;
+  @observable
+  public pos = -1;
 
   public back() {
     if (this.canGoBack) {
+      console.log(this.pos, this.history);
+
       this.pos--;
     }
   }
@@ -18,11 +21,6 @@ export class Location {
     }
   }
 
-  public go(index: number) {
-    this.pos = index + 1;
-    this.history = this.history.slice(0, this.pos);
-  }
-
   public get canGoBack() {
     return this.pos > 0;
   }
@@ -31,7 +29,16 @@ export class Location {
     return this.pos + 1 < this.history.length;
   }
 
+  @action
+  public go(index: number) {
+    this.pos = index + 1;
+    this.history = this.history.slice(0, this.pos);
+  }
+
+  @action
   public push(...items: string[]) {
+    if (items.length === 1 && items[0] === this.history[this.history.length - 1]) return;
+
     this.pos += items.length;
     this.history = this.history.slice(0, this.pos);
     this.history = [...this.history, ...items];
@@ -43,7 +50,11 @@ export class Location {
     this.pos = this.history.length - 1;
   }
 
+  public get pathItems() {
+    return this.history.slice(0, this.pos + 1);
+  }
+
   public get path() {
-    return this.history.join('/').slice(this.history.length > 1 && this.history[0] === '/' ? 1 : 0);
+    return this.pathItems.join('/');
   }
 }

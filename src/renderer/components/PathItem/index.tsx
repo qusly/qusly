@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { observer } from 'mobx-react';
 
 import store from '~/renderer/store';
 import { StyledPathItem } from './styles';
@@ -12,6 +13,10 @@ const onClick = (index: number) => (e: React.MouseEvent) => {
   page.fetchFiles();
 };
 
-export default ({ label, pathIndex }: { label: string; pathIndex: number }) => {
-  return <StyledPathItem onClick={onClick(pathIndex)}>{label}</StyledPathItem>;
-};
+export default observer(
+  ({ label, pathIndex }: { label: string; pathIndex: number }) => {
+    return (
+      <StyledPathItem onClick={onClick(pathIndex)}>{label}</StyledPathItem>
+    );
+  },
+);
