@@ -18,7 +18,12 @@ const onClick = (name: string) => (e: React.KeyboardEvent<HTMLDivElement>) => {
   const page = store.pages.current;
 
   if (e.ctrlKey) {
-    page.selectedFiles.push(name);
+    const index = page.selectedFiles.indexOf(name);
+    if (index === -1) {
+      page.selectedFiles.push(name);
+    } else {
+      page.selectedFiles.splice(index, 1);
+    }
   } else {
     page.selectedFiles = [name];
   }
