@@ -12,7 +12,6 @@ export const StyledFile = styled.div`
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.08);
-    border: 1px solid rgba(0, 0, 0, 0.12);
   }
 `;
 
