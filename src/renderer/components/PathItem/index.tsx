@@ -6,11 +6,7 @@ import { StyledPathItem } from './styles';
 
 const onClick = (index: number) => (e: React.MouseEvent) => {
   e.stopPropagation();
-
-  const page = store.pages.current;
-
-  page.location.go(index);
-  page.fetchFiles();
+  store.pages.current.location.go(index);
 };
 
 export default observer(

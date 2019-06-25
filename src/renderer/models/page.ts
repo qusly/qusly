@@ -18,7 +18,7 @@ export class Page {
   @observable
   public files: IFile[] = [];
 
-  public location = new Location();
+  public location = new Location(this);
 
   @observable
   public loading = true;
@@ -30,9 +30,7 @@ export class Page {
 
   public async load() {
     const { path } = await this.session.client.pwd();
-
     this.location.path = path;
-    await this.fetchFiles();
   }
 
   public async fetchFiles() {

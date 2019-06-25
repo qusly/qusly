@@ -1,5 +1,7 @@
 import { observable, action } from 'mobx';
 
+import { Page } from './page';
+
 export class Location {
   @observable
   public history: string[] = [];
@@ -7,17 +9,19 @@ export class Location {
   @observable
   public pos = -1;
 
+  constructor(public page: Page) { }
+
   public back() {
     if (this.canGoBack) {
-      console.log(this.pos, this.history);
-
       this.pos--;
+      this.page.fetchFiles();
     }
   }
 
   public forward() {
     if (this.canGoForward) {
       this.pos++;
+      this.page.fetchFiles();
     }
   }
 
@@ -33,6 +37,7 @@ export class Location {
   public go(index: number) {
     this.pos = index + 1;
     this.history = this.history.slice(0, this.pos);
+    this.page.fetchFiles();
   }
 
   @action
@@ -48,6 +53,7 @@ export class Location {
     // TODO: Determinate OS
     this.history = ['/', ...str.split(/\\|\//).filter(v => v !== '')];
     this.pos = this.history.length - 1;
+    this.page.fetchFiles();
   }
 
   public get pathItems() {
@@ -55,6 +61,7 @@ export class Location {
   }
 
   public get path() {
-    return this.pathItems.join('/');
+    const items = this.pathItems;
+    return items.join('/').slice(items.length > 1 && items[0] === '/' ? 1 : 0);
   }
 }

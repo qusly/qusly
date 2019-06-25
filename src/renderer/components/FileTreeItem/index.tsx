@@ -12,7 +12,7 @@ import {
 import store from '~/renderer/store';
 
 const onClick = (item: TreeItem) => () => {
-  store.pages.current.updatePath(item.path);
+  store.pages.current.location.path = item.path;
 };
 
 const onDropClick = (item: TreeItem) => (e: React.MouseEvent) => {
