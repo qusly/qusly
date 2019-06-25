@@ -7,6 +7,13 @@ export const StyledFile = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  padding: 0px 16px 8px 16px;
+  border: 1px solid transparent;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+  }
 `;
 
 export const Icon = styled.div`

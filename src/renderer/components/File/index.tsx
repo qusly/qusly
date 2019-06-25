@@ -19,7 +19,7 @@ export default observer(({ data }: { data: IFile }) => {
   const { icon, opacity } = store.favicons.get(data);
 
   return (
-    <StyledFile onClick={onClick(type, name)}>
+    <StyledFile onDoubleClick={onClick(type, name)}>
       <Icon icon={icon} style={{ opacity }} />
       <Label>{name}</Label>
     </StyledFile>

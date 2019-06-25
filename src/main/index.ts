@@ -1,14 +1,10 @@
-import {
-  BrowserWindow,
-  app,
-  ipcMain,
-  IpcMessageEvent,
-  Menu,
-} from 'electron';
+import { BrowserWindow, app, ipcMain, IpcMessageEvent, Menu } from 'electron';
 import { join, resolve } from 'path';
 import { platform } from 'os';
 import { getExtIcon } from 'electron-ext-icon';
 import { getMainMenu } from './menus/main';
+import { getPath } from '~/renderer/utils/path';
+import { existsSync, readFileSync, writeFileSync } from 'fs';
 
 const gotTheLock = app.requestSingleInstanceLock();
 
@@ -43,6 +39,60 @@ const createWindow = () => {
   };
 
   const window = new BrowserWindow(windowData);
+
+  const windowDataPath = getPath('window-data.json');
+
+  let windowState: any = {};
+
+  if (existsSync(windowDataPath)) {
+    try {
+      // Read the last window state from file.
+      windowState = JSON.parse(readFileSync(windowDataPath, 'utf8'));
+    } catch (e) {
+      writeFileSync(windowDataPath, JSON.stringify({}));
+    }
+  }
+
+  // Merge bounds from the last window state to the current window options.
+  if (windowState) {
+    window.setBounds({ ...windowState.bounds });
+  }
+
+  if (windowState) {
+    if (windowState.maximized) {
+      window.maximize();
+    }
+    if (windowState.fullscreen) {
+      window.setFullScreen(true);
+    }
+  }
+
+  // Update window bounds on resize and on move when window is not maximized.
+  window.on('resize', () => {
+    if (!window.isMaximized()) {
+      windowState.bounds = window.getBounds();
+    }
+  });
+  window.on('move', () => {
+    if (!window.isMaximized()) {
+      windowState.bounds = window.getBounds();
+    }
+  });
+
+  const resize = () => {
+    window.webContents.send('tabs-resize');
+  };
+
+  window.on('maximize', resize);
+  window.on('restore', resize);
+  window.on('unmaximize', resize);
+
+  // Save current window state to file.
+  window.on('close', () => {
+    windowState.maximized = window.isMaximized();
+    windowState.fullscreen = window.isFullScreen();
+    writeFileSync(windowDataPath, JSON.stringify(windowState));
+  });
 
   Menu.setApplicationMenu(getMainMenu(window));
 
