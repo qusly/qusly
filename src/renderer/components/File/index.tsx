@@ -10,7 +10,7 @@ const onClick = (type: IFileType, name: string) => () => {
 
   const page = store.pages.current;
 
-  page.pathItems.push(name);
+  page.location.push(name);
   page.fetchFiles();
 };
 

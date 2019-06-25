@@ -4,6 +4,7 @@ import { IFile } from 'qusly-core';
 import store from '../store';
 import { Session } from './session';
 import { sortFiles } from '../utils';
+import { Location } from './location';
 
 let id = 0;
 
@@ -17,8 +18,7 @@ export class Page {
   @observable
   public files: IFile[] = [];
 
-  @observable
-  public pathItems: string[] = [];
+  public location = new Location();
 
   @observable
   public loading = true;
@@ -28,31 +28,19 @@ export class Page {
 
   constructor(public session: Session) { }
 
-  public get path() {
-    return this.pathItems.join('/').slice(this.pathItems.length > 1 && this.pathItems[0] === '/' ? 1 : 0);
-  }
-
-  public get title() {
-    return `${this.session.site.title} - ${this.path}`;
-  }
-
   public async load() {
     const { path } = await this.session.client.pwd();
-    await this.updatePath(path);
-  }
 
-  public async updatePath(path: string) {
-    this.pathItems = ['/', ...path.split(/\\|\//).filter(v => v !== '')];
+    this.location.path = path;
     await this.fetchFiles();
   }
 
   public async fetchFiles() {
     this.loading = true;
 
-    const path = this.path;
-    const { files, error } = await this.session.client.readDir(path);
+    const { files, error } = await this.session.client.readDir(this.location.path);
 
-    if (error) console.error(error);
+    if (error) console.error(this.location.path, error);
 
     files && await store.favicons.load(files);
 
@@ -74,5 +62,9 @@ export class Page {
     } else if (store.tabs.previousTab != null) {
       store.tabs.previousTab.select();
     }
+  }
+
+  public get title() {
+    return `${this.session.site.title} - ${this.location.path}`;
   }
 }

@@ -8,7 +8,7 @@ const onClick = (index: number) => (e: React.MouseEvent) => {
 
   const page = store.pages.current;
 
-  page.pathItems = page.pathItems.slice(0, index + 1);
+  page.location.go(index);
   page.fetchFiles();
 };
 
