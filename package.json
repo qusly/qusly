@@ -1,6 +1,6 @@
 {
   "name": "qusly",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "An FTP/FTPS/SFTP client with Material Design UI.",
   "keywords": [
     "typescript",
@@ -66,6 +66,6 @@
     "wexond-ui": "1.1.7",
     "electron-ext-icon": "1.0.1",
     "nedb": "1.8.0",
-    "qusly-core": "1.1.5"
+    "qusly-core": "1.1.6"
   }
 }

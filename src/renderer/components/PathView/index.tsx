@@ -16,7 +16,7 @@ const onClick = (e: React.MouseEvent) => {
   page.pathInputVisible = true;
 
   requestAnimationFrame(() => {
-    input.current.value = page.path;
+    input.current.value = page.location.path;
     input.current.focus();
     input.current.select();
 
@@ -31,8 +31,10 @@ const onWindowClick = () => {
 
 const onKeyDown = (e: React.KeyboardEvent) => {
   if (e.key === 'Enter') {
-    store.pages.current.updatePath(input.current.value.trim());
-    store.pages.current.pathInputVisible = false;
+    const page = store.pages.current;
+    page.location.path = input.current.value.trim();
+    page.pathInputVisible = false;
+    page.fetchFiles();
   }
 };
 
@@ -42,7 +44,7 @@ export default observer(() => {
   return (
     <StyledPathView onClick={onClick}>
       <Container visible={!page.pathInputVisible}>
-        {page.pathItems.map((label, index) => (
+        {page.location.history.map((label, index) => (
           <PathItem key={index} pathIndex={index} label={label} />
         ))}
       </Container>
