@@ -10,9 +10,15 @@ export const StyledFile = styled.div`
   padding: 0px 16px 8px 16px;
   border: 1px solid transparent;
 
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.08);
-  }
+  ${({ selected }: { selected: boolean }) => css`
+    background-color: ${selected ? 'rgba(98, 0, 234, 0.12)' : 'none'};
+
+    &:hover {
+      background-color: ${selected
+        ? 'rgba(98, 0, 234, 0.16)'
+        : 'rgba(0, 0, 0, 0.08)'};
+    }
+  `}
 `;
 
 export const Icon = styled.div`

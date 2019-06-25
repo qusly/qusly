@@ -18,6 +18,9 @@ export class Page {
   @observable
   public files: IFile[] = [];
 
+  @observable
+  public selectedFiles: string[] = [];
+
   public location = new Location();
 
   @observable
@@ -26,7 +29,7 @@ export class Page {
   @observable
   public pathInputVisible = false;
 
-  constructor(public session: Session) { }
+  constructor(public session: Session) {}
 
   public async load() {
     const { path } = await this.session.client.pwd();
@@ -38,11 +41,13 @@ export class Page {
   public async fetchFiles() {
     this.loading = true;
 
-    const { files, error } = await this.session.client.readDir(this.location.path);
+    const { files, error } = await this.session.client.readDir(
+      this.location.path,
+    );
 
     if (error) console.error(this.location.path, error);
 
-    files && await store.favicons.load(files);
+    files && (await store.favicons.load(files));
 
     this.files = sortFiles(files);
     this.loading = false;
