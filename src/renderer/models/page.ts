@@ -36,11 +36,13 @@ export class Page {
   public async fetchFiles() {
     this.loading = true;
 
-    const { files, error } = await this.session.client.readDir(this.location.path);
+    const { files, error } = await this.session.client.readDir(
+      this.location.path,
+    );
 
     if (error) console.error(this.location.path, error);
 
-    files && await store.favicons.load(files);
+    files && (await store.favicons.load(files));
 
     this.files = sortFiles(files);
     this.loading = false;
