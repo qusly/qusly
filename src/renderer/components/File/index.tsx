@@ -14,10 +14,14 @@ const onDoubleClick = (type: IFileType, name: string) => () => {
   page.fetchFiles();
 };
 
-const onClick = (name: string) => () => {
+const onClick = (name: string) => (e: React.KeyboardEvent<HTMLDivElement>) => {
   const page = store.pages.current;
 
-  page.selectedFiles = [name];
+  if (e.ctrlKey) {
+    page.selectedFiles.push(name);
+  } else {
+    page.selectedFiles = [name];
+  }
 };
 
 export default observer(
