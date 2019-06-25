@@ -18,6 +18,9 @@ export class Page {
   @observable
   public files: IFile[] = [];
 
+  @observable
+  public selectedFiles: string[] = [];
+
   public location = new Location(this);
 
   @observable
