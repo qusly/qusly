@@ -14,7 +14,7 @@ const onDoubleClick = (type: IFileType, name: string) => () => {
   page.fetchFiles();
 };
 
-const onClick = (name: string) => (e: React.KeyboardEvent<HTMLDivElement>) => {
+const onClick = (name: string) => (e: React.MouseEvent) => {
   const page = store.pages.current;
 
   if (e.ctrlKey) {

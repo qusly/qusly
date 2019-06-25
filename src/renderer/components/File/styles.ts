@@ -8,18 +8,19 @@ export const StyledFile = styled.div`
   align-items: center;
   flex-direction: column;
   padding: 0px 16px 8px 16px;
+  border-radius: 4px;
 
   ${({ selected }: { selected: boolean }) => css`
     background-color: ${selected ? 'rgba(98, 0, 234, 0.08)' : 'none'};
 
     border: ${selected
-      ? `1px solid rgba(98, 0, 234, 0.12)`
-      : `1px solid transparent`};
+      ? '1px solid rgba(98, 0, 234, 0.12)'
+      : '1px solid transparent'};
 
     &:hover {
       background-color: ${selected
-        ? 'rgba(98, 0, 234, 0.12)'
-        : 'rgba(0, 0, 0, 0.08)'};
+      ? 'rgba(98, 0, 234, 0.12)'
+      : 'rgba(0, 0, 0, 0.08)'};
     }
   `}
 `;
