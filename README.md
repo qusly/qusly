@@ -10,6 +10,8 @@
 
 </div>
 
+## [Downloads](https://github.com/qusly/qusly/releases)
+
 ## Screenshots
 
 ![](https://wexond.net/img/qusly/explorer.png)
