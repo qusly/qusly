@@ -6,16 +6,19 @@ export const StyledPathView = styled.div`
   height: 32px;
   margin-left: 8px;
   overflow: hidden;
-  background-color: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 4px;
   cursor: text;
   position: relative;
+
+  &:hover {
+    border: 1px solid rgba(0, 0, 0, 0.14);
+  }
 `;
 
 export const Container = styled.div`
   width: 100%;
   height: 100%;
-  padding-left: 8px;
   align-items: center;
 
   ${({ visible }: { visible: boolean }) => css`
