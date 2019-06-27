@@ -1,7 +1,5 @@
 import styled, { css } from 'styled-components';
-import { robotoRegular, coloredCursor, transparency, centerVertical, robotoMedium, centerIcon } from 'wexond-ui';
-
-import { EASING_FUNCTION } from '../../constants';
+import { robotoRegular, coloredCursor, transparency, centerVertical, robotoMedium, centerIcon, EASING_FUNCTION } from 'wexond-ui';
 
 export const StyledTextfield = styled.div`
   width: 280px;

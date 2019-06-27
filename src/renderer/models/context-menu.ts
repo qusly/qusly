@@ -26,7 +26,6 @@ export class ContextMenuHandler {
   }
 
   public hide = () => {
-    console.log('hide');
     this.visible = false;
     window.removeEventListener('click', this.onWindowMouseDown);
   }

@@ -11,15 +11,17 @@ export default observer(() => {
       visible={store.fileMenu.visible}
       pos={store.fileMenu.pos}
     >
-      <ContextMenuItem>Item 1</ContextMenuItem>
-      <ContextMenuItem>Item 2</ContextMenuItem>
-      <ContextMenuItem>Item 3</ContextMenuItem>
-      <ContextMenuItem>Item 4</ContextMenuItem>
-      <ContextMenuItem>Item 5</ContextMenuItem>
-      <ContextMenuItem>Item 6</ContextMenuItem>
-      <ContextMenuItem>Item 7</ContextMenuItem>
-      <ContextMenuItem>Item 8</ContextMenuItem>
-      <ContextMenuItem>Item 9</ContextMenuItem>
+      <ContextMenuItem disabled>Download</ContextMenuItem>
+      <ContextMenuItem>Open</ContextMenuItem>
+      <ContextMenuItem>Open in new tab</ContextMenuItem>
+      <ContextMenuItem disabled>Edit</ContextMenuItem>
+      <ContextMenuItem disabled>Add to bookmarks</ContextMenuItem>
+      <ContextMenuItem disabled>Archive</ContextMenuItem>
+      <ContextMenuItem>Cut</ContextMenuItem>
+      <ContextMenuItem>Copy</ContextMenuItem>
+      <ContextMenuItem>Delete</ContextMenuItem>
+      <ContextMenuItem>Rename</ContextMenuItem>
+      <ContextMenuItem disabled>Properties</ContextMenuItem>
     </ContextMenu>
   );
 });

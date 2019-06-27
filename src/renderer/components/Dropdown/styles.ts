@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
-import { centerVertical, transparency, robotoMedium, robotoRegular, centerIcon, shadows } from 'wexond-ui';
+import { centerVertical, transparency, robotoMedium, robotoRegular, centerIcon, shadows, EASING_FUNCTION } from 'wexond-ui';
 
-import { EASING_FUNCTION, icons } from '~/renderer/constants';
+import { icons } from '~/renderer/constants';
 
 export const StyledDropdown = styled.div`
   min-width: 112px;
