@@ -13,7 +13,7 @@ export class PagesStore {
     return this.list.find(e => e.tabId === tab.id);
   }
 
-  public async add(site: Site, tab: Tab) {
+  public async add(site: Site, tab: Tab, path?: string) {
     const session = store.sessions.create(site);
     const page = new Page(session);
 
@@ -25,6 +25,6 @@ export class PagesStore {
     this.list.push(page);
 
     await session.connect(site);
-    await page.load();
+    await page.load(path);
   }
 }

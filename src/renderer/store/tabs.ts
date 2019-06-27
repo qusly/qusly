@@ -118,7 +118,7 @@ export class TabsStore {
       this.scrollbarRef.current.scrollToEnd(TAB_ANIMATION_DURATION * 1000);
     });
 
-    store.pages.add(site, tab);
+    store.pages.add(site, tab, options.path);
 
     return tab;
   }

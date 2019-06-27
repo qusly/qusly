@@ -13,6 +13,12 @@ import { Page } from './page';
 
 let id = 1;
 
+export interface TabOptions {
+  active?: boolean;
+  index?: number;
+  path?: string;
+}
+
 export class Tab {
   @observable
   public id: number = id++;

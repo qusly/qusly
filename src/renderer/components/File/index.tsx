@@ -9,9 +9,7 @@ const onDoubleClick = (type: IFileType, name: string) => () => {
   if (type !== 'directory') return;
 
   const page = store.pages.current;
-
   page.location.push(name);
-  page.fetchFiles();
 };
 
 const onClick = (name: string) => (e: React.MouseEvent) => {
@@ -43,6 +41,11 @@ const onClick = (name: string) => (e: React.MouseEvent) => {
   }
 };
 
+const onContextMenu = (name: string) => (e: React.MouseEvent) => {
+  store.pages.current.focusedFile = name;
+  store.fileMenu.show(e);
+};
+
 export default observer(
   ({ data, selected }: { data: IFile; selected: boolean }) => {
     const { name, type } = data;
@@ -53,7 +56,7 @@ export default observer(
         onClick={onClick(name)}
         onDoubleClick={onDoubleClick(type, name)}
         selected={selected}
-        onContextMenu={store.fileMenu.show}
+        onContextMenu={onContextMenu(name)}
       >
         <Icon icon={icon} style={{ opacity }} />
         <Label>{name}</Label>

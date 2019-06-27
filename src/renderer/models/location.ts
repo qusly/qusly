@@ -43,6 +43,7 @@ export class Location {
   public push(...items: string[]) {
     this.pos += items.length;
     this.history = [...this.history.slice(0, this.pos), ...items];
+    this.page.fetchFiles();
   }
 
   public set path(str: string) {

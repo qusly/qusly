@@ -34,9 +34,13 @@ export class Page {
 
   constructor(public session: Session) { }
 
-  public async load() {
-    const { path, error } = await this.session.client.pwd();
-    if (error) console.error(error);
+  public async load(path?: string) {
+    if (path == null) {
+      const res = await this.session.client.pwd();
+      if (res.error) console.error(res.error);
+      path = res.path;
+    }
+
     this.location.path = path;
   }
 

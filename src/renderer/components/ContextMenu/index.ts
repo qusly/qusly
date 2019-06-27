@@ -31,7 +31,7 @@ export const ContextMenuItem = styled.div`
   white-space: nowrap;
 
   ${({ disabled }: { disabled?: boolean }) => css`
-    pointer-events: ${disabled ? 'none' : 'auto'};
+    pointer-events: ${disabled ? 'none' : 'unset'};
     color: ${disabled ? `rgba(0, 0, 0, ${transparency.text.disabled})` : '#000'};
   `}
 
