@@ -11,7 +11,3 @@ export const VerticalLayout = styled.div`
   display: flex;
   flex-flow: column;
 `;
-
-export const AppContent = styled.div`
-  flex: 1;
-`;

@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { IProtocol } from 'qusly-core';
 import { GlobalStyle } from 'wexond-ui';
-import AppBar from '../AppBar';
-import Menu from '../Menu';
-import Page from '../Page';
-import Overlay from '../Overlay';
-import store from '~/renderer/store';
-import { VerticalLayout, HorizontalLayout, AppContent } from './styles';
-import { Titlebar } from '../Titlebar';
 
-export default class App extends React.Component {
+import store from '~/renderer/store';
+import Menu from '../Menu';
+import Overlay from '../Overlay';
+import { Titlebar } from '../Titlebar';
+import Content from '../Content';
+import { VerticalLayout, HorizontalLayout } from './styles';
+
+export default class App extends React.PureComponent {
   componentDidMount() {
     const {
       NODE_ENV,
@@ -40,10 +40,7 @@ export default class App extends React.Component {
         <Titlebar />
         <HorizontalLayout>
           <Menu />
-          <AppContent>
-            <AppBar />
-            <Page />
-          </AppContent>
+          <Content />
           <Overlay />
         </HorizontalLayout>
       </VerticalLayout>
