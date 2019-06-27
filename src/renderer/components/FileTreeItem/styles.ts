@@ -10,6 +10,10 @@ export const StyledTreeItem = styled.div`
   margin-top: 4px;
   align-items: center;
   cursor: pointer;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
 `;
 
 export const DropIcon = styled.div`
