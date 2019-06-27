@@ -35,16 +35,14 @@ export class Location {
 
   @action
   public go(index: number) {
-    this.pos = index + 1;
-    this.history = this.history.slice(0, this.pos);
+    this.pos = index;
     this.page.fetchFiles();
   }
 
   @action
   public push(...items: string[]) {
     this.pos += items.length;
-    this.history = this.history.slice(0, this.pos);
-    this.history = [...this.history, ...items];
+    this.history = [...this.history.slice(0, this.pos), ...items];
   }
 
   public set path(str: string) {

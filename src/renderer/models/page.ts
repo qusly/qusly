@@ -37,6 +37,7 @@ export class Page {
   }
 
   public async fetchFiles() {
+    this.selectedFiles = [];
     this.loading = true;
 
     const { files, error } = await this.session.client.readDir(
