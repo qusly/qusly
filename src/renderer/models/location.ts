@@ -35,8 +35,7 @@ export class Location {
 
   @action
   public go(index: number) {
-    this.pos = index + 1;
-    this.history = this.history.slice(0, this.pos);
+    this.pos = index;
     this.page.fetchFiles();
   }
 
