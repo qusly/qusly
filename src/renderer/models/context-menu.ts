@@ -13,17 +13,15 @@ export class ContextMenuHandler {
   @observable
   public pos: ContextMenuPos = {};
 
+  public ref = React.createRef<HTMLDivElement>();
+
   @action
   public show = (e: React.MouseEvent) => {
     if (!this.visible) {
       window.addEventListener('click', this.onWindowMouseDown);
     }
 
-    this.pos = {
-      top: e.clientY,
-      left: e.clientX,
-    }
-
+    this.pos = this.calcPos(e.clientX, e.clientY);
     this.visible = true;
   }
 
@@ -35,5 +33,26 @@ export class ContextMenuHandler {
 
   public onWindowMouseDown = () => {
     this.hide();
+  }
+
+  public calcPos(x: number, y: number) {
+    const screenWidth = document.body.clientWidth;
+    const screenHeight = document.body.clientHeight;
+
+    const width = this.ref.current.clientWidth;
+    const height = this.ref.current.clientHeight;
+
+    if (y + height > screenHeight && y - height > 0) {
+      y -= height;
+    }
+
+    if (x + width > screenWidth) {
+      x -= width;
+    }
+
+    return {
+      top: y,
+      left: x,
+    };
   }
 }
