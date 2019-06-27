@@ -5,3 +5,4 @@ export * from './tree';
 export * from './tree-item';
 export * from './site';
 export * from './form';
+export * from './context-menu';

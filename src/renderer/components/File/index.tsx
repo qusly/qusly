@@ -53,6 +53,7 @@ export default observer(
         onClick={onClick(name)}
         onDoubleClick={onDoubleClick(type, name)}
         selected={selected}
+        onContextMenu={store.fileMenu.show}
       >
         <Icon icon={icon} style={{ opacity }} />
         <Label>{name}</Label>

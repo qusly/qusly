@@ -7,6 +7,7 @@ import Menu from '../Menu';
 import Overlay from '../Overlay';
 import { Titlebar } from '../Titlebar';
 import Content from '../Content';
+import FileMenu from '../FileMenu';
 import { VerticalLayout, HorizontalLayout } from './styles';
 
 export default class App extends React.PureComponent {
@@ -42,6 +43,7 @@ export default class App extends React.PureComponent {
           <Menu />
           <Content />
           <Overlay />
+          <FileMenu />
         </HorizontalLayout>
       </VerticalLayout>
     );
