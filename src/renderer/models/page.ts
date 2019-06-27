@@ -21,6 +21,9 @@ export class Page {
   @observable
   public selectedFiles: string[] = [];
 
+  @observable
+  public focusedFile: string;
+
   public location = new Location(this);
 
   @observable

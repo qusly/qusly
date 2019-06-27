@@ -24,8 +24,22 @@ const onClick = (name: string) => (e: React.MouseEvent) => {
     } else {
       page.selectedFiles.splice(index, 1);
     }
+  } else if (e.shiftKey) {
+    const index = page.files.findIndex(e => e.name === name);
+    const focusedIndex = page.files.findIndex(e => e.name === page.focusedFile);
+
+    let items: IFile[];
+
+    if (index > focusedIndex) {
+      items = page.files.slice(focusedIndex, index + 1);
+    } else {
+      items = page.files.slice(index, focusedIndex + 1);
+    }
+
+    page.selectedFiles = items.map(e => e.name);
   } else {
     page.selectedFiles = [name];
+    page.focusedFile = name;
   }
 };
 
