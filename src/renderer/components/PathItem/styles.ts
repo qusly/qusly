@@ -12,6 +12,7 @@ export const StyledPathItem = styled.div`
   cursor: pointer;
   position: relative;
   padding-left: 4px;
+  white-space: nowrap;
 
   &:first-child {
     padding-left: 8px;
