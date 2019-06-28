@@ -9,7 +9,6 @@ import { PagesStore } from './pages';
 import { MenuStore } from './menu';
 import { SitesStore } from './sites';
 import { OverlayStore } from './overlay';
-import { ContextMenuHandler } from '../models';
 import { ContextMenuStore } from './context-menu';
 
 export class Store {

@@ -45,11 +45,7 @@ export default observer(() => {
   const mutliple = page.selectedFiles.length > 1;
 
   return (
-    <ContextMenu
-      ref={store.contextMenu.refs.file}
-      visible={store.contextMenu.content === 'file'}
-      pos={store.contextMenu.pos}
-    >
+    <ContextMenu content="file">
       <ContextMenuItem disabled>Download</ContextMenuItem>
       {!containsFile && (
         <>

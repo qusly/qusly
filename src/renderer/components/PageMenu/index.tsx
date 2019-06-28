@@ -6,11 +6,7 @@ import store from '~/renderer/store';
 
 export default observer(() => {
   return (
-    <ContextMenu
-      ref={store.contextMenu.refs.page}
-      visible={store.contextMenu.content === 'page'}
-      pos={store.contextMenu.pos}
-    >
+    <ContextMenu content="page">
       <ContextMenuItem>Refresh</ContextMenuItem>
       <ContextMenuItem disabled>New file</ContextMenuItem>
       <ContextMenuItem>New folder</ContextMenuItem>
