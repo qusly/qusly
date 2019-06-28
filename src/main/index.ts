@@ -139,18 +139,32 @@ app.on('window-all-closed', () => {
   }
 });
 
+const getExtensionIcon = async (ext: string) => {
+  const img = await getExtIcon(ext, { size: 'normal' });
+  return { ext, icon: img.toDataURL() };
+}
+
 ipcMain.on(
   'get-extensions-icons',
   async (e: IpcMessageEvent, exts: string[]) => {
+    const promises = exts.filter((e, index) => exts.indexOf(e) === index)
+      .map(ext => getExtensionIcon(ext));
+
+    const data = await Promise.all(promises);
     const icons: { [key: string]: string } = {};
 
-    for (const ext of exts) {
-      if (icons[ext] == null) {
-        const img = await getExtIcon(ext, { size: 'normal' });
-        icons[ext] = img.toDataURL();
-      }
+    for (const { icon, ext } of data) {
+      icons[ext] = icon;
     }
 
     e.sender.send('get-extensions-icons', icons);
+  },
+);
+
+ipcMain.on(
+  'get-extension-icon',
+  async (e: IpcMessageEvent, ext: string) => {
+    const { icon } = await getExtensionIcon(ext);
+    e.sender.send('get-extension-icon', icon);
   },
 );
