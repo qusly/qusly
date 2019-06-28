@@ -7,6 +7,7 @@ import FileView from '../FileView';
 import { StyledPage, PreloaderContainer } from './styles';
 
 const onContextMenu = (e: React.MouseEvent) => {
+  store.pages.current.unselectFiles();
   store.contextMenu.show('page', e);
 };
 
