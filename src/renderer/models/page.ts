@@ -113,4 +113,26 @@ export class Page {
       }
     }
   }
+
+  public getUniqueName(str: string) {
+    let index = -1;
+
+    for (let i = this.files.length - 1; i > 0; i--) {
+      const name = this.files[i].name.toLowerCase();
+
+      if (name.startsWith(str)) {
+        const matches = name.match(/\(([^)]+)\)/);
+
+        if (matches != null) {
+          const fileIndex = parseInt(matches[1], 10);
+
+          if (fileIndex > index) {
+            index = fileIndex;
+          }
+        }
+      }
+    }
+
+    return index === -1 ? str : `${str} (${index + 1})`;
+  }
 }
