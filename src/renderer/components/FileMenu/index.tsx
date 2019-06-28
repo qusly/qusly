@@ -12,18 +12,22 @@ const onOpen = () => {
 const openInNewTab = () => {
   const page = store.pages.current;
 
-  store.tabs.addTab(page.session.site, {
-    path: `${page.location.path}/${page.focusedFile}`,
-    active: true,
-  });
+  for (const file of page.selectedFiles) {
+    store.tabs.addTab(page.session.site, {
+      path: `${page.location.path}/${file}`,
+      active: true,
+    });
+  }
 };
 
 export default observer(() => {
   const page = store.pages.current;
   if (page == null) return null;
 
-  const file = page.files.find(e => e.name === page.focusedFile);
-  const isDirectory = file && file.type === 'directory';
+  const containsFile = page.selectedFiles.find(
+    e => page.files.find(x => x.name === e).type !== 'directory',
+  );
+  const mutliple = page.selectedFiles.length > 1;
 
   return (
     <ContextMenu
@@ -32,25 +36,31 @@ export default observer(() => {
       pos={store.fileMenu.pos}
     >
       <ContextMenuItem disabled>Download</ContextMenuItem>
-      {isDirectory && (
-        <React.Fragment>
-          <ContextMenuItem onClick={onOpen}>Open</ContextMenuItem>
+      {!containsFile && (
+        <>
+          {!mutliple && (
+            <ContextMenuItem onClick={onOpen}>Open</ContextMenuItem>
+          )}
           <ContextMenuItem onClick={openInNewTab}>
             Open in new tab
           </ContextMenuItem>
-        </React.Fragment>
+        </>
       )}
-      {!isDirectory && (
-        <React.Fragment>
-          <ContextMenuItem disabled>Edit</ContextMenuItem>
-          <ContextMenuItem disabled>Archive</ContextMenuItem>
-        </React.Fragment>
+      {!mutliple && (
+        <>
+          {containsFile && (
+            <>
+              <ContextMenuItem disabled>Edit</ContextMenuItem>
+              <ContextMenuItem disabled>Archive</ContextMenuItem>
+            </>
+          )}
+          <ContextMenuItem disabled>Add to bookmarks</ContextMenuItem>
+        </>
       )}
-      <ContextMenuItem disabled>Add to bookmarks</ContextMenuItem>
       <ContextMenuItem>Cut</ContextMenuItem>
       <ContextMenuItem>Copy</ContextMenuItem>
       <ContextMenuItem>Delete</ContextMenuItem>
-      <ContextMenuItem>Rename</ContextMenuItem>
+      {!mutliple && <ContextMenuItem>Rename</ContextMenuItem>}
       <ContextMenuItem disabled>Properties</ContextMenuItem>
     </ContextMenu>
   );
