@@ -3,6 +3,7 @@ import { observer } from 'mobx-react';
 
 import { ContextMenu, ContextMenuItem } from '../ContextMenu';
 import store from '~/renderer/store';
+import { resizeInput } from '~/renderer/utils';
 
 const onOpen = () => {
   const page = store.pages.current;
@@ -21,7 +22,13 @@ const openInNewTab = () => {
 };
 
 const onRename = () => {
-  store.pages.current.focusedFile.renaming = true;
+  const page = store.pages.current;
+
+  page.focusedFile.renaming = true;
+
+  requestAnimationFrame(() => {
+    resizeInput(page.fileNameInput.current);
+  });
 };
 
 export default observer(() => {

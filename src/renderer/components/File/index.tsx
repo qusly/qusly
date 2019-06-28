@@ -4,6 +4,7 @@ import { IFileType } from 'qusly-core';
 
 import store from '~/renderer/store';
 import { File } from '~/renderer/models';
+import { resizeInput } from '~/renderer/utils';
 import { StyledFile, Icon, Label, Input } from './styles';
 
 const onDoubleClick = (type: IFileType, name: string) => () => {
@@ -69,13 +70,7 @@ const onInputKey = (e: React.KeyboardEvent) => {
     rename();
   }
 
-  const target = e.target as HTMLTextAreaElement;
-
-  target.style.height = '0px';
-
-  requestAnimationFrame(() => {
-    target.style.height = `${target.scrollHeight}px`;
-  });
+  resizeInput(e.target as HTMLTextAreaElement);
 };
 
 const onInputClick = (e: React.MouseEvent) => {
