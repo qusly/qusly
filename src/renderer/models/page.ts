@@ -132,7 +132,9 @@ export class Page {
     await this.fetchFiles();
 
     const file = this.files.find(item => item.name === name);
+
     file.selected = true;
+    this.focusedFile = file;
   }
 
   public getUniqueName(str: string) {
