@@ -12,37 +12,58 @@ const onDoubleClick = (type: IFileType, name: string) => () => {
   page.location.push(name);
 };
 
-const onClick = (name: string) => (e: React.MouseEvent) => {
+const selectFile = (name: string) => {
+  const page = store.pages.current;
+  const index = page.selectedFiles.indexOf(name);
+
+  if (index === -1) {
+    page.selectedFiles.push(name);
+  } else {
+    page.selectedFiles.splice(index, 1);
+  }
+};
+
+const focusFile = (name: string) => {
   const page = store.pages.current;
 
-  if (e.ctrlKey) {
-    const index = page.selectedFiles.indexOf(name);
-    if (index === -1) {
-      page.selectedFiles.push(name);
-    } else {
-      page.selectedFiles.splice(index, 1);
-    }
-  } else if (e.shiftKey) {
-    const index = page.files.findIndex(e => e.name === name);
-    const focusedIndex = page.files.findIndex(e => e.name === page.focusedFile);
+  page.selectedFiles = [name];
+  page.focusedFile = name;
+};
 
-    let items: IFile[];
+const selectGroup = (name: string) => {
+  const page = store.pages.current;
+  const index = page.files.findIndex(e => e.name === name);
+  const focusedIndex = page.files.findIndex(e => e.name === page.focusedFile);
 
-    if (index > focusedIndex) {
-      items = page.files.slice(focusedIndex, index + 1);
-    } else {
-      items = page.files.slice(index, focusedIndex + 1);
-    }
+  let items: IFile[];
 
-    page.selectedFiles = items.map(e => e.name);
+  if (index > focusedIndex) {
+    items = page.files.slice(focusedIndex, index + 1);
   } else {
-    page.selectedFiles = [name];
-    page.focusedFile = name;
+    items = page.files.slice(index, focusedIndex + 1);
+  }
+
+  page.selectedFiles = items.map(e => e.name);
+};
+
+const onClick = (name: string) => (e: React.MouseEvent) => {
+  if (e.ctrlKey) {
+    selectFile(name);
+  } else if (e.shiftKey) {
+    selectGroup(name);
+  } else {
+    focusFile(name);
   }
 };
 
 const onContextMenu = (name: string) => (e: React.MouseEvent) => {
-  store.pages.current.focusedFile = name;
+  const page = store.pages.current;
+
+  if (page.selectedFiles.indexOf(name) === -1) {
+    page.selectedFiles = [name];
+    page.focusedFile = name;
+  }
+
   store.fileMenu.show(e);
 };
 

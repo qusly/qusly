@@ -20,8 +20,9 @@ const openInNewTab = () => {
 
 export default observer(() => {
   const page = store.pages.current;
-  const file = page && page.files.find(e => e.name === page.focusedFile);
+  if (page == null) return null;
 
+  const file = page.files.find(e => e.name === page.focusedFile);
   const isDirectory = file && file.type === 'directory';
 
   return (
