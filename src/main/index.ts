@@ -147,7 +147,7 @@ const getExtensionIcon = async (ext: string) => {
 ipcMain.on(
   'get-extensions-icons',
   async (e: IpcMessageEvent, exts: string[]) => {
-    const promises = exts.filter((e, index) => exts.indexOf(e) === index)
+    const promises = exts.filter((ext, index) => ext !== '' && exts.indexOf(ext) === index)
       .map(ext => getExtensionIcon(ext));
 
     const data = await Promise.all(promises);

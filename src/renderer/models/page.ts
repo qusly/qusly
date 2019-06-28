@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { observable, action } from 'mobx';
+import { extname } from 'path';
 
 import store from '../store';
 import { Session } from './session';
@@ -97,6 +98,9 @@ export class Page {
 
     if (newName.length && !this.files.find(e => e.name.toLowerCase() === newName.toLowerCase())) {
       file.name = newName;
+      file.ext = extname(newName);
+
+      await store.favicons.loadExt(file.ext);
 
       const path = this.location.path;
       const { error } = await this.session.client.move(`${path}/${oldName}`, `${path}/${newName}`);

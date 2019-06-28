@@ -16,10 +16,23 @@ export class FaviconsStore {
         resolve();
       });
 
-      const list = files.filter(e => this.favicons[e.ext] == null && e.ext !== '').map((e) => e.ext);
+      const list = files.filter(e => this.favicons[e.ext] == null).map((e) => e.ext);
 
       ipcRenderer.send('get-extensions-icons', list);
     })
+  }
+
+  public loadExt(ext: string) {
+    if (this.favicons[ext] != null || ext === '') return null;
+
+    return new Promise((resolve) => {
+      ipcRenderer.once('get-extension-icon', (e: any, data: string) => {
+        this.favicons[ext] = data;
+        resolve();
+      });
+
+      ipcRenderer.send('get-extension-icon', ext);
+    });
   }
 
   public get(file: File) {
