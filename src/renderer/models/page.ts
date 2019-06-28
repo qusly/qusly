@@ -1,10 +1,10 @@
-import { observable } from 'mobx';
-import { IFile } from 'qusly-core';
+import { observable, action } from 'mobx';
 
 import store from '../store';
 import { Session } from './session';
 import { sortFiles } from '../utils';
 import { Location } from './location';
+import { File } from '../models';
 
 let id = 0;
 
@@ -16,13 +16,10 @@ export class Page {
   public tabId: number;
 
   @observable
-  public files: IFile[] = [];
+  public files: File[] = [];
 
   @observable
-  public selectedFiles: IFile[] = [];
-
-  @observable
-  public focusedFile: IFile;
+  public focusedFile: File;
 
   public location = new Location(this);
 
@@ -45,7 +42,6 @@ export class Page {
   }
 
   public async fetchFiles() {
-    this.selectedFiles = [];
     this.loading = true;
 
     const { files, error } = await this.session.client.readDir(
@@ -78,5 +74,16 @@ export class Page {
 
   public get title() {
     return `${this.session.site.title} - ${this.location.path}`;
+  }
+
+  public get selectedFiles() {
+    return this.files.filter(e => e.selected);
+  }
+
+  @action
+  public unselectFiles() {
+    for (const file of this.files) {
+      file.selected = false;
+    }
   }
 }

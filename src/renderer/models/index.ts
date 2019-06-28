@@ -6,3 +6,4 @@ export * from './tree-item';
 export * from './site';
 export * from './form';
 export * from './context-menu';
+export * from './file';

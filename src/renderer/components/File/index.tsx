@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
-import { IFile, IFileType } from 'qusly-core';
+import { IFileType, IFile } from 'qusly-core';
 
 import store from '~/renderer/store';
+import { File } from '~/renderer/models';
 import { StyledFile, Icon, Label } from './styles';
 
 const onDoubleClick = (type: IFileType, name: string) => () => {
@@ -12,39 +13,32 @@ const onDoubleClick = (type: IFileType, name: string) => () => {
   page.location.push(name);
 };
 
-const selectFile = (file: IFile) => {
+const selectGroup = (file: File) => {
   const page = store.pages.current;
-  const index = page.selectedFiles.indexOf(file);
+  const fileIndex = page.files.indexOf(file);
+  const focusedFileIndex = page.files.indexOf(page.focusedFile);
 
-  if (index === -1) {
-    page.selectedFiles.push(file);
-  } else {
-    page.selectedFiles.splice(index, 1);
+  const bigger = fileIndex >= focusedFileIndex;
+
+  const start = bigger ? focusedFileIndex : fileIndex;
+  const end = !bigger ? focusedFileIndex : fileIndex;
+
+  for (let i = 0; i < page.files.length; i++) {
+    page.files[i].selected = i >= start && i <= end;
   }
 };
 
-const focusFile = (file: IFile) => {
+const focusFile = (file: File) => {
   const page = store.pages.current;
 
-  page.selectedFiles = [file];
+  page.unselectFiles();
   page.focusedFile = file;
+  file.selected = true;
 };
 
-const selectGroup = (file: IFile) => {
-  const page = store.pages.current;
-  const index = page.files.indexOf(file);
-  const focusedIndex = page.files.indexOf(page.focusedFile);
-
-  if (index > focusedIndex) {
-    page.selectedFiles = page.files.slice(focusedIndex, index + 1);
-  } else {
-    page.selectedFiles = page.files.slice(index, focusedIndex + 1);
-  }
-};
-
-const onClick = (file: IFile) => (e: React.MouseEvent) => {
+const onClick = (file: File) => (e: React.MouseEvent) => {
   if (e.ctrlKey) {
-    selectFile(file);
+    file.selected = true;
   } else if (e.shiftKey) {
     selectGroup(file);
   } else {
@@ -52,32 +46,27 @@ const onClick = (file: IFile) => (e: React.MouseEvent) => {
   }
 };
 
-const onContextMenu = (file: IFile) => (e: React.MouseEvent) => {
-  const page = store.pages.current;
-
-  if (page.selectedFiles.indexOf(file) === -1) {
-    page.selectedFiles = [file];
-    page.focusedFile = file;
+const onContextMenu = (file: File) => (e: React.MouseEvent) => {
+  if (!file.selected) {
+    focusFile(file);
   }
 
   store.fileMenu.show(e);
 };
 
-export default observer(
-  ({ data, selected }: { data: IFile; selected: boolean }) => {
-    const { name, type } = data;
-    const { icon, opacity } = store.favicons.get(data);
+export default observer(({ data }: { data: File }) => {
+  const { name, type, selected } = data;
+  const { icon, opacity } = store.favicons.get(data);
 
-    return (
-      <StyledFile
-        onClick={onClick(data)}
-        onDoubleClick={onDoubleClick(type, name)}
-        selected={selected}
-        onContextMenu={onContextMenu(data)}
-      >
-        <Icon icon={icon} style={{ opacity }} />
-        <Label>{name}</Label>
-      </StyledFile>
-    );
-  },
-);
+  return (
+    <StyledFile
+      onClick={onClick(data)}
+      onDoubleClick={onDoubleClick(type, name)}
+      selected={selected}
+      onContextMenu={onContextMenu(data)}
+    >
+      <Icon icon={icon} style={{ opacity }} />
+      <Label>{name}</Label>
+    </StyledFile>
+  );
+});

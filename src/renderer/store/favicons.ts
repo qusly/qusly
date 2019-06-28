@@ -1,15 +1,15 @@
 import { observable } from 'mobx';
 import { ipcRenderer } from 'electron';
-import { IFile } from 'qusly-core';
 import { transparency } from 'wexond-ui';
 
 import { icons } from '../constants';
+import { File } from '../models';
 
 export class FaviconsStore {
   @observable
   public favicons: { [key: string]: string } = {};
 
-  public load(files: IFile[]) {
+  public load(files: File[]) {
     return new Promise((resolve) => {
       ipcRenderer.once('get-extensions-icons', (e: any, data: any) => {
         this.favicons = { ...this.favicons, ...data };
@@ -22,7 +22,7 @@ export class FaviconsStore {
     })
   }
 
-  public get(file: IFile) {
+  public get(file: File) {
     const { type, ext } = file;
 
     let icon = icons.file;

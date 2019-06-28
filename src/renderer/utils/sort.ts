@@ -1,6 +1,6 @@
-import { IFile } from 'qusly-core';
+import { File } from '../models';
 
-export const sortFiles = (files: IFile[]): IFile[] => {
+export const sortFiles = (files: File[]): File[] => {
   if (files == null) return [];
 
   return files.sort((a, b) => {
