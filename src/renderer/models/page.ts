@@ -19,10 +19,10 @@ export class Page {
   public files: IFile[] = [];
 
   @observable
-  public selectedFiles: string[] = [];
+  public selectedFiles: IFile[] = [];
 
   @observable
-  public focusedFile: string;
+  public focusedFile: IFile;
 
   public location = new Location(this);
 

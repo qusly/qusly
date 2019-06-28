@@ -6,7 +6,7 @@ import store from '~/renderer/store';
 
 const onOpen = () => {
   const page = store.pages.current;
-  page.location.push(page.focusedFile);
+  page.location.push(page.focusedFile.name);
 };
 
 const openInNewTab = () => {
@@ -14,7 +14,7 @@ const openInNewTab = () => {
 
   for (const file of page.selectedFiles) {
     store.tabs.addTab(page.session.site, {
-      path: `${page.location.path}/${file}`,
+      path: `${page.location.path}/${file.name}`,
       active: true,
     });
   }
@@ -24,9 +24,7 @@ export default observer(() => {
   const page = store.pages.current;
   if (page == null) return null;
 
-  const containsFile = page.selectedFiles.find(
-    e => page.files.find(x => x.name === e).type !== 'directory',
-  );
+  const containsFile = page.selectedFiles.find(e => e.type !== 'directory');
   const mutliple = page.selectedFiles.length > 1;
 
   return (
@@ -61,7 +59,7 @@ export default observer(() => {
       <ContextMenuItem>Copy</ContextMenuItem>
       <ContextMenuItem>Delete</ContextMenuItem>
       {!mutliple && <ContextMenuItem>Rename</ContextMenuItem>}
-      <ContextMenuItem disabled>Properties</ContextMenuItem>
+      <ContextMenuItem disabled>Details</ContextMenuItem>
     </ContextMenu>
   );
 });

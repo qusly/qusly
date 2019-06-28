@@ -12,7 +12,7 @@ export default observer(() => {
     <StyledFilesView visible={!page.loading}>
       {page.files.map((file, index) => (
         <File
-          selected={page.selectedFiles.indexOf(file.name) !== -1}
+          selected={page.selectedFiles.indexOf(file) !== -1}
           data={file}
           key={index}
         />

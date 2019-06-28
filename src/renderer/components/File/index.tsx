@@ -12,56 +12,52 @@ const onDoubleClick = (type: IFileType, name: string) => () => {
   page.location.push(name);
 };
 
-const selectFile = (name: string) => {
+const selectFile = (file: IFile) => {
   const page = store.pages.current;
-  const index = page.selectedFiles.indexOf(name);
+  const index = page.selectedFiles.indexOf(file);
 
   if (index === -1) {
-    page.selectedFiles.push(name);
+    page.selectedFiles.push(file);
   } else {
     page.selectedFiles.splice(index, 1);
   }
 };
 
-const focusFile = (name: string) => {
+const focusFile = (file: IFile) => {
   const page = store.pages.current;
 
-  page.selectedFiles = [name];
-  page.focusedFile = name;
+  page.selectedFiles = [file];
+  page.focusedFile = file;
 };
 
-const selectGroup = (name: string) => {
+const selectGroup = (file: IFile) => {
   const page = store.pages.current;
-  const index = page.files.findIndex(e => e.name === name);
-  const focusedIndex = page.files.findIndex(e => e.name === page.focusedFile);
-
-  let items: IFile[];
+  const index = page.files.indexOf(file);
+  const focusedIndex = page.files.indexOf(page.focusedFile);
 
   if (index > focusedIndex) {
-    items = page.files.slice(focusedIndex, index + 1);
+    page.selectedFiles = page.files.slice(focusedIndex, index + 1);
   } else {
-    items = page.files.slice(index, focusedIndex + 1);
+    page.selectedFiles = page.files.slice(index, focusedIndex + 1);
   }
-
-  page.selectedFiles = items.map(e => e.name);
 };
 
-const onClick = (name: string) => (e: React.MouseEvent) => {
+const onClick = (file: IFile) => (e: React.MouseEvent) => {
   if (e.ctrlKey) {
-    selectFile(name);
+    selectFile(file);
   } else if (e.shiftKey) {
-    selectGroup(name);
+    selectGroup(file);
   } else {
-    focusFile(name);
+    focusFile(file);
   }
 };
 
-const onContextMenu = (name: string) => (e: React.MouseEvent) => {
+const onContextMenu = (file: IFile) => (e: React.MouseEvent) => {
   const page = store.pages.current;
 
-  if (page.selectedFiles.indexOf(name) === -1) {
-    page.selectedFiles = [name];
-    page.focusedFile = name;
+  if (page.selectedFiles.indexOf(file) === -1) {
+    page.selectedFiles = [file];
+    page.focusedFile = file;
   }
 
   store.fileMenu.show(e);
@@ -74,10 +70,10 @@ export default observer(
 
     return (
       <StyledFile
-        onClick={onClick(name)}
+        onClick={onClick(data)}
         onDoubleClick={onDoubleClick(type, name)}
         selected={selected}
-        onContextMenu={onContextMenu(name)}
+        onContextMenu={onContextMenu(data)}
       >
         <Icon icon={icon} style={{ opacity }} />
         <Label>{name}</Label>
