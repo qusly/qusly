@@ -24,8 +24,7 @@ export class ContextMenuStore {
 
   @action
   public show(content: ContextMenuContent, e: React.MouseEvent) {
-    this.removeListener();
-    window.addEventListener('click', this.onWindowMouseDown);
+    this.addListener();
 
     this.content = content;
     this.pos = this.calcPos(e.clientX, e.clientY);
@@ -57,12 +56,20 @@ export class ContextMenuStore {
     };
   }
 
-  public onWindowMouseDown = () => {
+  public onWindowClick = (e: MouseEvent) => {
+    e.stopPropagation();
     this.hide();
   }
 
+  public addListener() {
+    this.removeListener();
+    window.addEventListener('click', this.onWindowClick);
+    window.addEventListener('mousedown', this.onWindowClick);
+  }
+
   public removeListener() {
-    window.removeEventListener('click', this.onWindowMouseDown);
+    window.removeEventListener('click', this.onWindowClick);
+    window.removeEventListener('mousedown', this.onWindowClick);
   }
 
   public get ref(): React.RefObject<HTMLDivElement> {
