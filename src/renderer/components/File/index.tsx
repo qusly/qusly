@@ -98,7 +98,6 @@ export default observer(({ data }: { data: File }) => {
           onDoubleClick={onInputClick}
           defaultValue={name}
           autoFocus
-          onBlur={rename}
         />
       )}
     </StyledFile>

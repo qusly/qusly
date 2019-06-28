@@ -1,7 +1,9 @@
-export const resizeInput = (el: HTMLInputElement | HTMLTextAreaElement) => {
+export const resizeInput = (el: HTMLTextAreaElement) => {
+  el.style.padding = '';
   el.style.height = '0px';
 
   requestAnimationFrame(() => {
+    el.style.padding = '4px 8px';
     el.style.height = `${el.scrollHeight}px`;
   });
 }
