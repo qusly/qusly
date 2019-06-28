@@ -17,6 +17,7 @@ import fileTree from '~/renderer/resources/icons/file-tree.svg';
 import visible from '~/renderer/resources/icons/visible.svg';
 import invisible from '~/renderer/resources/icons/invisible.svg';
 import sitesManager from '~/renderer/resources/icons/sites-manager.svg';
+import download from '~/renderer/resources/icons/download.svg';
 
 export const icons = {
   windowsMaximize,
@@ -38,4 +39,5 @@ export const icons = {
   visible,
   invisible,
   sitesManager,
+  download,
 };
