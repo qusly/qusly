@@ -56,16 +56,17 @@
     "typescript-plugin-styled-components": "1.4.3"
   },
   "dependencies": {
+    "electron-ext-icon": "1.0.1",
+    "electron-updater": "4.0.14",
     "gsap": "2.1.3",
     "mobx": "5.10.0",
     "mobx-react": "6.0.3",
+    "nedb": "1.8.0",
+    "qusly-core": "1.1.6",
     "react": "16.8.6",
     "react-dom": "16.8.6",
     "react-windows-controls": "1.0.4",
     "styled-components": "4.2.1",
-    "wexond-ui": "1.1.7",
-    "electron-ext-icon": "1.0.1",
-    "nedb": "1.8.0",
-    "qusly-core": "1.1.6"
+    "wexond-ui": "1.1.7"
   }
 }
