@@ -9,9 +9,11 @@ const onRefresh = () => {
 };
 
 const onNewFolder = () => {
-  const page = store.pages.current;
+  store.pages.current.createBlank('folder');
+};
 
-  console.log(page.getUniqueName('new folder'));
+const onNewFile = () => {
+  store.pages.current.createBlank('file');
 };
 
 export default observer(() => {
@@ -19,7 +21,7 @@ export default observer(() => {
     <ContextMenu content="page">
       <ContextMenuItem onClick={onRefresh}>Refresh</ContextMenuItem>
       <ContextMenuItem onClick={onNewFolder}>New folder</ContextMenuItem>
-      <ContextMenuItem>New file</ContextMenuItem>
+      <ContextMenuItem onClick={onNewFile}>New file</ContextMenuItem>
       <ContextMenuItem disabled>Details</ContextMenuItem>
     </ContextMenu>
   );
