@@ -56,7 +56,7 @@ const onContextMenu = (file: File) => (e: React.MouseEvent) => {
     focusFile(file);
   }
 
-  store.fileMenu.show(e);
+  store.contextMenu.show('file', e);
 };
 
 const rename = () => {

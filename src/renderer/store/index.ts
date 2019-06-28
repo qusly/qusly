@@ -1,4 +1,5 @@
 import { ipcRenderer, IpcMessageEvent } from 'electron';
+import { observable } from 'mobx';
 
 import { AddTabStore } from './add-tab';
 import { TabsStore } from './tabs';
@@ -9,7 +10,7 @@ import { MenuStore } from './menu';
 import { SitesStore } from './sites';
 import { OverlayStore } from './overlay';
 import { ContextMenuHandler } from '../models';
-import { observable } from 'mobx';
+import { ContextMenuStore } from './context-menu';
 
 export class Store {
   public addTab = new AddTabStore();
@@ -20,9 +21,7 @@ export class Store {
   public menu = new MenuStore();
   public sites = new SitesStore();
   public overlay = new OverlayStore();
-
-  public fileMenu = new ContextMenuHandler();
-  public pageMenu = new ContextMenuHandler();
+  public contextMenu = new ContextMenuStore();
 
   @observable
   public updateInfo = {

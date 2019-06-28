@@ -7,9 +7,9 @@ import store from '~/renderer/store';
 export default observer(() => {
   return (
     <ContextMenu
-      ref={store.pageMenu.ref}
-      visible={store.pageMenu.visible}
-      pos={store.pageMenu.pos}
+      ref={store.contextMenu.refs.page}
+      visible={store.contextMenu.content === 'page'}
+      pos={store.contextMenu.pos}
     >
       <ContextMenuItem>Refresh</ContextMenuItem>
       <ContextMenuItem disabled>New file</ContextMenuItem>

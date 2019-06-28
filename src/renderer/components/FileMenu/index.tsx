@@ -46,9 +46,9 @@ export default observer(() => {
 
   return (
     <ContextMenu
-      ref={store.fileMenu.ref}
-      visible={store.fileMenu.visible}
-      pos={store.fileMenu.pos}
+      ref={store.contextMenu.refs.file}
+      visible={store.contextMenu.content === 'file'}
+      pos={store.contextMenu.pos}
     >
       <ContextMenuItem disabled>Download</ContextMenuItem>
       {!containsFile && (

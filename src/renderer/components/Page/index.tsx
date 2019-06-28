@@ -6,12 +6,16 @@ import store from '~/renderer/store';
 import FileView from '../FileView';
 import { StyledPage, PreloaderContainer } from './styles';
 
+const onContextMenu = (e: React.MouseEvent) => {
+  store.contextMenu.show('page', e);
+};
+
 export default observer(() => {
   const session = store.sessions.current;
   const page = store.pages.current;
 
   return (
-    <StyledPage onContextMenu={store.pageMenu.show}>
+    <StyledPage onContextMenu={onContextMenu}>
       {session && session.connected && <FileView />}
       <PreloaderContainer visible={page && page.loading}>
         <Preloader />
