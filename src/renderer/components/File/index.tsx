@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
-import { IFileType, IFile } from 'qusly-core';
+import { IFileType } from 'qusly-core';
 
 import store from '~/renderer/store';
 import { File } from '~/renderer/models';
-import { StyledFile, Icon, Label } from './styles';
+import { StyledFile, Icon, Label, Input } from './styles';
 
 const onDoubleClick = (type: IFileType, name: string) => () => {
   if (type !== 'directory') return;
@@ -54,8 +54,32 @@ const onContextMenu = (file: File) => (e: React.MouseEvent) => {
   store.fileMenu.show(e);
 };
 
+const onKey = (e: React.KeyboardEvent) => {
+  const target = e.target as HTMLTextAreaElement;
+
+  if (e.key === 'Enter') {
+    e.stopPropagation();
+    e.preventDefault();
+    store.pages.current.rename(target.value.trim());
+  }
+
+  target.style.height = '0px';
+
+  requestAnimationFrame(() => {
+    target.style.height = `${target.scrollHeight}px`;
+  });
+};
+
+const onInputClick = (e: React.MouseEvent) => {
+  e.stopPropagation();
+};
+
+const onInputBlur = (e: any) => {
+  store.pages.current.rename(e.target.value.trim());
+};
+
 export default observer(({ data }: { data: File }) => {
-  const { name, type, selected } = data;
+  const { name, type, selected, renaming } = data;
   const { icon, opacity } = store.favicons.get(data);
 
   return (
@@ -66,7 +90,17 @@ export default observer(({ data }: { data: File }) => {
       onContextMenu={onContextMenu(data)}
     >
       <Icon icon={icon} style={{ opacity }} />
-      <Label>{name}</Label>
+      {!renaming && <Label>{name}</Label>}
+      {renaming && (
+        <Input
+          onKeyDown={onKey}
+          onMouseDown={onInputClick}
+          onDoubleClick={onInputClick}
+          defaultValue={name}
+          autoFocus
+          onBlur={onInputBlur}
+        />
+      )}
     </StyledFile>
   );
 });

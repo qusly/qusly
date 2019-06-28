@@ -86,4 +86,17 @@ export class Page {
       file.selected = false;
     }
   }
+
+  public async rename(newName: string) {
+    this.focusedFile.renaming = false;
+
+    if (!this.files.find(e => e.name === newName)) {
+      this.focusedFile.name = newName;
+
+      const path = this.location.path;
+      const { error } = await this.session.client.move(`${path}/${name}`, `${path}/${newName}`);
+
+      if (error) console.error(error);
+    }
+  }
 }

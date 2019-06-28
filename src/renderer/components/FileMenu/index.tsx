@@ -20,6 +20,10 @@ const openInNewTab = () => {
   }
 };
 
+const onRename = () => {
+  store.pages.current.focusedFile.renaming = true;
+};
+
 export default observer(() => {
   const page = store.pages.current;
   if (page == null) return null;
@@ -58,7 +62,9 @@ export default observer(() => {
       <ContextMenuItem>Cut</ContextMenuItem>
       <ContextMenuItem>Copy</ContextMenuItem>
       <ContextMenuItem>Delete</ContextMenuItem>
-      {!mutliple && <ContextMenuItem>Rename</ContextMenuItem>}
+      {!mutliple && (
+        <ContextMenuItem onClick={onRename}>Rename</ContextMenuItem>
+      )}
       <ContextMenuItem disabled>Details</ContextMenuItem>
     </ContextMenu>
   );

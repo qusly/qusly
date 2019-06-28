@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { centerIcon } from 'wexond-ui';
+import { centerIcon, robotoRegular } from 'wexond-ui';
 
 import { icons } from '~/renderer/constants';
 
@@ -9,6 +9,7 @@ export const StyledFile = styled.div`
   flex-direction: column;
   padding: 0px 16px 8px 16px;
   border-radius: 4px;
+  position: relative;
 
   ${({ selected }: { selected: boolean }) => css`
     background-color: ${selected ? 'rgba(98, 0, 234, 0.08)' : 'none'};
@@ -43,4 +44,24 @@ export const Label = styled.div`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+`;
+
+export const Input = styled.textarea`
+  width: calc(100% + 2px);
+  min-height: fit-content;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background-color: #fff;
+  border: 1px solid #eee;
+  z-index: 1;
+  outline: none;
+  font-size: 13px;
+  color: #000;
+  resize: none;
+  overflow: hidden;
+  position: absolute;
+  top: 51px;
+  left: -1px;
+  text-align: center;
+  ${robotoRegular()};
 `;
