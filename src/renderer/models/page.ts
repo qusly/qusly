@@ -86,7 +86,9 @@ export class Page {
   @action
   public unselectFiles() {
     for (const file of this.files) {
-      file.selected = false;
+      if (file.selected) {
+        file.selected = false;
+      }
     }
   }
 

@@ -30,7 +30,6 @@ export const StyledContextMenu = styled.div`
   position: fixed;
   z-index: 1000;
   padding: 8px 0px;
-  transition: 0.15s opacity;
   box-shadow: ${shadows(4)};
 
   ${({ visible, pos }: { visible: boolean; pos: ContextMenuPos }) => css`
@@ -38,6 +37,7 @@ export const StyledContextMenu = styled.div`
     opacity: ${visible ? 1 : 0};
     top: ${pos.top}px;
     left: ${pos.left}px;
+    transition: ${visible ? '0.15s opacity' : 'unset'};
   `}
 `;
 
