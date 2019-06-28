@@ -1,3 +1,5 @@
+import { ipcRenderer, IpcMessageEvent } from 'electron';
+
 import { AddTabStore } from './add-tab';
 import { TabsStore } from './tabs';
 import { FaviconsStore } from './favicons';
@@ -21,6 +23,22 @@ export class Store {
 
   @observable
   public fileMenu = new ContextMenuHandler();
+
+  @observable
+  public updateInfo = {
+    available: false,
+    version: '',
+  };
+
+  constructor() {
+    ipcRenderer.on(
+      'update-available',
+      (e: IpcMessageEvent, version: string) => {
+        this.updateInfo.version = version;
+        this.updateInfo.available = true;
+      },
+    );
+  }
 }
 
 export default new Store();

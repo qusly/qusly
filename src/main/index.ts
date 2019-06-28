@@ -5,6 +5,7 @@ import { getExtIcon } from 'electron-ext-icon';
 import { getMainMenu } from './menus/main';
 import { getPath } from '~/renderer/utils/path';
 import { existsSync, readFileSync, writeFileSync } from 'fs';
+import { runAutoUpdaterService } from './services/auto-updater';
 
 const gotTheLock = app.requestSingleInstanceLock();
 
@@ -108,6 +109,8 @@ const createWindow = () => {
   });
 
   window.webContents.addListener('will-navigate', e => e.preventDefault());
+
+  runAutoUpdaterService(window);
 
   return window;
 };
