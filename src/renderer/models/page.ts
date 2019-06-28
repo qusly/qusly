@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { observable, action } from 'mobx';
 
 import store from '../store';
@@ -29,6 +30,8 @@ export class Page {
   @observable
   public pathInputVisible = false;
 
+  public fileNameInput = React.createRef<HTMLTextAreaElement>();
+
   constructor(public session: Session) { }
 
   public async load(path?: string) {
@@ -49,8 +52,7 @@ export class Page {
     );
 
     if (error) console.error(this.location.path, error);
-
-    files && (await store.favicons.load(files));
+    if (files) await store.favicons.load(files);
 
     this.files = sortFiles(files);
     this.loading = false;
@@ -87,16 +89,22 @@ export class Page {
     }
   }
 
-  public async rename(newName: string) {
-    this.focusedFile.renaming = false;
+  public async rename(oldName: string, newName: string) {
+    const file = this.focusedFile;
 
-    if (!this.files.find(e => e.name === newName)) {
-      this.focusedFile.name = newName;
+    file.renaming = false;
+    newName = newName.trim();
+
+    if (newName.length && !this.files.find(e => e.name.toLowerCase() === newName.toLowerCase())) {
+      file.name = newName;
 
       const path = this.location.path;
-      const { error } = await this.session.client.move(`${path}/${name}`, `${path}/${newName}`);
+      const { error } = await this.session.client.move(`${path}/${oldName}`, `${path}/${newName}`);
 
-      if (error) console.error(error);
+      if (error) {
+        file.name = oldName;
+        console.error(error);
+      }
     }
   }
 }

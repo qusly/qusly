@@ -47,6 +47,8 @@ const onClick = (file: File) => (e: React.MouseEvent) => {
 };
 
 const onContextMenu = (file: File) => (e: React.MouseEvent) => {
+  if (file.renaming) return;
+
   if (!file.selected) {
     focusFile(file);
   }
@@ -54,14 +56,20 @@ const onContextMenu = (file: File) => (e: React.MouseEvent) => {
   store.fileMenu.show(e);
 };
 
-const onKey = (e: React.KeyboardEvent) => {
-  const target = e.target as HTMLTextAreaElement;
+const rename = () => {
+  const page = store.pages.current;
+  const input = page.fileNameInput.current;
+  page.rename(page.focusedFile.name, input.value);
+};
 
+const onInputKey = (e: React.KeyboardEvent) => {
   if (e.key === 'Enter') {
     e.stopPropagation();
     e.preventDefault();
-    store.pages.current.rename(target.value.trim());
+    rename();
   }
+
+  const target = e.target as HTMLTextAreaElement;
 
   target.style.height = '0px';
 
@@ -72,10 +80,6 @@ const onKey = (e: React.KeyboardEvent) => {
 
 const onInputClick = (e: React.MouseEvent) => {
   e.stopPropagation();
-};
-
-const onInputBlur = (e: any) => {
-  store.pages.current.rename(e.target.value.trim());
 };
 
 export default observer(({ data }: { data: File }) => {
@@ -93,12 +97,13 @@ export default observer(({ data }: { data: File }) => {
       {!renaming && <Label>{name}</Label>}
       {renaming && (
         <Input
-          onKeyDown={onKey}
+          ref={store.pages.current.fileNameInput}
+          onKeyDown={onInputKey}
           onMouseDown={onInputClick}
           onDoubleClick={onInputClick}
           defaultValue={name}
           autoFocus
-          onBlur={onInputBlur}
+          onBlur={rename}
         />
       )}
     </StyledFile>
