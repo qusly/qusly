@@ -4,7 +4,7 @@ import { IFileType } from 'qusly-core';
 
 import store from '~/renderer/store';
 import { File } from '~/renderer/models';
-import { resizeInput } from '~/renderer/utils';
+import { resizeTextarea } from '~/renderer/utils';
 import { StyledFile, Icon, Label, Input } from './styles';
 
 const onDoubleClick = (type: IFileType, name: string) => () => {
@@ -70,7 +70,7 @@ const onInputKey = (e: React.KeyboardEvent) => {
     rename();
   }
 
-  resizeInput(e.target as HTMLTextAreaElement);
+  resizeTextarea(e.target as HTMLTextAreaElement);
 };
 
 const onInputClick = (e: React.MouseEvent) => {
@@ -96,7 +96,7 @@ export default observer(({ data }: { data: File }) => {
           onKeyDown={onInputKey}
           onMouseDown={onInputClick}
           onDoubleClick={onInputClick}
-          defaultValue={name}
+          onBlur={rename}
           autoFocus
         />
       )}

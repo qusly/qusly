@@ -99,12 +99,12 @@ export class Page {
       file.name = newName;
 
       const path = this.location.path;
-      /* const { error } = await this.session.client.move(`${path}/${oldName}`, `${path}/${newName}`);
- 
-       if (error) {
-         file.name = oldName;
-         console.error(error);
-       }*/
+      const { error } = await this.session.client.move(`${path}/${oldName}`, `${path}/${newName}`);
+
+      if (error) {
+        file.name = oldName;
+        console.error(error);
+      }
     }
   }
 }

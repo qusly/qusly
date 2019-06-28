@@ -1,4 +1,4 @@
-export const resizeInput = (el: HTMLTextAreaElement) => {
+export const resizeTextarea = (el: HTMLTextAreaElement) => {
   el.style.padding = '';
   el.style.height = '0px';
 
