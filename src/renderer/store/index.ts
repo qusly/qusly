@@ -21,8 +21,8 @@ export class Store {
   public sites = new SitesStore();
   public overlay = new OverlayStore();
 
-  @observable
   public fileMenu = new ContextMenuHandler();
+  public pageMenu = new ContextMenuHandler();
 
   @observable
   public updateInfo = {

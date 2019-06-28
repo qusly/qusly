@@ -48,6 +48,8 @@ const onClick = (file: File) => (e: React.MouseEvent) => {
 };
 
 const onContextMenu = (file: File) => (e: React.MouseEvent) => {
+  e.stopPropagation();
+
   if (file.renaming) return;
 
   if (!file.selected) {

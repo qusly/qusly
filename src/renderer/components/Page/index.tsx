@@ -11,7 +11,7 @@ export default observer(() => {
   const page = store.pages.current;
 
   return (
-    <StyledPage>
+    <StyledPage onContextMenu={store.pageMenu.show}>
       {session && session.connected && <FileView />}
       <PreloaderContainer visible={page && page.loading}>
         <Preloader />
