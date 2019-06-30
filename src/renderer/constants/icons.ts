@@ -18,6 +18,7 @@ import visible from '~/renderer/resources/icons/visible.svg';
 import invisible from '~/renderer/resources/icons/invisible.svg';
 import sitesManager from '~/renderer/resources/icons/sites-manager.svg';
 import download from '~/renderer/resources/icons/download.svg';
+import transfer from '~/renderer/resources/icons/transfer.svg';
 
 export const icons = {
   windowsMaximize,
@@ -40,4 +41,5 @@ export const icons = {
   invisible,
   sitesManager,
   download,
+  transfer,
 };
