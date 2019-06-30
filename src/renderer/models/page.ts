@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { observable, action } from 'mobx';
 import { extname } from 'path';
+import { IRes } from 'qusly-core';
 
 import store from '../store';
 import { Session } from './session';
@@ -92,8 +93,9 @@ export class Page {
     }
   }
 
-  public async rename(oldName: string, newName: string) {
+  public async rename(newName: string) {
     const file = this.focusedFile;
+    const oldName = file.name;
 
     file.renaming = false;
     newName = newName.trim();
@@ -112,5 +114,51 @@ export class Page {
         console.error(error);
       }
     }
+  }
+
+  public async createBlank(type: 'folder' | 'file') {
+    const name = this.getUniqueName(`new ${type}`);
+    const path = `${this.location.path}/${name}`;
+    let res: IRes;
+
+    if (type === 'folder') {
+      res = await this.session.client.mkdir(path);
+    } else {
+      res = await this.session.client.touch(path);
+    }
+
+    if (res.error) return console.error(name, type, path, res.error);
+
+    await this.fetchFiles();
+
+    const file = this.files.find(item => item.name === name);
+
+    file.selected = true;
+    this.focusedFile = file;
+  }
+
+  public getUniqueName(str: string) {
+    let exists = false;
+    let index = 0;
+
+    for (let i = this.files.length - 1; i > 0; i--) {
+      const name = this.files[i].name.toLowerCase();
+
+      if (name.startsWith(str)) {
+        exists = true;
+
+        const matches = name.match(/\(([^)]+)\)/);
+
+        if (matches != null) {
+          const fileIndex = parseInt(matches[1], 10);
+
+          if (fileIndex > index) {
+            index = fileIndex;
+          }
+        }
+      }
+    }
+
+    return exists ? `${str} (${index + 1})` : str;
   }
 }

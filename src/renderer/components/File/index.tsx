@@ -62,7 +62,7 @@ const onContextMenu = (file: File) => (e: React.MouseEvent) => {
 const rename = () => {
   const page = store.pages.current;
   const input = page.fileNameInput.current;
-  page.rename(page.focusedFile.name, input.value);
+  page.rename(input.value);
 };
 
 const onInputKey = (e: React.KeyboardEvent) => {
