@@ -23,6 +23,11 @@ const onItemMouseDown = (e: React.MouseEvent) => {
   e.stopPropagation();
 };
 
+const onItemClick = (onClick: Function) => (e: React.MouseEvent) => {
+  store.contextMenu.hide();
+  if (onClick) onClick(e);
+};
+
 export const ContextMenuItem = ({
   onClick,
   disabled,
@@ -34,7 +39,7 @@ export const ContextMenuItem = ({
 }) => {
   return (
     <StyledContextMenuItem
-      onClick={onClick}
+      onClick={onItemClick(onClick)}
       onMouseDown={onItemMouseDown}
       disabled={disabled}
     >

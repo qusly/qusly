@@ -31,30 +31,25 @@ export class Page {
 
   constructor(public session: Session) { }
 
+  public get title() {
+    return `${this.session.site.title} - ${this.location.path}`;
+  }
+
+  public get selectedFiles() {
+    return this.files.filter(e => e.selected);
+  }
+
   public async load(path?: string) {
     if (path == null) {
       const res = await this.session.client.pwd();
-      if (res.error) console.error(res.error);
       path = res.path;
+
+      if (res.error) {
+        console.error(res.error);
+      }
     }
 
     this.location.path = path;
-  }
-
-  public async fetchFiles() {
-    this.loading = true;
-
-    const { files, error } = await this.session.client.readDir(
-      this.location.path,
-    );
-
-    if (error) console.error(this.location.path, error);
-    if (files) await store.favicons.load(files);
-
-    this.files = sortFiles(files);
-    this.loading = false;
-
-    store.tabs.getTabById(this.tabId).title = this.title;
   }
 
   public close() {
@@ -71,12 +66,11 @@ export class Page {
     }
   }
 
-  public get title() {
-    return `${this.session.site.title} - ${this.location.path}`;
-  }
-
-  public get selectedFiles() {
-    return this.files.filter(e => e.selected);
+  @action
+  public focusFile(file: File) {
+    this.unselectFiles();
+    this.focusedFile = file;
+    file.selected = true;
   }
 
   @action
@@ -86,6 +80,21 @@ export class Page {
         file.selected = false;
       }
     }
+  }
+
+  public async fetchFiles() {
+    this.loading = true;
+
+    const path = this.location.path;
+    const { files, error } = await this.session.client.readDir(path);
+
+    if (error) console.error(path, error);
+    if (files) await store.favicons.load(files);
+
+    this.files = sortFiles(files);
+    this.loading = false;
+
+    store.tabs.getTabById(this.tabId).title = this.title;
   }
 
   public async rename(file: File, newName: string) {
@@ -126,7 +135,6 @@ export class Page {
     if (res.error) return console.error(name, type, path, res.error);
 
     await this.fetchFiles();
-
     const file = this.files.find(item => item.name === name);
 
     file.selected = true;

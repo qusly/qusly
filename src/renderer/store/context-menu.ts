@@ -63,12 +63,10 @@ export class ContextMenuStore {
 
   public addListener() {
     this.removeListener();
-    window.addEventListener('click', this.onWindowClick);
     window.addEventListener('mousedown', this.onWindowClick);
   }
 
   public removeListener() {
-    window.removeEventListener('click', this.onWindowClick);
     window.removeEventListener('mousedown', this.onWindowClick);
   }
 
