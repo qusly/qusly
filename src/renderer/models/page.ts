@@ -32,7 +32,7 @@ export class Page {
   @observable
   public pathInputVisible = false;
 
-  public fileNameInput = React.createRef<HTMLTextAreaElement>();
+  public fileNameInput: HTMLTextAreaElement;
 
   constructor(public session: Session) { }
 

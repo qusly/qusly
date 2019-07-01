@@ -27,13 +27,12 @@ const onRename = () => {
 
   requestAnimationFrame(() => {
     const { name } = page.focusedFile;
-    const input = page.fileNameInput.current;
     const endIndex = name.lastIndexOf('.');
 
-    input.value = name;
-    input.setSelectionRange(0, endIndex === -1 ? name.length : endIndex);
+    page.fileNameInput.value = name;
+    page.fileNameInput.setSelectionRange(0, endIndex === -1 ? name.length : endIndex);
 
-    resizeTextarea(input);
+    resizeTextarea(page.fileNameInput);
   });
 };
 

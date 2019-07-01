@@ -61,8 +61,7 @@ const onContextMenu = (file: File) => (e: React.MouseEvent) => {
 
 const rename = () => {
   const page = store.pages.current;
-  const input = page.fileNameInput.current;
-  page.rename(input.value);
+  page.rename(page.fileNameInput.value);
 };
 
 const onInputKey = (e: React.KeyboardEvent) => {
@@ -94,7 +93,7 @@ export default observer(({ data }: { data: File }) => {
       {!renaming && <Label>{name}</Label>}
       {renaming && (
         <Input
-          ref={store.pages.current.fileNameInput}
+          ref={r => (store.pages.current.fileNameInput = r)}
           onKeyDown={onInputKey}
           onMouseDown={onInputClick}
           onDoubleClick={onInputClick}

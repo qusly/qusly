@@ -48,8 +48,7 @@ export const Label = styled.div`
 
 export const Input = styled.textarea`
   width: calc(100% + 2px);
-  min-height: fit-content;
-  padding: 4px 8px;
+  min-height: calc(100% - 50px); 
   border-radius: 4px;
   background-color: #fff;
   border: 1px solid #eee;
