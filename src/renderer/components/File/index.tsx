@@ -43,7 +43,8 @@ export default class File extends React.PureComponent<Props> {
   };
 
   private onDoubleClick = () => {
-    const { type } = this.props.data;
+    const { data } = this.props;
+    const { type, name } = data;
 
     if (type === 'directory') {
       store.pages.current.location.push(name);
