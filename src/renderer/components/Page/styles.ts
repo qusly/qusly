@@ -23,6 +23,7 @@ export const SelectionRegion = styled.div`
   background-color: rgba(98,0,234,0.08);
   border: 1px solid rgba(98,0,234,0.12);
   position: fixed;
+  pointer-events: none;
 
   ${({ visible }: { visible: boolean }) => css`
     display: ${visible ? 'block' : 'none'};

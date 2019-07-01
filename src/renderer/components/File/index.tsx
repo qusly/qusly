@@ -30,7 +30,8 @@ export default class File extends React.PureComponent<Props> {
     }
   }
 
-  private onClick = (e: React.MouseEvent) => {
+  private onMouseDown = (e: React.MouseEvent) => {
+    e.stopPropagation();
     const { data } = this.props;
 
     if (e.ctrlKey) {
@@ -73,7 +74,7 @@ export default class File extends React.PureComponent<Props> {
     resizeTextarea(e.target as HTMLTextAreaElement);
   };
 
-  private onInputClick = (e: React.MouseEvent) => {
+  private stopPropagation = (e: React.MouseEvent) => {
     e.stopPropagation();
   };
 
@@ -100,7 +101,7 @@ export default class File extends React.PureComponent<Props> {
     return (
       <StyledFile
         ref={this.ref}
-        onClick={this.onClick}
+        onMouseDown={this.onMouseDown}
         onDoubleClick={this.onDoubleClick}
         selected={selected}
         onContextMenu={this.onContextMenu}
@@ -110,8 +111,8 @@ export default class File extends React.PureComponent<Props> {
         <Input
           ref={this.inputRef}
           onKeyDown={this.onInputKey}
-          onMouseDown={this.onInputClick}
-          onDoubleClick={this.onInputClick}
+          onMouseDown={this.stopPropagation}
+          onDoubleClick={this.stopPropagation}
           onBlur={this.rename}
           visible={renaming}
         />
