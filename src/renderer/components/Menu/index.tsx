@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { icons } from '~/renderer/constants/icons';
 import Resizable from '../Resizable';
-import MenuButton from '../MenuButton';
+import { MenuButton } from '../MenuButton';
 import MenuPage from '../MenuPage';
 import FileTree from '../FileTree';
 import SitesManager from '../SitesManager';
@@ -13,8 +13,8 @@ const Buttons = () => {
     <ButtonsBar>
       <MenuButton page="sites" icon={icons.sitesManager} />
       <MenuButton page="file-tree" icon={icons.fileTree} />
-      <MenuButton page="transfer" icon={icons.fileOutline} />
       <MenuButton page="search" icon={icons.search} />
+      <MenuButton iconSize={26} page="transfer" icon={icons.transfer} />
     </ButtonsBar>
   );
 };

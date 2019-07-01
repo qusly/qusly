@@ -9,10 +9,28 @@ const onClick = (page: MENU_PAGE) => () => {
   store.menu.selected = page;
 };
 
-export default observer(({ page, icon }: { page: MENU_PAGE; icon: any }) => {
-  return (
-    <StyledButton onClick={onClick(page)}>
-      <Icon icon={icon} selected={store.menu.selected === page} />
-    </StyledButton>
-  );
-});
+export const MenuButton = observer(
+  ({
+    page,
+    icon,
+    iconSize,
+  }: {
+    page: MENU_PAGE;
+    icon: any;
+    iconSize?: number;
+  }) => {
+    return (
+      <StyledButton onClick={onClick(page)}>
+        <Icon
+          size={iconSize}
+          icon={icon}
+          selected={store.menu.selected === page}
+        />
+      </StyledButton>
+    );
+  },
+);
+
+(MenuButton as any).defaultProps = {
+  iconSize: 24,
+};
