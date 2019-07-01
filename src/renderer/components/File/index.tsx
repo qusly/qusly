@@ -79,17 +79,10 @@ export default class File extends React.PureComponent<Props> {
   private selectGroup = () => {
     const { data } = this.props;
     const page = store.pages.current;
-    const fileIndex = page.files.indexOf(data);
-    const focusedFileIndex = page.files.indexOf(page.focusedFile);
+    const file = page.files.indexOf(data);
+    const focusedFile = page.files.indexOf(page.focusedFile);
 
-    const bigger = fileIndex >= focusedFileIndex;
-
-    const start = bigger ? focusedFileIndex : fileIndex;
-    const end = !bigger ? focusedFileIndex : fileIndex;
-
-    for (let i = 0; i < page.files.length; i++) {
-      page.files[i].selected = i >= start && i <= end;
-    }
+    page.selectGroup(file, focusedFile);
   };
 
   private rename = () => {

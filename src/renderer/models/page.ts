@@ -86,6 +86,21 @@ export class Page {
     }
   }
 
+  public selectGroup(start: number, end: number) {
+    const bigger = start >= end;
+    const startIndex = bigger ? end : start;
+    const endIndex = !bigger ? end : start;
+
+    for (let i = 0; i < this.files.length; i++) {
+      const file = this.files[i];
+      const selected = i >= startIndex && i <= endIndex;
+
+      if (file.selected !== selected) {
+        file.selected = selected;
+      }
+    }
+  }
+
   public async fetchFiles() {
     this.loading = true;
 
