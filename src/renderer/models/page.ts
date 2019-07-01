@@ -26,12 +26,15 @@ export class Page {
   @observable
   public focusedFile: File;
 
-  public location = new Location(this);
-
   @observable
   public loading = true;
 
+  @observable
+  public pathInputVisible = false;
+
   public fileNameInput: HTMLTextAreaElement;
+
+  public location = new Location(this);
 
   constructor(public session: Session) { }
 
