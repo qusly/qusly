@@ -1,7 +1,15 @@
 import * as React from 'react';
 import { observable, action } from 'mobx';
 
-import { Pos } from '../models';
+import { Pos, Page } from '../models';
+import store from '.';
+
+type MouseAction = React.MouseEvent | MouseEvent;
+
+interface Size {
+  width?: number;
+  height?: number;
+}
 
 export class SelectionStore {
   @observable
@@ -9,35 +17,48 @@ export class SelectionStore {
 
   public startPoint: Pos = {};
 
+  public pos: Pos = {};
+
+  public size: Size = {};
+
   public ref = React.createRef<HTMLDivElement>();
+
+  public page: Page;
 
   @action
   public show(e: React.MouseEvent) {
+    this.page = store.pages.current;
     this.visible = true;
-    this.startPoint = {
+    this.startPoint = this.pos = {
       top: e.clientY,
       left: e.clientX,
     };
 
-    this.setPos(this.startPoint);
     this.update(e);
     this.addListeners();
   }
 
-  public setPos(pos: Pos) {
-    const { top, left } = pos;
-    if (top) this.ref.current.style.top = `${top}px`;
-    if (left) this.ref.current.style.left = `${left}px`;
+  public update(e: MouseAction) {
+    this.updateSize(e);
+    this.updatePos(e);
   }
 
-  public update(e: React.MouseEvent | MouseEvent) {
+  public updatePos(e: MouseAction) {
+    const { width, height } = this.size;
+    const top = e.clientY < this.startPoint.top ? (this.startPoint.top - height) : this.pos.top;
+    const left = e.clientX < this.startPoint.left ? (this.startPoint.left - width) : this.pos.left;
+
+    this.pos = ({ top, left });
+
+    this.ref.current.style.top = `${top}px`;
+    this.ref.current.style.left = `${left}px`;
+  }
+
+  public updateSize(e: MouseAction) {
     const width = Math.abs(e.clientX - this.startPoint.left);
     const height = Math.abs(e.clientY - this.startPoint.top);
 
-    this.setPos({
-      top: e.clientY < this.startPoint.top && (this.startPoint.top - height),
-      left: e.clientX < this.startPoint.left && (this.startPoint.left - width),
-    })
+    this.size = { width, height };
 
     this.ref.current.style.width = `${width}px`;
     this.ref.current.style.height = `${height}px`;
