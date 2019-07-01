@@ -15,12 +15,21 @@ const onMouseDown = (e: React.MouseEvent) => {
   store.selection.show(e);
 };
 
+const onClick = (e: React.MouseEvent) => {
+  if (e.shiftKey || e.ctrlKey) return;
+  store.pages.current.unselectFiles();
+};
+
 export default observer(() => {
   const session = store.sessions.current;
   const page = store.pages.current;
 
   return (
-    <StyledPage onContextMenu={onContextMenu} onMouseDown={onMouseDown}>
+    <StyledPage
+      onContextMenu={onContextMenu}
+      onMouseDown={onMouseDown}
+      onClick={onClick}
+    >
       {session && session.connected && <FileView />}
       <PreloaderContainer visible={page && page.loading}>
         <Preloader />

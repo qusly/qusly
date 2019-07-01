@@ -105,6 +105,7 @@ export default class File extends React.PureComponent<Props> {
         onDoubleClick={this.onDoubleClick}
         selected={selected}
         onContextMenu={this.onContextMenu}
+        onClick={this.stopPropagation}
       >
         <Icon icon={icon} style={{ opacity }} />
         {!renaming && <Label>{name}</Label>}
