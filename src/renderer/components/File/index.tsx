@@ -9,9 +9,7 @@ import { StyledFile, Icon, Label, Input } from './styles';
 
 const onDoubleClick = (type: IFileType, name: string) => () => {
   if (type !== 'directory') return;
-
-  const page = store.pages.current;
-  page.location.push(name);
+  store.pages.current.location.push(name);
 };
 
 const selectGroup = (file: File) => {
@@ -51,17 +49,16 @@ const onContextMenu = (file: File) => (e: React.MouseEvent) => {
   e.stopPropagation();
 
   if (file.renaming) return;
-
-  if (!file.selected) {
-    focusFile(file);
-  }
+  if (!file.selected) focusFile(file);
 
   store.contextMenu.show('file', e);
 };
 
 const rename = () => {
   const page = store.pages.current;
-  page.rename(page.fileNameInput.value);
+  const file = page.focusedFile;
+
+  page.rename(file, file.nameInput.value);
 };
 
 const onInputKey = (e: React.KeyboardEvent) => {
@@ -91,16 +88,14 @@ export default observer(({ data }: { data: File }) => {
     >
       <Icon icon={icon} style={{ opacity }} />
       {!renaming && <Label>{name}</Label>}
-      {renaming && (
-        <Input
-          ref={r => (store.pages.current.fileNameInput = r)}
-          onKeyDown={onInputKey}
-          onMouseDown={onInputClick}
-          onDoubleClick={onInputClick}
-          onBlur={rename}
-          autoFocus
-        />
-      )}
+      <Input
+        ref={r => (data.nameInput = r)}
+        onKeyDown={onInputKey}
+        onMouseDown={onInputClick}
+        onDoubleClick={onInputClick}
+        onBlur={rename}
+        style={{ display: renaming ? 'block' : 'none' }}
+      />
     </StyledFile>
   );
 });

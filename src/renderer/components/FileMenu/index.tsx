@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 
 import { ContextMenu, ContextMenuItem } from '../ContextMenu';
 import store from '~/renderer/store';
-import { resizeTextarea } from '~/renderer/utils';
+import { resizeTextarea, selectFileName } from '~/renderer/utils';
 
 const onOpen = () => {
   const page = store.pages.current;
@@ -23,16 +23,16 @@ const openInNewTab = () => {
 
 const onRename = () => {
   const page = store.pages.current;
-  page.focusedFile.renaming = true;
+  const file = page.focusedFile;
+
+  file.renaming = true;
+  file.nameInput.value = file.name;
+
+  selectFileName(file.nameInput);
+  resizeTextarea(page.focusedFile.nameInput);
 
   requestAnimationFrame(() => {
-    const { name } = page.focusedFile;
-    const endIndex = name.lastIndexOf('.');
-
-    page.fileNameInput.value = name;
-    page.fileNameInput.setSelectionRange(0, endIndex === -1 ? name.length : endIndex);
-
-    resizeTextarea(page.fileNameInput);
+    file.nameInput.focus();
   });
 };
 

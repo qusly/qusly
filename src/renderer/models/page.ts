@@ -29,11 +29,6 @@ export class Page {
   @observable
   public loading = true;
 
-  @observable
-  public pathInputVisible = false;
-
-  public fileNameInput: HTMLTextAreaElement;
-
   constructor(public session: Session) { }
 
   public async load(path?: string) {
@@ -93,8 +88,7 @@ export class Page {
     }
   }
 
-  public async rename(newName: string) {
-    const file = this.focusedFile;
+  public async rename(file: File, newName: string) {
     const oldName = file.name;
 
     file.renaming = false;
