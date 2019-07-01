@@ -1,12 +1,9 @@
 import * as React from 'react';
 import { observable, action } from 'mobx';
 
-export type ContextMenuRef = React.RefObject<HTMLDivElement>;
+import { Pos } from '../models';
 
-export interface ContextMenuPos {
-  top?: number;
-  left?: number;
-}
+export type ContextMenuRef = React.RefObject<HTMLDivElement>;
 
 export type ContextMenuContent = 'file' | 'page';
 
@@ -15,7 +12,7 @@ export class ContextMenuStore {
   public content: ContextMenuContent;
 
   @observable
-  public pos: ContextMenuPos = {};
+  public pos: Pos = { };
 
   public refs = {
     file: React.createRef<HTMLDivElement>(),
@@ -35,7 +32,7 @@ export class ContextMenuStore {
     this.content = null;
   }
 
-  public calcPos(x: number, y: number): ContextMenuPos {
+  public calcPos(x: number, y: number): Pos {
     const screenWidth = document.body.clientWidth;
     const screenHeight = document.body.clientHeight;
 

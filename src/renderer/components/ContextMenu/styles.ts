@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { shadows, transparency } from 'wexond-ui';
 
-import { ContextMenuPos } from '~/renderer/store/context-menu';
+import { Pos } from '~/renderer/models';
 
 export const StyledContextMenu = styled.div`
   width: 244px;
@@ -12,7 +12,7 @@ export const StyledContextMenu = styled.div`
   padding: 8px 0px;
   box-shadow: ${shadows(4)};
 
-  ${({ visible, pos }: { visible: boolean; pos: ContextMenuPos }) => css`
+  ${({ visible, pos }: { visible: boolean; pos: Pos }) => css`
     pointer-events: ${visible ? 'auto' : 'none'};
     opacity: ${visible ? 1 : 0};
     top: ${pos.top}px;

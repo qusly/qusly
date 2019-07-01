@@ -6,3 +6,4 @@ export * from './tree-item';
 export * from './site';
 export * from './form';
 export * from './file';
+export * from './pos';
