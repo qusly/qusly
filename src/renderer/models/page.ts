@@ -5,7 +5,7 @@ import { IRes } from 'qusly-core';
 
 import store from '../store';
 import { Session } from './session';
-import { sortFiles } from '../utils';
+import { sortFiles, genFileName } from '../utils';
 import { Location } from './location';
 import { File } from '../models';
 
@@ -100,8 +100,10 @@ export class Page {
 
       await store.favicons.loadExt(file.ext);
 
-      const path = this.location.path;
-      const { error } = await this.session.client.move(`${path}/${oldName}`, `${path}/${newName}`);
+      const oldPath = this.location.relative(oldName);
+      const newPath = this.location.relative(newName);
+
+      const { error } = await this.session.client.move(oldPath, newPath);
 
       if (error) {
         file.name = oldName;
@@ -111,8 +113,8 @@ export class Page {
   }
 
   public async createBlank(type: 'folder' | 'file') {
-    const name = this.getUniqueName(`new ${type}`);
-    const path = `${this.location.path}/${name}`;
+    const name = genFileName(this.files, `new ${type}`);
+    const path = this.location.relative(name);
     let res: IRes;
 
     if (type === 'folder') {
@@ -129,30 +131,5 @@ export class Page {
 
     file.selected = true;
     this.focusedFile = file;
-  }
-
-  public getUniqueName(str: string) {
-    let exists = false;
-    let index = 0;
-
-    for (let i = this.files.length - 1; i > 0; i--) {
-      const name = this.files[i].name.toLowerCase();
-
-      if (name.startsWith(str)) {
-        exists = true;
-
-        const matches = name.match(/\(([^)]+)\)/);
-
-        if (matches != null) {
-          const fileIndex = parseInt(matches[1], 10);
-
-          if (fileIndex > index) {
-            index = fileIndex;
-          }
-        }
-      }
-    }
-
-    return exists ? `${str} (${index + 1})` : str;
   }
 }

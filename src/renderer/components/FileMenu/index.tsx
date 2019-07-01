@@ -15,7 +15,7 @@ const openInNewTab = () => {
 
   for (const file of page.selectedFiles) {
     store.tabs.addTab(page.session.site, {
-      path: `${page.location.path}/${file.name}`,
+      path: page.location.relative(file.name),
       active: true,
     });
   }

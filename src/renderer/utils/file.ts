@@ -23,3 +23,28 @@ export const sortFiles = (files: File[]): File[] => {
     return 0;
   });
 }
+
+export const genFileName = (files: File[], start: string) => {
+  let exists = false;
+  let index = 0;
+
+  for (let i = files.length - 1; i > 0; i--) {
+    const name = files[i].name.toLowerCase();
+
+    if (name.startsWith(start)) {
+      exists = true;
+
+      const matches = name.match(/\(([^)]+)\)/);
+
+      if (matches != null) {
+        const fileIndex = parseInt(matches[1], 10);
+
+        if (fileIndex > index) {
+          index = fileIndex;
+        }
+      }
+    }
+  }
+
+  return exists ? `${start} (${index + 1})` : start;
+};

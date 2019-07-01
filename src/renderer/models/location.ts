@@ -53,6 +53,10 @@ export class Location {
     this.page.fetchFiles();
   }
 
+  public relative(...items: string[]) {
+    return [...this.pathItems, ...items].join('/');
+  }
+
   public get pathItems() {
     return this.history.slice(0, this.pos + 1);
   }
