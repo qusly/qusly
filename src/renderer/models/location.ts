@@ -26,11 +26,11 @@ export class Location {
   }
 
   public get canGoBack() {
-    return this.pos > 0;
+    return !this.page.loading && this.pos > 0;
   }
 
   public get canGoForward() {
-    return this.pos + 1 < this.history.length;
+    return !this.page.loading && this.pos + 1 < this.history.length;
   }
 
   @action

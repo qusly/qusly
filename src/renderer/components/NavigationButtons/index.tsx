@@ -21,7 +21,8 @@ const onRefresh = () => {
 };
 
 export default observer(() => {
-  const location = store.pages.current.location;
+  const page = store.pages.current;
+  const location = page.location;
 
   return (
     <StyledContainer>
@@ -41,7 +42,7 @@ export default observer(() => {
         size={20}
         icon={icons.refresh}
         onClick={onRefresh}
-        disabled={!store.sessions.current.connected}
+        disabled={page.loading || !page.session.connected}
       />
     </StyledContainer>
   );
