@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { observable, action } from 'mobx';
 import { extname } from 'path';
 import { IRes } from 'qusly-core';
@@ -8,6 +7,7 @@ import { Session } from './session';
 import { sortFiles, genFileName } from '../utils';
 import { Location } from './location';
 import { File } from '../models';
+import FileComponent from '../components/File';
 
 let id = 0;
 
@@ -21,6 +21,8 @@ export class Page {
   @observable
   public files: File[] = [];
 
+  public filesComponents: FileComponent[] = [];
+
   @observable
   public focusedFile: File;
 
@@ -28,6 +30,8 @@ export class Page {
 
   @observable
   public loading = true;
+
+  public fileNameInput: HTMLTextAreaElement;
 
   constructor(public session: Session) { }
 

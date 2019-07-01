@@ -24,15 +24,19 @@ const openInNewTab = () => {
 const onRename = () => {
   const page = store.pages.current;
   const file = page.focusedFile;
+  const inputRef = page.filesComponents.find(e => e.props.data === file)
+    .inputRef;
+
+  page.fileNameInput = inputRef.current;
+  page.fileNameInput.value = file.name;
 
   file.renaming = true;
-  file.nameInput.value = file.name;
 
-  selectFileName(file.nameInput);
-  resizeTextarea(page.focusedFile.nameInput);
+  selectFileName(page.fileNameInput);
+  resizeTextarea(page.fileNameInput);
 
   requestAnimationFrame(() => {
-    file.nameInput.focus();
+    page.fileNameInput.focus();
   });
 };
 

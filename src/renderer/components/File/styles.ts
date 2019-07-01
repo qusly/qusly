@@ -63,4 +63,8 @@ export const Input = styled.textarea`
   left: -1px;
   text-align: center;
   ${robotoRegular()};
+
+  ${({ visible }: { visible: boolean }) => css`
+    display: ${visible ? 'block' : 'none'};
+  `}
 `;
