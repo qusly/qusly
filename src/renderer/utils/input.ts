@@ -11,7 +11,7 @@ export const resizeTextarea = (el: HTMLTextAreaElement) => {
 export const selectFileName = (el: HTMLTextAreaElement | HTMLInputElement) => {
   const value = el.value;
   const dotIndex = value.lastIndexOf('.');
-  const endIndex = dotIndex === -1 ? value.length : dotIndex
+  const endIndex = dotIndex <= 0 ? value.length : dotIndex
 
   el.setSelectionRange(0, endIndex);
 }
