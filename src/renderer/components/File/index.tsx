@@ -38,7 +38,7 @@ export default class File extends React.PureComponent<Props> {
       data.selected = true;
     } else if (e.shiftKey) {
       this.selectGroup();
-    } else if (!data.selected) {
+    } else {
       store.pages.current.focusFile(data);
     }
 

@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { observable, action } from 'mobx';
+import { observable } from 'mobx';
 
-import { Pos, Page } from '../models';
+import { Pos } from '../models';
 import store from '.';
 
 export type MouseAction = React.MouseEvent | MouseEvent;
@@ -27,8 +27,6 @@ export class SelectionStore {
 
   public lastScrollTop = 0;
 
-  public timer: number;
-
   constructor() {
     this.removeListeners();
   }
@@ -37,12 +35,10 @@ export class SelectionStore {
     return this.ref.current ? this.ref.current.parentElement : null;
   }
 
-  @action
   public show(e: MouseAction) {
     if (e.ctrlKey || e.shiftKey ||
       e.button === 1 || e.button === 2) {
-      this.visible = false;
-      return;
+      return this.hide();
     }
 
     this.visible = true;
@@ -50,6 +46,11 @@ export class SelectionStore {
 
     this.update(e);
     this.addListeners();
+  }
+
+  public hide = () => {
+    this.visible = false;
+    this.removeListeners();
   }
 
   public update(e?: MouseAction) {
@@ -63,9 +64,7 @@ export class SelectionStore {
 
     this.updateSize();
     this.updatePos();
-
-    clearTimeout(this.timer);
-    this.timer = setTimeout(this.selectFiles, 20);
+    this.selectFiles();
   }
 
   public getPos(e: MouseAction): Pos {
@@ -102,8 +101,10 @@ export class SelectionStore {
     const files = store.pages.current.filesComponents;
     const rects = this.ref.current.getBoundingClientRect();
 
+    console.log(files);
+
     for (const file of files) {
-      if (!file.ref) continue;
+      if (!file.ref.current) continue;
 
       const { data } = file.props;
       const fileRects = file.ref.current.getBoundingClientRect();
@@ -130,24 +131,19 @@ export class SelectionStore {
     this.update(e);
   }
 
-  public onWindowMouseClick = () => {
-    this.visible = false;
-    this.removeListeners();
-  }
-
   public onScroll = () => {
     this.update();
   }
 
   public addListeners() {
     window.addEventListener('mousemove', this.onWindowMouseMove);
-    window.addEventListener('click', this.onWindowMouseClick);
+    window.addEventListener('mouseup', this.hide);
     this.parent.addEventListener('scroll', this.onScroll);
   }
 
   public removeListeners() {
     window.removeEventListener('mousemove', this.onWindowMouseMove);
-    window.removeEventListener('click', this.onWindowMouseClick);
+    window.removeEventListener('mouseup', this.hide);
 
     const parent = this.parent;
 

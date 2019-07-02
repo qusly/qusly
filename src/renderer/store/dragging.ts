@@ -14,10 +14,15 @@ export class DraggingStore {
   public startPos: Pos = {};
 
   constructor() {
-    this.removeEventListeners();
+    this.hide();
   }
 
   public show(e: MouseAction) {
+    if (e.ctrlKey || e.shiftKey ||
+      e.button === 1 || e.button === 2) {
+      return this.hide();
+    }
+
     this.startPos = {
       top: e.clientY,
       left: e.clientX,
@@ -25,6 +30,11 @@ export class DraggingStore {
 
     this.addEventListeners();
     this.updatePos(e);
+  }
+
+  public hide = () => {
+    this.visible = false;
+    this.removeEventListeners();
   }
 
   public updatePos(e: MouseAction) {
@@ -49,19 +59,13 @@ export class DraggingStore {
     this.updatePos(e);
   }
 
-  public onWindowMouseUp = (e: MouseEvent) => {
-    e.stopPropagation();
-    this.visible = false;
-    this.removeEventListeners();
-  }
-
   public addEventListeners() {
     window.addEventListener('mousemove', this.onWindowMouseMove);
-    window.addEventListener('mouseup', this.onWindowMouseUp);
+    window.addEventListener('mouseup', this.hide);
   }
 
   public removeEventListeners() {
     window.removeEventListener('mousemove', this.onWindowMouseMove);
-    window.removeEventListener('mouseup', this.onWindowMouseUp);
+    window.removeEventListener('mouseup', this.hide);
   }
 }
