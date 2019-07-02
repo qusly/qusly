@@ -31,8 +31,8 @@ export class SelectionStore {
     this.page = store.pages.current;
     this.visible = true;
     this.startPoint = this.pos = {
-      top: e.clientY,
-      left: e.clientX,
+      top: e.pageY,
+      left: e.pageX,
     };
 
     this.update(e);
@@ -47,18 +47,20 @@ export class SelectionStore {
 
   public updatePos(e: MouseAction) {
     const { width, height } = this.size;
-    const top = e.clientY < this.startPoint.top ? (this.startPoint.top - height) : this.pos.top;
-    const left = e.clientX < this.startPoint.left ? (this.startPoint.left - width) : this.pos.left;
+    const parent = this.ref.current.parentElement;
+
+    const top = e.pageY < this.startPoint.top ? (this.startPoint.top - height) : this.pos.top;
+    const left = e.pageX < this.startPoint.left ? (this.startPoint.left - width) : this.pos.left;
 
     this.pos = ({ top, left });
 
-    this.ref.current.style.top = `${top}px`;
-    this.ref.current.style.left = `${left}px`;
+    this.ref.current.style.top = `${top - parent.offsetTop}px`;
+    this.ref.current.style.left = `${left - parent.offsetLeft}px`;
   }
 
   public updateSize(e: MouseAction) {
-    const width = Math.abs(e.clientX - this.startPoint.left);
-    const height = Math.abs(e.clientY - this.startPoint.top);
+    const width = Math.abs(e.pageX - this.startPoint.left);
+    const height = Math.abs(e.pageY - this.startPoint.top);
 
     this.size = { width, height };
 
@@ -97,7 +99,7 @@ export class SelectionStore {
   }
 
   public onWindowMouseUp = () => {
-    this.visible = false;
+    //this.visible = false;
     this.removeListeners();
   }
 
