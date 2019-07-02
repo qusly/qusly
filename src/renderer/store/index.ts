@@ -47,9 +47,11 @@ export class Store {
     );
 
     window.removeEventListener('click', this.onWindowClick);
+    window.removeEventListener('mousedown', this.onWindowMouseDown);
     window.removeEventListener('mousemove', this.onWindowMouseMove);
 
     window.addEventListener('click', this.onWindowClick);
+    window.addEventListener('mousedown', this.onWindowMouseDown);
     window.addEventListener('mousemove', this.onWindowMouseMove);
   }
 
@@ -60,6 +62,10 @@ export class Store {
 
     this.selection.hide();
     this.dragging.hide()
+  }
+
+  public onWindowMouseDown = () => {
+    this.contextMenu.hide();
   }
 
   public onWindowMouseMove = (e: MouseEvent) => {

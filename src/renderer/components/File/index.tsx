@@ -77,7 +77,7 @@ export default class File extends React.PureComponent<Props> {
       store.pages.current.focusFile(data);
     }
 
-    store.contextMenu.show('file', e);
+    store.contextMenu.show('file');
   };
 
   private onInputKey = (e: React.KeyboardEvent) => {
