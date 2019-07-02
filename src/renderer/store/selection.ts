@@ -28,20 +28,29 @@ export class SelectionStore {
 
   public mousePos: Pos = {};
 
+  public lastScrollTop = 0;
+
   public timer: number;
 
+  constructor() {
+    this.removeListeners();
+  }
+
   public get parent() {
-    return this.ref.current.parentElement;
+    return this.ref.current ? this.ref.current.parentElement : null;
   }
 
   @action
-  public show(e: any) {
+  public show(e: MouseAction) {
+    if (e.ctrlKey || e.shiftKey ||
+      e.button === 1 || e.button === 2) {
+      this.visible = false;
+      return;
+    }
+
     this.page = store.pages.current;
     this.visible = true;
-    this.startPoint = this.pos = {
-      top: e.clientY,
-      left: e.clientX,
-    };
+    this.startPoint = this.pos = this.getPos(e);
 
     this.update(e);
     this.addListeners();
@@ -49,18 +58,25 @@ export class SelectionStore {
 
   public update(e?: MouseAction) {
     if (e) {
-      this.mousePos = {
-        top: e.clientY,
-        left: e.clientX,
-      }
+      this.mousePos = this.getPos(e);
+    } else {
+      const scrollTop = this.parent.scrollTop;
+      this.mousePos.top += scrollTop - this.lastScrollTop;
+      this.lastScrollTop = scrollTop;
     }
 
     this.updateSize();
     this.updatePos();
 
     clearTimeout(this.timer);
-    this.timer = setTimeout(this.selectFiles(), 20);
+    this.timer = setTimeout(this.selectFiles, 20);
+  }
 
+  public getPos(e: MouseAction): Pos {
+    return {
+      top: e.clientY + this.parent.scrollTop,
+      left: e.clientX + this.parent.scrollLeft,
+    }
   }
 
   public updatePos() {
@@ -77,8 +93,8 @@ export class SelectionStore {
   }
 
   public updateSize() {
-    const width = Math.abs(this.mousePos.left - this.startPoint.left) + this.parent.scrollLeft;
-    const height = Math.abs(this.mousePos.top - this.startPoint.top) + this.parent.scrollTop;
+    const width = Math.abs(this.mousePos.left - this.startPoint.left);
+    const height = Math.abs(this.mousePos.top - this.startPoint.top);
 
     this.size = { width, height };
 
@@ -118,7 +134,7 @@ export class SelectionStore {
     this.update(e);
   }
 
-  public onWindowMouseUp = () => {
+  public onWindowMouseClick = () => {
     this.visible = false;
     this.removeListeners();
   }
@@ -129,13 +145,18 @@ export class SelectionStore {
 
   public addListeners() {
     window.addEventListener('mousemove', this.onWindowMouseMove);
-    window.addEventListener('mouseup', this.onWindowMouseUp);
+    window.addEventListener('click', this.onWindowMouseClick);
     this.parent.addEventListener('scroll', this.onScroll);
   }
 
   public removeListeners() {
     window.removeEventListener('mousemove', this.onWindowMouseMove);
-    window.removeEventListener('mouseup', this.onWindowMouseUp);
-    this.parent.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('click', this.onWindowMouseClick);
+
+    const parent = this.parent;
+
+    if (parent) {
+      parent.removeEventListener('scroll', this.onScroll);
+    }
   }
 }

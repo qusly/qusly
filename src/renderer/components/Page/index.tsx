@@ -11,17 +11,12 @@ const onContextMenu = (e: React.MouseEvent) => {
   store.contextMenu.show('page', e);
 };
 
-const onClick = (e: React.MouseEvent) => {
-  if (e.shiftKey || e.ctrlKey) return;
-  store.pages.current.unselectFiles();
-};
-
 export default observer(() => {
   const session = store.sessions.current;
   const page = store.pages.current;
 
   return (
-    <StyledPage onContextMenu={onContextMenu} onClick={onClick}>
+    <StyledPage onContextMenu={onContextMenu}>
       {session && session.connected && <FileView />}
       <PreloaderContainer visible={page && page.loading}>
         <Preloader />
