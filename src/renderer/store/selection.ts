@@ -3,9 +3,8 @@ import { observable, action } from 'mobx';
 
 import { Pos, Page } from '../models';
 import store from '.';
-import File from '../components/File';
 
-type MouseAction = React.MouseEvent | MouseEvent;
+export type MouseAction = React.MouseEvent | MouseEvent;
 
 interface Size {
   width?: number;
@@ -23,8 +22,6 @@ export class SelectionStore {
   public size: Size = {};
 
   public ref = React.createRef<HTMLDivElement>();
-
-  public page: Page;
 
   public mousePos: Pos = {};
 
@@ -48,7 +45,6 @@ export class SelectionStore {
       return;
     }
 
-    this.page = store.pages.current;
     this.visible = true;
     this.startPoint = this.pos = this.getPos(e);
 
@@ -103,7 +99,7 @@ export class SelectionStore {
   }
 
   public selectFiles = () => {
-    const files = this.page.filesComponents;
+    const files = store.pages.current.filesComponents;
     const rects = this.ref.current.getBoundingClientRect();
 
     for (const file of files) {

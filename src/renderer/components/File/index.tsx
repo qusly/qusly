@@ -41,6 +41,8 @@ export default class File extends React.PureComponent<Props> {
     } else if (!data.selected) {
       store.pages.current.focusFile(data);
     }
+
+    store.dragging.show(e);
   };
 
   private onDoubleClick = () => {
@@ -107,6 +109,7 @@ export default class File extends React.PureComponent<Props> {
         selected={selected}
         onContextMenu={this.onContextMenu}
         onClick={this.stopPropagation}
+        disabled={store.dragging.visible && selected}
       >
         <Icon icon={icon} style={{ opacity }} />
         {!renaming && <Label>{name}</Label>}

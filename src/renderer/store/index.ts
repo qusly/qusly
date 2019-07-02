@@ -11,6 +11,7 @@ import { SitesStore } from './sites';
 import { OverlayStore } from './overlay';
 import { ContextMenuStore } from './context-menu';
 import { SelectionStore } from './selection';
+import { DraggingStore } from './dragging';
 
 export class Store {
   public addTab = new AddTabStore();
@@ -23,6 +24,7 @@ export class Store {
   public overlay = new OverlayStore();
   public contextMenu = new ContextMenuStore();
   public selection = new SelectionStore();
+  public dragging = new DraggingStore();
 
   @observable
   public updateInfo = {

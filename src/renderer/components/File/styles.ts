@@ -11,8 +11,9 @@ export const StyledFile = styled.div`
   border-radius: 4px;
   position: relative;
 
-  ${({ selected }: { selected: boolean }) => css`
+  ${({ selected, disabled }: { selected: boolean, disabled: boolean }) => css`
     background-color: ${selected ? 'rgba(98, 0, 234, 0.08)' : 'none'};
+    opacity: ${disabled ? 0.48 : 1};
 
     border: ${selected
       ? '1px solid rgba(98, 0, 234, 0.12)'
