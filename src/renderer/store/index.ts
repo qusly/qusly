@@ -54,9 +54,12 @@ export class Store {
   }
 
   public onWindowClick = () => {
-    if (this.selection.visible) {
-      this.selection.hide();
+    if (this.dragging.active) {
+      this.pages.current.dragFiles();
     }
+
+    this.selection.hide();
+    this.dragging.hide()
   }
 
   public onWindowMouseMove = (e: MouseEvent) => {
@@ -65,8 +68,14 @@ export class Store {
       left: e.pageX,
     }
 
-    if (this.selection.visible) {
-      this.selection.update();
+    this.selection.update();
+    this.dragging.update();
+  }
+
+  public setStartPos(e: React.MouseEvent) {
+    this.startPos = {
+      top: e.pageY,
+      left: e.pageX,
     }
   }
 }

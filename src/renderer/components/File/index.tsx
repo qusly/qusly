@@ -38,6 +38,7 @@ export default class File extends React.PureComponent<Props> {
 
   private onMouseDown = (e: React.MouseEvent) => {
     e.stopPropagation();
+
     const { data } = this.props;
 
     if (e.ctrlKey) {
@@ -48,7 +49,8 @@ export default class File extends React.PureComponent<Props> {
       store.pages.current.focusFile(data);
     }
 
-    // store.dragging.show(e);
+    store.setStartPos(e);
+    store.dragging.show();
   };
 
   private onMouseEnter = () => {

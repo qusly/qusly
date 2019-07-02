@@ -11,8 +11,10 @@ export class SelectionStore {
   public ref = React.createRef<HTMLDivElement>();
 
   public show() {
-    this.visible = true;
-    this.update();
+    if (!this.visible) {
+      this.visible = true;
+      this.update();
+    }
   }
 
   public hide() {
@@ -20,6 +22,8 @@ export class SelectionStore {
   }
 
   public update() {
+    if (!this.visible) return;
+
     const { width, height } = this.size;
     const parentRect = this.parent.getBoundingClientRect();
 
@@ -33,7 +37,7 @@ export class SelectionStore {
       height: `${height}px`,
       top: `${top - parentRect.top}px`,
       left: `${left - parentRect.left}px`,
-    })
+    });
 
     this.selectFiles();
   }
