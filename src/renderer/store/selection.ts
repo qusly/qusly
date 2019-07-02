@@ -75,8 +75,8 @@ export class SelectionStore {
     for (const file of files) {
       const { data } = file.props;
       const fileRects = file.ref.current.getBoundingClientRect();
-      const selected = this.checkBounds(rects, fileRects) &&
-        this.checkBounds(rects, fileRects, false);
+      const selected = this.checkRects(rects, fileRects) &&
+        this.checkRects(rects, fileRects, false);
 
       if (data.selected !== selected) {
         data.selected = selected;
@@ -84,7 +84,7 @@ export class SelectionStore {
     }
   }
 
-  public checkBounds(rects: ClientRect, fileRects: ClientRect, horizontal = true) {
+  public checkRects(rects: ClientRect, fileRects: ClientRect, horizontal = true) {
     const sideA = horizontal ? 'left' : 'top';
     const sideB = horizontal ? 'right' : 'bottom';
 

@@ -5,6 +5,7 @@ export const StyledPage = styled.div`
   width: 100%;
   height: calc(100% - 82px);
   position: relative;
+  overflow: hidden;
 `;
 
 export const PreloaderContainer = styled.div`
