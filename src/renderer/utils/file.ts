@@ -1,4 +1,5 @@
 import { File } from '../models';
+import FileComponent from '../components/File';
 
 export const sortFiles = (files: File[]): File[] => {
   if (files == null) return [];
@@ -59,6 +60,10 @@ const checkRects = (rects: ClientRect, fileRects: ClientRect, horizontal = true)
     fileRects[sideB] > rects[sideA] && fileRects[sideB] < rects[sideB];
 }
 
-export const isFileInArea = (rects: ClientRect, fileRects: ClientRect) => {
+export const isFileInArea = (rects: ClientRect, file: FileComponent) => {
+  const el = file.ref.current;
+  if (!el) return null;
+
+  const fileRects = el.getBoundingClientRect();
   return checkRects(rects, fileRects) && checkRects(rects, fileRects, false);
 }

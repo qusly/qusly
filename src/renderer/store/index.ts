@@ -54,13 +54,19 @@ export class Store {
   }
 
   public onWindowClick = () => {
-
+    if (this.selection.visible) {
+      this.selection.hide();
+    }
   }
 
   public onWindowMouseMove = (e: MouseEvent) => {
     this.mousePos = {
       top: e.pageY,
       left: e.pageX,
+    }
+
+    if (this.selection.visible) {
+      this.selection.update();
     }
   }
 }

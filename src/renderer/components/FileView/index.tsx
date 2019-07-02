@@ -6,7 +6,12 @@ import File from '../File';
 import { StyledFilesView, SelectionRegion } from './styles';
 
 const onMouseDown = (e: React.MouseEvent) => {
-  // store.selection.show(e);
+  store.startPos = {
+    top: e.pageY,
+    left: e.pageX,
+  };
+
+  store.selection.show();
 };
 
 export default observer(() => {
