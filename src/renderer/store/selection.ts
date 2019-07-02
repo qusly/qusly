@@ -3,6 +3,7 @@ import { observable } from 'mobx';
 
 import { Pos } from '../models';
 import store from '.';
+import { isFileInArea } from '../utils';
 
 export type MouseAction = React.MouseEvent | MouseEvent;
 
@@ -106,23 +107,12 @@ export class SelectionStore {
 
       const { data } = file.props;
       const fileRects = file.ref.current.getBoundingClientRect();
-      const selected = this.checkRects(rects, fileRects) &&
-        this.checkRects(rects, fileRects, false);
+      const selected = isFileInArea(rects, fileRects);
 
       if (data.selected !== selected) {
         data.selected = selected;
       }
     }
-  }
-
-  public checkRects(rects: ClientRect, fileRects: ClientRect, horizontal = true) {
-    const sideA = horizontal ? 'left' : 'top';
-    const sideB = horizontal ? 'right' : 'bottom';
-
-    return rects[sideA] < fileRects[sideA] && rects[sideB] > fileRects[sideB] ||
-      rects[sideA] > fileRects[sideA] && rects[sideB] < fileRects[sideB] ||
-      rects[sideA] < fileRects[sideA] && fileRects[sideA] < rects[sideB] ||
-      fileRects[sideB] > rects[sideA] && fileRects[sideB] < rects[sideB];
   }
 
   public onWindowMouseMove = (e: MouseEvent) => {

@@ -48,3 +48,17 @@ export const genFileName = (files: File[], start: string) => {
 
   return exists ? `${start} (${index + 1})` : start;
 };
+
+const checkRects = (rects: ClientRect, fileRects: ClientRect, horizontal = true) => {
+  const sideA = horizontal ? 'left' : 'top';
+  const sideB = horizontal ? 'right' : 'bottom';
+
+  return rects[sideA] < fileRects[sideA] && rects[sideB] > fileRects[sideB] ||
+    rects[sideA] > fileRects[sideA] && rects[sideB] < fileRects[sideB] ||
+    rects[sideA] < fileRects[sideA] && fileRects[sideA] < rects[sideB] ||
+    fileRects[sideB] > rects[sideA] && fileRects[sideB] < rects[sideB];
+}
+
+export const isFileInArea = (rects: ClientRect, fileRects: ClientRect) => {
+  return checkRects(rects, fileRects) && checkRects(rects, fileRects, false);
+}
