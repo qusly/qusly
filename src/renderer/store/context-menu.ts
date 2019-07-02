@@ -1,18 +1,20 @@
 import * as React from 'react';
 import { observable, action } from 'mobx';
 
-import { Pos } from '../models';
+import { Pos, Tab } from '../models';
 
 export type ContextMenuRef = React.RefObject<HTMLDivElement>;
 
-export type ContextMenuContent = 'file' | 'page';
+export type ContextMenuContent = 'file' | 'page' | 'tab' | 'site';
 
 export class ContextMenuStore {
   @observable
   public content: ContextMenuContent;
 
   @observable
-  public pos: Pos = { };
+  public pos: Pos = {};
+
+  public tab: Tab;
 
   public refs = {
     file: React.createRef<HTMLDivElement>(),
@@ -30,7 +32,7 @@ export class ContextMenuStore {
   public hide = () => {
     this.removeListener();
     this.content = null;
-  }
+  };
 
   public calcPos(x: number, y: number): Pos {
     const screenWidth = document.body.clientWidth;
@@ -56,7 +58,7 @@ export class ContextMenuStore {
   public onWindowClick = (e: MouseEvent) => {
     e.stopPropagation();
     this.hide();
-  }
+  };
 
   public addListener() {
     this.removeListener();
