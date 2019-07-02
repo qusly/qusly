@@ -3,6 +3,7 @@ import { observable, action } from 'mobx';
 
 import { Pos, Page } from '../models';
 import store from '.';
+import File from '../components/File';
 
 type MouseAction = React.MouseEvent | MouseEvent;
 
@@ -41,6 +42,7 @@ export class SelectionStore {
   public update(e: MouseAction) {
     this.updateSize(e);
     this.updatePos(e);
+    this.selectFiles();
   }
 
   public updatePos(e: MouseAction) {
@@ -62,6 +64,32 @@ export class SelectionStore {
 
     this.ref.current.style.width = `${width}px`;
     this.ref.current.style.height = `${height}px`;
+  }
+
+  public selectFiles() {
+    const files = this.page.filesComponents;
+    const rects = this.ref.current.getBoundingClientRect();
+
+    for (const file of files) {
+      const { data } = file.props;
+      const fileRects = file.ref.current.getBoundingClientRect();
+      const selected = this.checkBounds(rects, fileRects) &&
+        this.checkBounds(rects, fileRects, false);
+
+      if (data.selected !== selected) {
+        data.selected = selected;
+      }
+    }
+  }
+
+  public checkBounds(rects: ClientRect, fileRects: ClientRect, horizontal = true) {
+    const sideA = horizontal ? 'left' : 'top';
+    const sideB = horizontal ? 'right' : 'bottom';
+
+    return rects[sideA] < fileRects[sideA] && rects[sideB] > fileRects[sideB] ||
+      rects[sideA] > fileRects[sideA] && rects[sideB] < fileRects[sideB] ||
+      rects[sideA] < fileRects[sideA] && fileRects[sideA] < rects[sideB] ||
+      fileRects[sideB] > rects[sideA] && fileRects[sideB] < rects[sideB];
   }
 
   public onWindowMouseMove = (e: MouseEvent) => {
