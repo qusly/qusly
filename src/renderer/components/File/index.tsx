@@ -70,13 +70,10 @@ export default class File extends React.PureComponent<Props> {
     e.stopPropagation();
     const { data } = this.props;
 
-    if (data.renaming) return;
-
-    if (!data.selected) {
+    if (!data.renaming) {
       store.pages.current.focusFile(data);
+      store.contextMenu.show('file');
     }
-
-    store.contextMenu.show('file');
   };
 
   private onInputKey = (e: React.KeyboardEvent) => {
