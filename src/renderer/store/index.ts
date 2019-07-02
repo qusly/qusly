@@ -35,6 +35,8 @@ export class Store {
 
   public mousePos: Pos = {};
 
+  public startPos: Pos = {};
+
   constructor() {
     ipcRenderer.on(
       'update-available',
