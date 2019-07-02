@@ -4,6 +4,7 @@ import { noButtons } from 'wexond-ui';
 export const StyledFilesView = styled.div`
   width: 100%;
   max-height: 100%;
+  overflow-x: hidden;
   overflow-y: auto;
   padding: 8px 24px 24px 24px;
   transition: 0.1s opacity;
