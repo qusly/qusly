@@ -31,11 +31,6 @@ export class DraggingStore {
       left: `${left}px`,
     });
 
-    this.visible = this.distance > 5;
-  }
-
-  public get distance() {
-    const { mousePos, startPos } = store;
-    return Math.sqrt(Math.pow(mousePos.top - startPos.top, 2) + Math.pow(mousePos.left - startPos.left, 2));
+    this.visible = store.cursorDistance > 5;
   }
 }

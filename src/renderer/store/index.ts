@@ -78,6 +78,11 @@ export class Store {
       left: e.pageX,
     }
   }
+
+  public get cursorDistance() {
+    return Math.sqrt(Math.pow(this.mousePos.top - this.startPos.top, 2) +
+      Math.pow(this.mousePos.left - this.startPos.left, 2));
+  }
 }
 
 export default new Store();

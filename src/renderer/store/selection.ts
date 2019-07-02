@@ -40,10 +40,13 @@ export class SelectionStore {
       left: `${left - parentRect.left}px`,
     });
 
+    this.visible = store.cursorDistance > 5;
     this.selectFiles();
   }
 
   public selectFiles = () => {
+    if (!this.visible) return;
+
     const files = store.pages.current.filesComponents;
     const rects = this.ref.current.getBoundingClientRect();
 
