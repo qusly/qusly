@@ -122,6 +122,7 @@ export class Page {
   public async rename(file: File, newName: string) {
     const oldName = file.name;
 
+    this.focusedFile = null;
     file.renaming = false;
     newName = newName.trim();
 

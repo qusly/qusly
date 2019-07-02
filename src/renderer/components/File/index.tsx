@@ -89,8 +89,8 @@ export default class File extends React.PureComponent<Props> {
 
   private rename = () => {
     const page = store.pages.current;
-    const file = page.focusedFile;
-    page.rename(file, this.inputRef.current.value);
+    const { data } = this.props;
+    page.rename(data, this.inputRef.current.value);
   };
 
   render() {

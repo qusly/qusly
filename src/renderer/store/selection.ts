@@ -59,7 +59,8 @@ export class SelectionStore {
     this.updatePos();
 
     clearTimeout(this.timer);
-    setTimeout(this.selectFiles, 100);
+    this.timer = setTimeout(this.selectFiles(), 20);
+
   }
 
   public updatePos() {
