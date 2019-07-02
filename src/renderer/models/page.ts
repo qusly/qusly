@@ -24,13 +24,14 @@ export class Page {
   public filesComponents: FileComponent[] = [];
 
   @observable
-  public focusedFile: File;
-
-  @observable
   public loading = true;
 
   @observable
   public pathInputVisible = false;
+
+  public focusedFile: File;
+
+  public hoveredFile: File;
 
   public fileNameInput: HTMLTextAreaElement;
 
@@ -162,5 +163,21 @@ export class Page {
 
     file.selected = true;
     this.focusedFile = file;
+  }
+
+  public async dragFiles() {
+    this.loading = true;
+    const files = this.selectedFiles;
+
+    if (this.hoveredFile.type === 'directory' && this.focusedFile !== this.hoveredFile) {
+      for (const file of files) {
+        const oldPath = this.location.relative(file.name);
+        const newPath = this.location.relative(this.hoveredFile.name, file.name);
+
+        await this.session.client.move(oldPath, newPath);
+      }
+
+      await this.fetchFiles();
+    }
   }
 }

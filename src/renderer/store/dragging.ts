@@ -59,13 +59,18 @@ export class DraggingStore {
     this.updatePos(e);
   }
 
+  public onWindowClick = () => {
+    this.hide();
+    store.pages.current.dragFiles();
+  }
+
   public addEventListeners() {
     window.addEventListener('mousemove', this.onWindowMouseMove);
-    window.addEventListener('mouseup', this.hide);
+    window.addEventListener('click', this.onWindowClick);
   }
 
   public removeEventListeners() {
     window.removeEventListener('mousemove', this.onWindowMouseMove);
-    window.removeEventListener('mouseup', this.hide);
+    window.removeEventListener('click', this.onWindowClick);
   }
 }

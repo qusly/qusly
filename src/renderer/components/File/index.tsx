@@ -31,6 +31,11 @@ export default class File extends React.PureComponent<Props> {
     }
   }
 
+  private onClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    store.dragging.hide();
+  };
+
   private onMouseDown = (e: React.MouseEvent) => {
     e.stopPropagation();
     const { data } = this.props;
@@ -44,6 +49,11 @@ export default class File extends React.PureComponent<Props> {
     }
 
     store.dragging.show(e);
+  };
+
+  private onMouseEnter = () => {
+    const { data } = this.props;
+    store.pages.current.hoveredFile = data;
   };
 
   private onDoubleClick = () => {
@@ -109,7 +119,8 @@ export default class File extends React.PureComponent<Props> {
         onDoubleClick={this.onDoubleClick}
         selected={selected}
         onContextMenu={this.onContextMenu}
-        onClick={this.stopPropagation}
+        onClick={this.onClick}
+        onMouseEnter={this.onMouseEnter}
         disabled={store.dragging.visible && selected}
       >
         <Icon icon={icon} style={{ opacity }} />

@@ -101,8 +101,6 @@ export class SelectionStore {
     const files = store.pages.current.filesComponents;
     const rects = this.ref.current.getBoundingClientRect();
 
-    console.log(files);
-
     for (const file of files) {
       if (!file.ref.current) continue;
 
