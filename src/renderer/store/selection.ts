@@ -2,27 +2,28 @@ import * as React from 'react';
 import { observable } from 'mobx';
 
 import store from '.';
-import { setStyle, isFileInArea } from '../utils';
+import { setStyle, isElementInArea } from '../utils';
 
 export class SelectionStore {
   @observable
   public visible = false;
 
+  public active = false;
+
   public ref = React.createRef<HTMLDivElement>();
 
   public show() {
-    if (!this.visible) {
-      this.visible = true;
-      this.update();
-    }
+    this.active = true;
+    this.update();
   }
 
   public hide() {
     this.visible = false;
+    this.active = false;
   }
 
   public update() {
-    if (!this.visible) return;
+    if (!this.active) return;
 
     const { width, height } = this.size;
     const parentRect = this.parent.getBoundingClientRect();
@@ -47,11 +48,15 @@ export class SelectionStore {
     const rects = this.ref.current.getBoundingClientRect();
 
     for (const file of files) {
-      const selected = isFileInArea(rects, file);
-      const { data } = file.props;
+      const el = file.ref.current;
 
-      if (selected != null && selected !== data.selected) {
-        data.selected = selected;
+      if (el) {
+        const selected = isElementInArea(rects, el);
+        const { data } = file.props;
+
+        if (selected !== data.selected) {
+          data.selected = selected;
+        }
       }
     }
   }

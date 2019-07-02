@@ -13,7 +13,6 @@ export class DraggingStore {
   public ref = React.createRef<HTMLDivElement>();
 
   public show() {
-    if (this.active) return;
     this.active = true;
     this.update();
   }
