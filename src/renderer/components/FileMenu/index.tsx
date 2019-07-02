@@ -42,7 +42,7 @@ const onRename = () => {
 
 export default observer(() => {
   const page = store.pages.current;
-  if (page == null) return null;
+  if (!page) return null;
 
   const containsFile = page.selectedFiles.find(e => e.type !== 'directory');
   const mutliple = page.selectedFiles.length > 1;

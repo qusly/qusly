@@ -64,7 +64,7 @@ export class Page {
 
     const page = store.pages.list.find(r => r.session === this.session);
 
-    if (page == null) {
+    if (!page) {
       this.session.close();
     } else if (store.tabs.nextTab != null) {
       store.tabs.nextTab.select();

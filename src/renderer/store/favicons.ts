@@ -36,16 +36,18 @@ export class FaviconsStore {
   }
 
   public get(file: File) {
-    const { type, ext } = file;
-
     let icon = icons.file;
     let opacity = transparency.icons.inactive;
 
-    if (type === 'directory') {
-      icon = icons.folder;
-    } else if (ext !== '' && this.favicons[ext] != null) {
-      icon = this.favicons[ext];
-      opacity = 1;
+    if (file) {
+      const { type, ext } = file;
+
+      if (type === 'directory') {
+        icon = icons.folder;
+      } else if (ext !== '' && this.favicons[ext] != null) {
+        icon = this.favicons[ext];
+        opacity = 1;
+      }
     }
 
     return { icon, opacity };

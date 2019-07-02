@@ -28,8 +28,10 @@ export class DraggingStore {
   }
 
   public updatePos(e: MouseAction) {
-    this.ref.current.style.top = `${e.clientY}px`;
-    this.ref.current.style.left = `${e.clientX}px`;
+    if (this.ref.current) {
+      this.ref.current.style.top = `${e.clientY}px`;
+      this.ref.current.style.left = `${e.clientX}px`;
+    }
   }
 
   public calcDistance(e: MouseAction) {
@@ -47,18 +49,19 @@ export class DraggingStore {
     this.updatePos(e);
   }
 
-  public onWindowClick = (e: MouseEvent) => {
+  public onWindowMouseUp = (e: MouseEvent) => {
+    e.stopPropagation();
     this.visible = false;
     this.removeEventListeners();
   }
 
   public addEventListeners() {
     window.addEventListener('mousemove', this.onWindowMouseMove);
-    window.addEventListener('click', this.onWindowClick);
+    window.addEventListener('mouseup', this.onWindowMouseUp);
   }
 
   public removeEventListeners() {
     window.removeEventListener('mousemove', this.onWindowMouseMove);
-    window.removeEventListener('click', this.onWindowClick);
+    window.removeEventListener('mouseup', this.onWindowMouseUp);
   }
 }
