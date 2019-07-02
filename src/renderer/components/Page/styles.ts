@@ -5,7 +5,6 @@ export const StyledPage = styled.div`
   width: 100%;
   height: calc(100% - 82px);
   position: relative;
-  overflow: hidden;
 `;
 
 export const PreloaderContainer = styled.div`
@@ -17,16 +16,5 @@ export const PreloaderContainer = styled.div`
 
   ${({ visible }: { visible: boolean }) => css`
     opacity: ${visible ? 1 : 0};
-  `}
-`;
-
-export const SelectionRegion = styled.div`
-  background-color: rgba(98,0,234,0.08);
-  border: 1px solid rgba(98,0,234,0.12);
-  position: absolute;
-  pointer-events: none;
-
-  ${({ visible }: { visible: boolean }) => css`
-    display: ${visible ? 'block' : 'none'};
   `}
 `;
