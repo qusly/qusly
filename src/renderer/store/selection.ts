@@ -2,7 +2,7 @@ import * as React from 'react';
 import { observable } from 'mobx';
 
 import store from '.';
-import { setStyle, isElementInArea } from '../utils';
+import { setStyle, isElementInArea, cursorDistance } from '../utils';
 
 export class SelectionStore {
   @observable
@@ -53,7 +53,7 @@ export class SelectionStore {
       left: `${left - parentRect.left}px`,
     });
 
-    this.visible = store.cursorDistance > 5;
+    this.visible = cursorDistance(store.startPos, mousePos) > 5;
     this.selectFiles();
   }
 
@@ -82,7 +82,11 @@ export class SelectionStore {
   }
 
   public get mousePos() {
-    return store.relativeMousePos(this.parent);
+    const { top, left } = store.mousePos;
+    return {
+      top: top + this.parent.scrollTop,
+      left: left + this.parent.scrollLeft,
+    }
   }
 
   public get parent() {

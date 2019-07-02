@@ -2,7 +2,7 @@ import * as React from 'react';
 import { observable } from 'mobx';
 
 import store from '.';
-import { setStyle } from '../utils';
+import { setStyle, cursorDistance } from '../utils';
 
 export class DraggingStore {
   @observable
@@ -18,7 +18,8 @@ export class DraggingStore {
       return;
     }
 
-    store.setStartPos(e);
+    store.startPos = store.mousePos;
+
     this.active = true;
     this.update();
   }
@@ -37,6 +38,6 @@ export class DraggingStore {
       left: `${left}px`,
     });
 
-    this.visible = store.cursorDistance > 5;
+    this.visible = cursorDistance(store.startPos, store.mousePos) > 5;
   }
 }

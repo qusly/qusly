@@ -1,3 +1,5 @@
+import { Pos } from "../models";
+
 const checkRects = (rects: ClientRect, fileRects: ClientRect, horizontal = true) => {
   const sideA = horizontal ? 'left' : 'top';
   const sideB = horizontal ? 'right' : 'bottom';
@@ -19,4 +21,9 @@ interface Style {
 
 export const setStyle = (el: HTMLElement, style: Style) => {
   Object.assign(el.style, style);
+}
+
+export const cursorDistance = (first: Pos, second: Pos) => {
+  return Math.sqrt(Math.pow(first.top - second.top, 2) +
+    Math.pow(first.left - second.left, 2));
 }
