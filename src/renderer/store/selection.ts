@@ -18,12 +18,18 @@ export class SelectionStore {
       return;
     }
 
-    store.setStartPos(e);
+    store.startPos = this.mousePos;
+
     this.active = true;
     this.update();
+    this.parent.addEventListener('scroll', this.onScroll);
   }
 
-  public hide() {
+  public hide = () => {
+    if (this.parent) {
+      this.parent.removeEventListener('scroll', this.onScroll);
+    }
+
     this.visible = false;
     this.active = false;
   }
@@ -34,7 +40,8 @@ export class SelectionStore {
     const { width, height } = this.size;
     const parentRect = this.parent.getBoundingClientRect();
 
-    const { mousePos, startPos } = store;
+    const mousePos = this.mousePos;
+    const { startPos } = store;
 
     const top = mousePos.top < startPos.top ? (startPos.top - height) : startPos.top;
     const left = mousePos.left < startPos.left ? (startPos.left - width) : startPos.left;
@@ -70,15 +77,26 @@ export class SelectionStore {
     }
   }
 
+  public onScroll = () => {
+    this.update();
+  }
+
+  public get mousePos() {
+    return store.relativeMousePos(this.parent);
+  }
+
   public get parent() {
     const current = this.ref.current;
     return current && current.parentElement;
   }
 
   public get size() {
-    const { mousePos, startPos } = store;
+    const mousePos = this.mousePos;
+    const { startPos } = store;
+
     const width = Math.abs(mousePos.left - startPos.left);
     const height = Math.abs(mousePos.top - startPos.top);
+
     return { width, height };
   }
 }

@@ -78,10 +78,11 @@ export class Store {
     this.dragging.update();
   }
 
-  public setStartPos(e: React.MouseEvent) {
-    this.startPos = {
-      top: e.pageY,
-      left: e.pageX,
+  public relativeMousePos(parent: HTMLElement) {
+    const { top, left } = this.mousePos;
+    return {
+      top: top + parent.scrollTop,
+      left: left + + parent.scrollLeft,
     }
   }
 
