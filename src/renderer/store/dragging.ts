@@ -12,7 +12,13 @@ export class DraggingStore {
 
   public ref = React.createRef<HTMLDivElement>();
 
-  public show() {
+  public show = (e: React.MouseEvent) => {
+    if (e.button !== 0) {
+      this.hide();
+      return;
+    }
+
+    store.setStartPos(e);
     this.active = true;
     this.update();
   }

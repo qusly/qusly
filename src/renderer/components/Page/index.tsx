@@ -6,14 +6,9 @@ import store from '~/renderer/store';
 import FileView from '../FileView';
 import { StyledPage, PreloaderContainer } from './styles';
 
-const onContextMenu = (e: React.MouseEvent) => {
+const onContextMenu = () => {
   store.pages.current.unselectFiles();
   store.contextMenu.show('page');
-};
-
-const onMouseDown = (e: React.MouseEvent) => {
-  store.setStartPos(e);
-  store.selection.show();
 };
 
 export default observer(() => {
@@ -21,7 +16,10 @@ export default observer(() => {
   const page = store.pages.current;
 
   return (
-    <StyledPage onContextMenu={onContextMenu} onMouseDown={onMouseDown}>
+    <StyledPage
+      onContextMenu={onContextMenu}
+      onMouseDown={store.selection.show}
+    >
       {session && session.connected && <FileView />}
       <PreloaderContainer visible={page && page.loading}>
         <Preloader />

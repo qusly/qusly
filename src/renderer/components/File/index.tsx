@@ -49,8 +49,7 @@ export default class File extends React.PureComponent<Props> {
       store.pages.current.focusFile(data);
     }
 
-    store.setStartPos(e);
-    store.dragging.show();
+    store.dragging.show(e);
   };
 
   private onMouseEnter = () => {
