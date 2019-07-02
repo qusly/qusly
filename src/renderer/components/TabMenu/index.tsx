@@ -6,12 +6,14 @@ import store from '~/renderer/store';
 
 const onDuplicateClick = () => {
   const { tab } = store.contextMenu;
-  store.tabs.addTab(store.sessions.list.find(x => x.id === tab.id).site);
+  store.tabs.addTab(
+    store.pages.list.find(x => x.tabId === tab.id).session.site,
+  );
 };
 
 const onReloadClick = () => {
   const { tab } = store.contextMenu;
-  store.pages.list.find(x => x.id === tab.id).fetchFiles();
+  store.pages.list.find(x => x.tabId === tab.id).fetchFiles();
 };
 
 const onCloseClick = () => {

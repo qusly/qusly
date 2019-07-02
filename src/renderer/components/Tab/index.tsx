@@ -45,6 +45,11 @@ const onMouseLeave = () => {
   store.tabs.hoveredTabId = -1;
 };
 
+const onContextMenu = (tab: Tab) => (e: React.MouseEvent) => {
+  store.contextMenu.tab = tab;
+  store.contextMenu.show('tab', e);
+};
+
 const Content = observer(({ tab }: { tab: Tab }) => {
   return (
     <StyledContent collapsed={tab.isExpanded}>
@@ -98,6 +103,7 @@ export default observer(({ tab }: { tab: Tab }) => {
       onMouseDown={onMouseDown(tab)}
       onMouseEnter={onMouseEnter(tab)}
       onMouseLeave={onMouseLeave}
+      onContextMenu={onContextMenu(tab)}
       ref={tab.ref}
     >
       <TabContainer

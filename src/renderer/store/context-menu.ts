@@ -19,6 +19,7 @@ export class ContextMenuStore {
   public refs = {
     file: React.createRef<HTMLDivElement>(),
     page: React.createRef<HTMLDivElement>(),
+    tab: React.createRef<HTMLDivElement>(),
   };
 
   @action
