@@ -22,10 +22,11 @@ export default class File extends React.PureComponent<Props> {
 
   componentWillUnmount() {
     const page = store.pages.current;
+
     if (page) {
       const index = page.filesComponents.indexOf(this);
       if (index !== -1) {
-        page.filesComponents = page.filesComponents.slice(index, 1);
+        page.filesComponents.splice(index, 1);
       }
     }
   }
