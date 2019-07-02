@@ -12,6 +12,7 @@ import { OverlayStore } from './overlay';
 import { ContextMenuStore } from './context-menu';
 import { SelectionStore } from './selection';
 import { DraggingStore } from './dragging';
+import { Pos } from '../models';
 
 export class Store {
   public addTab = new AddTabStore();
@@ -32,6 +33,8 @@ export class Store {
     version: '',
   };
 
+  public mousePos: Pos = {};
+
   constructor() {
     ipcRenderer.on(
       'update-available',
@@ -40,6 +43,23 @@ export class Store {
         this.updateInfo.available = true;
       },
     );
+
+    window.removeEventListener('click', this.onWindowClick);
+    window.removeEventListener('mousemove', this.onWindowMouseMove);
+
+    window.addEventListener('click', this.onWindowClick);
+    window.addEventListener('mousemove', this.onWindowMouseMove);
+  }
+
+  public onWindowClick = () => {
+
+  }
+
+  public onWindowMouseMove = (e: MouseEvent) => {
+    this.mousePos = {
+      top: e.pageY,
+      left: e.pageX,
+    }
   }
 }
 
