@@ -56,3 +56,8 @@ export const Buttons = styled.div`
     margin-right: 4px;
   }
 `;
+
+export const Bold = styled.span`
+  font-size: 14px;
+  ${robotoMedium()};
+`;
