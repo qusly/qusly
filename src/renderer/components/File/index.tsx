@@ -108,7 +108,7 @@ export default class File extends React.PureComponent<Props> {
 
   render() {
     const { data } = this.props;
-    const { name, selected, renaming } = data;
+    const { name, selected, renaming, cut } = data;
     const { icon, opacity } = store.favicons.get(data);
 
     return (
@@ -121,6 +121,7 @@ export default class File extends React.PureComponent<Props> {
         onClick={this.onClick}
         onMouseEnter={this.onMouseEnter}
         disabled={store.dragging.visible && selected}
+        cut={cut}
       >
         <Icon icon={icon} style={{ opacity }} />
         {!renaming && <Label>{name}</Label>}

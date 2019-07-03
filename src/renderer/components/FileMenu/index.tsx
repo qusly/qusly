@@ -44,6 +44,11 @@ const onDelete = () => {
   store.overlay.content = 'delete';
 };
 
+const onCut = () => {
+  const page = store.pages.current;
+  page.focusedFile.cut = true;
+};
+
 export default observer(() => {
   const page = store.pages.current;
   if (!page) return null;
@@ -75,8 +80,7 @@ export default observer(() => {
           <ContextMenuItem disabled>Add to bookmarks</ContextMenuItem>
         </>
       )}
-      <ContextMenuItem>Cut</ContextMenuItem>
-      <ContextMenuItem>Copy</ContextMenuItem>
+      <ContextMenuItem onClick={onCut}>Cut</ContextMenuItem>
       <ContextMenuItem onClick={onDelete}>Delete</ContextMenuItem>
       {!mutliple && (
         <ContextMenuItem onClick={onRename}>Rename</ContextMenuItem>

@@ -1,6 +1,6 @@
 import { observable, action } from 'mobx';
 import { extname } from 'path';
-import { IRes } from 'qusly-core';
+import { IRes, IFile } from 'qusly-core';
 
 import store from '../store';
 import { Session } from './session';
@@ -36,6 +36,8 @@ export class Page {
   public fileNameInput: HTMLTextAreaElement;
 
   public location = new Location(this);
+
+  public cutFiles: IFile[] = [];
 
   constructor(public session: Session) { }
 

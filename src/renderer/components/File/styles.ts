@@ -3,6 +3,12 @@ import { centerIcon, robotoRegular } from 'wexond-ui';
 
 import { icons } from '~/renderer/constants';
 
+interface Props {
+  selected: boolean;
+  disabled: boolean;
+  cut: boolean;
+}
+
 export const StyledFile = styled.div`
   display: flex;
   align-items: center;
@@ -11,19 +17,20 @@ export const StyledFile = styled.div`
   border-radius: 4px;
   position: relative;
 
-  ${({ selected, disabled }: { selected: boolean, disabled: boolean }) => css`
+  ${({ selected, disabled, cut }: Props) => css`
     background-color: ${selected ? 'rgba(98, 0, 234, 0.08)' : 'none'};
-    opacity: ${disabled ? 0.48 : 1};
-
+    opacity: ${disabled || cut ? 0.48 : 1};
     border: ${selected
       ? '1px solid rgba(98, 0, 234, 0.12)'
       : '1px solid transparent'};
 
-    &:hover {
-      background-color: ${selected
-      ? 'rgba(98, 0, 234, 0.12)'
-      : 'rgba(0, 0, 0, 0.08)'};
-    }
+    ${!disabled && !cut && css`
+      &:hover {
+        background-color: ${selected
+        ? 'rgba(98, 0, 234, 0.12)'
+        : 'rgba(0, 0, 0, 0.08)'};
+      }
+    `}
   `}
 `;
 
