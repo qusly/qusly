@@ -40,6 +40,18 @@ const onRename = () => {
   });
 };
 
+const onDelete = () => {
+  store.overlay.content = 'delete';
+};
+
+const onCut = () => {
+  store.pages.current.cutSelectedFiles();
+};
+
+const onPaste = () => {
+  store.pages.current.pasteFiles();
+};
+
 export default observer(() => {
   const page = store.pages.current;
   if (!page) return null;
@@ -71,9 +83,11 @@ export default observer(() => {
           <ContextMenuItem disabled>Add to bookmarks</ContextMenuItem>
         </>
       )}
-      <ContextMenuItem>Cut</ContextMenuItem>
-      <ContextMenuItem>Copy</ContextMenuItem>
-      <ContextMenuItem>Delete</ContextMenuItem>
+      <ContextMenuItem onClick={onCut}>Cut</ContextMenuItem>
+      {!containsFile && (
+        <ContextMenuItem onClick={onPaste}>Paste</ContextMenuItem>
+      )}
+      <ContextMenuItem onClick={onDelete}>Delete</ContextMenuItem>
       {!mutliple && (
         <ContextMenuItem onClick={onRename}>Rename</ContextMenuItem>
       )}

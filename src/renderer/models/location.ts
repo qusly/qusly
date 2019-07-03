@@ -35,8 +35,10 @@ export class Location {
 
   @action
   public go(index: number) {
-    this.pos = index;
-    this.page.fetchFiles();
+    if (!this.page.loading) {
+      this.pos = index;
+      this.page.fetchFiles();
+    }
   }
 
   @action
@@ -54,7 +56,12 @@ export class Location {
   }
 
   public relative(...items: string[]) {
+    // TODO: Determinate os
     return [...this.pathItems, ...items].join('/');
+  }
+
+  public combine(...items: string[]) {
+    return items.join('/');
   }
 
   public get pathItems() {

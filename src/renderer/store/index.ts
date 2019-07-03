@@ -63,7 +63,7 @@ export class Store {
     }
 
     if (this.dragging.active) {
-      page.dragFiles();
+      page.dropRemoteFiles();
     }
 
     this.selection.hide();

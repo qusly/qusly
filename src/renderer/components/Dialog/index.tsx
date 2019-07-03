@@ -28,6 +28,7 @@ export const Dialog = styled.div`
 
   ${({ visible }: { visible: boolean }) => css`
     pointer-events: ${visible ? 'auto' : 'none'};
+    opacity: ${visible ? 1 : 0};
     transform: ${visible ? 'translateY(0)' : 'translateY(-24px)'};
   `}
 `;
@@ -54,4 +55,9 @@ export const Buttons = styled.div`
   & > * {
     margin-right: 4px;
   }
+`;
+
+export const Bold = styled.span`
+  font-size: 14px;
+  ${robotoMedium()};
 `;

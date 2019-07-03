@@ -16,12 +16,18 @@ const onNewFile = () => {
   store.pages.current.createBlank('file');
 };
 
+const onPaste = () => {
+  store.pages.current.pasteFiles(true);
+};
+
 export default observer(() => {
   return (
     <ContextMenu content="page">
       <ContextMenuItem onClick={onRefresh}>Refresh</ContextMenuItem>
+      <ContextMenuItem>Upload</ContextMenuItem>
       <ContextMenuItem onClick={onNewFolder}>New folder</ContextMenuItem>
       <ContextMenuItem onClick={onNewFile}>New file</ContextMenuItem>
+      <ContextMenuItem onClick={onPaste}>Paste</ContextMenuItem>
       <ContextMenuItem disabled>Details</ContextMenuItem>
     </ContextMenu>
   );

@@ -1,6 +1,6 @@
 import { observable, action } from 'mobx';
 import { extname } from 'path';
-import { IRes } from 'qusly-core';
+import { IRes, IFile } from 'qusly-core';
 
 import store from '../store';
 import { Session } from './session';
@@ -36,6 +36,10 @@ export class Page {
   public fileNameInput: HTMLTextAreaElement;
 
   public location = new Location(this);
+
+  public cutFiles: IFile[] = [];
+
+  public cutPath: string;
 
   constructor(public session: Session) { }
 
@@ -108,6 +112,22 @@ export class Page {
     }
   }
 
+  public cutSelectedFiles() {
+    this.uncutFiles();
+    this.cutFiles = this.selectedFiles;
+    this.cutPath = this.location.path;
+
+    for (const file of this.selectedFiles) {
+      file.cut = true;
+    }
+  }
+
+  public uncutFiles() {
+    for (const file of this.files) {
+      file.cut = false;
+    }
+  }
+
   public async fetchFiles() {
     this.loading = true;
 
@@ -168,12 +188,11 @@ export class Page {
     this.focusedFile = file;
   }
 
-  public async dragFiles() {
+  public async dropRemoteFiles() {
     this.loading = true;
-    const files = this.selectedFiles;
 
     if (this.hoveredFile.type === 'directory' && this.focusedFile !== this.hoveredFile) {
-      for (const file of files) {
+      for (const file of this.selectedFiles) {
         const oldPath = this.location.relative(file.name);
         const newPath = this.location.relative(this.hoveredFile.name, file.name);
 
@@ -182,5 +201,39 @@ export class Page {
 
       await this.fetchFiles();
     }
+  }
+
+  public async deleteFiles(files: File[]) {
+    this.loading = true;
+
+    for (const file of files) {
+      const path = this.location.relative(file.name);
+
+      if (file.type === 'directory') {
+        await this.session.client.rimraf(path);
+      } else {
+        await this.session.client.unlink(path);
+      }
+    }
+
+    await this.fetchFiles();
+  }
+
+  public async pasteFiles(page = false) {
+    if (!this.cutFiles.length) return;
+
+    this.loading = true;
+
+    for (const file of this.cutFiles) {
+      const focusedFile = page ? null : this.focusedFile.name;
+      const oldPath = this.location.combine(this.cutPath, file.name);
+      const newPath = this.location.relative(focusedFile, file.name)
+
+      await this.session.client.move(oldPath, newPath);
+    }
+
+    this.cutFiles = [];
+
+    await this.fetchFiles();
   }
 }

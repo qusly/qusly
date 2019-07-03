@@ -1,6 +1,6 @@
 import { observable } from 'mobx';
 
-export type OverlayContent = 'add-site';
+export type OverlayContent = 'add-site' | 'delete';
 
 export class OverlayStore {
   @observable
