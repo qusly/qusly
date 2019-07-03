@@ -183,4 +183,20 @@ export class Page {
       await this.fetchFiles();
     }
   }
+
+  public async deleteFiles(files: File[]) {
+    this.loading = true;
+
+    for (const file of files) {
+      const path = this.location.relative(file.name);
+
+      if (file.type === 'directory') {
+        await this.session.client.rimraf(path);
+      } else {
+        await this.session.client.unlink(path);
+      }
+    }
+
+    await this.fetchFiles();
+  }
 }

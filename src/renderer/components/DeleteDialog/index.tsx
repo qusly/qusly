@@ -1,11 +1,15 @@
 import * as React from 'react';
 import { observer } from 'mobx-react';
-import prettyBytes from 'pretty-bytes';
 
 import store from '~/renderer/store';
 import { CloseButton, Dialog, Title, Content, Buttons } from '../Dialog';
 import { Button } from '../Button';
-import { Details, Icon, Name, Size, Container } from './styles';
+
+const onClick = () => {
+  const page = store.pages.current;
+  page.deleteFiles(page.selectedFiles);
+  store.overlay.hide();
+};
 
 export default observer(() => {
   const page = store.pages.current;
@@ -14,7 +18,6 @@ export default observer(() => {
   const visible = store.overlay.content === 'delete';
   const selected = visible ? page.selectedFiles : [];
   const containsFolder = selected.find(e => e.type === 'directory');
-  const { icon, opacity } = store.favicons.get(page.focusedFile);
 
   let title = 'file';
 
@@ -30,21 +33,10 @@ export default observer(() => {
   return (
     <Dialog visible={visible} style={{ width: 344 }}>
       <Title>Delete {title}</Title>
-      <Content>
-        Are you sure you want to delete {text}?
-        {selected.length === 1 && (
-          <Container>
-            <Icon icon={icon} opacity={opacity} />
-            <Details>
-              <Name>{page.focusedFile.name}</Name>
-              <Size>200MB</Size>
-            </Details>
-          </Container>
-        )}
-      </Content>
+      <Content>Are you sure you want to delete {text}?</Content>
       <Buttons>
         <CloseButton />
-        <Button background="transparent" foreground="#3F51B5">
+        <Button background="transparent" foreground="#3F51B5" onClick={onClick}>
           DELETE
         </Button>
       </Buttons>
