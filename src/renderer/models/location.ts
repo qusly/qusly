@@ -35,8 +35,10 @@ export class Location {
 
   @action
   public go(index: number) {
-    this.pos = index;
-    this.page.fetchFiles();
+    if (!this.page.loading) {
+      this.pos = index;
+      this.page.fetchFiles();
+    }
   }
 
   @action
