@@ -39,6 +39,8 @@ export class Page {
 
   public cutFiles: IFile[] = [];
 
+  public cutPath: string;
+
   constructor(public session: Session) { }
 
   public get title() {
@@ -113,6 +115,7 @@ export class Page {
   public cutSelectedFiles() {
     this.uncutFiles();
     this.cutFiles = this.selectedFiles;
+    this.cutPath = this.location.path;
 
     for (const file of this.selectedFiles) {
       file.cut = true;
@@ -187,10 +190,9 @@ export class Page {
 
   public async dropRemoteFiles() {
     this.loading = true;
-    const files = this.selectedFiles;
 
     if (this.hoveredFile.type === 'directory' && this.focusedFile !== this.hoveredFile) {
-      for (const file of files) {
+      for (const file of this.selectedFiles) {
         const oldPath = this.location.relative(file.name);
         const newPath = this.location.relative(this.hoveredFile.name, file.name);
 
@@ -212,6 +214,20 @@ export class Page {
       } else {
         await this.session.client.unlink(path);
       }
+    }
+
+    await this.fetchFiles();
+  }
+
+  public async pasteFiles(page = false) {
+    this.loading = true;
+
+    for (const file of this.cutFiles) {
+      const focusedFile = page ? null : this.focusedFile.name;
+      const oldPath = this.location.combine(this.cutPath, file.name);
+      const newPath = this.location.relative(focusedFile, file.name)
+
+      await this.session.client.move(oldPath, newPath);
     }
 
     await this.fetchFiles();

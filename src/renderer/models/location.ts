@@ -56,7 +56,12 @@ export class Location {
   }
 
   public relative(...items: string[]) {
+    // TODO: Determinate os
     return [...this.pathItems, ...items].join('/');
+  }
+
+  public combine(...items: string[]) {
+    return items.join('/');
   }
 
   public get pathItems() {

@@ -48,6 +48,10 @@ const onCut = () => {
   store.pages.current.cutSelectedFiles();
 };
 
+const onPaste = () => {
+  store.pages.current.pasteFiles();
+};
+
 export default observer(() => {
   const page = store.pages.current;
   if (!page) return null;
@@ -80,6 +84,9 @@ export default observer(() => {
         </>
       )}
       <ContextMenuItem onClick={onCut}>Cut</ContextMenuItem>
+      {!containsFile && (
+        <ContextMenuItem onClick={onPaste}>Paste</ContextMenuItem>
+      )}
       <ContextMenuItem onClick={onDelete}>Delete</ContextMenuItem>
       {!mutliple && (
         <ContextMenuItem onClick={onRename}>Rename</ContextMenuItem>
