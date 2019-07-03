@@ -11,7 +11,10 @@ const onContextMenu = () => {
 };
 
 const onMouseDown = (e: React.MouseEvent) => {
-  store.pages.current.unselectFiles();
+  if (!e.ctrlKey && !e.shiftKey) {
+    store.pages.current.unselectFiles();
+  }
+
   store.selection.show(e);
 };
 

@@ -49,6 +49,7 @@ export default class File extends React.PureComponent<Props> {
     }
 
     store.dragging.show(e);
+    store.contextMenu.hide();
   };
 
   private onMouseEnter = () => {
