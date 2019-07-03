@@ -1,8 +1,8 @@
 import { observable } from 'mobx';
 
-import { MENU_PAGE } from '../constants';
+export type MenuContent = 'file-tree' | 'transfer' | 'search' | 'sites';
 
 export class MenuStore {
   @observable
-  public selected: MENU_PAGE = 'sites';
+  public content: MenuContent = 'sites';
 }

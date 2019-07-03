@@ -2,29 +2,29 @@ import * as React from 'react';
 import { observer } from 'mobx-react';
 
 import store from '~/renderer/store';
-import { MENU_PAGE } from '~/renderer/constants';
+import { MenuContent } from '~/renderer/store/menu';
 import { StyledButton, Icon } from './styles';
 
-const onClick = (page: MENU_PAGE) => () => {
-  store.menu.selected = page;
+const onClick = (content: MenuContent) => () => {
+  store.menu.content = content;
 };
 
 export const MenuButton = observer(
   ({
-    page,
+    content,
     icon,
     iconSize,
   }: {
-    page: MENU_PAGE;
+    content: MenuContent;
     icon: any;
     iconSize?: number;
   }) => {
     return (
-      <StyledButton onClick={onClick(page)}>
+      <StyledButton onClick={onClick(content)}>
         <Icon
           size={iconSize}
           icon={icon}
-          selected={store.menu.selected === page}
+          selected={store.menu.content === content}
         />
       </StyledButton>
     );
