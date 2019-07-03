@@ -1,4 +1,5 @@
 import { File } from '../models';
+import FileComponent from '../components/File';
 
 export const sortFiles = (files: File[]): File[] => {
   if (files == null) return [];

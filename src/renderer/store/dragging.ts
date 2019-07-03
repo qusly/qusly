@@ -2,75 +2,42 @@ import * as React from 'react';
 import { observable } from 'mobx';
 
 import store from '.';
-import { MouseAction } from './selection';
-import { Pos } from '../models';
+import { setStyle, cursorDistance } from '../utils';
 
 export class DraggingStore {
   @observable
   public visible = false;
 
+  public active = false;
+
   public ref = React.createRef<HTMLDivElement>();
 
-  public startPos: Pos = {};
-
-  constructor() {
-    this.hide();
-  }
-
-  public show(e: MouseAction) {
-    if (e.ctrlKey || e.shiftKey ||
-      e.button === 1 || e.button === 2) {
-      return this.hide();
-    }
-
-    this.startPos = {
-      top: e.clientY,
-      left: e.clientX,
-    }
-
-    this.addEventListeners();
-    this.updatePos(e);
-  }
-
-  public hide = () => {
-    this.visible = false;
-    this.removeEventListeners();
-  }
-
-  public updatePos(e: MouseAction) {
-    if (this.ref.current) {
-      this.ref.current.style.top = `${e.clientY}px`;
-      this.ref.current.style.left = `${e.clientX}px`;
-    }
-  }
-
-  public calcDistance(e: MouseAction) {
-    const { top, left } = this.startPos;
-    return Math.sqrt(Math.pow(top - e.clientY, 2) + Math.pow(left - e.clientX, 2));
-  }
-
-  public onWindowMouseMove = (e: MouseEvent) => {
-    if (this.calcDistance(e) < 5) {
-      this.visible = false;
+  public show = (e: React.MouseEvent) => {
+    if (e.button !== 0) {
+      this.hide();
       return;
     }
 
-    this.visible = true;
-    this.updatePos(e);
+    store.startPos = store.mousePos;
+
+    this.active = true;
+    this.update();
   }
 
-  public onWindowClick = () => {
-    this.hide();
-    store.pages.current.dragFiles();
+  public hide = () => {
+    this.active = false;
+    this.visible = false;
   }
 
-  public addEventListeners() {
-    window.addEventListener('mousemove', this.onWindowMouseMove);
-    window.addEventListener('click', this.onWindowClick);
-  }
+  public update() {
+    if (!this.active) return;
+    const { top, left } = store.mousePos;
 
-  public removeEventListeners() {
-    window.removeEventListener('mousemove', this.onWindowMouseMove);
-    window.removeEventListener('click', this.onWindowClick);
+    setStyle(this.ref.current, {
+      top: `${top}px`,
+      left: `${left}px`,
+    });
+
+    this.visible = cursorDistance(store.startPos, store.mousePos) > 5;
   }
 }

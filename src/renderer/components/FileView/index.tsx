@@ -5,15 +5,11 @@ import store from '~/renderer/store';
 import File from '../File';
 import { StyledFilesView, SelectionRegion } from './styles';
 
-const onMouseDown = (e: React.MouseEvent) => {
-  store.selection.show(e);
-};
-
 export default observer(() => {
   const page = store.pages.current;
 
   return (
-    <StyledFilesView visible={!page.loading} onMouseDown={onMouseDown}>
+    <StyledFilesView visible={!page.loading}>
       {page.files.map((file, index) => (
         <File data={file} key={index} />
       ))}

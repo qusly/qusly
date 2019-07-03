@@ -76,7 +76,10 @@ export class Page {
 
   @action
   public focusFile(file: File) {
-    if (!file.selected) this.unselectFiles();
+    if (!file.selected) {
+      this.unselectFiles();
+    }
+
     this.focusedFile = file;
     file.selected = true;
   }

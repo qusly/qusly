@@ -1,152 +1,106 @@
 import * as React from 'react';
 import { observable } from 'mobx';
 
-import { Pos } from '../models';
 import store from '.';
-
-export type MouseAction = React.MouseEvent | MouseEvent;
-
-interface Size {
-  width?: number;
-  height?: number;
-}
+import { setStyle, isElementInArea, cursorDistance } from '../utils';
 
 export class SelectionStore {
   @observable
   public visible = false;
 
-  public startPoint: Pos = {};
-
-  public pos: Pos = {};
-
-  public size: Size = {};
+  public active = false;
 
   public ref = React.createRef<HTMLDivElement>();
 
-  public mousePos: Pos = {};
-
-  public lastScrollTop = 0;
-
-  constructor() {
-    this.removeListeners();
-  }
-
-  public get parent() {
-    return this.ref.current ? this.ref.current.parentElement : null;
-  }
-
-  public show(e: MouseAction) {
-    if (e.ctrlKey || e.shiftKey ||
-      e.button === 1 || e.button === 2) {
-      return this.hide();
+  public show = (e: React.MouseEvent) => {
+    if (e.button !== 0) {
+      this.hide();
+      return;
     }
 
-    this.visible = true;
-    this.startPoint = this.pos = this.getPos(e);
+    store.startPos = this.mousePos;
 
-    this.update(e);
-    this.addListeners();
+    this.active = true;
+    this.update();
+    this.parent.addEventListener('scroll', this.onScroll);
   }
 
   public hide = () => {
+    if (this.parent) {
+      this.parent.removeEventListener('scroll', this.onScroll);
+    }
+
     this.visible = false;
-    this.removeListeners();
+    this.active = false;
   }
 
-  public update(e?: MouseAction) {
-    if (e) {
-      this.mousePos = this.getPos(e);
-    } else {
-      const scrollTop = this.parent.scrollTop;
-      this.mousePos.top += scrollTop - this.lastScrollTop;
-      this.lastScrollTop = scrollTop;
-    }
+  public update() {
+    if (!this.active) return;
 
-    this.updateSize();
-    this.updatePos();
-    this.selectFiles();
-  }
-
-  public getPos(e: MouseAction): Pos {
-    return {
-      top: e.clientY + this.parent.scrollTop,
-      left: e.clientX + this.parent.scrollLeft,
-    }
-  }
-
-  public updatePos() {
     const { width, height } = this.size;
     const parentRect = this.parent.getBoundingClientRect();
 
-    const top = this.mousePos.top < this.startPoint.top ? (this.startPoint.top - height) : this.pos.top;
-    const left = this.mousePos.left < this.startPoint.left ? (this.startPoint.left - width) : this.pos.left;
+    const mousePos = this.mousePos;
+    const { startPos } = store;
 
-    this.pos = ({ top, left });
+    const top = mousePos.top < startPos.top ? (startPos.top - height) : startPos.top;
+    const left = mousePos.left < startPos.left ? (startPos.left - width) : startPos.left;
 
-    this.ref.current.style.top = `${top - parentRect.top}px`;
-    this.ref.current.style.left = `${left - parentRect.left}px`;
-  }
+    setStyle(this.ref.current, {
+      width: `${width}px`,
+      height: `${height}px`,
+      top: `${top - parentRect.top}px`,
+      left: `${left - parentRect.left}px`,
+    });
 
-  public updateSize() {
-    const width = Math.abs(this.mousePos.left - this.startPoint.left);
-    const height = Math.abs(this.mousePos.top - this.startPoint.top);
-
-    this.size = { width, height };
-
-    this.ref.current.style.width = `${width}px`;
-    this.ref.current.style.height = `${height}px`;
+    this.visible = cursorDistance(store.startPos, mousePos) > 5;
+    this.selectFiles();
   }
 
   public selectFiles = () => {
+    if (!this.visible) return;
+
     const files = store.pages.current.filesComponents;
     const rects = this.ref.current.getBoundingClientRect();
 
     for (const file of files) {
-      if (!file.ref.current) continue;
+      const el = file.ref.current;
 
-      const { data } = file.props;
-      const fileRects = file.ref.current.getBoundingClientRect();
-      const selected = this.checkRects(rects, fileRects) &&
-        this.checkRects(rects, fileRects, false);
+      if (el) {
+        const selected = isElementInArea(rects, el);
+        const { data } = file.props;
 
-      if (data.selected !== selected) {
-        data.selected = selected;
+        if (selected !== data.selected) {
+          data.selected = selected;
+        }
       }
     }
-  }
-
-  public checkRects(rects: ClientRect, fileRects: ClientRect, horizontal = true) {
-    const sideA = horizontal ? 'left' : 'top';
-    const sideB = horizontal ? 'right' : 'bottom';
-
-    return rects[sideA] < fileRects[sideA] && rects[sideB] > fileRects[sideB] ||
-      rects[sideA] > fileRects[sideA] && rects[sideB] < fileRects[sideB] ||
-      rects[sideA] < fileRects[sideA] && fileRects[sideA] < rects[sideB] ||
-      fileRects[sideB] > rects[sideA] && fileRects[sideB] < rects[sideB];
-  }
-
-  public onWindowMouseMove = (e: MouseEvent) => {
-    this.update(e);
   }
 
   public onScroll = () => {
     this.update();
   }
 
-  public addListeners() {
-    window.addEventListener('mousemove', this.onWindowMouseMove);
-    window.addEventListener('mouseup', this.hide);
-    this.parent.addEventListener('scroll', this.onScroll);
+  public get mousePos() {
+    const { top, left } = store.mousePos;
+    return {
+      top: top + this.parent.scrollTop,
+      left: left + this.parent.scrollLeft,
+    }
   }
 
-  public removeListeners() {
-    window.removeEventListener('mousemove', this.onWindowMouseMove);
-    window.removeEventListener('mouseup', this.hide);
+  public get parent() {
+    const current = this.ref.current;
+    return current && current.parentElement;
+  }
 
-    const parent = this.parent;
+  public get size() {
+    const mousePos = this.mousePos;
+    const { startPos } = store;
 
-    if (parent) {
-      parent.removeEventListener('scroll', this.onScroll);
-    }
+    const width = Math.abs(mousePos.left - startPos.left);
+    const height = Math.abs(mousePos.top - startPos.top);
+
+    return { width, height };
   }
 }

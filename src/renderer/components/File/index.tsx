@@ -31,13 +31,13 @@ export default class File extends React.PureComponent<Props> {
     }
   }
 
-  private onClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  private onClick = () => {
     store.dragging.hide();
   };
 
   private onMouseDown = (e: React.MouseEvent) => {
     e.stopPropagation();
+
     const { data } = this.props;
 
     if (e.ctrlKey) {
@@ -49,6 +49,7 @@ export default class File extends React.PureComponent<Props> {
     }
 
     store.dragging.show(e);
+    store.contextMenu.hide();
   };
 
   private onMouseEnter = () => {
@@ -67,15 +68,13 @@ export default class File extends React.PureComponent<Props> {
 
   private onContextMenu = (e: React.MouseEvent) => {
     e.stopPropagation();
+
     const { data } = this.props;
 
-    if (data.renaming) return;
-
-    if (!data.selected) {
+    if (!data.renaming) {
       store.pages.current.focusFile(data);
+      store.contextMenu.show('file');
     }
-
-    store.contextMenu.show('file', e);
   };
 
   private onInputKey = (e: React.KeyboardEvent) => {

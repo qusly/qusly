@@ -12,6 +12,7 @@ import { OverlayStore } from './overlay';
 import { ContextMenuStore } from './context-menu';
 import { SelectionStore } from './selection';
 import { DraggingStore } from './dragging';
+import { Pos } from '../models';
 
 export class Store {
   public addTab = new AddTabStore();
@@ -32,6 +33,10 @@ export class Store {
     version: '',
   };
 
+  public mousePos: Pos = {};
+
+  public startPos: Pos = {};
+
   constructor() {
     ipcRenderer.on(
       'update-available',
@@ -40,6 +45,43 @@ export class Store {
         this.updateInfo.available = true;
       },
     );
+
+    window.removeEventListener('click', this.onWindowClick);
+    window.removeEventListener('mousedown', this.onWindowMouseDown);
+    window.removeEventListener('mousemove', this.onWindowMouseMove);
+
+    window.addEventListener('click', this.onWindowClick);
+    window.addEventListener('mousedown', this.onWindowMouseDown);
+    window.addEventListener('mousemove', this.onWindowMouseMove);
+  }
+
+  public onWindowClick = (e: MouseEvent) => {
+    const page = this.pages.current;
+
+    if (page) {
+      page.pathInputVisible = false;
+    }
+
+    if (this.dragging.active) {
+      page.dragFiles();
+    }
+
+    this.selection.hide();
+    this.dragging.hide();
+  }
+
+  public onWindowMouseDown = (e: MouseEvent) => {
+    this.contextMenu.hide();
+  }
+
+  public onWindowMouseMove = (e: MouseEvent) => {
+    this.mousePos = {
+      top: e.pageY,
+      left: e.pageX,
+    }
+
+    this.selection.update();
+    this.dragging.update();
   }
 }
 
