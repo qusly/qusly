@@ -55,16 +55,22 @@ export class Store {
     window.addEventListener('mousemove', this.onWindowMouseMove);
   }
 
-  public onWindowClick = () => {
+  public onWindowClick = (e: MouseEvent) => {
+    const page = this.pages.current;
+
+    if (page) {
+      page.pathInputVisible = false;
+    }
+
     if (this.dragging.active) {
-      this.pages.current.dragFiles();
+      page.dragFiles();
     }
 
     this.selection.hide();
-    this.dragging.hide()
+    this.dragging.hide();
   }
 
-  public onWindowMouseDown = () => {
+  public onWindowMouseDown = (e: MouseEvent) => {
     this.contextMenu.hide();
   }
 

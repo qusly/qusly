@@ -31,8 +31,7 @@ export default class File extends React.PureComponent<Props> {
     }
   }
 
-  private onClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  private onClick = () => {
     store.dragging.hide();
   };
 
@@ -68,6 +67,7 @@ export default class File extends React.PureComponent<Props> {
 
   private onContextMenu = (e: React.MouseEvent) => {
     e.stopPropagation();
+
     const { data } = this.props;
 
     if (!data.renaming) {

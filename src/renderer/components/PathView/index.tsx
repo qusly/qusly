@@ -11,27 +11,22 @@ const onClick = (e: React.MouseEvent) => {
   e.stopPropagation();
 
   const page = store.pages.current;
-  if (page.pathInputVisible) return;
 
-  page.pathInputVisible = true;
+  if (!page.pathInputVisible) {
+    page.pathInputVisible = true;
 
-  requestAnimationFrame(() => {
-    input.current.value = page.location.path;
-    input.current.focus();
-    input.current.select();
-
-    window.addEventListener('click', onWindowClick);
-  });
-};
-
-const onWindowClick = () => {
-  window.removeEventListener('click', onWindowClick);
-  store.pages.current.pathInputVisible = false;
+    requestAnimationFrame(() => {
+      input.current.value = page.location.path;
+      input.current.focus();
+      input.current.select();
+    });
+  }
 };
 
 const onKeyDown = (e: React.KeyboardEvent) => {
   if (e.key === 'Enter') {
     const page = store.pages.current;
+
     page.location.path = input.current.value.trim();
     page.pathInputVisible = false;
     page.fetchFiles();

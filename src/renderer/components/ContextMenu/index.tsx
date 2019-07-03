@@ -7,10 +7,12 @@ import { StyledContextMenu, StyledContextMenuItem } from './styles';
 
 export const ContextMenu = observer(
   ({ content, children }: { content: ContextMenuContent; children?: any }) => {
+    const visible = store.contextMenu.content === content;
+
     return (
       <StyledContextMenu
         ref={store.contextMenu.refs[content]}
-        visible={store.contextMenu.content === content}
+        visible={visible}
       >
         {children}
       </StyledContextMenu>
@@ -20,6 +22,11 @@ export const ContextMenu = observer(
 
 const onItemMouseDown = (e: React.MouseEvent) => {
   e.stopPropagation();
+};
+
+const onItemMouseUp = (onClick: Function) => (e: React.MouseEvent) => {
+  if (onClick) onClick(e);
+  store.contextMenu.hide();
 };
 
 export const ContextMenuItem = ({
@@ -33,7 +40,7 @@ export const ContextMenuItem = ({
 }) => {
   return (
     <StyledContextMenuItem
-      onClick={onClick}
+      onMouseUp={onItemMouseUp(onClick)}
       onMouseDown={onItemMouseDown}
       disabled={disabled}
     >

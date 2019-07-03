@@ -27,13 +27,12 @@ export const StyledContextMenuItem = styled.div`
   white-space: nowrap;
 
   ${({ disabled }: { disabled?: boolean }) => css`
-    pointer-events: ${disabled ? 'none' : 'unset'};
     color: ${disabled
       ? `rgba(0, 0, 0, ${transparency.text.disabled})`
       : '#000'};
-  `}
 
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.04);
-  }
+    &:hover {
+      background-color: ${!disabled ? 'rgba(0, 0, 0, 0.04)' : 'transparent'};
+    }
+  `}
 `;
