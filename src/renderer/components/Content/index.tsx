@@ -2,13 +2,17 @@ import * as React from 'react';
 
 import AppBar from '../AppBar';
 import Page from '../Page';
-import { StyledContent } from './styles';
+import Details from '../Details';
+import { StyledContent, Container } from './styles';
 
 export default () => {
   return (
     <StyledContent>
       <AppBar />
-      <Page />
+      <Container>
+        <Page />
+        <Details />
+      </Container>
     </StyledContent>
   );
 };
