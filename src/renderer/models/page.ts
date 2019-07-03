@@ -230,6 +230,8 @@ export class Page {
       await this.session.client.move(oldPath, newPath);
     }
 
+    this.cutFiles = [];
+
     await this.fetchFiles();
   }
 }
