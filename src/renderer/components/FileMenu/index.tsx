@@ -40,6 +40,10 @@ const onRename = () => {
   });
 };
 
+const onDelete = () => {
+  store.overlay.content = 'delete';
+};
+
 export default observer(() => {
   const page = store.pages.current;
   if (!page) return null;
@@ -73,7 +77,7 @@ export default observer(() => {
       )}
       <ContextMenuItem>Cut</ContextMenuItem>
       <ContextMenuItem>Copy</ContextMenuItem>
-      <ContextMenuItem>Delete</ContextMenuItem>
+      <ContextMenuItem onClick={onDelete}>Delete</ContextMenuItem>
       {!mutliple && (
         <ContextMenuItem onClick={onRename}>Rename</ContextMenuItem>
       )}
