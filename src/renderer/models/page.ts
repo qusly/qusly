@@ -189,9 +189,9 @@ export class Page {
   }
 
   public async dropRemoteFiles() {
-    this.loading = true;
-
     if (this.hoveredFile.type === 'directory' && this.focusedFile !== this.hoveredFile) {
+      this.loading = true;
+
       for (const file of this.selectedFiles) {
         const oldPath = this.location.relative(file.name);
         const newPath = this.location.relative(this.hoveredFile.name, file.name);
