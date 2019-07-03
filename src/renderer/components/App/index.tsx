@@ -11,6 +11,7 @@ import FileMenu from '../FileMenu';
 import PageMenu from '../PageMenu';
 import DragThumb from '../DragThumb';
 import { VerticalLayout, HorizontalLayout } from './styles';
+import TabMenu from '../TabMenu';
 
 export default class App extends React.PureComponent {
   componentDidMount() {
@@ -41,6 +42,7 @@ export default class App extends React.PureComponent {
       <VerticalLayout>
         <GlobalStyle />
         <Titlebar />
+        <TabMenu />
         <HorizontalLayout>
           <Menu />
           <Content />
