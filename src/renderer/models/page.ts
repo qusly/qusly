@@ -110,6 +110,21 @@ export class Page {
     }
   }
 
+  public cutSelectedFiles() {
+    this.uncutFiles();
+    this.cutFiles = this.selectedFiles;
+
+    for (const file of this.selectedFiles) {
+      file.cut = true;
+    }
+  }
+
+  public uncutFiles() {
+    for (const file of this.files) {
+      file.cut = false;
+    }
+  }
+
   public async fetchFiles() {
     this.loading = true;
 

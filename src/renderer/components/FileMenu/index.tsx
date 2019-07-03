@@ -45,8 +45,7 @@ const onDelete = () => {
 };
 
 const onCut = () => {
-  const page = store.pages.current;
-  page.focusedFile.cut = true;
+  store.pages.current.cutSelectedFiles();
 };
 
 export default observer(() => {
