@@ -220,6 +220,8 @@ export class Page {
   }
 
   public async pasteFiles(page = false) {
+    if (!this.cutFiles.length) return;
+
     this.loading = true;
 
     for (const file of this.cutFiles) {
