@@ -168,7 +168,7 @@ export class Page {
     this.focusedFile = file;
   }
 
-  public async dragFiles() {
+  public async dropRemoteFiles() {
     this.loading = true;
     const files = this.selectedFiles;
 
