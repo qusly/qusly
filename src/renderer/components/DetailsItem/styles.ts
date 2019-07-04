@@ -2,8 +2,7 @@ import styled from 'styled-components';
 import { robotoMedium } from 'wexond-ui';
 
 export const StyledItem = styled.div`
-  height: 48px;
-  padding: 16px;
+  padding: 8px 16px;
 `;
 
 export const Property = styled.div`

@@ -2,11 +2,11 @@ import * as React from 'react';
 
 import { StyledItem, Property, Value } from './styles';
 
-export default () => {
+export default ({ property, value }: { property: string; value: string }) => {
   return (
     <StyledItem>
-      <Property>Property</Property>
-      <Value>Value</Value>
+      <Property>{property}</Property>
+      <Value>{value}</Value>
     </StyledItem>
   );
 };

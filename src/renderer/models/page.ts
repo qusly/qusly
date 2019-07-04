@@ -29,6 +29,10 @@ export class Page {
   @observable
   public pathInputVisible = false;
 
+  @observable
+  public detailsVisible = false;
+
+  @observable
   public focusedFile: File;
 
   public hoveredFile: File;
