@@ -5,11 +5,15 @@ import * as prettyBytes from 'pretty-bytes';
 import store from '~/renderer/store';
 import Resizable from '../Resizable';
 import DetailsItem from '../DetailsItem';
-import { Name, Header, Icon } from './styles';
+import { Name, Header, Icon, Close } from './styles';
+
+const onClose = () => {
+  store.pages.current.detailsVisible = false;
+};
 
 export default observer(() => {
   const page = store.pages.current;
-  if (!page) return null;
+  if (!page || !page.detailsVisible) return null;
 
   const file = page.focusedFile;
   const { icon, opacity } = store.favicons.get(file);
@@ -19,7 +23,6 @@ export default observer(() => {
       pos="left"
       style={{
         borderLeft: '1px solid rgba(0, 0, 0, 0.08)',
-        borderTop: '1px solid rgba(0, 0, 0, 0.08)',
       }}
     >
       {file && (
@@ -27,6 +30,7 @@ export default observer(() => {
           <Header>
             <Icon icon={icon} opacity={opacity} />
             <Name>{file.name}</Name>
+            <Close onClick={onClose} />
           </Header>
           <DetailsItem property="Location" value={page.focusedFilePath} />
           <DetailsItem property="Size" value={prettyBytes(file.size)} />
