@@ -29,7 +29,6 @@ export const Name = styled.div`
 export const Close = styled.div`
   min-width: 20px;
   min-height: 20px;
-  padding-left: 8px;
   margin-left: auto;
   background-image: url(${icons.close});
   cursor: pointer;
