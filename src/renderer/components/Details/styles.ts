@@ -1,11 +1,11 @@
 import styled, { css } from 'styled-components';
-import { robotoMedium, centerIcon } from 'wexond-ui';
+import { centerIcon } from 'wexond-ui';
 
 export const Header = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  padding: 8px 16px;
+  padding: 8px 24px;
   margin-top: 8px;
 `;
 
@@ -23,5 +23,4 @@ export const Icon = styled.div`
 export const Name = styled.div`
   font-size: 18px;
   margin-left: 12px;
-  ${robotoMedium()};
 `;

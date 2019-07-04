@@ -35,6 +35,9 @@ export class Page {
   @observable
   public focusedFile: File;
 
+  @observable
+  public focusedFilePath = '';
+
   public hoveredFile: File;
 
   public fileNameInput: HTMLTextAreaElement;
@@ -89,6 +92,8 @@ export class Page {
     }
 
     this.focusedFile = file;
+    this.focusedFilePath = this.location.path;
+
     file.selected = true;
   }
 

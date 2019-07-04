@@ -28,7 +28,7 @@ export default observer(() => {
             <Icon icon={icon} opacity={opacity} />
             <Name>{file.name}</Name>
           </Header>
-          <DetailsItem property="Location" value="/var/www/" />
+          <DetailsItem property="Location" value={page.focusedFilePath} />
           <DetailsItem property="Size" value={prettyBytes(file.size)} />
           <DetailsItem property="Modified" value={file.date.toDateString()} />
           <DetailsItem property="Owner" value={file.user} />
