@@ -22,8 +22,9 @@ export const Icon = styled.div`
 
 export const Name = styled.div`
   font-size: 18px;
-  margin-left: 12px;
+  padding: 0px 12px;
   overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const Close = styled.div`

@@ -38,13 +38,14 @@ export class Page {
   @observable
   public focusedFilePath = '';
 
+  @observable
+  public cutFiles: File[] = [];
+
   public hoveredFile: File;
 
   public fileNameInput: HTMLTextAreaElement;
 
   public location = new Location(this);
-
-  public cutFiles: File[] = [];
 
   public cutPath: string;
 
@@ -152,6 +153,7 @@ export class Page {
     store.tabs.getTabById(this.tabId).title = this.title;
   }
 
+  @action
   public async rename(file: File, newName: string) {
     const oldName = file.name;
 
@@ -177,6 +179,7 @@ export class Page {
     }
   }
 
+  @action
   public async createBlank(type: 'folder' | 'file') {
     const name = genFileName(this.files, `new ${type}`);
     const path = this.location.relative(name);
@@ -197,6 +200,7 @@ export class Page {
     this.focusedFile = file;
   }
 
+  @action
   public async dropRemoteFiles() {
     if (this.hoveredFile.type === 'directory' && this.focusedFile !== this.hoveredFile) {
       this.loading = true;
@@ -212,6 +216,7 @@ export class Page {
     }
   }
 
+  @action
   public async deleteFiles(files: File[]) {
     this.loading = true;
     this.focusedFile = null;

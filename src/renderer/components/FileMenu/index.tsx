@@ -89,7 +89,9 @@ export default observer(() => {
       )}
       <ContextMenuItem onClick={onCut}>Cut</ContextMenuItem>
       {!containsFile && (
-        <ContextMenuItem onClick={onPaste}>Paste</ContextMenuItem>
+        <ContextMenuItem onClick={onPaste} disabled={!page.cutFiles.length}>
+          Paste
+        </ContextMenuItem>
       )}
       <ContextMenuItem onClick={onDelete}>Delete</ContextMenuItem>
       {!mutliple && (
