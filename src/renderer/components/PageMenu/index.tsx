@@ -28,7 +28,6 @@ export default observer(() => {
       <ContextMenuItem onClick={onNewFolder}>New folder</ContextMenuItem>
       <ContextMenuItem onClick={onNewFile}>New file</ContextMenuItem>
       <ContextMenuItem onClick={onPaste}>Paste</ContextMenuItem>
-      <ContextMenuItem disabled>Details</ContextMenuItem>
     </ContextMenu>
   );
 });

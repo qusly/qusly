@@ -52,6 +52,10 @@ const onPaste = () => {
   store.pages.current.pasteFiles();
 };
 
+const onDetails = () => {
+  store.pages.current.detailsVisible = true;
+};
+
 export default observer(() => {
   const page = store.pages.current;
   if (!page) return null;
@@ -91,7 +95,7 @@ export default observer(() => {
       {!mutliple && (
         <ContextMenuItem onClick={onRename}>Rename</ContextMenuItem>
       )}
-      <ContextMenuItem disabled>Details</ContextMenuItem>
+      <ContextMenuItem onClick={onDetails}>Details</ContextMenuItem>
     </ContextMenu>
   );
 });

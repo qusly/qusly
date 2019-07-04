@@ -3,8 +3,8 @@ import { centerBoth } from 'wexond-ui';
 
 export const StyledPage = styled.div`
   width: 100%;
-  height: calc(100% - 82px);
   position: relative;
+  flex: 1;
 `;
 
 export const PreloaderContainer = styled.div`
