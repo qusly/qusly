@@ -214,6 +214,7 @@ export class Page {
 
   public async deleteFiles(files: File[]) {
     this.loading = true;
+    this.focusedFile = null;
 
     for (const file of files) {
       const path = this.location.relative(file.name);
