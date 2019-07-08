@@ -87,8 +87,8 @@ export class Page {
   }
 
   @action
-  public focusFile(file: File) {
-    if (!file.selected) {
+  public focusFile(file: File, unselectFiles = true) {
+    if (unselectFiles) {
       this.unselectFiles();
     }
 

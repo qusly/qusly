@@ -25,6 +25,7 @@ export default class File extends React.PureComponent<Props> {
 
     if (page) {
       const index = page.filesComponents.indexOf(this);
+
       if (index !== -1) {
         page.filesComponents.splice(index, 1);
       }
@@ -38,18 +39,20 @@ export default class File extends React.PureComponent<Props> {
   private onMouseDown = (e: React.MouseEvent) => {
     e.stopPropagation();
 
-    const { data } = this.props;
+    if (e.button !== 1 && e.button !== 2) {
+      const { data } = this.props;
 
-    if (e.ctrlKey) {
-      data.selected = true;
-    } else if (e.shiftKey) {
-      this.selectGroup();
-    } else {
-      store.pages.current.focusFile(data);
+      if (e.ctrlKey) {
+        data.selected = !data.selected;
+      } else if (e.shiftKey) {
+        this.selectGroup();
+      } else {
+        store.pages.current.focusFile(data);
+      }
+
+      store.dragging.show(e);
+      store.contextMenu.hide();
     }
-
-    store.dragging.show(e);
-    store.contextMenu.hide();
   };
 
   private onMouseEnter = () => {
@@ -72,7 +75,7 @@ export default class File extends React.PureComponent<Props> {
     const { data } = this.props;
 
     if (!data.renaming) {
-      store.pages.current.focusFile(data);
+      store.pages.current.focusFile(data, !data.selected);
       store.contextMenu.show('file');
     }
   };
