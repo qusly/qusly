@@ -1,17 +1,10 @@
-<<<<<<< HEAD
 import { createWriteStream, existsSync, mkdirSync } from 'fs';
-=======
-import { createWriteStream } from 'fs';
->>>>>>> a45992dccf605c233928133cc28030c2a29ae1c1
 import { join } from 'path';
 import { Client } from 'qusly-core';
 
 import { Session } from './session';
 import { QueueItem } from './queue-item';
-<<<<<<< HEAD
 import { getPath } from '../utils';
-=======
->>>>>>> a45992dccf605c233928133cc28030c2a29ae1c1
 
 export class TransferManager {
   public client: Client;
