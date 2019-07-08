@@ -1,9 +1,10 @@
-import { createWriteStream } from 'fs';
+import { createWriteStream, existsSync, mkdirSync } from 'fs';
 import { join } from 'path';
 import { Client } from 'qusly-core';
 
 import { Session } from './session';
 import { QueueItem } from './queue-item';
+import { getPath } from '../utils';
 
 export class TransferManager {
   public client: Client;
@@ -29,10 +30,15 @@ export class TransferManager {
 
   public async add(remotePath: string, fileName: string) {
     await this.connect();
+    const localPath = getPath('downloads');
+
+    if (!existsSync(localPath)) {
+      mkdirSync(localPath);
+    }
 
     this.queue.push({
       remotePath,
-      localPath: join('C:\\Users\\xnerh\\Desktop\\qusly transfers\\download\\', fileName),
+      localPath: join(localPath, fileName),
     });
 
     this.process();
