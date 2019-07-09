@@ -13,9 +13,7 @@ export class TransferManager {
 
   public transfering = false;
 
-  constructor(public session: Session) {
-
-  }
+  constructor(public session: Session, public type: 'download' | 'upload') { }
 
   public async connect() {
     if (!this.client) {

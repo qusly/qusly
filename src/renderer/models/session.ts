@@ -23,9 +23,7 @@ export class Session {
 
   public connecting = false;
 
-  public download = new TransferManager(this);
-
-  public upload = new TransferManager(this);
+  public download = new TransferManager(this, 'download');
 
   public async connect(config: Site) {
     if (this.connecting) return;
