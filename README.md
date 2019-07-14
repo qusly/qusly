@@ -12,7 +12,7 @@
 [![Travis](https://img.shields.io/travis/qusly/qusly-core.svg?style=flat-square)](https://travis-ci.org/xnerhu/qusly-core.svg)
 [![Downloads](https://img.shields.io/github/downloads/qusly/qusly/total.svg?style=flat-square)](https://github.com/qusly/qusly/releases)
 [![Discord](https://img.shields.io/discord/591624973609730059.svg?style=flat-square)](https://discord.gg/rNyNYFn)
-[![Github](https://img.shields.io/github/followers/xnerhu.svg?style=social&label=Follow)](https://twitter.com/xnerhu)
+[![Github](https://img.shields.io/github/followers/xnerhu.svg?style=social&label=Follow)](https://github.com/xnerhu)
 
 </div>
 
