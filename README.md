@@ -33,7 +33,7 @@ and more! Check out [roadmap](https://github.com/qusly/qusly/projects/) to see w
 
 ### Screenshots
 
-![](https://i.imgur.com/N0paCfw.png)
+![](https://i.imgur.com/WcfFAE8.png)
 
 ![](https://i.imgur.com/dKTpp5U.png)
 
