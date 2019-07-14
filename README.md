@@ -2,9 +2,9 @@
   <img src="static/app-icons/readme.png">
 
   <h3>
-    A feature-rich, elegant FTP client
+    A feature-rich, elegant FTP client<br />
   </h3>
-<br />
+
 [![Release](https://img.shields.io/github/release-pre/qusly/qusly.svg)](https://github.com/qusly/qusly/releases)
 [![Travis](https://img.shields.io/travis/qusly/qusly.svg?style=flat-square)](https://travis-ci.com/qusly/qusly)
 [![Travis](https://img.shields.io/travis/qusly/qusly-core.svg?style=flat-square)](https://travis-ci.org/xnerhu/qusly-core.svg)
