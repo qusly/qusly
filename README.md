@@ -20,13 +20,10 @@ Qusly is an FTP client, built on top of Electron, React, Styled-components and [
 
 ### Features
 - Supports __FTP, FTPS, SFTP__
-- Tabs
+- Has tabs
 - Full file operations e.g. rename, delete
-- Easy drag and drop
 - Properties panel
-- Bookmarks
 - Structure tree
-- File transfer
 
 and more! Check out [roadmap](https://github.com/qusly/qusly/projects/) to see what's coming.
 
