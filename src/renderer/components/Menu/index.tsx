@@ -15,7 +15,7 @@ const Buttons = () => {
       <MenuButton content="sites" icon={icons.sitesManager} />
       <MenuButton content="file-tree" icon={icons.fileTree} />
       <MenuButton content="search" icon={icons.search} />
-      <MenuButton content="transfers" icon={icons.transfer} iconSize={26} />
+      <MenuButton content="transfers" icon={icons.transfer} iconSize={26} disabled />
     </ButtonsBar>
   );
 };

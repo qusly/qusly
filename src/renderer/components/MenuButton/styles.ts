@@ -8,6 +8,10 @@ export const StyledButton = styled.div`
   height: ${MENU_WIDTH}px;
   cursor: pointer;
   position: relative;
+
+  ${({ disabled }: { disabled: boolean }) => css`
+    pointer-events: ${disabled ? 'none' : 'auto'};
+  `}
 `;
 
 export const Icon = styled.div`
@@ -19,16 +23,18 @@ export const Icon = styled.div`
   }
 
   ${({
-    icon,
-    selected,
-    size,
-  }: {
-    icon: any;
-    selected: boolean;
-    size: number;
-  }) => css`
+  icon,
+  selected,
+  size,
+  disabled,
+}: {
+  icon: any;
+  selected: boolean;
+  size: number;
+  disabled: boolean;
+}) => css`
     background-image: url(${icon});
-    opacity: ${selected ? 1 : transparency.icons.inactive};
+    opacity: ${disabled ? transparency.icons.disabled : (selected ? 1 : transparency.icons.inactive)};
     ${centerIcon(size)};
   `}
 `;
