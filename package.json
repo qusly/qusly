@@ -1,7 +1,7 @@
 {
   "name": "qusly",
-  "version": "0.0.2",
-  "description": "An FTP/FTPS/SFTP client with Material Design UI.",
+  "version": "0.1.0",
+  "description": "A full-featured, elegant FTP client.",
   "keywords": [
     "typescript",
     "react",
