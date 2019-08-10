@@ -24,6 +24,14 @@ export const getMainMenu = (window: BrowserWindow) => {
             }
           },
         },
+        {
+          label: 'Toggle developer tools',
+          accelerator: 'CmdOrCtrl+Shift+F12',
+          visible: false,
+          click() {
+            window.webContents.openDevTools();
+          },
+        },
       ],
     },
   ]);
