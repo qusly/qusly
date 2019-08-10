@@ -4,6 +4,7 @@ import { Client } from 'qusly-core';
 import { Tree } from './tree';
 import { Site } from './site';
 import store from '../store';
+import { TransferManager } from './transfer';
 
 let id = 0;
 
@@ -21,6 +22,8 @@ export class Session {
   public site: Site;
 
   public connecting = false;
+
+  public download = new TransferManager(this, 'download');
 
   public async connect(config: Site) {
     if (this.connecting) return;

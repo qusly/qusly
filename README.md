@@ -2,7 +2,7 @@
   <img src="static/app-icons/readme.png">
 
   <h3>
-    A feature-rich, elegant FTP client
+    A full-featured, elegant FTP client
   </h3>
 
   <br />
@@ -11,7 +11,7 @@
 [![Travis](https://img.shields.io/travis/qusly/qusly.svg?style=flat-square)](https://travis-ci.com/qusly/qusly)
 [![Travis](https://img.shields.io/travis/qusly/qusly-core.svg?style=flat-square)](https://travis-ci.org/xnerhu/qusly-core.svg)
 [![Downloads](https://img.shields.io/github/downloads/qusly/qusly/total.svg?style=flat-square)](https://github.com/qusly/qusly/releases)
-[![Discord](https://img.shields.io/discord/591624973609730059.svg?style=flat-square)](https://discord.gg/rNyNYFn)
+[![Discord](https://discordapp.com/api/guilds/307605794680209409/widget.png?style=shield)](https://discord.gg/P7Vn4VX)
 [![Github](https://img.shields.io/github/followers/xnerhu.svg?style=social&label=Follow)](https://github.com/xnerhu)
 
 </div>
@@ -58,26 +58,6 @@ ENABLED=true
 
 You can set the protocol to `sftp`, `ftp` or `ftps`.
 Port is usually `21` for FTP(s) and `22` for SFTP.
-
-### Other commands
-
-You can also run other commands, for other tasks like building the app or linting the code, by using the commands described below.
-
-##### Usage:
-
-```bash
-$ npm run <command>
-```
-
-| Command          | Description                                 |
-| ---------------- | ------------------------------------------- |
-| `build`          | Bundles the source code in production mode. |
-| `compile-win32`  | Compiles binaries for Windows.              |
-| `compile-darwin` | Compiles binaries for macOS.                |
-| `compile-linux`  | Compiles binaries for Linux.                |
-| `lint`           | Lints the source code.                      |
-| `lint-fix`       | Fixes eslint errors                         |
-| `dev`            | Starts Qusly in the dev mode        |
 
 <a href="https://www.patreon.com/bePatron?u=21429620">
     <img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160">
