@@ -5,6 +5,14 @@ import { ContextMenu, ContextMenuItem } from '../ContextMenu';
 import store from '~/renderer/store';
 import { resizeTextarea, selectFileName } from '~/renderer/utils';
 
+const onDownload = () => {
+  const session = store.sessions.current;
+  const page = store.pages.current;
+  const path = page.location.relative(page.focusedFile.name);
+
+  session.download.add(path, page.focusedFile.name);
+};
+
 const onOpen = () => {
   const page = store.pages.current;
   page.location.push(page.focusedFile.name);
@@ -65,7 +73,7 @@ export default observer(() => {
 
   return (
     <ContextMenu content="file">
-      <ContextMenuItem disabled>Download</ContextMenuItem>
+      <ContextMenuItem onClick={onDownload}>Download</ContextMenuItem>
       {!containsFile && (
         <>
           {!mutliple && (

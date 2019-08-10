@@ -14,17 +14,20 @@ export const MenuButton = observer(
     content,
     icon,
     iconSize,
+    disabled,
   }: {
     content: MenuContent;
     icon: any;
     iconSize?: number;
+    disabled?: boolean;
   }) => {
     return (
-      <StyledButton onClick={onClick(content)}>
+      <StyledButton onClick={onClick(content)} disabled={disabled}>
         <Icon
           size={iconSize}
           icon={icon}
           selected={store.menu.content === content}
+          disabled={disabled}
         />
       </StyledButton>
     );
