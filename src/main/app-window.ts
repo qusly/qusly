@@ -3,6 +3,7 @@ import { readFileSync, writeFileSync } from 'fs';
 import { resolve, join } from 'path';
 
 import { getPath } from '~/utils';
+import { runAutoUpdaterService } from './services/auto-updater';
 
 export class AppWindow extends BrowserWindow {
   public constructor() {
@@ -22,7 +23,7 @@ export class AppWindow extends BrowserWindow {
       icon: resolve(app.getAppPath(), 'static/app-icons/icon.png'),
     });
 
-    // runMessagingService(this);
+    runAutoUpdaterService(this);
 
     const windowDataPath = getPath('window-data.json');
 
