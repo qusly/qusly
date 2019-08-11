@@ -1,72 +1,116 @@
 /* eslint-disable */
 const webpack = require('webpack');
-const { getConfig, dev } = require('./webpack.config.base');
 const { join } = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const postcssNested = require('postcss-nested');
+const postcssMixins = require('postcss-mixins');
+const postcssVariables = require('postcss-css-variables');
+
+const { getConfig, dev } = require('./webpack.config.base');
 /* eslint-enable */
 
 const PORT = 4444;
 
-const getHtml = name => {
+const getHtml = (scope, name) => {
   return new HtmlWebpackPlugin({
-    title: 'Qusly',
+    title: 'Multrin',
     template: 'static/pages/app.html',
     filename: `${name}.html`,
-    chunks: ['vendor', name],
+    chunks: [`vendor.${scope}`, name],
   });
 };
 
-const config = {
-  target: 'electron-renderer',
-  plugins: [],
-  output: {},
+const applyEntries = (scope, config, entries) => {
+  for (const entry of entries) {
+    config.entry[entry] = [`./src/renderer/${entry}`];
+    config.plugins.push(getHtml(scope, entry));
+
+    if (dev) {
+      config.entry[entry].unshift('react-hot-loader/patch');
+    }
+  }
 };
 
-if (dev) {
-  config.devServer = {
-    contentBase: join(__dirname, 'dist'),
-    port: PORT,
-    hot: true,
-    inline: true,
-  };
-
-  config.output.publicPath = `http://localhost:${PORT}/`;
-
-  config.plugins.push(new webpack.HotModuleReplacementPlugin());
-}
-
-const appConfig = getConfig(config, {
-  entry: {
-    app: ['./src/renderer/app'],
-
-    vendor: [
-      'react',
-      'react-dom',
-      'mobx',
-      'mobx-react-lite',
-      'styled-components',
+const getBaseConfig = name => {
+  const config = {
+    plugins: [
+      new HardSourceWebpackPlugin(),
+      new MiniCssExtractPlugin({
+        filename: '[name].css',
+      }),
     ],
-  },
 
-  optimization: {
-    splitChunks: {
-      cacheGroups: {
-        vendor: {
-          chunks: 'initial',
-          name: 'vendor',
-          test: 'vendor',
-          enforce: true,
+    output: {},
+    entry: {},
+
+    module: {
+      rules: [
+        {
+          test: /\.css$/,
+          use: [
+            MiniCssExtractPlugin.loader,
+            {
+              loader: 'css-loader',
+              options: {
+                modules: true,
+                localsConvention: 'camelCase',
+              },
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                ident: 'postcss',
+                plugins: () => [
+                  postcssMixins(),
+                  postcssVariables(),
+                  postcssNested(),
+                ],
+              },
+            },
+          ],
+        },
+      ],
+    },
+
+    optimization: {
+      splitChunks: {
+        cacheGroups: {
+          vendor: {
+            chunks: 'initial',
+            name: `vendor.${name}`,
+            test: `vendor.${name}`,
+            enforce: true,
+          },
         },
       },
     },
-  },
+  };
 
-  plugins: [getHtml('app'), new HardSourceWebpackPlugin()],
+  config.entry[`vendor.${name}`] = [
+    'react',
+    'react-dom',
+    'mobx',
+    'mobx-react-lite',
+    'styled-components',
+  ];
+
+  return config;
+};
+
+const appConfig = getConfig(getBaseConfig('app'), {
+  target: 'electron-renderer',
+
+  devServer: {
+    contentBase: join(__dirname, 'build'),
+    port: PORT,
+    hot: true,
+    inline: true,
+    disableHostCheck: true,
+  },
 });
 
-if (dev) {
-  appConfig.entry.app.unshift('react-hot-loader/patch');
-}
+applyEntries('app', appConfig, ['app']);
 
 module.exports = [appConfig];
