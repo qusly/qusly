@@ -73,6 +73,7 @@
     "postcss-mixins": "^6.2.2",
     "postcss-nested": "^4.1.2",
     "postcss-preset-env": "^6.7.0",
+    "prettier": "^1.18.2",
     "pretty-bytes": "^5.3.0",
     "qusly-core": "^1.1.6",
     "react": "^16.9.0",
@@ -80,6 +81,7 @@
     "react-hot-loader": "^4.12.10",
     "react-windows-controls": "^1.1.0",
     "styled-components": "^4.3.2",
+    "stylelint-config-standard": "^18.3.0",
     "ts-loader": "^6.0.4",
     "typescript": "3.5.3",
     "webpack": "^4.39.1",
@@ -87,5 +89,6 @@
     "webpack-dev-server": "^3.8.0",
     "webpack-merge": "^4.2.1",
     "wexond-ui": "^1.1.7"
-  }
+  },
+  "dependencies": {}
 }

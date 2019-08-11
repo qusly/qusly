@@ -15,7 +15,7 @@ const PORT = 4444;
 
 const getHtml = (scope, name) => {
   return new HtmlWebpackPlugin({
-    title: 'Multrin',
+    title: 'Qusly',
     template: 'static/pages/app.html',
     filename: `${name}.html`,
     chunks: [`vendor.${scope}`, name],
