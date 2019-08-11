@@ -10,7 +10,7 @@ const PORT = 4444;
 
 const getHtml = name => {
   return new HtmlWebpackPlugin({
-    title: 'Wexond',
+    title: 'Qusly',
     template: 'static/pages/app.html',
     filename: `${name}.html`,
     chunks: ['vendor', name],

@@ -3,7 +3,7 @@ import { join, resolve } from 'path';
 import { platform } from 'os';
 import { getExtIcon } from 'electron-ext-icon';
 import { getMainMenu } from './menus/main';
-import { getPath } from '~/renderer/utils/path';
+import { getPath } from '~/utils';
 import { existsSync, readFileSync, writeFileSync } from 'fs';
 import { runAutoUpdaterService } from './services/auto-updater';
 

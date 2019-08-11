@@ -1,5 +1,5 @@
 {
-  "appId": "org.wexond.qusly",
+  "appId": "org.qusly.qusly",
   "productName": "Qusly",
   "asar": true,
   "directories": {
