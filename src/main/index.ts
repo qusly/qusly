@@ -99,9 +99,9 @@ const createWindow = () => {
 
   if (process.env.ENV === 'dev') {
     window.webContents.openDevTools({ mode: 'right' });
-    window.loadURL('http://localhost:4444');
+    window.loadURL('http://localhost:4444/app.html');
   } else {
-    window.loadURL(join('file://', app.getAppPath(), 'build/index.html'));
+    window.loadURL(join('file://', app.getAppPath(), 'build/app.html'));
   }
 
   window.once('ready-to-show', () => {

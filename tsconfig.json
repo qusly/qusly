@@ -13,16 +13,14 @@
     "allowJs": true,
     "sourceMap": true,
     "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true,
     "lib": ["dom", "esnext"],
     "experimentalDecorators": true,
 
     "baseUrl": "./",
 
     "paths": {
-      "~/*": ["src/*"],
-      "@renderer/*": ["src/renderer/*"]
+      "~/*": ["./src/*"]
     }
   },
-  "exclude": ["node_modules", "build"]
+  "include": ["./src/**/*.ts", "./src/**/*.tsx"]
 }
