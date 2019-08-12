@@ -69,7 +69,7 @@ const getBaseConfig = name => {
             {
               loader: 'sass-resources-loader',
               options: {
-                resources: [resolve(INCLUDE, 'renderer/mixins/test.scss')],
+                resources: resolve(INCLUDE, 'renderer/mixins/*.scss'),
               },
             },
           ],

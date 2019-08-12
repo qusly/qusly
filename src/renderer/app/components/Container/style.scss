@@ -2,6 +2,6 @@
   width: 200px;
   height: 120px;
   background-color: #eee;
-
-  @include test;
+  @include center-icon(24px);
+  @include max-lines(2);
 }
