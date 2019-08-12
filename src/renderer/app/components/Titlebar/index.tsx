@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 import { platform } from 'os';
 import { ipcRenderer } from 'electron';
 import { WindowsControls } from 'react-windows-controls';
