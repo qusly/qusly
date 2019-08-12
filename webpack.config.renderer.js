@@ -37,6 +37,7 @@ const getBaseConfig = name => {
       new HardSourceWebpackPlugin(),
       new MiniCssExtractPlugin({
         filename: '[name].css',
+        publicPath: './',
       }),
     ],
 
