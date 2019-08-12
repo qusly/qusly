@@ -19,80 +19,80 @@
 
 @mixin h1 {
   font-size: 96px;
-  letter-spacing: getLetterSpacing(96, -1.5)rem;
+  letter-spacing: #{getLetterSpacing(96, -1.5)}rem;
   @include roboto-light;
 }
 
 @mixin h2 {
   font-size: 60px;
-  letter-spacing: getLetterSpacing(60, -0.5)rem;
+  letter-spacing: #{getLetterSpacing(60, -0.5)}rem;
   @include roboto-light;
 }
 
 @mixin h3 {
   font-size: 48px;
-  letter-spacing: getLetterSpacing(48, 0)rem;
+  letter-spacing: #{getLetterSpacing(48, 0)}rem;
   @include roboto-regular;
 }
 
 @mixin h4 {
   font-size: 34px;
-  letter-spacing: getLetterSpacing(34, 0.25)rem;
+  letter-spacing: #{getLetterSpacing(34, 0.25)}rem;
   @include roboto-regular;
 }
 
 @mixin h5 {
   font-size: 24px;
-  letter-spacing: getLetterSpacing(24, 0)rem;
+  letter-spacing: #{getLetterSpacing(24, 0)}rem;
   @include roboto-regular;
 }
 
 @mixin h6 {
-  letter-spacing: getLetterSpacing(20, 0.15)rem;
+  letter-spacing: #{getLetterSpacing(20, 0.15)}rem;
   font-size: 20px;
   @include roboto-medium;
 }
 
 @mixin subtitle1 {
   font-size: 16px;
-  letter-spacing: getLetterSpacing(16, 0.15)rem;
+  letter-spacing: #{getLetterSpacing(16, 0.15)}rem;
   @include roboto-regular();
 }
 
 @mixin subtitle2 {
   font-size: 14px;
-  letter-spacing: getLetterSpacing(14, 0.1)rem;
+  letter-spacing: #{getLetterSpacing(14, 0.1)}rem;
   @include roboto-medium;
 }
 
 @mixin body1 {
   font-size: 16px;
-  letter-spacing: getLetterSpacing(16, 0.5)rem;
+  letter-spacing: #{getLetterSpacing(16, 0.5)}rem;
   @include roboto-regular;
 }
 
 @mixin body2 {
   font-size: 14px;
-  letter-spacing: getLetterSpacing(14, 0.25)rem;
+  letter-spacing: #{getLetterSpacing(14, 0.25)}rem;
   @include roboto-regular;
 }
 
 @mixin button {
   font-size: 14px;
-  letter-spacing: getLetterSpacing(14, 0.75)rem;
+  letter-spacing: #{getLetterSpacing(14, 0.75)}rem;
   @include roboto-medium;
 }
 
 @mixin caption {
   font-size: 12px;
-  letter-spacing: getLetterSpacing(12, 0.4)rem;
+  letter-spacing: #{getLetterSpacing(12, 0.4)}rem;
   @include roboto-regular;
 }
 
 @mixin overline {
   font-size: 10px;
   text-transform: uppercase;
-  letter-spacing: getLetterSpacing(10, 1.5)rem;
+  letter-spacing: #{getLetterSpacing(10, 1.5)}rem;
   @include roboto-regular;
 }
 

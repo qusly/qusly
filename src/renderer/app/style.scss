@@ -27,6 +27,7 @@ body {
   overflow: hidden;
   user-select: none;
   cursor: default;
+  @include body2;
 }
 
 * {
