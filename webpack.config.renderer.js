@@ -65,7 +65,12 @@ const getBaseConfig = name => {
                 },
               },
             },
-            'sass-loader',
+            {
+              loader: 'sass-loader',
+              /*options: {
+                data: `$test: rgba(0, 0, 0, 0.48);`,
+              },*/
+            },
             {
               loader: 'sass-resources-loader',
               options: {
@@ -96,7 +101,6 @@ const getBaseConfig = name => {
     'react-dom',
     'mobx',
     'mobx-react-lite',
-    'styled-components',
   ];
 
   return config;
