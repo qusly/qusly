@@ -5,7 +5,7 @@ import { WindowsControls } from 'react-windows-controls';
 
 import { closeWindow, minimizeWindow, maximizeWindow } from '../../utils';
 import { TOOLBAR_HEIGHT } from '../../constants';
-import * as styles from './style.css';
+import * as styles from './style.scss';
 
 const App = () => {
   return (

@@ -4,7 +4,7 @@ import { render } from 'react-dom';
 
 import App from './components/App';
 
-import './style.css'
+import './style.scss';
 
 ipcRenderer.setMaxListeners(0);
 

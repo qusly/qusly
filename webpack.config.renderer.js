@@ -3,9 +3,6 @@ const { join, resolve } = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const postcssNested = require('postcss-nested');
-const postcssMixins = require('postcss-mixins');
-const postcssVariables = require('postcss-css-variables');
 
 const { getConfig, dev } = require('./webpack.config.base');
 /* eslint-enable */
@@ -54,7 +51,7 @@ const getBaseConfig = name => {
           use: ['file-loader'],
         },
         {
-          test: /\.css$/,
+          test: /\.scss$/,
           use: [
             'css-hot-loader',
             MiniCssExtractPlugin.loader,
@@ -65,17 +62,7 @@ const getBaseConfig = name => {
                 localsConvention: 'camelCase',
               },
             },
-            {
-              loader: 'postcss-loader',
-              options: {
-                ident: 'postcss',
-                plugins: () => [
-                  postcssMixins(),
-                  postcssVariables(),
-                  postcssNested(),
-                ],
-              },
-            },
+            'sass-loader',
           ],
         },
       ],
