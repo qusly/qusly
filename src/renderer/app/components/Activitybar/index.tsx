@@ -25,7 +25,12 @@ const Item = observer(({ content, icon, disabled }: ItemProps) => {
   }
 
   return (
-    <div className={style.item} onClick={!disabled && onItemClick(content)}>
+    <div
+      className={style.item}
+      onClick={onItemClick(content)}
+      style={{
+        pointerEvents: disabled ? 'none' : 'auto',
+      }}>
       <div className={style.itemIcon} style={iconStyle} />
     </div>
   );
