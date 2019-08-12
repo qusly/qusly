@@ -1,6 +1,5 @@
 /* eslint-disable */
-const webpack = require('webpack');
-const { join } = require('path');
+const { join, resolve } = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -12,6 +11,8 @@ const { getConfig, dev } = require('./webpack.config.base');
 /* eslint-enable */
 
 const PORT = 4444;
+
+const INCLUDE = resolve(__dirname, 'src');
 
 const getHtml = (scope, name) => {
   return new HtmlWebpackPlugin({
@@ -48,8 +49,14 @@ const getBaseConfig = name => {
     module: {
       rules: [
         {
+          test: /\.(png|gif|jpg|woff2|ttf|svg)$/,
+          include: INCLUDE,
+          use: ['file-loader'],
+        },
+        {
           test: /\.css$/,
           use: [
+            'css-hot-loader',
             MiniCssExtractPlugin.loader,
             {
               loader: 'css-loader',

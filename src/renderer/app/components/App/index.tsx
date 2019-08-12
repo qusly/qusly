@@ -1,21 +1,16 @@
-import { platform } from 'os';
 import * as React from 'react';
 import { hot } from 'react-hot-loader/root';
-import { createGlobalStyle } from 'styled-components';
+import { platform } from 'os';
 import { WindowsControls } from 'react-windows-controls';
 
 import { closeWindow, minimizeWindow, maximizeWindow } from '../../utils';
 import { TOOLBAR_HEIGHT } from '../../constants';
-import { Style } from '../../style';
-import { StyledApp } from './style';
-
-const GlobalStyle = createGlobalStyle`${Style}`;
+import * as styles from './style.css';
 
 const App = () => {
   return (
-    <StyledApp>
-      <GlobalStyle />
-      test
+    <div className={styles.app}>
+      aha
       {platform() !== 'darwin' && (
         <WindowsControls
           style={{
@@ -31,7 +26,7 @@ const App = () => {
           onMaximize={maximizeWindow}
         />
       )}
-    </StyledApp>
+    </div>
   );
 };
 

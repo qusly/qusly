@@ -8,7 +8,7 @@ import { runAutoUpdaterService } from './services/auto-updater';
 export class AppWindow extends BrowserWindow {
   public constructor() {
     super({
-      frame: false,
+      //frame: false,
       minWidth: 400,
       minHeight: 450,
       width: 900,
