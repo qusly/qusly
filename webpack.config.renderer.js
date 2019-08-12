@@ -58,11 +58,20 @@ const getBaseConfig = name => {
             {
               loader: 'css-loader',
               options: {
-                modules: true,
+                sourceMap: dev,
                 localsConvention: 'camelCase',
+                modules: {
+                  localIdentName: '[local]--[hash:base64:5]',
+                },
               },
             },
             'sass-loader',
+            {
+              loader: 'sass-resources-loader',
+              options: {
+                resources: [resolve(INCLUDE, 'renderer/mixins/test.scss')],
+              },
+            },
           ],
         },
       ],

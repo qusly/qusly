@@ -5,12 +5,15 @@ import { WindowsControls } from 'react-windows-controls';
 
 import { closeWindow, minimizeWindow, maximizeWindow } from '../../utils';
 import { TOOLBAR_HEIGHT } from '../../constants';
-import * as styles from './style.scss';
+import * as style from './style.scss';
+
+import { Container } from '../Container';
 
 const App = () => {
   return (
-    <div className={styles.app}>
-      aha
+    <div className={style.app}>
+      test
+      <Container />
       {platform() !== 'darwin' && (
         <WindowsControls
           style={{

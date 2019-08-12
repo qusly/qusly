@@ -2,9 +2,9 @@ import { ipcRenderer } from 'electron';
 import * as React from 'react';
 import { render } from 'react-dom';
 
-import App from './components/App';
-
 import './style.scss';
+
+import App from './components/App';
 
 ipcRenderer.setMaxListeners(0);
 
