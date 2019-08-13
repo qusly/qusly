@@ -3,8 +3,8 @@ import { observer } from 'mobx-react-lite';
 
 import store from '~/renderer/app/store';
 import { ActivitybarContent } from '~/renderer/app/store/activitybar';
-import { transparency, icons } from '~/renderer/constants';
-import * as style from './style.scss';
+import { icons } from '~/renderer/constants';
+import { StyledActivitybar, StyledItem, ItemIcon } from './style';
 
 interface ItemProps {
   content: ActivitybarContent;
@@ -17,32 +17,22 @@ const onItemClick = (content: ActivitybarContent) => () => {
 }
 
 const Item = observer(({ content, icon, disabled }: ItemProps) => {
-  const opacity = store.activitybar.content === content ? 1 : transparency.icons.inactive;
-
-  const iconStyle = {
-    backgroundImage: `url(${icon})`,
-    opacity: disabled ? transparency.icons.disabled : opacity,
-  }
+  const selected = store.activitybar.content === content;
 
   return (
-    <div
-      className={style.item}
-      onClick={onItemClick(content)}
-      style={{
-        pointerEvents: disabled ? 'none' : 'auto',
-      }}>
-      <div className={style.itemIcon} style={iconStyle} />
-    </div>
+    <StyledItem onClick={onItemClick(content)} disabled={disabled}>
+      <ItemIcon selected={selected} icon={icon} disabled={disabled} />
+    </StyledItem>
   );
 });
 
 export const Activitybar = () => {
   return (
-    <div className={style.activitybar}>
+    <StyledActivitybar>
       <Item content='explorer' icon={icons.fileTree} />
       <Item content='sites-manager' icon={icons.sitesManager} />
       <Item content='search' icon={icons.search} disabled />
       <Item content='transfer' icon={icons.transfer} disabled />
-    </div>
+    </StyledActivitybar>
   );
 }

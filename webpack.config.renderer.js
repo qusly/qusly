@@ -2,7 +2,6 @@
 const { join, resolve } = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const { getConfig, dev } = require('./webpack.config.base');
 /* eslint-enable */
@@ -33,13 +32,7 @@ const applyEntries = (scope, config, entries) => {
 
 const getBaseConfig = name => {
   const config = {
-    plugins: [
-      new HardSourceWebpackPlugin(),
-      new MiniCssExtractPlugin({
-        filename: '[name].css',
-        publicPath: './',
-      }),
-    ],
+    plugins: [new HardSourceWebpackPlugin()],
 
     output: {},
     entry: {},
@@ -50,35 +43,6 @@ const getBaseConfig = name => {
           test: /\.(png|gif|jpg|woff2|ttf|svg)$/,
           include: INCLUDE,
           use: ['file-loader'],
-        },
-        {
-          test: /\.scss$/,
-          use: [
-            'css-hot-loader',
-            MiniCssExtractPlugin.loader,
-            {
-              loader: 'css-loader',
-              options: {
-                sourceMap: dev,
-                localsConvention: 'camelCase',
-                modules: {
-                  localIdentName: '[local]--[hash:base64:5]',
-                },
-              },
-            },
-            {
-              loader: 'sass-loader',
-              /*options: {
-                data: `$test: rgba(0, 0, 0, 0.48);`,
-              },*/
-            },
-            {
-              loader: 'sass-resources-loader',
-              options: {
-                resources: resolve(INCLUDE, 'renderer/mixins/*.scss'),
-              },
-            },
-          ],
         },
       ],
     },
@@ -102,6 +66,7 @@ const getBaseConfig = name => {
     'react-dom',
     'mobx',
     'mobx-react-lite',
+    'styled-components',
   ];
 
   return config;

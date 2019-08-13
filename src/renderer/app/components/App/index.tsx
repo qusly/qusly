@@ -1,16 +1,21 @@
 import * as React from 'react';
 import { hot } from 'react-hot-loader/root';
+import { createGlobalStyle } from 'styled-components';
 
 import { Titlebar } from '../Titlebar';
 import { Activitybar } from '../Activitybar';
-import * as style from './style.scss';
+import { StyledApp } from './style';
+import { Style } from '~/renderer/app/style';
+
+const GlobalStyle = createGlobalStyle`${Style}`;
 
 const App = () => {
   return (
-    <div className={style.appContainer}>
+    <StyledApp>
+      <GlobalStyle />
       <Titlebar />
       <Activitybar />
-    </div>
+    </StyledApp>
   );
 };
 

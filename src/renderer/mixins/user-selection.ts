@@ -1,7 +1,7 @@
-@mixin no-user-select {
+export const noUserSelect = () => `
   user-select: none;
-}
+`;
 
-@mixin no-tap-highlight {
+export const noTapHighlight = () => `
   -webkit-tap-highlight-color:  rgba(255, 255, 255, 0) !important;
-}
+`;

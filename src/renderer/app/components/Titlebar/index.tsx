@@ -5,7 +5,7 @@ import { ipcRenderer } from 'electron';
 import { WindowsControls } from 'react-windows-controls';
 
 import { closeWindow, maximizeWindow, minimizeWindow } from '~/renderer/app/utils';
-import * as style from './style.scss';
+import { StyledTitlebar, TrafficButtons, Handle, Icon, Title } from './style';
 
 const onUpdateClick = () => {
   ipcRenderer.send('update-install');
@@ -15,10 +15,10 @@ export const Titlebar = observer(() => {
   const isDarwin = platform() === 'darwin';
 
   return (
-    <div className={style.titlebar}>
-      <div className={style.handle} />
-      {isDarwin ? <div className={style.trafficButtons} /> : <div className={style.icon} />}
-      <div className={style.title}>Qusly</div>
+    <StyledTitlebar>
+      <Handle />
+      {isDarwin ? <TrafficButtons /> : <Icon />}
+      <Title>Qusly</Title>
       {!isDarwin && (
         <WindowsControls
           onClose={closeWindow}
@@ -27,7 +27,7 @@ export const Titlebar = observer(() => {
           style={{ WebkitAppRegion: 'no-drag', height: '100%' }}
         />
       )}
-    </div>
+    </StyledTitlebar>
   );
 });
 
