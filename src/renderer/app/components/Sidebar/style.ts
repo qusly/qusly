@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { robotoMedium } from '~/renderer/mixins';
 
 export const StyledSidebar = styled.div`
-  width: 274px;
+  width: 200px; /*274px;*/
   height: 100%;
   background-color: rgba(0, 0, 0, 0.04);
 `;
