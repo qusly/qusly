@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { observer } from 'mobx-react-lite';
 
-import { ToolbarButton } from '../ToolbarButton';
+import { ToolbarButton } from '~/renderer/components/ToolbarButton';
 import { icons } from '~/renderer/constants';
 import { StyledContainer } from './style';
 
-export default observer(() => {
+export const NavigationButtons = observer(() => {
   return (
     <StyledContainer>
       <ToolbarButton

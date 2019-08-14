@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import Appbar from '../Appbar';
+import { Appbar } from '../Appbar';
 import { Page } from '../Page';
 import { StyledContent } from './style';
 

@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import NavigationButtons from '../NavigationButtons';
+import { NavigationButtons } from '../NavigationButtons';
 import { StyledToolbar } from './style';
 
-export default () => {
+export const Toolbar = () => {
   return (
     <StyledToolbar>
       <NavigationButtons />

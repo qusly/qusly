@@ -1,5 +1,5 @@
-import { observer } from 'mobx-react-lite';
 import * as React from 'react';
+import { observer } from 'mobx-react-lite';
 
 import { transparency } from '~/renderer/constants/transparency';
 import { Button, Icon, Circle } from './style';
