@@ -6,4 +6,7 @@ export const icons = {
   qusly: require('~/renderer/resources/icons/qusly.png'),
   close: require('~/renderer/resources/icons/close.svg'),
   add: require('~/renderer/resources/icons/add.svg'),
+  chevronLeft: require('~/renderer/resources/icons/chevron-left.svg'),
+  chevronRight: require('~/renderer/resources/icons/chevron-right.svg'),
+  refresh: require('~/renderer/resources/icons/refresh.svg'),
 }
