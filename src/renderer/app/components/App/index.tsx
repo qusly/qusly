@@ -4,8 +4,9 @@ import { createGlobalStyle } from 'styled-components';
 
 import { Titlebar } from '../Titlebar';
 import { Activitybar } from '../Activitybar';
-import { StyledApp } from './style';
-import { Style } from '~/renderer/app/style';
+import { Sidebar } from '../Sidebar';
+import { Style } from '../../style';
+import { StyledApp, Container } from './style';
 
 const GlobalStyle = createGlobalStyle`${Style}`;
 
@@ -14,7 +15,10 @@ const App = () => {
     <StyledApp>
       <GlobalStyle />
       <Titlebar />
-      <Activitybar />
+      <Container>
+        <Activitybar />
+        <Sidebar />
+      </Container>
     </StyledApp>
   );
 };
