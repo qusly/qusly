@@ -85,7 +85,7 @@ const Overlay = observer(({ tab }: { tab: Tab }) => {
     <StyledOverlay
       hovered={tab.isHovered}
       style={{
-        backgroundColor: tab.isSelected ? 'white' : 'rgba(255, 255, 255, 0.5)',
+        backgroundColor: tab.isSelected ? '#fafafa' : 'rgba(255, 255, 255, 0.5)',
       }}
     />
   );
@@ -102,7 +102,7 @@ export default observer(({ tab }: { tab: Tab }) => {
     >
       <TabContainer
         style={{
-          backgroundColor: tab.isSelected ? 'white' : 'transparent',
+          backgroundColor: tab.isSelected ? '#fafafa' : 'transparent',
         }}
       >
         <Content tab={tab} />
