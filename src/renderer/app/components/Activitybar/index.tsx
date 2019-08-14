@@ -2,17 +2,17 @@ import * as React from 'react';
 import { observer } from 'mobx-react-lite';
 
 import store from '~/renderer/app/store';
-import { ActivitybarContent } from '~/renderer/app/store/activitybar';
+import { SidebarContent } from '~/renderer/app/store/activitybar';
 import { icons } from '~/renderer/constants';
 import { StyledActivitybar, StyledItem, ItemIcon } from './style';
 
 interface ItemProps {
-  content: ActivitybarContent;
+  content: SidebarContent;
   icon: string;
   disabled?: boolean;
 }
 
-const onItemClick = (content: ActivitybarContent) => () => {
+const onItemClick = (content: SidebarContent) => () => {
   store.activitybar.content = content;
 }
 

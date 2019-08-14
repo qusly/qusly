@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { robotoMedium } from '~/renderer/mixins';
 
@@ -10,8 +10,11 @@ export const StyledSidebar = styled.div`
 
 export const StyledPage = styled.div`
   width: 100%;
-  display: flex;
   flex-direction: column;
+
+  ${({ visible }: { visible: boolean }) => css`
+    display: ${visible ? 'flex' : 'none'};
+  `};
 `;
 
 export const Title = styled.div`
