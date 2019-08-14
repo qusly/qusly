@@ -84,6 +84,9 @@ export const StyledTitle = styled.div`
   transition: 0.2s margin-left;
   margin-left: 8px;
   -webkit-font-smoothing: antialiased;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+
   ${body2()};
 
   ${({ isIcon }: TitleProps) => css`
