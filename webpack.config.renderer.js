@@ -7,7 +7,6 @@ const { getConfig, dev } = require('./webpack.config.base');
 /* eslint-enable */
 
 const PORT = 4444;
-
 const INCLUDE = resolve(__dirname, 'src');
 
 const getHtml = (scope, name) => {

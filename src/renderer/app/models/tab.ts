@@ -9,6 +9,7 @@ import {
   TAB_ANIMATION_DURATION,
   ADD_TAB_MARGIN_LEFT,
 } from '~/renderer/app/constants';
+import { ISite } from '~/interfaces';
 
 let id = 1;
 
@@ -16,6 +17,7 @@ export interface TabOptions {
   active?: boolean;
   index?: number;
   path?: string;
+  site?: ISite;
 }
 
 export class Tab {
@@ -27,12 +29,6 @@ export class Tab {
 
   @observable
   public title: string = 'New tab';
-
-  @observable
-  public loading: boolean = false;
-
-  @observable
-  public favicon: string = '';
 
   @observable
   public width: number = 0;
@@ -75,11 +71,6 @@ export class Tab {
   @computed
   public get isExpanded() {
     return this.isHovered || this.isSelected || !store.tabs.scrollable;
-  }
-
-  @computed
-  public get isIconSet() {
-    return this.favicon !== '' || this.loading;
   }
 
   public left = 0;

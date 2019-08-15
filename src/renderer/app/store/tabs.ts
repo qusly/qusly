@@ -111,6 +111,10 @@ export class TabsStore {
       this.list.push(tab);
     }
 
+    if (options.site) {
+      store.pages.add(options.site, tab);
+    }
+
     requestAnimationFrame(() => {
       tab.setLeft(tab.getLeft(), false);
       this.updateTabsBounds(true);

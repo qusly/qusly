@@ -2,6 +2,7 @@ import { ipcRenderer } from 'electron';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
+import store from './store';
 import { fonts } from '~/renderer/constants';
 import App from './components/App';
 
@@ -35,3 +36,9 @@ styleElement.textContent = `
 document.head.appendChild(styleElement);
 
 ReactDOM.render(<App />, document.getElementById('app'));
+
+if (process.env.ENV === 'dev') {
+  const site = ipcRenderer.sendSync('get-testing-site');
+
+  store.tabs.addTab({ site, active: true, });
+}

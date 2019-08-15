@@ -1,8 +1,8 @@
 import { Power2 } from 'gsap';
 
-// import { TabOptions } from '../models';
+import { TabOptions } from '../models';
 
-export const defaultTabOptions: any = { // TabOptions
+export const defaultTabOptions: TabOptions = {
   active: true,
 };
 
