@@ -8,5 +8,8 @@ export class Page {
   @observable
   public id = id++;
 
+  @observable
+  public loading = true;
+
   constructor(public session: Session) { }
 }
