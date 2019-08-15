@@ -1,3 +1,4 @@
+import { ipcRenderer } from 'electron';
 import { observable, action } from 'mobx';
 import * as React from 'react';
 import { TweenLite } from 'gsap';
@@ -65,6 +66,15 @@ export class TabsStore {
       }
       this.rearrangeTabsTimer.time++;
     }, 1000);
+
+    if (process.env.ENV === 'dev') {
+      requestAnimationFrame(() => {
+        if (!this.list.length) {
+          const site = ipcRenderer.sendSync('get-testing-site');
+          this.addTab({ site, active: true });
+        }
+      });
+    }
   }
 
   public resetRearrangeTabsTimer() {
