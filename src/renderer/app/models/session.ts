@@ -11,15 +11,14 @@ export class Session {
 
   public client = new Client();
 
-  public site: ISite;
-
   public status: ConnectionStatus;
 
-  public async connect(site: ISite) {
-    this.site = site;
+  constructor(public site: ISite) { }
+
+  public async connect() {
     this.status = 'connecting';
 
-    const res = await this.client.connect(site);
+    const res = await this.client.connect(this.site);
 
     if (res.success) {
       this.status = 'connected';

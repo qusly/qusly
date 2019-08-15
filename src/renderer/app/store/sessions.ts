@@ -10,11 +10,15 @@ export class SessionsStore {
   @observable
   public currentId = 0;
 
-  public create(site: ISite) {
-    let session = this.list.find(r => r.site === site);
+  public get current() {
+    return this.list.find(r => r.id === this.currentId);
+  }
+
+  public add(site: ISite) {
+    let session = this.list.find(r => r.site._id === site._id);
 
     if (!session) {
-      session = new Session();
+      session = new Session(site);
       this.list.push(session);
     }
 

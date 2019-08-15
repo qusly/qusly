@@ -92,6 +92,8 @@ export class Tab {
   public findRequestId: number;
   public removeTimeout: any;
   public isWindow: boolean = false;
+  public pageId: number;
+  public sessionId: number;
 
   constructor({ active } = defaultTabOptions) {
     if (active) {
