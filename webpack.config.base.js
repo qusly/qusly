@@ -51,7 +51,7 @@ const config = {
     },
   },
 
-  externals: [],
+  externals: ['qusly-core'],
 };
 
 function getConfig(...cfg) {
