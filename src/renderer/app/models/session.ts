@@ -16,14 +16,13 @@ export class Session {
   constructor(public site: ISite) { }
 
   public async connect() {
-    this.status = 'connecting';
+    if (this.status !== 'connecting') {
+      this.status = 'connecting';
 
-    const res = await this.client.connect(this.site);
+      const res = await this.client.connect(this.site);
+      if (!res.success) throw res.error;
 
-    if (res.success) {
       this.status = 'connected';
-    } else {
-      console.error(res.error);
     }
   }
 }
