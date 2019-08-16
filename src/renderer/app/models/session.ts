@@ -13,6 +13,8 @@ export class Session {
 
   public status: ConnectionStatus;
 
+  public startPath: string;
+
   constructor(public site: ISite) { }
 
   public async connect() {
@@ -22,6 +24,9 @@ export class Session {
       const res = await this.client.connect(this.site);
       if (!res.success) throw res.error;
 
+      const { path } = await this.client.pwd();
+
+      this.startPath = path;
       this.status = 'connected';
     }
   }

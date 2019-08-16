@@ -26,5 +26,6 @@ export class PagesStore {
     this.list.push(page);
 
     await session.connect();
+    await page.load(session.startPath);
   }
 }
