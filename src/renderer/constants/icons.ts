@@ -10,4 +10,5 @@ export const icons = {
   chevronRight: require('~/renderer/resources/icons/chevron-right.svg'),
   refresh: require('~/renderer/resources/icons/refresh.svg'),
   folder: require('~/renderer/resources/icons/folder.svg'),
+  file: require('~/renderer/resources/icons/file.svg'),
 }
