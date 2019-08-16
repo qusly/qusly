@@ -31,8 +31,10 @@ export class Page {
     this.loading = true;
 
     const path = this.path.toString();
+    console.log(path);
     const res = await this.session.client.readDir(path);
     if (!res.success) throw res.error;
+
 
     this.files = res.files;
     this.loading = false;

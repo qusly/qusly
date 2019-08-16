@@ -48,6 +48,6 @@ export class Location {
   }
 
   public relative(...items: string[]) {
-    return '/' + [...this.items.slice(1, -1), ...items].join('/');
+    return '/' + [...this.items.slice(1), ...items].join('/');
   }
 }
