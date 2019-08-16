@@ -11,11 +11,9 @@ export const PathView = observer(() => {
   return (
     <StyledPathView>
       <Container visible>
-        <Item>/</Item>
-        <Item>Home</Item>
-        <Item>Documents</Item>
-        <Item>Projects</Item>
-        <Item>Qusly</Item>
+        {page.path.items.map((label, index) => (
+          <Item key={index}>{label}</Item>
+        ))}
       </Container>
     </StyledPathView>
   );
