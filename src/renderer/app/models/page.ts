@@ -31,14 +31,12 @@ export class Page {
     this.loading = true;
 
     const path = this.path.toString();
-    console.log(path);
     const res = await this.session.client.readDir(path);
     if (!res.success) throw res.error;
 
-
+    this.tab.title = `${this.session.site.title} - ${path}`;
     this.files = res.files;
     this.loading = false;
-    this.tab.title = `${this.session.site.title} - ${path}`;
   }
 
   public get tab() {

@@ -9,4 +9,5 @@ export const icons = {
   chevronLeft: require('~/renderer/resources/icons/chevron-left.svg'),
   chevronRight: require('~/renderer/resources/icons/chevron-right.svg'),
   refresh: require('~/renderer/resources/icons/refresh.svg'),
+  folder: require('~/renderer/resources/icons/folder.svg'),
 }
