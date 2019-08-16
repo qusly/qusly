@@ -1,17 +1,26 @@
+import { computed, observable, action } from 'mobx';
+
 export class Location {
+  @observable
   private history: string[] = [];
 
+  @observable
   private pos = -1;
 
+  @computed
   public get items() {
+    if (this.pos === -1) return [];
+
     const items = this.history[this.pos].split('/').filter(r => r.length);
     return ['/', ...items];
   }
 
+  @computed
   public get canGoBack() {
     return this.pos > 0;
   }
 
+  @computed
   public get canGoForward() {
     return this.pos < this.history.length - 1;
   }
@@ -28,6 +37,7 @@ export class Location {
     }
   }
 
+  @action
   public push(path: string) {
     this.pos++;
     this.history = [...this.history.slice(0, this.pos), path];
