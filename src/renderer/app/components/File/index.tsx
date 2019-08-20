@@ -3,7 +3,6 @@ import { observer } from 'mobx-react-lite';
 import { selectableItem } from 'rectangle-selection';
 
 import store from '~/renderer/app/store';
-import { handleSelection } from '~/renderer/app/utils';
 import { IFile } from '~/interfaces';
 import { StyledFile, Label, Icon } from './style';
 
@@ -13,7 +12,24 @@ interface Props {
 
 const onMouseDown = (data: IFile) => (e: React.MouseEvent) => {
   e.stopPropagation();
-  handleSelection(data, e);
+
+  if (e.button !== 1 && e.button !== 2) {
+    const page = store.pages.current;
+    const { selected } = data;
+
+    if (e.ctrlKey) {
+      data.selected = !selected;
+    } else if (e.shiftKey) {
+      page.selectGroup(page.files.indexOf(data), page.files.indexOf(page.focusedFile));
+    } else {
+      page.unselectFiles();
+      data.selected = true;
+    }
+
+    if (!e.shiftKey) {
+      page.focusedFile = data;
+    }
+  }
 }
 
 const onDoubleClick = (data: IFile) => () => {
