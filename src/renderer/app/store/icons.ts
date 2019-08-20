@@ -11,10 +11,14 @@ export class IconsStore {
 
   @action
   public load(files: IFile[]) {
+    if (!files || !files.length) return null;
+
     return new Promise(resolve => {
       const id = makeId(32);
       const list = files.map(r => r.ext).filter((ext, index, arr) => ext.length
         && arr.indexOf(ext) === index && !this.icons.get(ext));
+
+      if (!list.length) return resolve();
 
       ipcRenderer.once(`get-icons-${id}`, (e, icons) => {
         for (const ext in icons) {

@@ -38,7 +38,7 @@ export class Page {
     await store.icons.load(res.files);
 
     this.tab.title = `${this.session.site.title} - ${path}`;
-    this.files = res.files;
+    this.files = res.files || [];
     this.loading = false;
   }
 
