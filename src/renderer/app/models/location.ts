@@ -43,6 +43,12 @@ export class Location {
     this.history = [...this.history.slice(0, this.pos), path];
   }
 
+  @action
+  public pushRelative(...items: string[]) {
+    const path = this.relative(...items);
+    this.push(path);
+  }
+
   public toString() {
     return this.relative();
   }

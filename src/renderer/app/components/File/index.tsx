@@ -16,12 +16,26 @@ const onMouseDown = (data: IFile) => (e: React.MouseEvent) => {
   handleSelection(data, e);
 }
 
+const onDoubleClick = (data: IFile) => () => {
+  const page = store.pages.current;
+
+  if (data.type === 'directory') {
+    page.path.pushRelative(data.name);
+    page.fetchFiles();
+  }
+}
+
 export const File = selectableItem<Props>(observer(({ data }: Props) => {
   const { name, selected } = data;
   const { icon, opacity } = store.icons.getIcon(data);
 
   return (
-    <StyledFile onMouseDown={onMouseDown(data)} selected={selected} cut={false} disabled={false}>
+    <StyledFile
+      onMouseDown={onMouseDown(data)}
+      onDoubleClick={onDoubleClick(data)}
+      selected={selected}
+      cut={false}
+      disabled={false}>
       <Icon icon={icon} style={{ opacity }} />
       <Label>{name}</Label>
     </StyledFile>
