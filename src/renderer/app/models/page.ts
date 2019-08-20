@@ -19,6 +19,8 @@ export class Page {
 
   public path = new Location();
 
+  public focusedFile: IFile;
+
   constructor(public session: Session) { }
 
   public async load(path?: string) {
@@ -43,5 +45,26 @@ export class Page {
 
   public get tab() {
     return store.tabs.list.find(r => r.pageId === this.id);
+  }
+
+  @action
+  public unselectFiles() {
+    this.files.forEach(item => {
+      item.selected = false;
+    });
+  }
+
+  @action
+  public selectGroup(start: number, end: number) {
+    if (start > end) [start, end] = [end, start];
+
+    for (let i = 0; i < this.files.length; i++) {
+      const file = this.files[i];
+      const selected = i >= start && i <= end;
+
+      if (file.selected !== selected) {
+        file.selected = selected;
+      }
+    }
   }
 }

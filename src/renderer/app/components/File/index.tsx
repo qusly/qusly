@@ -3,6 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { selectableItem } from 'rectangle-selection';
 
 import store from '~/renderer/app/store';
+import { handleSelection } from '~/renderer/app/utils';
 import { IFile } from '~/interfaces';
 import { StyledFile, Label, Icon } from './style';
 
@@ -10,12 +11,17 @@ interface Props {
   data: IFile;
 }
 
+const onMouseDown = (data: IFile) => (e: React.MouseEvent) => {
+  e.stopPropagation();
+  handleSelection(data, e);
+}
+
 export const File = selectableItem<Props>(observer(({ data }: Props) => {
   const { name, selected } = data;
   const { icon, opacity } = store.icons.getIcon(data);
 
   return (
-    <StyledFile selected={selected} cut={false} disabled={false}>
+    <StyledFile onMouseDown={onMouseDown(data)} selected={selected} cut={false} disabled={false}>
       <Icon icon={icon} style={{ opacity }} />
       <Label>{name}</Label>
     </StyledFile>
