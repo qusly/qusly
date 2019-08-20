@@ -25,7 +25,12 @@ export const Page = observer(() => {
 
   return (
     <StyledPage>
-      <SelectableGroup onSelect={onSelect}>
+      <SelectableGroup
+        onSelect={onSelect}
+        style={{
+          opacity: page.loading ? 0 : 1,
+          pointerEvents: page.loading ? 'none' : 'auto'
+        }}>
         {page.files.map(file => (
           <File key={file.name} itemKey={file.name} data={file} />
         ))}

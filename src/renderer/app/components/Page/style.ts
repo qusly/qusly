@@ -17,13 +17,13 @@ export const StyledPage = styled.div`
     overflow-y: auto;
     padding: 24px;
     padding-top: 16px;
-    transition: 0.1s opacity;
     display: grid;
     grid-gap: 8px;
     grid-template-rows: 1fr;
     grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
     grid-template-rows: repeat(auto-fill, 82px);
     position: relative;
+    transition: 0.1s opacity;
     ${noButtons()};
   }
 `;
