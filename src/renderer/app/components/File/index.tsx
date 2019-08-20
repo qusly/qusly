@@ -1,17 +1,24 @@
 import * as React from 'react';
+import { observer } from 'mobx-react-lite';
+import { selectableItem } from 'rectangle-selection';
 
 import store from '~/renderer/app/store';
 import { IFile } from '~/interfaces';
 import { StyledFile, Label, Icon } from './style';
 
-export const File = ({ data }: { data: IFile }) => {
-  const { name, ext } = data;
+interface Props {
+  data: IFile;
+}
+
+export const File = selectableItem<Props>(observer(({ data }: Props) => {
+  const { name, selected } = data;
   const { icon, opacity } = store.icons.getIcon(data);
 
   return (
-    <StyledFile cut={false} disabled={false} selected={false}>
+    <StyledFile selected={selected} cut={false} disabled={false}>
       <Icon icon={icon} style={{ opacity }} />
       <Label>{name}</Label>
     </StyledFile>
   );
-};
+}));
+

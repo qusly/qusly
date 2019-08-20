@@ -9,6 +9,23 @@ export const StyledPage = styled.div`
   background-color: #fff;
   border-radius: 32px 32px 0px 0px;
   position: relative;
+
+  & .selection-container {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 24px;
+    padding-top: 16px;
+    transition: 0.1s opacity;
+    display: grid;
+    grid-gap: 8px;
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+    grid-template-rows: repeat(auto-fill, 82px);
+    position: relative;
+    ${noButtons()};
+  }
 `;
 
 export const PreloaderContainer = styled.div`
@@ -20,25 +37,4 @@ export const PreloaderContainer = styled.div`
   ${({ visible }: { visible: boolean }) => css`
     opacity: ${visible ? 1 : 0};
   `}
-`;
-
-export const FilesContainer = styled.div`
-  width: 100%;
-  max-height: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-  padding: 24px;
-  padding-top: 16px;
-  transition: 0.1s opacity;
-  display: grid;
-  grid-gap: 8px;
-  grid-template-rows: 1fr;
-  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
-  position: relative;
-  ${noButtons()};
-
-  ${({ visible }: { visible: boolean }) => css`
-    opacity: ${visible ? 1 : 0};
-    pointer-events: ${visible ? 'auto' : 'none'};
-  `};
 `;
