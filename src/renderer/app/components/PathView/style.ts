@@ -49,7 +49,6 @@ export const Item = styled.div`
 
   &:last-child {
     opacity: 1;
-    cursor: default;
     ${robotoMedium()};
 
     &:after {

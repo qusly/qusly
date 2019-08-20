@@ -4,6 +4,11 @@ import { observer } from 'mobx-react-lite';
 import store from '~/renderer/app/store';
 import { StyledPathView, Container, Item } from './style';
 
+const onItemClick = (index: number) => () => {
+  const page = store.pages.current;
+  page.path.goto(index);
+}
+
 export const PathView = observer(() => {
   const page = store.pages.current;
   if (!page) return null;
@@ -12,7 +17,7 @@ export const PathView = observer(() => {
     <StyledPathView>
       <Container visible>
         {page.path.items.map((label, index) => (
-          <Item key={index}>{label}</Item>
+          <Item key={label} onClick={onItemClick(index)}>{label}</Item>
         ))}
       </Container>
     </StyledPathView>

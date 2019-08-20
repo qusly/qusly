@@ -63,4 +63,11 @@ export class Location {
   public relative(...items: string[]) {
     return '/' + [...this.items.slice(1), ...items].join('/');
   }
+
+  @action
+  public goto(index: number) {
+    const items = this.items.slice(1, index + 1);
+    const path = '/' + items.join('/');
+    this.push(path);
+  }
 }
