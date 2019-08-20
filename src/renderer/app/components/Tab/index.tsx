@@ -6,7 +6,6 @@ import store from '~/renderer/app/store';
 import {
   StyledTab,
   StyledContent,
-  StyledIcon,
   StyledTitle,
   StyledClose,
   StyledBorder,
@@ -48,18 +47,7 @@ const onMouseLeave = () => {
 const Content = observer(({ tab }: { tab: Tab }) => {
   return (
     <StyledContent collapsed={tab.isExpanded}>
-      {!tab.loading && tab.favicon !== '' && (
-        <StyledIcon
-          isIconSet={tab.favicon !== ''}
-          style={{ backgroundImage: `url(${tab.favicon})` }}
-        />
-      )}
-      <StyledTitle
-        isIcon={tab.isIconSet}
-        style={{
-          color: 'black',
-        }}
-      >
+      <StyledTitle style={{ color: 'black' }}>
         {tab.title}
       </StyledTitle>
     </StyledContent>

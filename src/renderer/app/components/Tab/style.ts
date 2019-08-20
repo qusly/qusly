@@ -72,38 +72,15 @@ export const StyledOverlay = styled.div`
   `};
 `;
 
-interface TitleProps {
-  isIcon: boolean;
-}
-
 export const StyledTitle = styled.div`
   font-size: 12px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  transition: 0.2s margin-left;
-  margin-left: 8px;
   -webkit-font-smoothing: antialiased;
   backface-visibility: hidden;
   transform: translateZ(0);
-
   ${body2()};
-
-  ${({ isIcon }: TitleProps) => css`
-    margin-left: ${!isIcon ? 0 : 12}px;
-  `};
-`;
-
-export const StyledIcon = styled.div`
-  height: 16px;
-  min-width: 16px;
-  transition: 0.2s opacity, 0.2s min-width;
-  ${centerIcon()};
-
-  ${({ isIconSet }: { isIconSet: boolean }) => css`
-    min-width: ${isIconSet ? 0 : 16},
-    opacity: ${isIconSet ? 0 : 1};
-  `};
 `;
 
 interface ContentProps {
