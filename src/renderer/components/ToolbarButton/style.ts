@@ -31,7 +31,6 @@ export const Button = styled.div`
 
   ${({ disabled }: { disabled: boolean }) => css`
     pointer-events: ${disabled ? 'none' : 'inherit'};
-    -webkit-app-region: ${disabled ? 'drag' : 'no-drag'};
   `};
 `;
 
