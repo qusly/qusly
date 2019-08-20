@@ -7,6 +7,7 @@ import { IconsStore } from './icons';
 import { ActivitybarStore } from './activitybar';
 import { SessionsStore } from './sessions';
 import { PagesStore } from './pages';
+import { PathViewStore } from './path-view';
 
 export class Store {
   public addTab = new AddTabStore();
@@ -15,6 +16,7 @@ export class Store {
   public activitybar = new ActivitybarStore();
   public sessions = new SessionsStore();
   public pages = new PagesStore();
+  public pathView = new PathViewStore();
 
   @observable
   public updateInfo = {

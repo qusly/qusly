@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { robotoMedium, robotoRegular } from '~/renderer/mixins';
+import { robotoMedium, robotoRegular, customInput } from '~/renderer/mixins';
 
 export const StyledPathView = styled.div`
   width: 100%;
@@ -56,4 +56,19 @@ export const Item = styled.div`
       margin-left: 0;
     }
   }
+`;
+
+export const Input = styled.input`
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  padding: 0px 12px;
+  color: #000;
+  ${customInput()};
+
+  ${({ visible }: { visible: boolean }) => css`
+    display: ${visible ? 'block' : 'none'};
+  `}
 `;
