@@ -1,7 +1,9 @@
+import { ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
-import { ipcMain, BrowserWindow } from 'electron';
 
-export const runAutoUpdaterService = (window: BrowserWindow) => {
+import { AppWindow } from '../app-window';
+
+export const runAutoUpdaterService = (appWindow: AppWindow) => {
   ipcMain.on('update-install', () => {
     autoUpdater.quitAndInstall();
   });
@@ -13,6 +15,6 @@ export const runAutoUpdaterService = (window: BrowserWindow) => {
   });
 
   autoUpdater.on('update-downloaded', ({ version }) => {
-    window.webContents.send('update-available', version);
+    appWindow.webContents.send('update-available', version);
   });
 };

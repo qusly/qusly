@@ -1,3 +1,6 @@
+import { ipcRenderer, IpcMessageEvent } from 'electron';
+import { observable } from 'mobx';
+
 import { AddTabStore } from './add-tab';
 import { TabsStore } from './tabs';
 import { IconsStore } from './icons';
@@ -12,6 +15,22 @@ export class Store {
   public activitybar = new ActivitybarStore();
   public sessions = new SessionsStore();
   public pages = new PagesStore();
+
+  @observable
+  public updateInfo = {
+    available: false,
+    version: '',
+  };
+
+  constructor() {
+    ipcRenderer.on(
+      'update-available',
+      (e, version: string) => {
+        this.updateInfo.version = version;
+        this.updateInfo.available = true;
+      },
+    );
+  }
 }
 
 export default new Store();

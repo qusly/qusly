@@ -11,4 +11,5 @@ export const icons = {
   refresh: require('~/renderer/resources/icons/refresh.svg'),
   folder: require('~/renderer/resources/icons/folder.svg'),
   file: require('~/renderer/resources/icons/file.svg'),
+  download: require('~/renderer/resources/icons/download.svg'),
 }

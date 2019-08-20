@@ -4,7 +4,10 @@ import { platform } from 'os';
 import { ipcRenderer } from 'electron';
 import { WindowsControls } from 'react-windows-controls';
 
+import store from '~/renderer/app/store';
 import { closeWindow, maximizeWindow, minimizeWindow } from '~/renderer/app/utils';
+import { ToolbarButton } from '~/renderer/components/ToolbarButton';
+import { icons } from '~/renderer/constants';
 import { StyledTitlebar, TrafficButtons, Handle, Icon, Title } from './style';
 
 const onUpdateClick = () => {
@@ -13,12 +16,16 @@ const onUpdateClick = () => {
 
 export const Titlebar = observer(() => {
   const isDarwin = platform() === 'darwin';
+  const tab = store.tabs.selectedTab;
 
   return (
     <StyledTitlebar>
       <Handle />
       {isDarwin ? <TrafficButtons /> : <Icon />}
-      <Title>Qusly</Title>
+      <Title>{!tab ? 'Qusly' : `${tab.title} - Qusly`}</Title>
+      {store.updateInfo.available && (
+        <ToolbarButton icon={icons.download} onClick={onUpdateClick} />
+      )}
       {!isDarwin && (
         <WindowsControls
           onClose={closeWindow}
@@ -30,11 +37,3 @@ export const Titlebar = observer(() => {
     </StyledTitlebar>
   );
 });
-
-//{tab == null ? 'Qusly' : `${tab.title} - Qusly`}
-
-/*
-TODO: Auto-updater
-{store.updateInfo.available && (
-  <ToolbarButton icon={icons.download} onClick={onUpdateClick} />
-)}*/
