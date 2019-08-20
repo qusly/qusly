@@ -29,32 +29,27 @@ export const Item = styled.div`
   align-items: center;
   font-size: 14px;
   font-weight: 300;
-  opacity: 0.54;
-  margin-right: 4px;
+  padding-left: 4px;
   cursor: pointer;
+  color: rgba(0, 0, 0, 0.54);
   ${robotoRegular()};
+  
+  &:hover {
+    color: #000;
+  }
 
   &:first-child {
     padding-left: 12px;
   }
 
-  &:not(:first-child):after {
-    content: '/';
-    margin-left: 4px;
-  }
-
-  &:hover {
-    opacity: 1;
-  }
-
   &:last-child {
-    opacity: 1;
+    color: #000;
     ${robotoMedium()};
+  }
 
-    &:after {
-      content: '';
-      margin-left: 0;
-    }
+  &:not(:first-child):not(:last-child):after {
+    content: '/';
+    padding-left: 4px;
   }
 `;
 
