@@ -1,11 +1,15 @@
 import { computed, observable, action } from 'mobx';
 
+import { Page } from './page';
+
 export class Location {
   @observable
   private history: string[] = [];
 
   @observable
   private pos = -1;
+
+  constructor(private page: Page) { }
 
   @computed
   public get items() {
@@ -25,22 +29,25 @@ export class Location {
     return this.pos < this.history.length - 1;
   }
 
-  public goBack() {
+  public goBack = async () => {
     if (this.canGoBack) {
       this.pos--;
+      await this.page.fetchFiles();
     }
   }
 
-  public goForward() {
+  public goForward = async () => {
     if (this.canGoForward) {
       this.pos++;
+      await this.page.fetchFiles();
     }
   }
 
   @action
-  public push(path: string) {
+  public async push(path: string) {
     this.pos++;
     this.history = [...this.history.slice(0, this.pos), path];
+    await this.page.fetchFiles();
   }
 
   @action

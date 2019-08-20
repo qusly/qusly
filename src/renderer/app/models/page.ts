@@ -17,19 +17,18 @@ export class Page {
   @observable
   public files: IFile[] = [];
 
-  public path = new Location();
+  public path = new Location(this);
 
   public focusedFile: IFile;
 
   constructor(public session: Session) { }
 
   public async load(path?: string) {
-    this.path.push(path);
-    await this.fetchFiles();
+    await this.path.push(path);
   }
 
   @action
-  public async fetchFiles() {
+  public fetchFiles = async () => {
     this.loading = true;
 
     const path = this.path.toString();

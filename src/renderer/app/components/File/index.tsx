@@ -21,7 +21,6 @@ const onDoubleClick = (data: IFile) => () => {
 
   if (data.type === 'directory') {
     page.path.pushRelative(data.name);
-    page.fetchFiles();
   }
 }
 
