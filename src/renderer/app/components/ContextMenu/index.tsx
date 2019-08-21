@@ -1,28 +1,10 @@
 import * as React from 'react';
 import { observer } from 'mobx-react-lite';
 
+import { ContextMenuItem } from '~/renderer/components/ContextMenuItem';
 import store from '~/renderer/app/store';
-import { StyledContextMenu, StyledContextMenuItem } from './style';
-
-interface ItemProps {
-  onClick?: (e: React.MouseEvent) => void;
-  children: any;
-}
-
-export const ContextMenuItem = ({ onClick, children }: ItemProps) => {
-  const onItemClick = (e: React.MouseEvent) => {
-    store.contextMenu.visible = false;
-    if (onClick) onClick(e);
-  }
-
-  return (
-    <StyledContextMenuItem
-      onMouseDown={e => e.stopPropagation()}
-      onClick={onItemClick}>
-      {children}
-    </StyledContextMenuItem>
-  );
-}
+import { StyledContextMenu } from './style';
+import { icons } from '~/renderer/constants';
 
 export const ContextMenu = observer(() => {
   const { visible, pos } = store.contextMenu;
@@ -34,9 +16,9 @@ export const ContextMenu = observer(() => {
 
   return (
     <StyledContextMenu ref={store.contextMenu.menuRef} visible={visible} style={style}>
-      <ContextMenuItem>First item</ContextMenuItem>
-      <ContextMenuItem>Second item</ContextMenuItem>
-      <ContextMenuItem>Third item</ContextMenuItem>
+      <ContextMenuItem icon={icons.add}>Third item</ContextMenuItem>
+      <ContextMenuItem icon={icons.folder}>First item</ContextMenuItem>
+      <ContextMenuItem icon={icons.file}>Second item</ContextMenuItem>
     </StyledContextMenu>
   );
 });
