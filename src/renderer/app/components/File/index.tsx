@@ -47,6 +47,7 @@ export const File = selectableItem<Props>(observer(({ data }: Props) => {
   return (
     <StyledFile
       onMouseDown={onMouseDown(data)}
+      onClick={e => e.stopPropagation()}
       onDoubleClick={onDoubleClick(data)}
       selected={selected}
       cut={false}

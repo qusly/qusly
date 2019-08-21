@@ -19,6 +19,12 @@ const onSelect = (items: string[]) => {
   });
 }
 
+const onClick = (e: React.MouseEvent) => {
+  if (!e.ctrlKey && !e.shiftKey) {
+    store.pages.current.unselectFiles();
+  }
+}
+
 export const Page = observer(() => {
   const page = store.pages.current;
   if (!page) return null;
@@ -28,6 +34,7 @@ export const Page = observer(() => {
       <SelectableGroup
         onSelect={onSelect}
         onContextMenu={store.contextMenu.show}
+        onClick={onClick}
         style={{
           opacity: page.loading ? 0 : 1,
           pointerEvents: page.loading ? 'none' : 'auto'
