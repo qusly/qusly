@@ -19,7 +19,7 @@ export const StyledContextMenu = styled.div`
   `}
 `;
 
-export const ContextMenuItem = styled.div`
+export const StyledContextMenuItem = styled.div`
   width: 100%;
   height: 32px;
   padding: 0px 24px;

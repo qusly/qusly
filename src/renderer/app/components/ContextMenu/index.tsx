@@ -2,7 +2,27 @@ import * as React from 'react';
 import { observer } from 'mobx-react-lite';
 
 import store from '~/renderer/app/store';
-import { StyledContextMenu, ContextMenuItem } from './style';
+import { StyledContextMenu, StyledContextMenuItem } from './style';
+
+interface ItemProps {
+  onClick?: (e: React.MouseEvent) => void;
+  children: any;
+}
+
+export const ContextMenuItem = ({ onClick, children }: ItemProps) => {
+  const onItemClick = (e: React.MouseEvent) => {
+    store.contextMenu.visible = false;
+    if (onClick) onClick(e);
+  }
+
+  return (
+    <StyledContextMenuItem
+      onMouseDown={e => e.stopPropagation()}
+      onClick={onItemClick}>
+      {children}
+    </StyledContextMenuItem>
+  );
+}
 
 export const ContextMenu = observer(() => {
   const { visible, pos } = store.contextMenu;
