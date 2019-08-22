@@ -39,11 +39,17 @@ const onMouseDown = (data: IFile) => (e: React.MouseEvent) => {
 }
 
 const onDoubleClick = (data: IFile) => () => {
-  const page = store.pages.current;
-
   if (data.type === 'directory') {
-    page.path.pushRelative(data.name);
+    store.pages.current.path.pushRelative(data.name);
   }
+}
+
+const onMouseEnter = (data: IFile) => () => {
+  store.pages.current.hoveredFile = data;
+}
+
+const onMouseLeave = (data: IFile) => {
+  store.pages.current.hoveredFile = null;
 }
 
 export const File = selectableItem<Props>(observer(({ data }: Props) => {
@@ -52,6 +58,8 @@ export const File = selectableItem<Props>(observer(({ data }: Props) => {
 
   return (
     <StyledFile
+      onMouseEnter={onMouseEnter(data)}
+      onMouseLeave={onMouseLeave(data)}
       onMouseDown={onMouseDown(data)}
       onClick={e => e.stopPropagation()}
       onDoubleClick={onDoubleClick(data)}

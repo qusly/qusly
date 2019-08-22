@@ -20,6 +20,8 @@ export class Page {
   @observable
   public focusedFile: IFile;
 
+  public hoveredFile: IFile;
+
   public path = new Location(this);
 
   constructor(public session: Session) { }
@@ -47,6 +49,11 @@ export class Page {
     return store.tabs.list.find(r => r.pageId === this.id);
   }
 
+  @computed
+  public get selectedFiles() {
+    return this.files.filter(e => e.selected);
+  }
+
   @action
   public unselectFiles() {
     this.files.forEach(item => {
@@ -68,8 +75,19 @@ export class Page {
     }
   }
 
-  @computed
-  public get selectedFiles() {
-    return this.files.filter(e => e.selected);
+  @action
+  public async dropRemote() {
+    if (this.hoveredFile.type === 'directory' && this.focusedFile !== this.hoveredFile) {
+      this.loading = true;
+
+      for (const file of this.selectedFiles) {
+        const oldPath = this.path.relative(file.name);
+        const newPath = this.path.relative(this.hoveredFile.name, file.name);
+
+        await this.session.client.move(oldPath, newPath);
+      }
+
+      await this.fetchFiles();
+    }
   }
 }

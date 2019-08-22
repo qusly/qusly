@@ -68,6 +68,10 @@ export class Store {
 
   @action
   private onWindowMouseUp = () => {
+    if (this.drag.visible) {
+      this.pages.current.dropRemote();
+    }
+
     this.drag.visible = false;
     this.drag.active = false;
   }
