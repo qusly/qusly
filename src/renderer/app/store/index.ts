@@ -1,5 +1,5 @@
 import { ipcRenderer } from 'electron';
-import { observable } from 'mobx';
+import { observable, action } from 'mobx';
 
 import { IPos } from '~/interfaces';
 import { AddTabStore } from './add-tab';
@@ -10,6 +10,7 @@ import { SessionsStore } from './sessions';
 import { PagesStore } from './pages';
 import { PathViewStore } from './path-view';
 import { ContextMenuStore } from './context-menu';
+import { DragStore } from './drag';
 
 export class Store {
   public addTab = new AddTabStore();
@@ -20,6 +21,7 @@ export class Store {
   public pages = new PagesStore();
   public pathView = new PathViewStore();
   public contextMenu = new ContextMenuStore();
+  public drag = new DragStore();
 
   @observable
   public updateInfo = {
@@ -43,19 +45,31 @@ export class Store {
 
     window.removeEventListener('mousemove', this.onWindowMouseMove);
     window.removeEventListener('mousedown', this.onWindowMouseDown);
+    window.removeEventListener('mouseup', this.onWindowMouseUp);
     window.addEventListener('mousemove', this.onWindowMouseMove);
     window.addEventListener('mousedown', this.onWindowMouseDown);
+    window.addEventListener('mouseup', this.onWindowMouseUp);
   }
 
+  @action
   private onWindowMouseMove = (e: MouseEvent) => {
     this.mousePos = {
-      top: e.y,
-      left: e.x,
+      top: e.pageY,
+      left: e.pageX,
     }
+
+    this.drag.update(this.mousePos);
   }
 
+  @action
   private onWindowMouseDown = () => {
     this.contextMenu.visible = false;
+  }
+
+  @action
+  private onWindowMouseUp = () => {
+    this.drag.visible = false;
+    this.drag.active = false;
   }
 }
 

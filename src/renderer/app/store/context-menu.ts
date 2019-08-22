@@ -20,11 +20,11 @@ export class ContextMenuStore {
   @observable
   public content: ContextMenuContent = 'file';
 
-  public menuRef = React.createRef<HTMLDivElement>();
+  public ref = React.createRef<HTMLDivElement>();
 
   @action
   public show = () => {
     this.visible = true;
-    this.pos = getMenuPosition(this.menuRef.current, store.mousePos);
+    this.pos = getMenuPosition(this.ref.current, store.mousePos);
   }
 }

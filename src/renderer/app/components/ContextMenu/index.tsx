@@ -22,15 +22,10 @@ const FileMenu = () => {
 }
 
 export const ContextMenu = observer(() => {
-  const { visible, pos } = store.contextMenu;
-
-  const style = {
-    top: pos.top,
-    left: pos.left
-  }
+  const { top, left } = store.contextMenu.pos;
 
   return (
-    <StyledContextMenu ref={store.contextMenu.menuRef} visible={visible} style={style}>
+    <StyledContextMenu ref={store.contextMenu.ref} visible={store.contextMenu.visible} style={{ top, left }}>
       <FileMenu />
     </StyledContextMenu>
   );

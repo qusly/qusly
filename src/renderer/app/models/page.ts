@@ -1,4 +1,4 @@
-import { observable, action } from 'mobx';
+import { observable, action, computed } from 'mobx';
 
 import { Session } from './session';
 import { Location } from './location';
@@ -17,9 +17,10 @@ export class Page {
   @observable
   public files: IFile[] = [];
 
-  public path = new Location(this);
-
+  @observable
   public focusedFile: IFile;
+
+  public path = new Location(this);
 
   constructor(public session: Session) { }
 
@@ -65,5 +66,10 @@ export class Page {
         file.selected = selected;
       }
     }
+  }
+
+  @computed
+  public get selectedFiles() {
+    return this.files.filter(e => e.selected);
   }
 }

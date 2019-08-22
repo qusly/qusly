@@ -33,6 +33,8 @@ export class IconsStore {
   }
 
   public getIcon(file: IFile) {
+    if (!file) return { icon: '', opacity: 1 };
+
     let icon = file.type === 'directory' ? icons.folder : this.icons.get(file.ext);
     const opacity = file.type === 'directory' || !icon ? transparency.icons.inactive : 1;
 

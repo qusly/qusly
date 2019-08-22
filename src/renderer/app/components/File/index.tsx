@@ -13,7 +13,7 @@ interface Props {
 const onMouseDown = (data: IFile) => (e: React.MouseEvent) => {
   e.stopPropagation();
 
-  if (e.button !== 1 && e.button !== 2) {
+  if (e.button === 0) {
     const page = store.pages.current;
     const { selected } = data;
 
@@ -28,6 +28,12 @@ const onMouseDown = (data: IFile) => (e: React.MouseEvent) => {
 
     if (!e.shiftKey) {
       page.focusedFile = data;
+    }
+
+    store.drag.active = true;
+    store.drag.startPos = {
+      top: e.pageY,
+      left: e.pageX,
     }
   }
 }
