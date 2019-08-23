@@ -55,9 +55,13 @@ export class Page {
   }
 
   @action
-  public unselectFiles() {
+  public unselectFiles(...skip: IFile[]) {
     this.files.forEach(item => {
-      item.selected = false;
+      if (skip.indexOf(item) === -1) {
+        item.selected = false;
+      } else {
+        item.selected = true;
+      }
     });
   }
 
@@ -77,7 +81,7 @@ export class Page {
 
   @action
   public async dropRemote() {
-    if (this.hoveredFile.type === 'directory' && this.focusedFile !== this.hoveredFile) {
+    if (this.hoveredFile && this.hoveredFile.type === 'directory' && this.focusedFile !== this.hoveredFile) {
       this.loading = true;
 
       for (const file of this.selectedFiles) {

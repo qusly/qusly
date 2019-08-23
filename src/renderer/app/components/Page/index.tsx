@@ -20,7 +20,7 @@ const onSelect = (items: string[]) => {
 }
 
 const onClick = (e: React.MouseEvent) => {
-  if (!e.ctrlKey && !e.shiftKey) {
+  if (!e.ctrlKey && !e.shiftKey && !store.drag.active) {
     store.pages.current.unselectFiles();
   }
 }

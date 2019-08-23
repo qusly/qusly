@@ -3,6 +3,7 @@ import { observable, action } from 'mobx';
 import { cursorDistance, setElementStyle } from 'rectangle-selection';
 
 import { IPos } from '~/interfaces';
+import store from '.';
 
 export class DragStore {
   @observable
@@ -26,5 +27,14 @@ export class DragStore {
         left: `${left}px`,
       });
     }
+  }
+
+  public hide() {
+    if (this.visible) {
+      store.pages.current.dropRemote();
+    }
+
+    this.visible = false;
+    this.active = false;
   }
 }

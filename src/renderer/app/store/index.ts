@@ -45,10 +45,10 @@ export class Store {
 
     window.removeEventListener('mousemove', this.onWindowMouseMove);
     window.removeEventListener('mousedown', this.onWindowMouseDown);
-    window.removeEventListener('mouseup', this.onWindowMouseUp);
+    window.removeEventListener('click', this.onWindowClick);
     window.addEventListener('mousemove', this.onWindowMouseMove);
     window.addEventListener('mousedown', this.onWindowMouseDown);
-    window.addEventListener('mouseup', this.onWindowMouseUp);
+    window.addEventListener('click', this.onWindowClick);
   }
 
   @action
@@ -67,13 +67,8 @@ export class Store {
   }
 
   @action
-  private onWindowMouseUp = () => {
-    if (this.drag.visible) {
-      this.pages.current.dropRemote();
-    }
-
-    this.drag.visible = false;
-    this.drag.active = false;
+  private onWindowClick = () => {
+    this.drag.hide();
   }
 }
 

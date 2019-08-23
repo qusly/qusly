@@ -21,9 +21,8 @@ const onMouseDown = (data: IFile) => (e: React.MouseEvent) => {
       data.selected = !selected;
     } else if (e.shiftKey) {
       page.selectGroup(page.files.indexOf(data), page.files.indexOf(page.focusedFile));
-    } else {
-      page.unselectFiles();
-      data.selected = true;
+    } else if (!data.selected) {
+      page.unselectFiles(data);
     }
 
     if (!e.shiftKey) {
@@ -48,8 +47,17 @@ const onMouseEnter = (data: IFile) => () => {
   store.pages.current.hoveredFile = data;
 }
 
-const onMouseLeave = (data: IFile) => {
+const onMouseLeave = (data: IFile) => () => {
   store.pages.current.hoveredFile = null;
+}
+
+const onClick = (data: IFile) => (e: React.MouseEvent) => {
+  e.stopPropagation();
+  store.drag.hide();
+
+  if (!e.shiftKey && !e.ctrlKey) {
+    store.pages.current.unselectFiles(data);
+  }
 }
 
 export const File = selectableItem<Props>(observer(({ data }: Props) => {
@@ -61,7 +69,7 @@ export const File = selectableItem<Props>(observer(({ data }: Props) => {
       onMouseEnter={onMouseEnter(data)}
       onMouseLeave={onMouseLeave(data)}
       onMouseDown={onMouseDown(data)}
-      onClick={e => e.stopPropagation()}
+      onClick={onClick(data)}
       onDoubleClick={onDoubleClick(data)}
       selected={selected}
       cut={false}
