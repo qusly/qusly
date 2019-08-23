@@ -22,6 +22,10 @@ const onKeyDown = (e: React.KeyboardEvent) => {
   }
 };
 
+const onBlur = () => {
+  store.pathView.inputVisible = false;
+}
+
 export const PathView = observer(() => {
   const page = store.pages.current;
   if (!page) return null;
@@ -38,6 +42,8 @@ export const PathView = observer(() => {
         type="text"
         visible={store.pathView.inputVisible}
         onKeyDown={onKeyDown}
+        onBlur={onBlur}
+        onMouseDown={e => e.stopPropagation()}
       />
     </StyledPathView>
   );

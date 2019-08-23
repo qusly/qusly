@@ -35,6 +35,8 @@ const onMouseDown = (data: IFile) => (e: React.MouseEvent) => {
       left: e.pageX,
     }
   }
+
+  store.contextMenu.visible = false;
 }
 
 const onDoubleClick = (data: IFile) => () => {

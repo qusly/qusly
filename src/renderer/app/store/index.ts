@@ -63,6 +63,7 @@ export class Store {
 
   @action
   private onWindowMouseDown = () => {
+    this.pathView.inputVisible = false;
     this.contextMenu.visible = false;
   }
 
