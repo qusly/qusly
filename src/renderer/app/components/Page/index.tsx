@@ -33,7 +33,7 @@ export const Page = observer(() => {
     <StyledPage>
       <SelectableGroup
         onSelect={onSelect}
-        onContextMenu={store.contextMenu.show}
+        onContextMenu={() => store.contextMenu.show('page')}
         onClick={onClick}
         style={{
           opacity: page.loading ? 0 : 1,

@@ -5,7 +5,7 @@ import store from '.';
 import { IPos } from '~/interfaces';
 import { getMenuPosition } from '~/renderer/app/utils';
 
-export type ContextMenuContent = 'file';
+export type ContextMenuContent = 'page' | 'file';
 
 export class ContextMenuStore {
   @observable
@@ -23,7 +23,8 @@ export class ContextMenuStore {
   public ref = React.createRef<HTMLDivElement>();
 
   @action
-  public show = () => {
+  public show = (content: ContextMenuContent) => {
+    this.content = content;
     this.visible = true;
     this.pos = getMenuPosition(this.ref.current, store.mousePos);
   }

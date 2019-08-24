@@ -62,6 +62,19 @@ const onClick = (data: IFile) => (e: React.MouseEvent) => {
   }
 }
 
+const onContextMenu = (data: IFile) => (e: React.MouseEvent) => {
+  e.stopPropagation();
+
+  const page = store.pages.current;
+  const selectedFiles = page.selectedFiles;
+
+  if (selectedFiles.indexOf(data) === -1) {
+    page.unselectFiles(data);
+  }
+
+  store.contextMenu.show('file');
+}
+
 export const File = selectableItem<Props>(observer(({ data }: Props) => {
   const { name, selected } = data;
   const { icon, opacity } = store.icons.getIcon(data);
@@ -73,6 +86,7 @@ export const File = selectableItem<Props>(observer(({ data }: Props) => {
       onMouseDown={onMouseDown(data)}
       onClick={onClick(data)}
       onDoubleClick={onDoubleClick(data)}
+      onContextMenu={onContextMenu(data)}
       selected={selected}
       cut={false}
       disabled={false}>
