@@ -194,6 +194,9 @@ export class Tab {
       }
     }
 
+    const page = store.pages.list.find(r => r.id === this.pageId);
+    page.close();
+
     this.removeTimeout = setTimeout(() => {
       store.tabs.removeTab(this.id);
     }, TAB_ANIMATION_DURATION * 1000);

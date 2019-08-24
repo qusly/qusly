@@ -94,4 +94,14 @@ export class Page {
       await this.fetchFiles();
     }
   }
+
+  public async close() {
+    store.pages.list = store.pages.list.filter(r => r !== this);
+
+    const pages = store.pages.list.filter(r => r.session.id === this.session.id);
+
+    if (!pages.length) {
+      this.session.close();
+    }
+  }
 }

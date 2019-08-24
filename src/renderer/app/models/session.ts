@@ -1,6 +1,7 @@
 import { Client } from 'qusly-core';
 
 import { ISite } from '~/interfaces';
+import store from '../store';
 
 export type ConnectionStatus = 'connecting' | 'connected';
 
@@ -29,5 +30,11 @@ export class Session {
       this.startPath = path;
       this.status = 'connected';
     }
+  }
+
+  public async close() {
+    await this.client.disconnect();
+
+    store.sessions.list = store.sessions.list.filter(r => r !== this);
   }
 }
