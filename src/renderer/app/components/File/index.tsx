@@ -72,6 +72,7 @@ const onContextMenu = (data: IFile) => (e: React.MouseEvent) => {
     page.unselectFiles(data);
   }
 
+  page.focusedFile = data;
   store.contextMenu.show('file');
 }
 

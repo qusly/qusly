@@ -6,7 +6,7 @@ import { centerIcon } from '~/renderer/mixins';
 export const StyledItem = styled.div`
   width: 100%;
   height: 32px;
-  padding: 0px 16px;
+  padding: 0px 24px;
   display: flex;
   align-items: center;
   font-size: 14px;
