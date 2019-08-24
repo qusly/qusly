@@ -49,7 +49,7 @@ const onMouseEnter = (data: IFile) => () => {
   store.pages.current.hoveredFile = data;
 }
 
-const onMouseLeave = (data: IFile) => () => {
+const onMouseLeave = () => {
   store.pages.current.hoveredFile = null;
 }
 
@@ -82,7 +82,7 @@ export const File = selectableItem<Props>(observer(({ data }: Props) => {
   return (
     <StyledFile
       onMouseEnter={onMouseEnter(data)}
-      onMouseLeave={onMouseLeave(data)}
+      onMouseLeave={onMouseLeave}
       onMouseDown={onMouseDown(data)}
       onClick={onClick(data)}
       onDoubleClick={onDoubleClick(data)}
