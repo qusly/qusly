@@ -1,4 +1,4 @@
-import { observable } from 'mobx';
+import { observable, computed } from 'mobx';
 
 import { Page, Tab } from '../models';
 import { ISite } from '~/interfaces';
@@ -8,11 +8,10 @@ export class PagesStore {
   @observable
   public list: Page[] = [];
 
-  @observable
-  public currentId = 0;
-
+  @computed
   public get current() {
-    return this.list.find(e => e.id === this.currentId);
+    const tab = store.tabs.selectedTab;
+    return this.list.find(e => e.id === tab.pageId);
   }
 
   public async add(site: ISite, tab: Tab) {

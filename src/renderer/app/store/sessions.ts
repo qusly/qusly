@@ -1,17 +1,17 @@
-import { observable } from 'mobx';
+import { observable, computed } from 'mobx';
 
-import { Session } from '../models';
 import { ISite } from '~/interfaces';
+import { Session } from '../models';
+import store from '.';
 
 export class SessionsStore {
   @observable
   public list: Session[] = [];
 
-  @observable
-  public currentId = 0;
-
+  @computed
   public get current() {
-    return this.list.find(r => r.id === this.currentId);
+    const tab = store.tabs.selectedTab;
+    return this.list.find(r => r.id === tab.sessionId);
   }
 
   public add(site: ISite) {
