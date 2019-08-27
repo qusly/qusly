@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { ContextMenuItem } from '~/renderer/components/ContextMenuItem';
+import { Item } from '../Item';
 import store from '~/renderer/app/store';
 import { MenuContainer } from '..';
 
@@ -23,36 +23,36 @@ export const FileMenu = () => {
       {!containsFile && (
         <>
           {!mutliple && (
-            <ContextMenuItem onClick={onOpen}>Open</ContextMenuItem>
+            <Item onClick={onOpen}>Open</Item>
           )}
-          <ContextMenuItem>
+          <Item>
             Open in new tab
-          </ContextMenuItem>
+          </Item>
         </>
       )}
       {!mutliple && (
         <>
           {containsFile && (
             <>
-              <ContextMenuItem>Edit</ContextMenuItem>
-              <ContextMenuItem>Archive</ContextMenuItem>
+              <Item>Edit</Item>
+              <Item>Archive</Item>
             </>
           )}
-          <ContextMenuItem>Add to bookmarks</ContextMenuItem>
+          <Item>Add to bookmarks</Item>
         </>
       )}
-      <ContextMenuItem>Cut</ContextMenuItem>
+      <Item>Cut</Item>
       {!containsFile && (
-        <ContextMenuItem>
+        <Item>
           Paste
-        </ContextMenuItem>
+        </Item>
       )}
-      <ContextMenuItem>Delete</ContextMenuItem>
+      <Item>Delete</Item>
       {!mutliple && (
-        <ContextMenuItem>Rename</ContextMenuItem>
+        <Item>Rename</Item>
       )}
-      <ContextMenuItem>Download</ContextMenuItem>
-      <ContextMenuItem>Details</ContextMenuItem>
+      <Item>Download</Item>
+      <Item>Details</Item>
     </MenuContainer>
   );
 }

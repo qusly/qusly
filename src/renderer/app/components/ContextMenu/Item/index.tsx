@@ -10,7 +10,7 @@ interface ItemProps {
   children: any;
 }
 
-export const ContextMenuItem = ({ icon, onClick, children, disabled }: ItemProps) => {
+export const Item = ({ icon, onClick, children, disabled }: ItemProps) => {
   const onItemClick = (e: React.MouseEvent) => {
     store.contextMenu.visible = false;
     if (onClick) onClick(e);
