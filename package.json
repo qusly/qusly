@@ -72,15 +72,15 @@
     "qusly-core": "^1.1.7",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
-    "react-hot-loader": "^4.12.11",
+    "react-hot-loader": "^4.12.12",
     "react-windows-controls": "^1.1.1",
     "rectangle-selection": "^1.0.3",
     "styled-components": "^4.3.2",
     "ts-loader": "^6.0.4",
     "typescript": "3.5.3",
-    "webpack": "^4.39.2",
+    "webpack": "^4.39.3",
     "webpack-cli": "^3.3.7",
     "webpack-dev-server": "^3.8.0",
-    "webpack-merge": "^4.2.1"
+    "webpack-merge": "^4.2.2"
   }
 }
