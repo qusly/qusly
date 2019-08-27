@@ -2,6 +2,7 @@ import { Client } from 'qusly-core';
 
 import { ISite } from '~/interfaces';
 import store from '../store';
+import { Tree } from './tree';
 
 export type ConnectionStatus = 'connecting' | 'connected';
 
@@ -11,6 +12,8 @@ export class Session {
   public id = id++;
 
   public client = new Client();
+
+  public tree = new Tree(this);
 
   public status: ConnectionStatus;
 
@@ -27,14 +30,15 @@ export class Session {
 
       const { path } = await this.client.pwd();
 
+      //this.tree.init();
       this.startPath = path;
       this.status = 'connected';
     }
   }
 
   public async close() {
-    await this.client.disconnect();
-
     store.sessions.list = store.sessions.list.filter(r => r !== this);
+
+    await this.client.disconnect();
   }
 }
