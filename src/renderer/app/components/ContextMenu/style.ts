@@ -23,18 +23,19 @@ interface ItemProps {
   icon: string;
   disabled: boolean;
   iconSize: number;
+  hidden: boolean;
 }
 
 export const StyledItem = styled.div`
   width: 100%;
   height: 32px;
   padding: 0px 16px;
-  display: flex;
   align-items: center;
   font-size: 14px;
   white-space: nowrap;
 
-  ${({ icon, disabled, iconSize }: ItemProps) => css`
+  ${({ icon, disabled, iconSize, hidden }: ItemProps) => css`
+    display: ${!hidden ? 'flex' : 'none'};
     color: ${disabled
       ? `rgba(0, 0, 0, ${transparency.text.disabled})`
       : '#000'};
