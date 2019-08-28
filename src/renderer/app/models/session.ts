@@ -30,7 +30,7 @@ export class Session {
 
       const { path } = await this.client.pwd();
 
-      //this.tree.init();
+      this.tree.init();
       this.startPath = path;
       this.status = 'connected';
     }

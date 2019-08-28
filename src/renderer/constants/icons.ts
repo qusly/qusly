@@ -12,4 +12,5 @@ export const icons = {
   folder: require('~/renderer/resources/icons/folder.svg'),
   file: require('~/renderer/resources/icons/file.svg'),
   download: require('~/renderer/resources/icons/download.svg'),
+  expand: require('~/renderer/resources/icons/expand.svg'),
 }
