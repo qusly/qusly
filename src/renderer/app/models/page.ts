@@ -108,14 +108,15 @@ export class Page {
   @action
   public async rename(file: IFile, newName: string) {
     newName = newName.trim();
+    file.renamed = false;
 
     const oldName = file.name;
-    const exists = this.files.find(r => r.name.toLowerCase() === newName.toLowerCase());
+    const ext = extname(newName);
+    const exists = this.files.find(r => r.name.toLowerCase() === newName.toLowerCase() && r.ext === ext);
 
     if (!exists && newName.length) {
       file.name = newName;
-      file.ext = extname(newName);
-      file.renamed = false;
+      file.ext = ext;
 
       if (file.type !== 'directory') {
         await store.icons.load(file);

@@ -31,10 +31,11 @@ export const runMessagingService = (appWindow: AppWindow) => {
   ipcMain.on('get-icons', async (e, list: string[], id: string) => {
     const promises = list.map(ext => getIcon(ext));
     const data = await Promise.all(promises);
-    const icons = data.reduce((result: any, item) => {
-      result[item.ext] = item.icon;
-      return result;
-    })
+    const icons: { [key: string]: string } = {};
+
+    data.forEach(({ ext, icon }) => {
+      icons[ext] = icon;
+    });
 
     appWindow.webContents.send(`get-icons-${id}`, icons);
   });

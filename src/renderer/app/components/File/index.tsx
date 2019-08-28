@@ -90,8 +90,10 @@ const onInputKeyDown = (data: IFile) => (e: React.KeyboardEvent) => {
 };
 
 const onInputBlur = (data: IFile) => (e: React.FocusEvent<HTMLTextAreaElement>) => {
-  store.pages.current.rename(data, e.target.value);
-  data.renamed = false;
+  if (data.renamed) {
+    store.pages.current.rename(data, e.target.value);
+    data.renamed = false;
+  }
 }
 
 export const File = selectableItem<Props>(observer(({ data }: Props) => {
@@ -102,7 +104,6 @@ export const File = selectableItem<Props>(observer(({ data }: Props) => {
   React.useEffect(() => {
     if (renamed) {
       const input = inputRef.current;
-
       input.value = name;
       input.focus();
       selectFileName(input);
