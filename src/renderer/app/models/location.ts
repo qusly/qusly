@@ -66,8 +66,10 @@ export class Location {
 
   @action
   public goto(index: number) {
-    const items = this.items.slice(1, index + 1);
-    const path = '/' + items.join('/');
-    this.push(path);
+    if (!this.page.loading) {
+      const items = this.items.slice(1, index + 1);
+      const path = '/' + items.join('/');
+      this.push(path);
+    }
   }
 }
