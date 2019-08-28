@@ -45,6 +45,7 @@ export class Page {
     this.loading = false;
   }
 
+  @computed
   public get tab() {
     return store.tabs.list.find(r => r.pageId === this.id);
   }
@@ -57,11 +58,7 @@ export class Page {
   @action
   public unselectFiles(...skip: IFile[]) {
     this.files.forEach(item => {
-      if (skip.indexOf(item) === -1) {
-        item.selected = false;
-      } else {
-        item.selected = true;
-      }
+      item.selected = skip.indexOf(item) !== -1;
     });
   }
 
@@ -71,11 +68,7 @@ export class Page {
 
     for (let i = 0; i < this.files.length; i++) {
       const file = this.files[i];
-      const selected = i >= start && i <= end;
-
-      if (file.selected !== selected) {
-        file.selected = selected;
-      }
+      file.selected = i >= start && i <= end;
     }
   }
 
@@ -96,12 +89,12 @@ export class Page {
   }
 
   public async close() {
-    store.pages.list = store.pages.list.filter(r => r !== this);
-
     const pages = store.pages.list.filter(r => r.session.id === this.session.id);
 
     if (!pages.length) {
       this.session.close();
     }
+
+    store.pages.list = store.pages.list.filter(r => r !== this);
   }
 }
