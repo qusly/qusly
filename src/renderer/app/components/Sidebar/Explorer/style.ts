@@ -16,12 +16,13 @@ export const StyledItem = styled.div`
 `;
 
 export const ExpandIcon = styled.div`
-  width: 20px;
-  height: 20px;
+  min-width: 20px;
+  min-height: 20px;
   margin-left: 12px;
   background-image: url(${icons.expand});
   border-radius: 100%;
   opacity: ${transparency.icons.inactive};
+  display: flex;
   ${centerIcon()};
 
   ${({ expanded }: { expanded: boolean }) => css`
@@ -30,8 +31,8 @@ export const ExpandIcon = styled.div`
 `;
 
 export const Icon = styled.div`
-  width: 20px;
-  height: 20px;
+  min-width: 20px;
+  min-height: 20px;
   margin-left: 4px;
   opacity: ${transparency.icons.inactive};
   background-image: url(${icons.folder});

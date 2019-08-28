@@ -18,7 +18,7 @@ const Item = observer(({ data, depth }: { data: ITreeItem, depth: number }) => {
 
   return (
     <>
-      <StyledItem style={{ paddingLeft: depth * 30 }}>
+      <StyledItem style={{ paddingLeft: depth * 16 }}>
         <ExpandIcon onClick={onExpandClick(data)} expanded={expanded} />
         <Icon />
         <Label>{file.name}</Label>

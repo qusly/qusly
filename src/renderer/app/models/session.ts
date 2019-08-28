@@ -38,7 +38,6 @@ export class Session {
 
   public async close() {
     store.sessions.list = store.sessions.list.filter(r => r !== this);
-
     await this.client.disconnect();
   }
 }
