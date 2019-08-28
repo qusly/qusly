@@ -35,8 +35,8 @@ export const Page = observer(() => {
     <StyledPage>
       <SelectableGroup
         onSelect={onSelect}
-        onContextMenu={() => store.contextMenu.show('page')}
         onMouseDown={onMouseDown}
+        onContextMenu={() => store.contextMenu.show('page')}
         style={{
           opacity: page.loading ? 0 : 1,
           pointerEvents: page.loading ? 'none' : 'auto'

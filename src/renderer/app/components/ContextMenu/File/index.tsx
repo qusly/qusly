@@ -58,19 +58,33 @@ export const FileMenu = observer(() => {
       <MenuItem onClick={openInNewTab} icon={icons.openInNew} iconSize={18} hidden={containsFile}>
         Open in new tab
       </MenuItem>
-      <MenuItem icon={icons.apps} iconSize={18} hidden={multiple || !containsFile} disabled>Open with</MenuItem>
+      <MenuItem icon={icons.apps} iconSize={18} hidden={multiple || !containsFile} disabled>
+        Open with
+      </MenuItem>
       {(multiple !== containsFile || !containsFile) && <MenuDivider />}
-      <MenuItem icon={icons.cut} iconSize={16} onClick={onCut}>Cut</MenuItem>
+      <MenuItem icon={icons.cut} iconSize={16} onClick={onCut}>
+        Cut
+      </MenuItem>
       <MenuItem icon={icons.paste} iconSize={18} onClick={onPaste} hidden={!page.cutFiles.length || containsFile}>
         Paste
       </MenuItem>
-      <MenuItem icon={icons.edit} onClick={onRename} hidden={multiple}>Rename</MenuItem>
-      <MenuItem icon={icons.delete} iconSize={20} onClick={onDelete}>Delete</MenuItem>
+      <MenuItem icon={icons.edit} onClick={onRename} hidden={multiple}>
+        Rename
+      </MenuItem>
+      <MenuItem icon={icons.delete} iconSize={20} onClick={onDelete}>
+        Delete
+      </MenuItem>
       <MenuDivider />
-      <MenuItem icon={icons.download} hidden={!containsFile} disabled>Download</MenuItem>
-      <MenuItem icon={icons.zip} iconSize={18} hidden={!containsFile} disabled>Archive</MenuItem>
+      <MenuItem icon={icons.download} hidden={!containsFile} disabled>
+        Download
+      </MenuItem>
+      <MenuItem icon={icons.zip} iconSize={18} hidden={!containsFile} disabled>
+        Archive
+      </MenuItem>
       {containsFile && <MenuDivider />}
-      <MenuItem icon={icons.details} iconSize={18} disabled>Details</MenuItem>
+      <MenuItem icon={icons.details} iconSize={18} disabled>
+        Details
+      </MenuItem>
     </MenuContainer>
   );
 });

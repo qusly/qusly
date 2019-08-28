@@ -23,4 +23,6 @@ export const icons = {
   apps: require('~/renderer/resources/icons/apps.svg'),
   details: require('~/renderer/resources/icons/details.svg'),
   zip: require('~/renderer/resources/icons/zip.svg'),
+  folderAdd: require('~/renderer/resources/icons/folder-add.svg'),
+  fileAdd: require('~/renderer/resources/icons/file-add.svg'),
 }
