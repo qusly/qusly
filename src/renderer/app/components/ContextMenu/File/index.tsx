@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { observer } from 'mobx-react-lite';
 
 import store from '~/renderer/app/store';
 import { MenuContainer, MenuItem } from '..';
@@ -42,7 +43,7 @@ const onDelete = () => {
   page.delete(page.selectedFiles);
 }
 
-export const FileMenu = () => {
+export const FileMenu = observer(() => {
   const page = store.pages.current;
   if (!page) return null;
 
@@ -58,7 +59,7 @@ export const FileMenu = () => {
         Open in new tab
       </MenuItem>
       <MenuItem icon={icons.apps} iconSize={18} hidden={multiple || !containsFile} disabled>Open with</MenuItem>
-      <MenuDivider />
+      {(multiple !== containsFile || !containsFile) && <MenuDivider />}
       <MenuItem icon={icons.cut} iconSize={16} onClick={onCut}>Cut</MenuItem>
       <MenuItem icon={icons.paste} iconSize={18} onClick={onPaste} hidden={!page.cutFiles.length || containsFile}>
         Paste
@@ -72,4 +73,4 @@ export const FileMenu = () => {
       <MenuItem icon={icons.details} iconSize={18} disabled>Details</MenuItem>
     </MenuContainer>
   );
-}
+});
