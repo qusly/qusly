@@ -48,7 +48,7 @@ export const StyledItem = styled.div`
         content: '';
         width: 20px;
         height: 20px;
-        opacity: 0.54;
+        opacity: ${disabled ? transparency.icons.disabled : 0.54};
         margin-right: 12px;
         background-image: url(${icon});
         backface-visibility: hidden;

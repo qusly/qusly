@@ -15,7 +15,7 @@ export class PagesStore {
   }
 
   @action
-  public async add(site: ISite, tab: Tab) {
+  public async add(site: ISite, tab: Tab, path?: string) {
     const session = await store.sessions.add(site);
     const page = new Page(session);
 
@@ -26,6 +26,6 @@ export class PagesStore {
     this.list.push(page);
 
     await session.connect();
-    await page.load(session.startPath);
+    await page.load(path || session.startPath);
   }
 }

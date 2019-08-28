@@ -129,7 +129,7 @@ export class TabsStore {
     }
 
     if (options.site) {
-      store.pages.add(options.site, tab);
+      store.pages.add(options.site, tab, options.path);
     }
 
     requestAnimationFrame(() => {

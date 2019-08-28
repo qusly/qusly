@@ -126,4 +126,21 @@ export class Page {
       }
     }
   }
+
+  @action
+  public async delete(files: IFile[]) {
+    this.loading = true;
+
+    for (const file of files) {
+      const path = this.path.relative(file.name);
+
+      if (file.type === 'directory') {
+        await this.session.client.rimraf(path);
+      } else {
+        await this.session.client.unlink(path);
+      }
+    }
+
+    await this.fetchFiles();
+  }
 }

@@ -4,7 +4,7 @@ import { ISite } from '~/interfaces';
 import store from '../store';
 import { Tree } from './tree';
 
-export type ConnectionStatus = 'connecting' | 'connected';
+export type ConnectionStatus = 'connecting' | 'connected' | 'disconnected';
 
 let id = 0;
 
@@ -15,14 +15,14 @@ export class Session {
 
   public tree = new Tree(this);
 
-  public status: ConnectionStatus;
+  public status: ConnectionStatus = 'disconnected';
 
   public startPath: string;
 
   constructor(public site: ISite) { }
 
   public async connect() {
-    if (this.status !== 'connecting') {
+    if (this.status === 'disconnected') {
       this.status = 'connecting';
 
       const res = await this.client.connect(this.site);

@@ -8,11 +8,29 @@ import { MenuDivider } from '../style';
 const onOpen = () => {
   const page = store.pages.current;
   page.path.pushRelative(page.focusedFile.name);
-};
+}
+
+const openInNewTab = () => {
+  const page = store.pages.current;
+  const { site } = page.session;
+
+  for (const file of page.selectedFiles) {
+    store.tabs.addTab({
+      active: true,
+      path: page.path.relative(file.name),
+      site,
+    });
+  }
+}
 
 const onRename = () => {
   const page = store.pages.current;
   page.focusedFile.renamed = true;
+}
+
+const onDelete = () => {
+  const page = store.pages.current;
+  page.delete(page.selectedFiles);
 }
 
 export const FileMenu = () => {
@@ -29,14 +47,14 @@ export const FileMenu = () => {
           {!mutliple && (
             <MenuItem icon={icons.folderOutline} onClick={onOpen}>Open</MenuItem>
           )}
-          <MenuItem icon={icons.openInNew} iconSize={18}>
+          <MenuItem icon={icons.openInNew} iconSize={18} onClick={openInNewTab}>
             Open in new tab
           </MenuItem>
         </>
       )}
       {!mutliple && (
         <>
-          {containsFile && <MenuItem icon={icons.apps} iconSize={18}>Open with</MenuItem>}
+          {containsFile && <MenuItem icon={icons.apps} iconSize={18} disabled>Open with</MenuItem>}
         </>
       )}
       <MenuDivider />
@@ -49,14 +67,14 @@ export const FileMenu = () => {
       {!mutliple && (
         <MenuItem icon={icons.edit} onClick={onRename}>Rename</MenuItem>
       )}
-      <MenuItem icon={icons.delete} iconSize={20}>Delete</MenuItem>
+      <MenuItem icon={icons.delete} iconSize={20} onClick={onDelete}>Delete</MenuItem>
       <MenuDivider />
       {containsFile && <>
-        <MenuItem icon={icons.download}>Download</MenuItem>
-        <MenuItem icon={icons.zip} iconSize={18}>Archive</MenuItem>
+        <MenuItem icon={icons.download} disabled>Download</MenuItem>
+        <MenuItem icon={icons.zip} iconSize={18} disabled>Archive</MenuItem>
         <MenuDivider />
       </>}
-      <MenuItem icon={icons.details} iconSize={18}>Details</MenuItem>
+      <MenuItem icon={icons.details} iconSize={18} disabled>Details</MenuItem>
     </MenuContainer>
   );
 }
