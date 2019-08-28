@@ -8,6 +8,8 @@ import { File } from '../File';
 import { StyledPage, PreloaderContainer } from './style';
 
 const onSelect = (items: string[]) => {
+  if (!items.length) return;
+
   const page = store.pages.current;
 
   page.files.forEach(item => {
