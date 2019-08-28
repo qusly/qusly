@@ -10,10 +10,11 @@ interface ItemProps {
   onClick?: (e: React.MouseEvent) => void;
   icon?: string;
   disabled?: boolean;
+  iconSize?: number;
   children: any;
 }
 
-export const MenuItem = ({ icon, onClick, children, disabled }: ItemProps) => {
+export const MenuItem = ({ icon, onClick, children, disabled, iconSize }: ItemProps) => {
   const onItemClick = (e: React.MouseEvent) => {
     store.contextMenu.visible = false;
     if (onClick) onClick(e);
@@ -24,7 +25,8 @@ export const MenuItem = ({ icon, onClick, children, disabled }: ItemProps) => {
       onMouseDown={e => e.stopPropagation()}
       onClick={onItemClick}
       icon={icon}
-      disabled={disabled}>
+      disabled={disabled}
+      iconSize={iconSize}>
       {children}
     </StyledItem>
   );

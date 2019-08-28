@@ -4,7 +4,7 @@ export const centerIcon = (size: number | 'contain' = 'contain') => {
   if (typeof size === 'number') s += 'px';
 
   return `
-    background-size: ${s};
+    background-size: ${s} ${size === 'contain' ? '' : 'auto'};
     background-position: center;
     background-repeat: no-repeat;
 `;

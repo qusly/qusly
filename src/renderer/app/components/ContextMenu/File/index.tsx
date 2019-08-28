@@ -2,6 +2,8 @@ import * as React from 'react';
 
 import store from '~/renderer/app/store';
 import { MenuContainer, MenuItem } from '..';
+import { icons } from '~/renderer/constants';
+import { MenuDivider } from '../style';
 
 const onOpen = () => {
   const page = store.pages.current;
@@ -22,36 +24,36 @@ export const FileMenu = () => {
       {!containsFile && (
         <>
           {!mutliple && (
-            <MenuItem onClick={onOpen}>Open</MenuItem>
+            <MenuItem onClick={onOpen} icon={icons.folderOutline}>Open</MenuItem>
           )}
-          <MenuItem>
+          <MenuItem icon={icons.openInNew} iconSize={18}>
             Open in new tab
           </MenuItem>
         </>
       )}
       {!mutliple && (
         <>
-          {containsFile && (
-            <>
-              <MenuItem>Edit</MenuItem>
-              <MenuItem>Archive</MenuItem>
-            </>
-          )}
-          <MenuItem>Add to bookmarks</MenuItem>
+          {containsFile && <MenuItem icon={icons.apps} iconSize={18}>Open with</MenuItem>}
         </>
       )}
-      <MenuItem>Cut</MenuItem>
+      <MenuDivider />
+      <MenuItem icon={icons.cut} iconSize={16}>Cut</MenuItem>
       {!containsFile && (
-        <MenuItem>
+        <MenuItem icon={icons.paste} iconSize={18}>
           Paste
         </MenuItem>
       )}
-      <MenuItem>Delete</MenuItem>
       {!mutliple && (
-        <MenuItem>Rename</MenuItem>
+        <MenuItem icon={icons.edit}>Rename</MenuItem>
       )}
-      <MenuItem>Download</MenuItem>
-      <MenuItem>Details</MenuItem>
+      <MenuItem icon={icons.delete} iconSize={20}>Delete</MenuItem>
+      <MenuDivider />
+      {containsFile && <>
+        <MenuItem icon={icons.download}>Download</MenuItem>
+        <MenuItem icon={icons.zip} iconSize={18}>Archive</MenuItem>
+        <MenuDivider />
+      </>}
+      <MenuItem icon={icons.details} iconSize={18}>Details</MenuItem>
     </MenuContainer>
   );
 }

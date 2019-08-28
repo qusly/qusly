@@ -19,16 +19,22 @@ export const StyledContextMenu = styled.div`
   `}
 `;
 
+interface ItemProps {
+  icon: string;
+  disabled: boolean;
+  iconSize: number;
+}
+
 export const StyledItem = styled.div`
   width: 100%;
   height: 32px;
-  padding: 0px 24px;
+  padding: 0px 16px;
   display: flex;
   align-items: center;
   font-size: 14px;
   white-space: nowrap;
 
-  ${({ icon, disabled }: { icon: string, disabled?: boolean }) => css`
+  ${({ icon, disabled, iconSize }: ItemProps) => css`
     color: ${disabled
       ? `rgba(0, 0, 0, ${transparency.text.disabled})`
       : '#000'};
@@ -45,8 +51,18 @@ export const StyledItem = styled.div`
         opacity: 0.54;
         margin-right: 12px;
         background-image: url(${icon});
-        ${centerIcon()};
+        backface-visibility: hidden;
+        transform: translateZ(0);
+        -webkit-font-smoothing: subpixel-antialiased;
+        ${centerIcon(iconSize)};
       }
     `}
   `}
+`;
+
+export const MenuDivider = styled.div`
+  width: 100%;
+  height: 1px;
+  background-color: rgba(0, 0, 0, ${transparency.dividers});
+  margin: 8px 0px;
 `;
