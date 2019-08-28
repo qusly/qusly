@@ -177,4 +177,18 @@ export class Page {
       await this.fetchFiles();
     }
   }
+
+  @action
+  public async createBlank(type: 'folder' | 'file') {
+    const path = this.path.toString();
+    const res = await this.session.client.createBlank(type, path, this.files);
+
+    if (!res.success) throw res.error;
+
+    await this.fetchFiles();
+    const file = this.files.find(r => r.name === res.fileName);
+
+    file.selected = true;
+    this.focusedFile = file;
+  }
 }

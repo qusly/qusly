@@ -11,11 +11,11 @@ const onRefresh = () => {
 };
 
 const onNewFolder = () => {
-  //store.pages.current.createBlank('folder');
+  store.pages.current.createBlank('folder');
 };
 
 const onNewFile = () => {
-  // store.pages.current.createBlank('file');
+  store.pages.current.createBlank('file');
 };
 
 const onPaste = () => {
@@ -32,15 +32,15 @@ export const PageMenu = observer(() => {
         Refresh
       </MenuItem>
       <MenuDivider />
-      <MenuItem icon={icons.folderAdd}>
+      <MenuItem icon={icons.folderAdd} onClick={onNewFolder}>
         New folder
       </MenuItem>
-      <MenuItem icon={icons.fileAdd}>
+      <MenuItem icon={icons.fileAdd} onClick={onNewFile}>
         New file
       </MenuItem>
       {!!page.cutFiles.length && <>
         <MenuDivider />
-        <MenuItem icon={icons.paste} iconSize={18}>
+        <MenuItem icon={icons.paste} iconSize={18} onClick={onPaste}>
           Paste
         </MenuItem>
       </>}
