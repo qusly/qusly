@@ -1,5 +1,5 @@
 import { observable, action } from 'mobx';
-import { Tree as TraversalClient, ITreeItem as ITraversalItem } from 'qusly-core';
+import { formatPath } from 'qusly-core';
 
 import { Session } from './session';
 import { ITreeItem } from '~/interfaces';
@@ -8,36 +8,24 @@ export class Tree {
   @observable
   public items: ITreeItem[] = [];
 
-  private parent: ITreeItem;
-
-  public client = new TraversalClient();
-
-  constructor(public session: Session) {
-    this.client.on('fetch', this.onFetch);
-  }
-
-  public async init(item?: ITreeItem) {
-    await this.client.connect(this.session.site);
-
-    if (item) {
-      this.parent = item;
-    }
-
-    this.client.init({
-      maxDepth: -1,
-      path: item ? item.path : '/',
-      filter: ({ file }) => file.type === 'directory',
-    });
-  }
+  constructor(public session: Session) { }
 
   @action
-  private onFetch = ({ file, path }: ITraversalItem) => {
-    const list = !this.parent ? this.items : this.parent.children;
+  public async fetch(parent?: ITreeItem) {
+    if (parent && parent.children.length) return;
 
-    list.push({
-      file,
-      path,
-      children: [],
-    });
+    const path = !parent ? '/' : parent.path;
+    const list = !parent ? this.items : parent.children;
+
+    const res = await this.session.client.readDir(path);
+    if (!res.success) throw res.error;
+
+    const folders = res.files.filter(r => r.type === 'directory').map(r => ({
+      file: r,
+      path: formatPath(path, r),
+      children: []
+    }) as ITreeItem);
+
+    list.push(...folders);
   }
 }

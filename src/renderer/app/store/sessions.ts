@@ -1,4 +1,4 @@
-import { observable, computed } from 'mobx';
+import { observable, computed, action } from 'mobx';
 
 import { ISite } from '~/interfaces';
 import { Session } from '../models';
@@ -14,6 +14,7 @@ export class SessionsStore {
     return this.list.find(r => r.id === tab.sessionId);
   }
 
+  @action
   public add(site: ISite) {
     let session = this.list.find(r => r.site._id === site._id);
 

@@ -3,6 +3,9 @@ import { observable, action } from 'mobx';
 import * as React from 'react';
 import { TweenLite } from 'gsap';
 
+import store from '.';
+import { makeId } from '~/utils';
+import { ISite } from '~/interfaces';
 import { Tab } from '~/renderer/app/models';
 import {
   TAB_ANIMATION_DURATION,
@@ -12,7 +15,6 @@ import {
   ADD_TAB_MARGIN_LEFT,
 } from '~/renderer/app/constants';
 import HorizontalScrollbar from '~/renderer/components/HorizontalScrollbar';
-import store from '.';
 
 export class TabsStore {
   @observable
@@ -70,8 +72,13 @@ export class TabsStore {
     if (process.env.ENV === 'dev') {
       requestAnimationFrame(() => {
         if (!this.list.length) {
-          const site = ipcRenderer.sendSync('get-testing-site');
-          this.addTab({ site, active: true });
+          const id = makeId(32);
+
+          ipcRenderer.once(`get-testing-site-${id}`, (e, site: ISite) => {
+            this.addTab({ site, active: true });
+          });
+
+          ipcRenderer.send('get-testing-site', id);
         }
       });
     }

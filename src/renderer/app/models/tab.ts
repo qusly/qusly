@@ -33,6 +33,12 @@ export class Tab {
   @observable
   public width: number = 0;
 
+  @observable
+  public pageId: number;
+
+  @observable
+  public sessionId: number;
+
   @computed
   public get isSelected() {
     return store.tabs.selectedTabId === this.id;
@@ -83,8 +89,6 @@ export class Tab {
   public findRequestId: number;
   public removeTimeout: any;
   public isWindow: boolean = false;
-  public pageId: number;
-  public sessionId: number;
 
   constructor({ active } = defaultTabOptions) {
     if (active) {
@@ -94,9 +98,7 @@ export class Tab {
 
   @action
   public select() {
-    if (!this.isClosing) {
-      store.tabs.selectedTabId = this.id;
-    }
+    store.tabs.selectedTabId = this.id;
   }
 
   public getWidth(containerWidth: number = null, tabs: Tab[] = null) {

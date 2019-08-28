@@ -1,4 +1,4 @@
-import { observable, computed } from 'mobx';
+import { observable, computed, action } from 'mobx';
 
 import { Page, Tab } from '../models';
 import { ISite } from '~/interfaces';
@@ -14,6 +14,7 @@ export class PagesStore {
     return this.list.find(e => e.id === tab.pageId);
   }
 
+  @action
   public async add(site: ISite, tab: Tab) {
     const session = await store.sessions.add(site);
     const page = new Page(session);

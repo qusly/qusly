@@ -7,25 +7,23 @@ import { Page } from '..';
 import { StyledItem, Label, ExpandIcon, Icon } from './style';
 
 const onExpandClick = (data: ITreeItem) => () => {
-  if (!data.children.length) {
-    const session = store.sessions.current;
-    session.tree.init(data);
-  }
+  const session = store.sessions.current;
 
+  session.tree.fetch(data);
   data.expanded = !data.expanded;
 }
 
 const Item = observer(({ data, depth }: { data: ITreeItem, depth: number }) => {
-  const { file } = data;
+  const { file, expanded } = data;
 
   return (
     <>
       <StyledItem style={{ paddingLeft: depth * 30 }}>
-        <ExpandIcon onClick={onExpandClick(data)} expanded={false} />
+        <ExpandIcon onClick={onExpandClick(data)} expanded={expanded} />
         <Icon />
         <Label>{file.name}</Label>
       </StyledItem>
-      {data.children.map(item => (
+      {expanded && data.children.map(item => (
         <Item key={item.path} data={item} depth={depth + 1} />
       ))}
     </>

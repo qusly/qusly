@@ -7,7 +7,7 @@ import { makeId } from '~/utils';
 import { getIcon } from '../utils';
 
 export const runMessagingService = (appWindow: AppWindow) => {
-  ipcMain.on(`get-testing-site`, (e) => {
+  ipcMain.on(`get-testing-site`, (e, id: string) => {
     const { HOSTNAME,
       USER,
       PASSWORD,
@@ -25,7 +25,7 @@ export const runMessagingService = (appWindow: AppWindow) => {
       port: parseInt(PORT),
     };
 
-    e.returnValue = ENABLED === 'true' ? site : null;
+    appWindow.webContents.send(`get-testing-site-${id}`, ENABLED === 'true' ? site : null);
   });
 
   ipcMain.on('get-icons', async (e, list: string[], id: string) => {
