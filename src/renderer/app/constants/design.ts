@@ -1,3 +1,5 @@
+export const TITLEBAR_HEIGHT = 32;
+
 export const TABBAR_HEIGHT = 32;
 
 export const TOOLBAR_HEIGHT = 48;

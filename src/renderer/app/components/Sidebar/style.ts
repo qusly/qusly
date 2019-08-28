@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { robotoMedium } from '~/renderer/mixins';
+import { robotoMedium, noButtons } from '~/renderer/mixins';
 
 export const StyledSidebar = styled.div`
   width: 200px; /*274px;*/
@@ -10,11 +10,13 @@ export const StyledSidebar = styled.div`
 
 export const StyledPage = styled.div`
   width: 100%;
-  display: flex;
-  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  padding-bottom: 8px;
+  ${noButtons()};
 
   ${({ visible }: { visible: boolean }) => css`
-    display: ${visible ? 'flex' : 'none'};
+    display: ${visible ? 'block' : 'none'};
   `};
 `;
 

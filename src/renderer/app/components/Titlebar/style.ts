@@ -2,9 +2,10 @@ import styled from 'styled-components';
 
 import { centerIcon } from '~/renderer/mixins';
 import { icons } from '~/renderer/constants';
+import { TITLEBAR_HEIGHT } from '~/renderer/app/constants';
 
 export const StyledTitlebar = styled.div`
-  height: 32px;
+  height: ${TITLEBAR_HEIGHT}px;
   display: flex;
   position: relative;
   align-items: center;
