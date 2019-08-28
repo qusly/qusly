@@ -5,7 +5,6 @@ import { centerIcon, robotoRegular, customInput } from '~/renderer/mixins';
 
 interface Props {
   selected: boolean;
-  disabled: boolean;
   cut: boolean;
 }
 
@@ -17,14 +16,14 @@ export const StyledFile = styled.div`
   border-radius: 4px;
   position: relative;
 
-  ${({ selected, disabled, cut }: Props) => css`
+  ${({ selected, cut }: Props) => css`
     background-color: ${selected ? 'rgba(98, 0, 234, 0.08)' : 'none'};
-    opacity: ${disabled || cut ? 0.48 : 1};
+    opacity: ${cut ? 0.48 : 1};
     border: ${selected
       ? '1px solid rgba(98, 0, 234, 0.12)'
       : '1px solid transparent'};
 
-    ${!disabled && !cut && css`
+    ${!cut && css`
       &:hover {
         background-color: ${selected
         ? 'rgba(98, 0, 234, 0.12)'

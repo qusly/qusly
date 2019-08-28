@@ -96,7 +96,7 @@ const onInputBlur = (data: IFile) => (e: React.FocusEvent<HTMLTextAreaElement>) 
 
 export const File = selectableItem<Props>(observer(({ data }: Props) => {
   const inputRef = React.useRef<HTMLTextAreaElement>();
-  const { name, selected, renamed } = data;
+  const { name, selected, renamed, cut } = data;
   const { icon, opacity } = store.icons.getIcon(data);
 
   React.useEffect(() => {
@@ -119,8 +119,7 @@ export const File = selectableItem<Props>(observer(({ data }: Props) => {
       onDoubleClick={onDoubleClick(data)}
       onContextMenu={onContextMenu(data)}
       selected={selected}
-      cut={false}
-      disabled={false}>
+      cut={cut}>
       <Icon icon={icon} style={{ opacity }} />
       <Label>{name}</Label>
       <Input

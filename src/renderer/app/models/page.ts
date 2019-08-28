@@ -21,9 +21,14 @@ export class Page {
   @observable
   public focusedFile: IFile;
 
+  @observable
+  public cutFiles: IFile[] = [];
+
   public hoveredFile: IFile;
 
   public path = new Location(this);
+
+  public cutPath: string;
 
   constructor(public session: Session) { }
 
@@ -142,5 +147,34 @@ export class Page {
     }
 
     await this.fetchFiles();
+  }
+
+  @action
+  public async cut(files: IFile[]) {
+    this.cutFiles = files;
+    this.cutPath = this.path.toString();
+    this.files.forEach(file => {
+      file.cut = files.indexOf(file) !== -1;
+    });
+  }
+
+  @action
+  public async paste(wd = false) {
+    if (this.cutFiles.length) {
+      this.loading = true;
+
+      const dir = wd ? '' : this.focusedFile.name;
+
+      for (const file of this.cutFiles) {
+        const oldPath = `${this.cutPath}/${file.name}`;
+        const newPath = this.path.relative(dir, file.name);
+
+        await this.session.client.move(oldPath, newPath)
+      }
+
+      this.cutFiles = [];
+
+      await this.fetchFiles();
+    }
   }
 }

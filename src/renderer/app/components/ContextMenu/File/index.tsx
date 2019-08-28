@@ -23,6 +23,15 @@ const openInNewTab = () => {
   }
 }
 
+const onCut = () => {
+  const page = store.pages.current;
+  page.cut(page.selectedFiles);
+}
+
+const onPaste = () => {
+  store.pages.current.paste();
+}
+
 const onRename = () => {
   const page = store.pages.current;
   page.focusedFile.renamed = true;
@@ -50,8 +59,8 @@ export const FileMenu = () => {
       </MenuItem>
       <MenuItem icon={icons.apps} iconSize={18} hidden={multiple || !containsFile} disabled>Open with</MenuItem>
       <MenuDivider />
-      <MenuItem icon={icons.cut} iconSize={16}>Cut</MenuItem>
-      <MenuItem icon={icons.paste} iconSize={18}>
+      <MenuItem icon={icons.cut} iconSize={16} onClick={onCut}>Cut</MenuItem>
+      <MenuItem icon={icons.paste} iconSize={18} onClick={onPaste} hidden={!page.cutFiles.length || containsFile}>
         Paste
       </MenuItem>
       <MenuItem icon={icons.edit} onClick={onRename} hidden={multiple}>Rename</MenuItem>
