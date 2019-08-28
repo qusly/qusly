@@ -10,7 +10,10 @@ const onOpen = () => {
   page.path.pushRelative(page.focusedFile.name);
 };
 
-// TODO: Open in new tab
+const onRename = () => {
+  const page = store.pages.current;
+  page.focusedFile.renamed = true;
+}
 
 export const FileMenu = () => {
   const page = store.pages.current;
@@ -24,7 +27,7 @@ export const FileMenu = () => {
       {!containsFile && (
         <>
           {!mutliple && (
-            <MenuItem onClick={onOpen} icon={icons.folderOutline}>Open</MenuItem>
+            <MenuItem icon={icons.folderOutline} onClick={onOpen}>Open</MenuItem>
           )}
           <MenuItem icon={icons.openInNew} iconSize={18}>
             Open in new tab
@@ -44,7 +47,7 @@ export const FileMenu = () => {
         </MenuItem>
       )}
       {!mutliple && (
-        <MenuItem icon={icons.edit}>Rename</MenuItem>
+        <MenuItem icon={icons.edit} onClick={onRename}>Rename</MenuItem>
       )}
       <MenuItem icon={icons.delete} iconSize={20}>Delete</MenuItem>
       <MenuDivider />

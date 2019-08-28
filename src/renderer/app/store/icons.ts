@@ -10,7 +10,7 @@ export class IconsStore {
   public icons: Map<string, string> = new Map();
 
   @action
-  public load(files: IFile[]) {
+  public load(...files: IFile[]) {
     if (!files || !files.length) return null;
 
     return new Promise(resolve => {

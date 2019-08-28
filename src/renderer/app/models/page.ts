@@ -1,4 +1,5 @@
 import { observable, action, computed } from 'mobx';
+import { extname } from 'path';
 
 import { Session } from './session';
 import { Location } from './location';
@@ -30,6 +31,16 @@ export class Page {
     await this.path.push(path);
   }
 
+  public async close() {
+    const pages = store.pages.list.filter(r => r.session.id === this.session.id);
+
+    if (!pages.length) {
+      this.session.close();
+    }
+
+    store.pages.list = store.pages.list.filter(r => r !== this);
+  }
+
   @action
   public fetchFiles = async () => {
     this.loading = true;
@@ -38,7 +49,7 @@ export class Page {
     const res = await this.session.client.readDir(path);
     if (!res.success) throw res.error;
 
-    await store.icons.load(res.files);
+    await store.icons.load(...res.files);
 
     this.tab.title = `${this.session.site.title} - ${path}`;
     this.files = res.files || [];
@@ -88,13 +99,31 @@ export class Page {
     }
   }
 
-  public async close() {
-    const pages = store.pages.list.filter(r => r.session.id === this.session.id);
+  @action
+  public async rename(file: IFile, newName: string) {
+    newName = newName.trim();
 
-    if (!pages.length) {
-      this.session.close();
+    const oldName = file.name;
+    const exists = this.files.find(r => r.name.toLowerCase() === newName.toLowerCase());
+
+    if (!exists && newName.length) {
+      file.name = newName;
+      file.ext = extname(newName);
+      file.renamed = false;
+
+      if (file.type !== 'directory') {
+        await store.icons.load(file);
+      }
+
+      const oldPath = this.path.relative(oldName);
+      const newPath = this.path.relative(newName);
+
+      const res = await this.session.client.move(oldPath, newPath);
+
+      if (!res.success) {
+        file.name = oldName;
+        throw res.error;
+      }
     }
-
-    store.pages.list = store.pages.list.filter(r => r !== this);
   }
 }

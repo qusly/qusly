@@ -4,7 +4,8 @@ import { selectableItem } from 'rectangle-selection';
 
 import store from '~/renderer/app/store';
 import { IFile } from '~/interfaces';
-import { StyledFile, Label, Icon } from './style';
+import { resizeTextarea, selectFileName } from '~/renderer/app/utils';
+import { StyledFile, Label, Icon, Input } from './style';
 
 interface Props {
   data: IFile;
@@ -76,9 +77,38 @@ const onContextMenu = (data: IFile) => (e: React.MouseEvent) => {
   store.contextMenu.show('file');
 }
 
+const onInputKeyDown = (data: IFile) => (e: React.KeyboardEvent) => {
+  const input = e.target as HTMLTextAreaElement;
+
+  if (e.key === 'Enter') {
+    e.stopPropagation();
+    e.preventDefault();
+    store.pages.current.rename(data, input.value)
+  } else {
+    resizeTextarea(input);
+  }
+};
+
+const onInputBlur = (data: IFile) => (e: React.FocusEvent<HTMLTextAreaElement>) => {
+  store.pages.current.rename(data, e.target.value);
+  data.renamed = false;
+}
+
 export const File = selectableItem<Props>(observer(({ data }: Props) => {
-  const { name, selected } = data;
+  const inputRef = React.useRef<HTMLTextAreaElement>();
+  const { name, selected, renamed } = data;
   const { icon, opacity } = store.icons.getIcon(data);
+
+  React.useEffect(() => {
+    if (renamed) {
+      const input = inputRef.current;
+
+      input.value = name;
+      input.focus();
+      selectFileName(input);
+      resizeTextarea(input);
+    }
+  }, [renamed]);
 
   return (
     <StyledFile
@@ -93,6 +123,13 @@ export const File = selectableItem<Props>(observer(({ data }: Props) => {
       disabled={false}>
       <Icon icon={icon} style={{ opacity }} />
       <Label>{name}</Label>
+      <Input
+        ref={inputRef}
+        visible={renamed}
+        onKeyDown={onInputKeyDown(data)}
+        onMouseDown={e => e.stopPropagation()}
+        onDoubleClick={e => e.stopPropagation()}
+        onBlur={onInputBlur(data)} />
     </StyledFile>
   );
 }));

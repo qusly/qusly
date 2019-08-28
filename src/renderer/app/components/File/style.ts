@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 import { icons } from '~/renderer/constants';
-import { centerIcon, robotoRegular } from '~/renderer/mixins';
+import { centerIcon, robotoRegular, customInput } from '~/renderer/mixins';
 
 interface Props {
   selected: boolean;
@@ -59,18 +59,16 @@ export const Input = styled.textarea`
   min-height: calc(100% - 50px); 
   border-radius: 4px;
   background-color: #fff;
-  border: 1px solid #eee;
   z-index: 1;
-  outline: none;
   font-size: 13px;
   color: #000;
-  resize: none;
   overflow: hidden;
   position: absolute;
   top: 51px;
   left: -1px;
   text-align: center;
-  ${robotoRegular()};
+  ${customInput()};
+  border: 1px solid #eee;
 
   ${({ visible }: { visible: boolean }) => css`
     display: ${visible ? 'block' : 'none'};
