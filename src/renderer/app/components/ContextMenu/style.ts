@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 
-import { shadows } from '~/renderer/mixins';
+import { shadows, centerIcon } from '~/renderer/mixins';
+import { transparency } from '~/renderer/constants';
 
 export const StyledContextMenu = styled.div`
   width: 244px;
@@ -15,5 +16,37 @@ export const StyledContextMenu = styled.div`
     pointer-events: ${visible ? 'auto' : 'none'};
     opacity: ${visible ? 1 : 0};
     transition: ${visible ? '0.15s opacity' : 'unset'};
+  `}
+`;
+
+export const StyledItem = styled.div`
+  width: 100%;
+  height: 32px;
+  padding: 0px 24px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  white-space: nowrap;
+
+  ${({ icon, disabled }: { icon: string, disabled?: boolean }) => css`
+    color: ${disabled
+      ? `rgba(0, 0, 0, ${transparency.text.disabled})`
+      : '#000'};
+
+    &:hover {
+      background-color: ${!disabled ? 'rgba(0, 0, 0, 0.04)' : 'transparent'};
+    }
+
+    ${icon && css`
+      &:before {
+        content: '';
+        width: 20px;
+        height: 20px;
+        opacity: 0.54;
+        margin-right: 12px;
+        background-image: url(${icon});
+        ${centerIcon()};
+      }
+    `}
   `}
 `;

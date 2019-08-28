@@ -4,7 +4,32 @@ import { observer } from 'mobx-react-lite';
 import store from '~/renderer/app/store';
 import { ContextMenuContent } from '~/renderer/app/store/context-menu';
 import { FileMenu } from './File';
-import { StyledContextMenu } from './style';
+import { StyledContextMenu, StyledItem } from './style';
+
+interface ItemProps {
+  onClick?: (e: React.MouseEvent) => void;
+  icon?: string;
+  disabled?: boolean;
+  children: any;
+}
+
+export const MenuItem = ({ icon, onClick, children, disabled }: ItemProps) => {
+  const onItemClick = (e: React.MouseEvent) => {
+    store.contextMenu.visible = false;
+    if (onClick) onClick(e);
+  }
+
+  return (
+    <StyledItem
+      onMouseDown={e => e.stopPropagation()}
+      onClick={onItemClick}
+      icon={icon}
+      disabled={disabled}>
+      {children}
+    </StyledItem>
+  );
+};
+
 
 export const MenuContainer = observer(({ content, children }: { content: ContextMenuContent, children: any }) => {
   const selected = store.contextMenu.content === content;

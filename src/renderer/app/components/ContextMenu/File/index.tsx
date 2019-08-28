@@ -1,8 +1,7 @@
 import * as React from 'react';
 
-import { Item } from '../Item';
 import store from '~/renderer/app/store';
-import { MenuContainer } from '..';
+import { MenuContainer, MenuItem } from '..';
 
 const onOpen = () => {
   const page = store.pages.current;
@@ -23,36 +22,36 @@ export const FileMenu = () => {
       {!containsFile && (
         <>
           {!mutliple && (
-            <Item onClick={onOpen}>Open</Item>
+            <MenuItem onClick={onOpen}>Open</MenuItem>
           )}
-          <Item>
+          <MenuItem>
             Open in new tab
-          </Item>
+          </MenuItem>
         </>
       )}
       {!mutliple && (
         <>
           {containsFile && (
             <>
-              <Item>Edit</Item>
-              <Item>Archive</Item>
+              <MenuItem>Edit</MenuItem>
+              <MenuItem>Archive</MenuItem>
             </>
           )}
-          <Item>Add to bookmarks</Item>
+          <MenuItem>Add to bookmarks</MenuItem>
         </>
       )}
-      <Item>Cut</Item>
+      <MenuItem>Cut</MenuItem>
       {!containsFile && (
-        <Item>
+        <MenuItem>
           Paste
-        </Item>
+        </MenuItem>
       )}
-      <Item>Delete</Item>
+      <MenuItem>Delete</MenuItem>
       {!mutliple && (
-        <Item>Rename</Item>
+        <MenuItem>Rename</MenuItem>
       )}
-      <Item>Download</Item>
-      <Item>Details</Item>
+      <MenuItem>Download</MenuItem>
+      <MenuItem>Details</MenuItem>
     </MenuContainer>
   );
 }
