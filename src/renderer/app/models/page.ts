@@ -1,10 +1,11 @@
 import { observable, action, computed } from 'mobx';
 import { extname } from 'path';
 
+import store from '../store';
 import { Session } from './session';
 import { Location } from './location';
 import { IFile } from '~/interfaces';
-import store from '../store';
+import { sortFiles } from '../utils';
 
 let id = 0;
 
@@ -57,7 +58,7 @@ export class Page {
     await store.icons.load(...res.files);
 
     this.tab.title = `${this.session.site.title} - ${path}`;
-    this.files = res.files || [];
+    this.files = sortFiles(res.files);
     this.loading = false;
   }
 
