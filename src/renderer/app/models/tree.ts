@@ -12,7 +12,7 @@ export class Tree {
 
   @action
   public async fetch(parent?: ITreeItem) {
-    if (parent && parent.children.length) return;
+    if (parent && parent.children.length || !parent && this.items.length) return;
 
     const path = !parent ? '/' : parent.path;
     const list = !parent ? this.items : parent.children;
