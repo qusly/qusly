@@ -73,7 +73,7 @@ const Overlay = observer(({ tab }: { tab: Tab }) => {
     <StyledOverlay
       hovered={tab.isHovered}
       style={{
-        backgroundColor: tab.isSelected ? '#fafafa' : 'rgba(255, 255, 255, 0.5)',
+        backgroundColor: 'transparent',
       }}
     />
   );

@@ -39,10 +39,6 @@ export const StyledClose = styled.div`
   }
 `;
 
-interface TabProps {
-  selected: boolean;
-}
-
 export const StyledTab = styled.div`
   position: absolute;
   height: 100%;
@@ -53,7 +49,7 @@ export const StyledTab = styled.div`
   -webkit-app-region: no-drag;
   display: flex;
 
-  ${({ selected }: TabProps) => css`
+  ${({ selected }: { selected: boolean }) => css`
     z-index: ${selected ? 2 : 1};
   `};
 `;
@@ -73,7 +69,6 @@ export const StyledOverlay = styled.div`
 `;
 
 export const StyledTitle = styled.div`
-  font-size: 12px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

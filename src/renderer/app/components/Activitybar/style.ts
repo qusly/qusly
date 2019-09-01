@@ -7,7 +7,6 @@ import { ACTIVITYBAR_WIDTH } from '~/renderer/app/constants';
 export const StyledActivitybar = styled.div`
   width: ${ACTIVITYBAR_WIDTH}px;
   height: 100%;
-  background-color: #eee;
 `;
 
 export const StyledItem = styled.div`

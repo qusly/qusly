@@ -10,7 +10,6 @@ export const StyledTitlebar = styled.div`
   position: relative;
   align-items: center;
   justify-content: space-between;
-  background-color: rgba(0, 0, 0, 0.1);
 `;
 
 export const Title = styled.div`
@@ -29,8 +28,8 @@ export const Handle = styled.div`
 `;
 
 export const Icon = styled.div`
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   margin-left: 8px;
   background-image: url(${icons.qusly});
   ${centerIcon()};

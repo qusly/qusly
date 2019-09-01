@@ -6,9 +6,10 @@ import { APPBAR_HEIGHT } from '~/renderer/app/constants';
 export const StyledPage = styled.div`
   width: 100%;
   height: calc(100% - ${APPBAR_HEIGHT}px);
-  background-color: #fff;
-  border-radius: 32px 32px 0px 0px;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
   position: relative;
+  background-color: #fff;
 
   & .selection-container {
     width: 100%;

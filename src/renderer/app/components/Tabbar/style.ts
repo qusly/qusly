@@ -8,9 +8,9 @@ export const StyledTabbar = styled.div`
   height: ${TABBAR_HEIGHT}px;
   position: relative;
   overflow: hidden;
-  transition: 0.3s opacity, 0.3s transform;
   display: flex;
-  background-color: rgba(0, 0, 0, 0.06);
+  background-color: #eee;
+  transition: 0.3s opacity, 0.3s transform;
 `;
 
 export const TabsContainer = styled.div`
@@ -25,7 +25,7 @@ export const TabsContainer = styled.div`
 `;
 
 export const AddTab = styled(ToolbarButton)`
-  height: 32px;
+  height: ${TABBAR_HEIGHT}px;
   position: absolute;
   left: 0;
   bottom: 0;
