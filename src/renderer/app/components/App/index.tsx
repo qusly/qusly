@@ -7,7 +7,7 @@ import { Activitybar } from '../Activitybar';
 import { Sidebar } from '../Sidebar';
 import { Content } from '../Content';
 import { ContextMenu } from '../ContextMenu';
-import { Drag } from '../Drag';
+import { DragThumb } from '../DragThumb';
 import { Style } from '../../style';
 import { StyledApp, Container } from './style';
 
@@ -22,7 +22,7 @@ const App = () => {
         <Activitybar />
         <Sidebar />
         <Content />
-        <Drag />
+        <DragThumb />
       </Container>
       <ContextMenu />
     </StyledApp>

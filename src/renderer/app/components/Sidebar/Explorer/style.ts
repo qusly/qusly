@@ -41,7 +41,7 @@ export const Icon = styled.div`
 
 export const Label = styled.div`
   font-size: 13px;
-  margin-left: 8px;
+  padding: 0px 8px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

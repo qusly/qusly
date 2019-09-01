@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 import { shadows, centerIcon, robotoRegular, robotoMedium } from '~/renderer/mixins';
 
-export const StyledDrag = styled.div`
+export const StyledThumb = styled.div`
   width: fit-content;
   max-width: 164px;
   height: 48px;
