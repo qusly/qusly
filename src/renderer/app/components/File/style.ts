@@ -15,6 +15,7 @@ export const StyledFile = styled.div`
   padding: 0px 16px 8px 16px;
   border-radius: 4px;
   position: relative;
+  border-radius: 8px;
 
   ${({ selected, cut }: Props) => css`
     background-color: ${selected ? 'rgba(98, 0, 234, 0.08)' : 'none'};
@@ -27,7 +28,7 @@ export const StyledFile = styled.div`
       &:hover {
         background-color: ${selected
         ? 'rgba(98, 0, 234, 0.12)'
-        : 'rgba(0, 0, 0, 0.08)'};
+        : '#f5f5f5'};
       }
     `}
   `}

@@ -6,10 +6,7 @@ import { APPBAR_HEIGHT } from '~/renderer/app/constants';
 export const StyledPage = styled.div`
   width: 100%;
   height: calc(100% - ${APPBAR_HEIGHT}px);
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
   position: relative;
-  background-color: #fff;
 
   & .selection-container {
     width: 100%;
@@ -17,7 +14,7 @@ export const StyledPage = styled.div`
     overflow-x: hidden;
     overflow-y: auto;
     padding: 24px;
-    padding-top: 16px;
+    padding-top: 8px;
     display: grid;
     grid-gap: 8px;
     grid-template-rows: 1fr;

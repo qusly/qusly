@@ -9,9 +9,8 @@ export const StyledPathView = styled.div`
   overflow: hidden;
   cursor: text;
   position: relative;
-  border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 4px;
-  background-color: #fff;
+  background-color: #f5f5f5;
 `;
 
 export const Container = styled.div`
@@ -62,6 +61,7 @@ export const Input = styled.input`
   position: absolute;
   padding: 0px 12px;
   color: #000;
+  background-color: inherit;
   ${customInput()};
 
   ${({ visible }: { visible: boolean }) => css`
