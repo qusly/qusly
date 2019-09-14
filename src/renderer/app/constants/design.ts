@@ -8,3 +8,5 @@ export const TOOLBAR_BUTTON_WIDTH = 38;
 export const APPBAR_HEIGHT = TABBAR_HEIGHT + TOOLBAR_HEIGHT;
 
 export const ACTIVITYBAR_WIDTH = 52;
+
+export const SIDEBAR_TITLE_HEIGHT = 36;

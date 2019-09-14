@@ -4,7 +4,7 @@ import { observer } from 'mobx-react-lite';
 import store from '~/renderer/app/store';
 import { SidebarContent } from '~/renderer/app/store/activitybar';
 import { Explorer } from './Explorer';
-import { StyledSidebar, StyledPage, Title } from './style';
+import { StyledSidebar, StyledPage, Title, Content } from './style';
 
 interface PageProps {
   title: string;
@@ -16,7 +16,7 @@ export const Page = observer(({ title, content, children }: PageProps) => {
   return (
     <StyledPage visible={store.activitybar.content === content}>
       <Title>{title}</Title>
-      {children}
+      <Content>{children}</Content>
     </StyledPage>
   )
 });
