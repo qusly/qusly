@@ -31,8 +31,6 @@ export class Page {
 
   public cutPath: string;
 
-  public treeItem: ITreeItem;
-
   constructor(public session: Session) { }
 
   public async load(path?: string) {
@@ -69,6 +67,12 @@ export class Page {
   @computed
   public get tab() {
     return store.tabs.list.find(r => r.pageId === this.id);
+  }
+
+  @computed
+  public get treeItem() {
+    const path = this.path.toString();
+    return this.session.tree.getItem(path);
   }
 
   @computed

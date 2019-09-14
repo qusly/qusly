@@ -32,7 +32,7 @@ export class Session {
 
       this.startPath = path;
       this.status = 'connected';
-      this.tree.fetch();
+      this.tree.fetch(this.tree.items[0]);
     }
   }
 

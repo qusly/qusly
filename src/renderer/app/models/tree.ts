@@ -1,5 +1,4 @@
-import { observable, action } from 'mobx';
-import { formatPath } from 'qusly-core';
+import { observable, action, computed } from 'mobx';
 
 import { Session } from './session';
 import { ITreeItem, IFile } from '~/interfaces';
@@ -7,7 +6,14 @@ import { formatTreeItems } from '../utils';
 
 export class Tree {
   @observable
-  public items: ITreeItem[] = [];
+  public items: ITreeItem[] = [{
+    path: '/',
+    file: {
+      name: '/'
+    },
+    expanded: true,
+    children: [],
+  } as any];
 
   constructor(public session: Session) { }
 
@@ -33,15 +39,18 @@ export class Tree {
   public async update(item: ITreeItem, files: IFile[]) {
     if (!item) return;
 
+    item.fetched = true;
+
     item.children = formatTreeItems(files, item.path).map(r => {
-      const child = item.children.find(r => r.path === item.path);
+      const child = item.children.find(el => el.path === r.path);
 
       if (!child) return r;
 
       return {
         ...r,
-        fetched: child.fetched,
         children: child.children,
+        expanded: child.expanded,
+        fetched: child.fetched,
       }
     });
   }

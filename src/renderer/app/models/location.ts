@@ -48,8 +48,6 @@ export class Location {
     this.pos++;
     this.history = [...this.history.slice(0, this.pos), path];
     await this.page.fetchFiles();
-
-    this.page.treeItem = this.page.session.tree.getItem(path)
   }
 
   @action
