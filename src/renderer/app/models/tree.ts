@@ -11,11 +11,14 @@ export class Tree {
   constructor(public session: Session) { }
 
   @action
-  public async fetch(parent?: ITreeItem) {
-    if (parent && parent.children.length || !parent && this.items.length) return;
+  public async fetch(item?: ITreeItem) {
+    if (item) {
+      if (item.fetched) return;
+      item.fetched = true;
+    }
 
-    const path = !parent ? '/' : parent.path;
-    const list = !parent ? this.items : parent.children;
+    const path = !item ? '/' : item.path;
+    const list = !item ? this.items : item.children;
 
     const res = await this.session.client.readDir(path);
     if (!res.success) throw res.error;
