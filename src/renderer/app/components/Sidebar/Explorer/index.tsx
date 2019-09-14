@@ -6,7 +6,13 @@ import store from '~/renderer/app/store';
 import { Page } from '..';
 import { StyledItem, Label, ExpandIcon, Icon } from './style';
 
-const onExpandClick = (data: ITreeItem) => () => {
+const onItemClick = (data: ITreeItem) => () => {
+  store.pages.current.path.push(data.path);
+}
+
+const onExpandClick = (data: ITreeItem) => (e: React.MouseEvent) => {
+  e.stopPropagation();
+
   const session = store.sessions.current;
 
   session.tree.fetch(data);
@@ -18,7 +24,7 @@ const Item = observer(({ data, depth }: { data: ITreeItem, depth: number }) => {
 
   return (
     <>
-      <StyledItem style={{ paddingLeft: depth * 16 }}>
+      <StyledItem onClick={onItemClick(data)} style={{ paddingLeft: depth * 16 }}>
         <ExpandIcon onClick={onExpandClick(data)} expanded={expanded} />
         <Icon />
         <Label>{file.name}</Label>
