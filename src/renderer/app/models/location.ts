@@ -67,6 +67,11 @@ export class Location {
   @action
   public goto(index: number) {
     if (!this.page.loading) {
+      if (this.items.length - 1 === index) {
+        this.page.fetchFiles();
+        return;
+      }
+
       const items = this.items.slice(1, index + 1);
       const path = '/' + items.join('/');
       this.push(path);
