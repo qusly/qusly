@@ -16,14 +16,14 @@ export const StyledItem = styled.div`
 `;
 
 export const ExpandIcon = styled.div`
-  min-width: 20px;
-  min-height: 20px;
-  margin-left: 12px;
+  min-width: 30px;
+  min-height: 30px;
+  margin-left: 6px;
   background-image: url(${icons.expand});
   border-radius: 100%;
   opacity: ${transparency.icons.inactive};
   display: flex;
-  ${centerIcon()};
+  ${centerIcon(20)};
 
   ${({ expanded }: { expanded: boolean }) => css`
     transform: ${expanded ? 'rotate(-90deg)' : 'rotate(0deg)'};
@@ -33,7 +33,6 @@ export const ExpandIcon = styled.div`
 export const Icon = styled.div`
   min-width: 20px;
   min-height: 20px;
-  margin-left: 4px;
   opacity: ${transparency.icons.inactive};
   background-image: url(${icons.folder});
   ${centerIcon(18)}
