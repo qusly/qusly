@@ -139,6 +139,8 @@ export class Page {
         file.name = oldName;
         throw res.error;
       }
+
+      this.files = sortFiles(this.files);
     }
   }
 
