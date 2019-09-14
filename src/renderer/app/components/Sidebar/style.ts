@@ -32,7 +32,8 @@ export const Title = styled.div`
 export const Content = styled.div`
   width: 100%;
   height: calc(100% - ${SIDEBAR_TITLE_HEIGHT}px);
-  overflow-y: auto;
+  overflow-x: hidden;
+  overflow-y: visible;
   padding-bottom: 8px;
-  ${noButtons()};
+  ${noButtons({ color: 'rgba(0, 0, 0, 0.08)', hoverColor: 'rgba(0, 0, 0, 0.32)', alwaysVisible: false })};
 `;
