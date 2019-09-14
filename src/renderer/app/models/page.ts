@@ -4,7 +4,7 @@ import { extname } from 'path';
 import store from '../store';
 import { Session } from './session';
 import { Location } from './location';
-import { IFile } from '~/interfaces';
+import { IFile, ITreeItem } from '~/interfaces';
 import { sortFiles } from '../utils';
 
 let id = 0;
@@ -30,6 +30,8 @@ export class Page {
   public path = new Location(this);
 
   public cutPath: string;
+
+  public treeItem: ITreeItem;
 
   constructor(public session: Session) { }
 
@@ -60,6 +62,8 @@ export class Page {
     this.tab.title = `${this.session.site.title} - ${path}`;
     this.files = sortFiles(res.files);
     this.loading = false;
+
+    this.session.tree.update(this.treeItem, this.files);
   }
 
   @computed
