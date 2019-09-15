@@ -1,6 +1,6 @@
 import { observable } from 'mobx';
 
-export type SidebarContent = 'explorer' | 'sites-manager' | 'search' | 'transfer';
+export type SidebarContent = 'explorer' | 'sites' | 'search' | 'transfer';
 
 export class ActivitybarStore {
   @observable

@@ -5,6 +5,7 @@ import { Resizable } from 'resizable-box';
 import store from '~/renderer/app/store';
 import { SidebarContent } from '~/renderer/app/store/activitybar';
 import { Explorer } from './Explorer';
+import { Sites } from './Sites';
 import { StyledSidebar, StyledPage, Title, Content } from './style';
 
 interface PageProps {
@@ -27,6 +28,7 @@ export const Sidebar = () => {
     <Resizable direction='right' defaultSize={256} minSize={128} maxSize={512} style={{ height: '100%' }}>
       <StyledSidebar>
         <Explorer />
+        <Sites />
       </StyledSidebar>
     </Resizable >
   );

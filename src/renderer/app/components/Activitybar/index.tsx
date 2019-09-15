@@ -30,7 +30,7 @@ export const Activitybar = () => {
   return (
     <StyledActivitybar>
       <Item content='explorer' icon={icons.fileTree} />
-      <Item content='sites-manager' icon={icons.sitesManager} />
+      <Item content='sites' icon={icons.sitesManager} />
       <Item content='search' icon={icons.search} disabled />
       <Item content='transfer' icon={icons.transfer} disabled />
     </StyledActivitybar>
