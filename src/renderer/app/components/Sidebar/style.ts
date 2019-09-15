@@ -4,7 +4,6 @@ import { noButtons, body2, robotoMedium } from '~/renderer/mixins';
 import { SIDEBAR_TITLE_HEIGHT } from '~/renderer/app/constants';
 
 export const StyledSidebar = styled.div`
-  width: 200px; /*274px;*/
   height: 100%;
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
@@ -35,5 +34,5 @@ export const Content = styled.div`
   overflow-x: hidden;
   overflow-y: visible;
   padding-bottom: 8px;
-  ${noButtons({ color: 'rgba(0, 0, 0, 0.08)', hoverColor: 'rgba(0, 0, 0, 0.32)', alwaysVisible: false })};
+  ${noButtons({ color: 'rgba(0, 0, 0, 0.12)', hoverColor: 'rgba(0, 0, 0, 0.32)', alwaysVisible: false })};
 `;

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { observer } from 'mobx-react-lite';
+import { Resizable } from 'resizable-box';
 
 import store from '~/renderer/app/store';
 import { SidebarContent } from '~/renderer/app/store/activitybar';
@@ -23,8 +24,10 @@ export const Page = observer(({ title, content, children }: PageProps) => {
 
 export const Sidebar = () => {
   return (
-    <StyledSidebar>
-      <Explorer />
-    </StyledSidebar>
+    <Resizable direction='right' defaultSize={256} minSize={128} maxSize={512} style={{ height: '100%' }}>
+      <StyledSidebar>
+        <Explorer />
+      </StyledSidebar>
+    </Resizable >
   );
 }
