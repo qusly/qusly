@@ -45,7 +45,7 @@ const onMouseLeave = () => {
 };
 
 const onContextMenu = (tab: Tab) => () => {
-  store.focusedTab = tab;
+  store.contextMenu.focusedTab = tab;
   store.contextMenu.show('tab');
 };
 

@@ -4,6 +4,7 @@ import { observable, action } from 'mobx';
 import store from '.';
 import { IPos } from '~/interfaces';
 import { getMenuPosition } from '~/renderer/app/utils';
+import { Tab } from '../models';
 
 export type ContextMenuContent = 'page' | 'file' | 'tab';
 
@@ -21,6 +22,8 @@ export class ContextMenuStore {
   public content: ContextMenuContent = 'file';
 
   public ref = React.createRef<HTMLDivElement>();
+
+  public focusedTab: Tab;
 
   @action
   public show = (content: ContextMenuContent) => {

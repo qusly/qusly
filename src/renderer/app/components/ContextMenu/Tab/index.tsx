@@ -8,11 +8,11 @@ import { MenuContainer, MenuItem } from '..';
 import { MenuDivider } from '../style';
 
 const onClose = () => {
-  store.focusedTab.close();
+  store.contextMenu.focusedTab.close();
 }
 
 const onCloseOthers = () => {
-  const pageId = store.focusedTab.pageId;
+  const pageId = store.contextMenu.focusedTab.pageId;
 
   for (const tab of store.tabs.list) {
     if (tab.pageId !== pageId) {
@@ -22,7 +22,7 @@ const onCloseOthers = () => {
 }
 
 const onCloseLeft = () => {
-  const tabIndex = store.tabs.list.indexOf(store.focusedTab);
+  const tabIndex = store.tabs.list.indexOf(store.contextMenu.focusedTab);
 
   for (let i = 0; i < tabIndex; i++) {
     store.tabs.list[i].close();
@@ -30,7 +30,7 @@ const onCloseLeft = () => {
 }
 
 const onCloseRight = () => {
-  const tabIndex = store.tabs.list.indexOf(store.focusedTab);
+  const tabIndex = store.tabs.list.indexOf(store.contextMenu.focusedTab);
 
   for (let i = tabIndex + 1; i < store.tabs.list.length; i++) {
     store.tabs.list[i].close();

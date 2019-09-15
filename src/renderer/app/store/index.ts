@@ -11,7 +11,6 @@ import { PagesStore } from './pages';
 import { PathViewStore } from './path-view';
 import { ContextMenuStore } from './context-menu';
 import { DragStore } from './drag';
-import { Tab } from '../models';
 
 export class Store {
   public addTab = new AddTabStore();
@@ -34,8 +33,6 @@ export class Store {
     top: 0,
     left: 0,
   }
-
-  public focusedTab: Tab;
 
   constructor() {
     ipcRenderer.on(
