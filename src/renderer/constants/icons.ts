@@ -25,4 +25,5 @@ export const icons = {
   zip: require('~/renderer/resources/icons/zip.svg'),
   folderAdd: require('~/renderer/resources/icons/folder-add.svg'),
   fileAdd: require('~/renderer/resources/icons/file-add.svg'),
+  copy: require('~/renderer/resources/icons/copy.svg'),
 }

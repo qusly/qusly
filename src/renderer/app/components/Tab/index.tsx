@@ -44,6 +44,11 @@ const onMouseLeave = () => {
   store.tabs.hoveredTabId = -1;
 };
 
+const onContextMenu = (tab: Tab) => () => {
+  store.focusedTab = tab;
+  store.contextMenu.show('tab');
+};
+
 const Content = observer(({ tab }: { tab: Tab }) => {
   return (
     <StyledContent collapsed={tab.isExpanded}>
@@ -82,11 +87,12 @@ const Overlay = observer(({ tab }: { tab: Tab }) => {
 export default observer(({ tab }: { tab: Tab }) => {
   return (
     <StyledTab
+      ref={tab.ref}
       selected={tab.isSelected}
       onMouseDown={onMouseDown(tab)}
       onMouseEnter={onMouseEnter(tab)}
       onMouseLeave={onMouseLeave}
-      ref={tab.ref}
+      onContextMenu={onContextMenu(tab)}
     >
       <TabContainer
         style={{
