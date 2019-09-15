@@ -1,16 +1,17 @@
 import * as React from 'react';
 import { observer } from 'mobx-react-lite';
 
-import { ISite } from '~/interfaces';
 import store from '~/renderer/app/store';
+import { ISite } from '~/interfaces';
+import { formatSiteDescription } from '~/renderer/app/utils';
 import { Page } from '..';
-import { StyledSite, Label, User } from './style';
+import { StyledSite, Label, Description } from './style';
 
 const Site = ({ data }: { data: ISite }) => {
   return (
     <StyledSite>
       <Label>{data.title}</Label>
-      <User>{data.user}</User>
+      <Description>{formatSiteDescription(data)}</Description>
     </StyledSite>
   );
 };

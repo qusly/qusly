@@ -26,11 +26,11 @@ export const Label = styled.div`
   ${robotoRegular()};
 `;
 
-export const User = styled.div`
+export const Description = styled.div`
   font-size: 13px;
   margin-top: 4px;
-  color: rgba(0, 0, 0, ${transparency.text.medium});
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  color: rgba(0, 0, 0, ${transparency.text.medium});
 `;
