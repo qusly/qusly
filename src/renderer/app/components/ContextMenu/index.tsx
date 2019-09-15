@@ -7,6 +7,7 @@ import { FileMenu } from './File';
 import { PageMenu } from './Page';
 import { TabMenu } from './Tab';
 import { PathMenu } from './Path';
+import { ExplorerMenu } from './Explorer';
 import { StyledContextMenu, StyledItem } from './style';
 
 interface ItemProps {
@@ -52,6 +53,7 @@ export const ContextMenu = observer(() => {
       <PageMenu />
       <TabMenu />
       <PathMenu />
+      <ExplorerMenu />
     </StyledContextMenu>
   );
 });

@@ -19,12 +19,17 @@ const onExpandClick = (data: ITreeItem) => (e: React.MouseEvent) => {
   data.expanded = !data.expanded;
 }
 
+const onContextMenu = (data: ITreeItem) => () => {
+  store.contextMenu.focusedExplorerItem = data;
+  store.contextMenu.show('explorer');
+}
+
 const Item = observer(({ data, depth }: { data: ITreeItem, depth: number }) => {
   const { file, expanded } = data;
 
   return (
     <>
-      <StyledItem onClick={onItemClick(data)} style={{ paddingLeft: depth * 16 }}>
+      <StyledItem onClick={onItemClick(data)} onContextMenu={onContextMenu(data)} style={{ paddingLeft: depth * 16 }}>
         <ExpandIcon onClick={onExpandClick(data)} expanded={expanded} />
         <Icon />
         <Label>{file.name}</Label>

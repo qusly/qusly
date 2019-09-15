@@ -11,7 +11,7 @@ const onOpen = () => {
   page.path.pushRelative(page.focusedFile.name);
 }
 
-const openInNewTab = () => {
+const onOpenInNewTab = () => {
   const page = store.pages.current;
   const { site } = page.session;
 
@@ -55,7 +55,7 @@ export const FileMenu = observer(() => {
       <MenuItem onClick={onOpen} icon={icons.folderOutline} hidden={multiple || containsFile}>
         Open
       </MenuItem>
-      <MenuItem onClick={openInNewTab} icon={icons.openInNew} iconSize={18} hidden={containsFile}>
+      <MenuItem onClick={onOpenInNewTab} icon={icons.openInNew} iconSize={18} hidden={containsFile}>
         Open in new tab
       </MenuItem>
       <MenuItem icon={icons.apps} iconSize={18} hidden={multiple || !containsFile} disabled>

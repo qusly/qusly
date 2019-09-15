@@ -2,11 +2,11 @@ import * as React from 'react';
 import { observable, action } from 'mobx';
 
 import store from '.';
-import { IPos } from '~/interfaces';
+import { IPos, ITreeItem } from '~/interfaces';
 import { getMenuPosition } from '~/renderer/app/utils';
 import { Tab } from '../models';
 
-export type ContextMenuContent = 'page' | 'file' | 'tab' | 'path' | 'explorer-item';
+export type ContextMenuContent = 'page' | 'file' | 'tab' | 'path' | 'explorer';
 
 export class ContextMenuStore {
   @observable
@@ -24,6 +24,8 @@ export class ContextMenuStore {
   public ref = React.createRef<HTMLDivElement>();
 
   public focusedTab: Tab;
+
+  public focusedExplorerItem: ITreeItem;
 
   @action
   public show = (content: ContextMenuContent) => {
