@@ -1,3 +1,4 @@
+import { clipboard } from 'electron';
 import { computed, observable, action } from 'mobx';
 
 import { Page } from './page';
@@ -76,5 +77,9 @@ export class Location {
       const path = '/' + items.join('/');
       this.push(path);
     }
+  }
+
+  public copyToClipboard() {
+    clipboard.writeText(this.toString(), 'clipboard')
   }
 }

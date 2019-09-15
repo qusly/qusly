@@ -1,4 +1,3 @@
-import { clipboard } from 'electron';
 import * as React from 'react';
 import { observer } from 'mobx-react-lite';
 
@@ -48,10 +47,7 @@ const onRefresh = () => {
 };
 
 const onCopyPath = () => {
-  const page = store.pages.current;
-  const path = page.path.toString();
-
-  clipboard.writeText(path, 'clipboard')
+  store.pages.current.path.copyToClipboard();
 }
 
 export const TabMenu = observer(() => {

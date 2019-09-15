@@ -26,12 +26,16 @@ const onBlur = () => {
   store.pathView.inputVisible = false;
 }
 
+const onContextMenu = () => {
+  store.contextMenu.show('path');
+}
+
 export const PathView = observer(() => {
   const page = store.pages.current;
   if (!page) return null;
 
   return (
-    <StyledPathView>
+    <StyledPathView onContextMenu={onContextMenu}>
       <Container visible={!store.pathView.inputVisible} onClick={store.pathView.show}>
         {page.path.items.map((label, index) => (
           <Item key={label} onClick={onItemClick(index)}>{label}</Item>

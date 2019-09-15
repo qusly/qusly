@@ -6,6 +6,7 @@ import { ContextMenuContent } from '~/renderer/app/store/context-menu';
 import { FileMenu } from './File';
 import { PageMenu } from './Page';
 import { TabMenu } from './Tab';
+import { PathMenu } from './Path';
 import { StyledContextMenu, StyledItem } from './style';
 
 interface ItemProps {
@@ -50,6 +51,7 @@ export const ContextMenu = observer(() => {
       <FileMenu />
       <PageMenu />
       <TabMenu />
+      <PathMenu />
     </StyledContextMenu>
   );
 });

@@ -6,7 +6,7 @@ import { IPos } from '~/interfaces';
 import { getMenuPosition } from '~/renderer/app/utils';
 import { Tab } from '../models';
 
-export type ContextMenuContent = 'page' | 'file' | 'tab';
+export type ContextMenuContent = 'page' | 'file' | 'tab' | 'path' | 'explorer-item';
 
 export class ContextMenuStore {
   @observable
