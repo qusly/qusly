@@ -7,9 +7,13 @@ import { formatSiteDescription } from '~/renderer/app/utils';
 import { Page } from '..';
 import { StyledSite, Label, Description } from './style';
 
+const onClick = (site: ISite) => () => {
+  store.tabs.addTab({ active: true, site });
+}
+
 const Site = ({ data }: { data: ISite }) => {
   return (
-    <StyledSite>
+    <StyledSite onClick={onClick(data)}>
       <Label>{data.title}</Label>
       <Description>{formatSiteDescription(data)}</Description>
     </StyledSite>
