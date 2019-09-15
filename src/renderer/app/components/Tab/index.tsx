@@ -17,21 +17,23 @@ const removeTab = (tab: Tab) => () => {
   tab.close();
 };
 
-const onCloseMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+const onCloseMouseDown = (e: React.MouseEvent) => {
   e.stopPropagation();
 };
 
-const onMouseDown = (tab: Tab) => (e: React.MouseEvent<HTMLDivElement>) => {
-  const { pageX } = e;
+const onMouseDown = (tab: Tab) => (e: React.MouseEvent) => {
+  if (e.button === 0) {
+    tab.select();
 
-  tab.select();
+    store.tabs.lastMouseX = 0;
+    store.tabs.isDragging = true;
+    store.tabs.mouseStartX = e.pageX;
+    store.tabs.tabStartX = tab.left;
 
-  store.tabs.lastMouseX = 0;
-  store.tabs.isDragging = true;
-  store.tabs.mouseStartX = pageX;
-  store.tabs.tabStartX = tab.left;
-
-  store.tabs.lastScrollLeft = store.tabs.containerRef.current.scrollLeft;
+    store.tabs.lastScrollLeft = store.tabs.containerRef.current.scrollLeft;
+  } else if (e.button === 1) {
+    tab.close();
+  }
 };
 
 const onMouseEnter = (tab: Tab) => () => {
