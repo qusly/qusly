@@ -41,7 +41,8 @@
   "devDependencies": {
     "@types/dotenv": "6.1.1",
     "@types/gsap": "1.20.2",
-    "@types/nedb": "1.8.8",
+    "@types/keytar": "^4.4.0",
+    "@types/nedb": "^1.8.8",
     "@types/pretty-bytes": "^5.2.0",
     "@types/react": "16.9.2",
     "@types/react-dom": "16.9.0",
@@ -83,5 +84,8 @@
     "webpack-cli": "^3.3.7",
     "webpack-dev-server": "^3.8.0",
     "webpack-merge": "^4.2.2"
+  },
+  "dependencies": {
+    "keytar": "^5.0.0-beta.2"
   }
 }
