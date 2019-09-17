@@ -36,7 +36,7 @@ export const ToolbarButton = observer(
       <Button
         onClick={onClick}
         onMouseDown={onMouseDown}
-        className={className}
+        className={'toolbar-button ' + (className || '')}
         style={style}
         ref={(r: HTMLDivElement) => {
           if (typeof divRef === 'function') {

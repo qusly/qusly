@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 import { noButtons, body2, robotoMedium } from '~/renderer/mixins';
-import { SIDEBAR_TITLE_HEIGHT } from '~/renderer/app/constants';
+import { SIDEBAR_HEADER_HEIGHT } from '~/renderer/app/constants';
 
 export const StyledSidebar = styled.div`
   height: 100%;
@@ -19,18 +19,24 @@ export const StyledPage = styled.div`
   `};
 `;
 
-export const Title = styled.div`
-  height: ${SIDEBAR_TITLE_HEIGHT}px;
+export const Header = styled.div`
+  height: ${SIDEBAR_HEADER_HEIGHT}px;
   display: flex;
   align-items: center;
-  padding: 0px 16px;
+  padding-left: 16px;
+  padding-right: 4px;
   ${body2()};
   ${robotoMedium()};
+
+  & > .toolbar-button {
+    height: ${SIDEBAR_HEADER_HEIGHT}px;
+    margin-left: auto;
+  }
 `;
 
 export const Content = styled.div`
   width: 100%;
-  height: calc(100% - ${SIDEBAR_TITLE_HEIGHT}px);
+  height: calc(100% - ${SIDEBAR_HEADER_HEIGHT}px);
   overflow-x: hidden;
   overflow-y: visible;
   padding-bottom: 8px;
