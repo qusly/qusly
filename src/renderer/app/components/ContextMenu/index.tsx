@@ -38,7 +38,6 @@ export const MenuItem = ({ icon, onClick, children, disabled, iconSize, hidden }
   );
 };
 
-
 export const MenuContainer = observer(({ content, children }: { content: ContextMenuContent, children: any }) => {
   const selected = store.contextMenu.content === content;
   return selected && children;

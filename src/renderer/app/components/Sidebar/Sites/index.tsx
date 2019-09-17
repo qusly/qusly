@@ -13,6 +13,10 @@ const onClick = (site: ISite) => () => {
   store.tabs.addTab({ active: true, site });
 }
 
+const onAdd = () => {
+
+}
+
 const Site = ({ data }: { data: ISite }) => {
   return (
     <StyledSite onClick={onClick(data)}>
@@ -30,7 +34,7 @@ export const Sites = observer(() => {
     <StyledPage visible={store.activitybar.content === 'sites'}>
       <Header>
         Sites
-        <ToolbarButton icon={icons.add} />
+        <ToolbarButton icon={icons.add} onClick={onAdd} />
       </Header>
       <Site data={{
         host: 'example.com',
