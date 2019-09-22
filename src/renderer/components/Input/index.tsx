@@ -5,10 +5,9 @@ import { customInput } from '~/renderer/mixins';
 export const Input = styled.input`
   width: 200px;
   height: 32px;
-  position: relative;;
+  position: relative;
   border-radius: 4px;
   user-select: none;
-  cursor: pointer;
   display: flex;
   align-items: center;
   padding: 0px 8px;

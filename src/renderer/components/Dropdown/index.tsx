@@ -9,10 +9,10 @@ interface Props {
   children?: any;
   defaultValue?: any;
   onChange?: (newValue?: any, oldValue?: any) => void;
-  style?: any;
+  style?: React.CSSProperties;
 }
 
-export const Dropdown = ({ defaultValue, onChange, children }: Props) => {
+export const Dropdown = ({ defaultValue, onChange, children, style }: Props) => {
   const [expanded, setExpanded] = React.useState(false);
   const [value, setValue] = React.useState(defaultValue);
   const [label, setLabel] = React.useState<string>(null);
@@ -49,7 +49,7 @@ export const Dropdown = ({ defaultValue, onChange, children }: Props) => {
   }, [expanded]);
 
   return (
-    <StyledDropdown onMouseDown={onMouseDown}>
+    <StyledDropdown className='dropdown' onMouseDown={onMouseDown} style={style}>
       <Label>{label}</Label>
       <DropIcon expanded={expanded} />
       <Menu visible={expanded}>
