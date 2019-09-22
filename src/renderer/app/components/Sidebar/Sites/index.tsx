@@ -6,11 +6,11 @@ import { ISite } from '~/interfaces';
 import { icons } from '~/renderer/constants';
 import { formatSiteDescription } from '~/renderer/app/utils';
 import { ToolbarButton } from '~/renderer/components/ToolbarButton';
-import { StyledPage, Header, Content } from '../style';
+import { StyledPage, Header } from '../style';
 import { StyledSite, Label, Description } from './style';
 
 const onClick = (site: ISite) => () => {
-  store.tabs.addTab({ active: true, site });
+  store.sites.openInTab(site);
 }
 
 const onAdd = () => {
@@ -36,14 +36,9 @@ export const Sites = observer(() => {
         Sites
         <ToolbarButton icon={icons.add} onClick={onAdd} />
       </Header>
-      <Site data={{
-        host: 'example.com',
-        user: 'test',
-        password: '123',
-        protocol: 'sftp',
-        title: 'My website',
-        port: 22
-      }} />
+      {store.sites.list.map(item => (
+        <Site key={item._id} data={item} />
+      ))}
     </StyledPage>
   );
 });

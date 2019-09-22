@@ -31,6 +31,7 @@ export const Header = styled.div`
   & > .toolbar-button {
     height: ${SIDEBAR_HEADER_HEIGHT}px;
     margin-left: auto;
+    cursor: pointer;
   }
 `;
 

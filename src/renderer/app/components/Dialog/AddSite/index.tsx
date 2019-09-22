@@ -36,6 +36,7 @@ export const AddSite = observer(() => {
     store.sites.add({
       title: title || host,
       port: port.length ? parseInt(port, 10) : defaultPort,
+      protocol: protocol.current,
       host,
       user,
       password,

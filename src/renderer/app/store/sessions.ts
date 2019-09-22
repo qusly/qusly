@@ -16,7 +16,7 @@ export class SessionsStore {
 
   @action
   public add(site: ISite) {
-    let session = this.list.find(r => r.site._id === site._id);
+    let session = this.findSession(site);
 
     if (!session) {
       session = new Session(site);
@@ -24,5 +24,9 @@ export class SessionsStore {
     }
 
     return session;
+  }
+
+  private findSession({ host, port, protocol }: ISite) {
+    return this.list.find(({ site }) => site.host === host && site.port === port && site.protocol === protocol);
   }
 }

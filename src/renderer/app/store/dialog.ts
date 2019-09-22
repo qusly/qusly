@@ -7,7 +7,7 @@ export class DialogStore {
   public visible = false;
 
   @observable
-  public content: DialogContent = 'add-site';
+  public content: DialogContent = null;
 
   @action
   public show = (content: DialogContent) => {

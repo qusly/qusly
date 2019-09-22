@@ -3,6 +3,7 @@ import { setPassword, getPassword } from 'keytar';
 
 import { Database } from '~/renderer/models';
 import { ISite } from '~/interfaces';
+import store from '.';
 
 export class SitesStore {
   public db = new Database<ISite>('sites');
@@ -15,13 +16,7 @@ export class SitesStore {
   }
 
   private async load() {
-    const res = await this.db.get({} as any);
-
-    res.forEach(async item => {
-      item.password = await getPassword('qusly', `site-${item._id}`);
-    });
-
-    this.list = res;
+    this.list = await this.db.get({} as any);
   }
 
   public async add(site: ISite) {
@@ -29,5 +24,10 @@ export class SitesStore {
     const res = await this.db.insert({ ...site, password: '' });
 
     setPassword('qusly', `site-${res._id}`, password);
+  }
+
+  public async openInTab(site: ISite) {
+    site.password = await getPassword('qusly', `site-${site._id}`);
+    store.tabs.addTab({ active: true, site });
   }
 }
