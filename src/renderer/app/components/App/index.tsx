@@ -8,6 +8,7 @@ import { Sidebar } from '../Sidebar';
 import { Content } from '../Content';
 import { ContextMenu } from '../ContextMenu';
 import { DragThumb } from '../DragThumb';
+import { Dialog } from '../Dialog';
 import { Style } from '../../style';
 import { StyledApp, Container } from './style';
 
@@ -25,6 +26,7 @@ const App = () => {
         <DragThumb />
       </Container>
       <ContextMenu />
+      <Dialog />
     </StyledApp>
   );
 };

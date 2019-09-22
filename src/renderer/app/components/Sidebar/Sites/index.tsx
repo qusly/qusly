@@ -3,12 +3,18 @@ import { observer } from 'mobx-react-lite';
 
 import store from '~/renderer/app/store';
 import { ISite } from '~/interfaces';
+import { icons } from '~/renderer/constants';
 import { formatSiteDescription } from '~/renderer/app/utils';
-import { Page } from '..';
+import { ToolbarButton } from '~/renderer/components/ToolbarButton';
+import { StyledPage, Header, Content } from '../style';
 import { StyledSite, Label, Description } from './style';
 
 const onClick = (site: ISite) => () => {
   store.tabs.addTab({ active: true, site });
+}
+
+const onAdd = () => {
+  store.dialog.show('add-site');
 }
 
 const Site = ({ data }: { data: ISite }) => {
@@ -25,7 +31,11 @@ export const Sites = observer(() => {
   if (!session) return null;
 
   return (
-    <Page title='Sites' content='sites'>
+    <StyledPage visible={store.activitybar.content === 'sites'}>
+      <Header>
+        Sites
+        <ToolbarButton icon={icons.add} onClick={onAdd} />
+      </Header>
       <Site data={{
         host: 'example.com',
         user: 'test',
@@ -34,6 +44,6 @@ export const Sites = observer(() => {
         title: 'My website',
         port: 22
       }} />
-    </Page>
+    </StyledPage>
   );
 });
