@@ -1,7 +1,5 @@
 import { observable, action } from 'mobx';
 
-import { ISite } from '~/interfaces';
-
 export type DialogContent = 'add-site' | 'edit-site';
 
 export class DialogStore {

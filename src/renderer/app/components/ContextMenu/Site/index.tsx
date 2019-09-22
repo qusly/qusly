@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { observer } from 'mobx-react-lite';
 
 import store from '~/renderer/app/store';
 import { icons } from '~/renderer/constants';
@@ -8,8 +7,13 @@ import { MenuDivider } from '../style';
 
 const onConnect = () => {
   const site = store.contextMenu.focusedSite;
-
   store.sites.openInTab(site);
+}
+
+const onEdit = async () => {
+  const site = store.contextMenu.focusedSite;
+  site.password = await store.sites.getPassword(site._id);
+  store.dialog.show('edit-site');
 }
 
 export const SiteMenu = () => {
@@ -19,7 +23,7 @@ export const SiteMenu = () => {
         Connect
       </MenuItem>
       <MenuDivider />
-      <MenuItem icon={icons.edit}>
+      <MenuItem icon={icons.edit} onClick={onEdit}>
         Edit
       </MenuItem>
       <MenuItem icon={icons.delete} iconSize={20}>

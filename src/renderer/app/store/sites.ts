@@ -27,7 +27,11 @@ export class SitesStore {
   }
 
   public async openInTab(site: ISite) {
-    site.password = await getPassword('qusly', `site-${site._id}`);
+    site.password = await this.getPassword(site._id);
     store.tabs.addTab({ active: true, site });
+  }
+
+  public getPassword(_id: string) {
+    return getPassword('qusly', `site-${_id}`);
   }
 }

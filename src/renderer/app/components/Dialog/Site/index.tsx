@@ -3,24 +3,22 @@ import { IProtocol } from 'qusly-core';
 import { observer } from 'mobx-react-lite';
 
 import store from '~/renderer/app/store';
-import { ensureValue, getValues } from '~/renderer/app/utils';
+import { ensureValue, getValues, setValues, clearValues } from '~/renderer/app/utils';
 import { Dropdown, DropdownItem } from '~/renderer/components/Dropdown';
 import { CloseButton } from '..';
 import { Title, Content, Buttons, DialogButton, Container } from '../style';
 import { Input, Row } from './style';
 
 export const SiteDialog = observer(() => {
+  const content = store.dialog.content;
+
   const titleRef = React.useRef<HTMLInputElement>();
-  const protocol = React.useRef<IProtocol>('sftp');
+  const protocolRef = React.useRef<Dropdown>();
   const portRef = React.useRef<HTMLInputElement>();
   const hostnameRef = React.useRef<HTMLInputElement>();
   const userRef = React.useRef<HTMLInputElement>();
   const passwordRef = React.useRef<HTMLInputElement>();
   const [disabled, setDisabled] = React.useState(true);
-
-  const onProtocol = React.useCallback((value: IProtocol) => {
-    protocol.current = value;
-  }, []);
 
   const onInput = React.useCallback(() => {
     const hasValue = ensureValue(hostnameRef, userRef, passwordRef);
@@ -29,12 +27,12 @@ export const SiteDialog = observer(() => {
 
   const onAdd = React.useCallback(() => {
     const [title, port, host, user, password] = getValues(titleRef, portRef, hostnameRef, userRef, passwordRef);
-    const defaultPort = protocol.current === 'sftp' ? 22 : 21;
+    const defaultPort = protocolRef.current.value === 'sftp' ? 22 : 21;
 
     store.sites.add({
       title: title || host,
       port: port.length ? parseInt(port, 10) : defaultPort,
-      protocol: protocol.current,
+      protocol: protocolRef.current.value as IProtocol,
       host,
       user,
       password,
@@ -43,7 +41,19 @@ export const SiteDialog = observer(() => {
     store.dialog.hide();
   }, []);
 
-  const content = store.dialog.content;
+  React.useEffect(() => {
+    if (content === 'edit-site') {
+      const { title, protocol, port, host, user, password } = store.contextMenu.focusedSite;
+
+      setValues([titleRef, title], [protocolRef, protocol], [portRef, port], [hostnameRef, host], [userRef, user], [passwordRef, password]);
+      setDisabled(false);
+    } else if (content === 'add-site') {
+      protocolRef.current.value = 'sftp';
+
+      clearValues(titleRef, portRef, hostnameRef, userRef, passwordRef);
+      setDisabled(true);
+    }
+  }, [content]);
 
   return (
     <Container visible={content === 'add-site' || content === 'edit-site'}>
@@ -51,7 +61,7 @@ export const SiteDialog = observer(() => {
       <Content>
         <Input ref={titleRef} placeholder='Title (optional)' onInput={onInput} />
         <Row>
-          <Dropdown onChange={onProtocol} defaultValue={protocol.current} style={{ width: '100%' }}>
+          <Dropdown ref={protocolRef} defaultValue='sftp' style={{ width: '100%' }}>
             <DropdownItem value='ftp'>FTP</DropdownItem>
             <DropdownItem value='ftps'>FTPS</DropdownItem>
             <DropdownItem value='sftp'>SFTP</DropdownItem>
