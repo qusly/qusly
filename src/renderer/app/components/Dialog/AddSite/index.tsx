@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { observer } from 'mobx-react-lite';
 
+import { Button } from '~/renderer/components/Button';
 import { Dropdown, DropdownItem } from '~/renderer/components/Dropdown';
 import { DialogContainer, } from '..';
-import { Title, Content } from '../style';
+import { Title, Content, Buttons, DialogButton } from '../style';
 import { Input, Row } from './style';
 
 export const AddSite = observer(() => {
@@ -24,6 +25,10 @@ export const AddSite = observer(() => {
         <Input placeholder='Username' />
         <Input placeholder='Password' />
       </Content>
+      <Buttons>
+        <DialogButton label='Cancel' background='rgba(0, 0, 0, 0.08)' color='#000' />
+        <DialogButton label='Add' disabled />
+      </Buttons>
     </DialogContainer>
   );
 });

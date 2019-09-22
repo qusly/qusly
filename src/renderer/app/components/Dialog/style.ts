@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components';
 
 import { EASING_FUNCTION } from '../../constants';
-import { robotoMedium, shadows } from '~/renderer/mixins';
+import { shadows } from '~/renderer/mixins';
+import { Button } from '~/renderer/components/Button';
 
 export const StyledDialog = styled.div`
   width: 100vw;
@@ -29,19 +30,31 @@ export const Container = styled.div`
   max-width: 512px;
   height: fit-content;
   background-color: #fff;
-  border-radius: 8px;
-  padding-bottom: 8px;
+  border-radius: 16px;
   z-index: 11;
   transition: 0.15s transform ${EASING_FUNCTION};
   box-shadow: ${shadows(4)};
 `;
 
 export const Title = styled.div`
-  padding: 16px 16px 8px 16px;
-  font-size: 16px;
-  ${robotoMedium()};
+  padding: 16px;
+  font-size: 18px;
 `;
 
 export const Content = styled.div`
-  padding: 8px 16px;
+  padding: 0px 16px 8px;
 `;
+
+export const Buttons = styled.div`
+  width: 100%;
+  padding: 12px 4px 16px;
+  display: flex;
+`;
+
+export const DialogButton = styled(Button)`
+  margin-right: 8px;
+
+  &:first-child {
+    margin-left: auto;
+  }
+`
