@@ -9,17 +9,22 @@ import { ToolbarButton } from '~/renderer/components/ToolbarButton';
 import { StyledPage, Header } from '../style';
 import { StyledSite, Label, Description } from './style';
 
-const onClick = (site: ISite) => () => {
-  store.sites.openInTab(site);
-}
-
 const onAdd = () => {
   store.dialog.show('add-site');
 }
 
+const onClick = (site: ISite) => () => {
+  store.sites.openInTab(site);
+}
+
+const onContextMenu = (site: ISite) => () => {
+  store.contextMenu.focusedSite = site;
+  store.contextMenu.show('site');
+}
+
 const Site = ({ data }: { data: ISite }) => {
   return (
-    <StyledSite onClick={onClick(data)}>
+    <StyledSite onClick={onClick(data)} onContextMenu={onContextMenu(data)}>
       <Label>{data.title}</Label>
       <Description>{formatSiteDescription(data)}</Description>
     </StyledSite>

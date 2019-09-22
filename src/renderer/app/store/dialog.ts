@@ -1,6 +1,8 @@
 import { observable, action } from 'mobx';
 
-export type DialogContent = 'add-site';
+import { ISite } from '~/interfaces';
+
+export type DialogContent = 'add-site' | 'edit-site';
 
 export class DialogStore {
   @observable

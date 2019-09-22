@@ -9,15 +9,13 @@ import { CloseButton } from '..';
 import { Title, Content, Buttons, DialogButton, Container } from '../style';
 import { Input, Row } from './style';
 
-type IInput = HTMLInputElement;
-
-export const AddSite = observer(() => {
-  const titleRef = React.useRef<IInput>();
+export const SiteDialog = observer(() => {
+  const titleRef = React.useRef<HTMLInputElement>();
   const protocol = React.useRef<IProtocol>('sftp');
-  const portRef = React.useRef<IInput>();
-  const hostnameRef = React.useRef<IInput>();
-  const userRef = React.useRef<IInput>();
-  const passwordRef = React.useRef<IInput>();
+  const portRef = React.useRef<HTMLInputElement>();
+  const hostnameRef = React.useRef<HTMLInputElement>();
+  const userRef = React.useRef<HTMLInputElement>();
+  const passwordRef = React.useRef<HTMLInputElement>();
   const [disabled, setDisabled] = React.useState(true);
 
   const onProtocol = React.useCallback((value: IProtocol) => {
@@ -45,9 +43,11 @@ export const AddSite = observer(() => {
     store.dialog.hide();
   }, []);
 
+  const content = store.dialog.content;
+
   return (
-    <Container visible={store.dialog.content === 'add-site'}>
-      <Title>New site</Title>
+    <Container visible={content === 'add-site' || content === 'edit-site'}>
+      <Title>{content === 'edit-site' ? 'Edit' : 'New'} site</Title>
       <Content>
         <Input ref={titleRef} placeholder='Title (optional)' onInput={onInput} />
         <Row>

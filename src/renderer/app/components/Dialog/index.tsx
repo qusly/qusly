@@ -2,7 +2,7 @@ import * as React from 'react';
 import { observer } from 'mobx-react-lite';
 
 import store from '~/renderer/app/store';
-import { AddSite } from './AddSite';
+import { SiteDialog } from './Site';
 import { StyledDialog, DialogButton, Dark } from './style';
 
 const onClose = () => {
@@ -19,7 +19,7 @@ export const Dialog = observer(() => {
   return (
     <StyledDialog visible={visible}>
       <Dark visible={visible} onClick={onClose} />
-      <AddSite />
+      <SiteDialog />
     </StyledDialog>
   );
 });
