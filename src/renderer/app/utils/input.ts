@@ -19,13 +19,18 @@ export const selectFileName = (el: HTMLTextAreaElement | HTMLInputElement) => {
 }
 
 export const ensureValue = (...inputs: HTMLInputElement[] | MutableRefObject<HTMLInputElement>[]) => {
-  for (const input of inputs) {
-    const value = input instanceof HTMLInputElement ? input.value : input.current.value;
+  const values = getValues(...inputs);
+  return values.findIndex(r => !r.length) === -1;
+}
 
-    if (!value.trim().length) {
-      return false;
-    }
+export const getValues = (...inputs: HTMLInputElement[] | MutableRefObject<HTMLInputElement>[]) => {
+  const values: string[] = [];
+
+  for (const input of inputs) {
+    const value: any = input instanceof HTMLInputElement ? input.value : input.current.value;
+
+    values.push(value.trim());
   }
 
-  return true;
+  return values;
 }

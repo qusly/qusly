@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { IProtocol } from 'qusly-core';
 
-import { ensureValue } from '~/renderer/app/utils';
+import { ensureValue, getValues } from '~/renderer/app/utils';
 import { Dropdown, DropdownItem } from '~/renderer/components/Dropdown';
-import { DialogContainer, } from '..';
+import { DialogContainer, CloseButton, } from '..';
 import { Title, Content, Buttons, DialogButton } from '../style';
 import { Input, Row } from './style';
 
@@ -27,6 +27,12 @@ export const AddSite = () => {
     setDisabled(!hasValue);
   }, []);
 
+  const onAdd = React.useCallback(() => {
+    const [title, port, hostname, user, password] = getValues(titleRef, portRef, hostnameRef, userRef, passwordRef);
+
+    console.log(title, port, hostname, user, password);
+  }, []);
+
   return (
     <DialogContainer content='add-site'>
       <Title>New site</Title>
@@ -45,8 +51,8 @@ export const AddSite = () => {
         <Input ref={passwordRef} placeholder='Password' onInput={onInput} />
       </Content>
       <Buttons>
-        <DialogButton label='Cancel' background='rgba(0, 0, 0, 0.08)' color='#000' />
-        <DialogButton label='Add' disabled={disabled} />
+        <CloseButton />
+        <DialogButton label='Add' disabled={disabled} onClick={onAdd} />
       </Buttons>
     </DialogContainer>
   );
