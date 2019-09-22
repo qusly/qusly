@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { IProtocol } from 'qusly-core';
 
+import store from '~/renderer/app/store';
 import { ensureValue, getValues } from '~/renderer/app/utils';
 import { Dropdown, DropdownItem } from '~/renderer/components/Dropdown';
 import { DialogContainer, CloseButton, } from '..';
@@ -28,9 +29,18 @@ export const AddSite = () => {
   }, []);
 
   const onAdd = React.useCallback(() => {
-    const [title, port, hostname, user, password] = getValues(titleRef, portRef, hostnameRef, userRef, passwordRef);
+    const [title, port, host, user, password] = getValues(titleRef, portRef, hostnameRef, userRef, passwordRef);
+    const defaultPort = protocol.current === 'sftp' ? 22 : 21;
 
-    console.log(title, port, hostname, user, password);
+    store.sites.add({
+      title: title || host,
+      port: port.length ? parseInt(port, 10) : defaultPort,
+      host,
+      user,
+      password,
+    });
+
+    store.dialog.content = null;
   }, []);
 
   return (
