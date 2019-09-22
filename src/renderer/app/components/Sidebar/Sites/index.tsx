@@ -14,7 +14,7 @@ const onClick = (site: ISite) => () => {
 }
 
 const onAdd = () => {
-
+  store.dialog.show('add-site');
 }
 
 const Site = ({ data }: { data: ISite }) => {

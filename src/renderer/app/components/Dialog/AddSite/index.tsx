@@ -1,16 +1,17 @@
 import * as React from 'react';
 import { IProtocol } from 'qusly-core';
+import { observer } from 'mobx-react-lite';
 
 import store from '~/renderer/app/store';
 import { ensureValue, getValues } from '~/renderer/app/utils';
 import { Dropdown, DropdownItem } from '~/renderer/components/Dropdown';
-import { DialogContainer, CloseButton, } from '..';
-import { Title, Content, Buttons, DialogButton } from '../style';
+import { CloseButton } from '..';
+import { Title, Content, Buttons, DialogButton, Container } from '../style';
 import { Input, Row } from './style';
 
 type IInput = HTMLInputElement;
 
-export const AddSite = () => {
+export const AddSite = observer(() => {
   const titleRef = React.useRef<IInput>();
   const protocol = React.useRef<IProtocol>('sftp');
   const portRef = React.useRef<IInput>();
@@ -44,7 +45,7 @@ export const AddSite = () => {
   }, []);
 
   return (
-    <DialogContainer content='add-site'>
+    <Container visible={store.dialog.content === 'add-site'}>
       <Title>New site</Title>
       <Content>
         <Input ref={titleRef} placeholder='Title (optional)' onInput={onInput} />
@@ -64,6 +65,6 @@ export const AddSite = () => {
         <CloseButton />
         <DialogButton label='Add' disabled={disabled} onClick={onAdd} />
       </Buttons>
-    </DialogContainer>
+    </Container>
   );
-};
+});

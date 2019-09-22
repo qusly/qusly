@@ -15,13 +15,22 @@ export const StyledDialog = styled.div`
   align-items: center;
   justify-content: center;
 
+  ${({ visible }: { visible: boolean }) => css`
+    pointer-events: ${visible ? 'auto' : 'none'};
+
+    &::before {
+      opacity: ${visible ? 0.54 : 0};
+    }
+  `}
+
   &::before {
     content: '';
     display: block;
     width: 100%;
     height: 100%;
     position: absolute;
-    background-color: rgba(0, 0, 0, 0.54);
+    background-color: #000;
+    transition: 0.15s opacity;
   }
 `;
 
@@ -32,8 +41,13 @@ export const Container = styled.div`
   background-color: #fff;
   border-radius: 16px;
   z-index: 11;
-  transition: 0.15s transform ${EASING_FUNCTION};
+  transition: 0.15s transform ${EASING_FUNCTION}, 0.15s opacity;
   box-shadow: ${shadows(4)};
+
+  ${({ visible }: { visible: boolean }) => css`
+    transform: translateY(${visible ? 0 : -20}px);
+    opacity: ${visible ? 1 : 0};
+  `}
 `;
 
 export const Title = styled.div`
