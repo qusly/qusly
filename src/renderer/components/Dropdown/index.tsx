@@ -17,18 +17,17 @@ export const Dropdown = ({ defaultValue, onChange, children, style }: Props) => 
   const [value, setValue] = React.useState(defaultValue);
   const [label, setLabel] = React.useState<string>(null);
 
-  const onWindowMouseDown = React.useCallback(() => {
-    setExpanded(false)
-  }, [expanded]);
+  const onWindowMouseDown = React.useCallback(() => setExpanded(false), []);
 
   const onMouseDown = React.useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
     setExpanded(!expanded);
-  }, []);
+  }, [expanded]);
 
-  const onItemMouseClick = (newValue: any, label: string) => () => {
+  const onItemMouseClick = (newValue: any, label: string) => (e: React.MouseEvent) => {
+    e.stopPropagation();
+
     if (onChange) onChange(value, newValue);
-
     setValue(newValue);
     setLabel(label);
     setExpanded(false);
