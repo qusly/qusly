@@ -13,4 +13,9 @@ export class DialogStore {
   public show = (content: DialogContent) => {
     this.content = content;
   }
+
+  @action
+  public hide() {
+    this.content = null;
+  }
 }

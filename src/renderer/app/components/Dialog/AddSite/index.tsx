@@ -41,7 +41,7 @@ export const AddSite = observer(() => {
       password,
     });
 
-    store.dialog.content = null;
+    store.dialog.hide();
   }, []);
 
   return (

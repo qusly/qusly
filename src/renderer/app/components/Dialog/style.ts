@@ -17,21 +17,19 @@ export const StyledDialog = styled.div`
 
   ${({ visible }: { visible: boolean }) => css`
     pointer-events: ${visible ? 'auto' : 'none'};
-
-    &::before {
-      opacity: ${visible ? 0.54 : 0};
-    }
   `}
+`;
 
-  &::before {
-    content: '';
-    display: block;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    background-color: #000;
-    transition: 0.15s opacity;
-  }
+export const Dark = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: #000;
+  transition: 0.15s opacity;
+
+  ${({ visible }: { visible: boolean }) => css`
+    opacity: ${visible ? 0.54 : 0};
+  `}
 `;
 
 export const Container = styled.div`

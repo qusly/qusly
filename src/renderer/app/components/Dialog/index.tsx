@@ -3,10 +3,10 @@ import { observer } from 'mobx-react-lite';
 
 import store from '~/renderer/app/store';
 import { AddSite } from './AddSite';
-import { StyledDialog, DialogButton } from './style';
+import { StyledDialog, DialogButton, Dark } from './style';
 
 const onClose = () => {
-  store.dialog.content = null;
+  store.dialog.hide();
 }
 
 export const CloseButton = () => {
@@ -14,8 +14,11 @@ export const CloseButton = () => {
 }
 
 export const Dialog = observer(() => {
+  const visible = !!store.dialog.content;
+
   return (
-    <StyledDialog visible={!!store.dialog.content}>
+    <StyledDialog visible={visible}>
+      <Dark visible={visible} onClick={onClose} />
       <AddSite />
     </StyledDialog>
   );
