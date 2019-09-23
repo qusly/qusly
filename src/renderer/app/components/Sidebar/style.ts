@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { noButtons, body2, robotoMedium } from '~/renderer/mixins';
+import { noButtons, body2, robotoMedium, robotoLight, robotoRegular } from '~/renderer/mixins';
 import { SIDEBAR_HEADER_HEIGHT } from '~/renderer/app/constants';
 
 export const StyledSidebar = styled.div`
@@ -25,8 +25,8 @@ export const Header = styled.div`
   align-items: center;
   padding-left: 16px;
   padding-right: 4px;
-  ${body2()};
-  ${robotoMedium()};
+  font-size: 16px;
+  ${robotoLight()};
 
   & > .toolbar-button {
     height: ${SIDEBAR_HEADER_HEIGHT}px;

@@ -4,13 +4,15 @@ import { robotoRegular } from '~/renderer/mixins';
 import { transparency } from '~/renderer/constants';
 
 export const StyledSite = styled.div`
-  width: 100%;
+  width: calc(100% - 16px);
   height: 52px;
-  padding: 0 16px;
+  padding: 0 8px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin: 0 auto;
   cursor: pointer;
+  border-radius: 4px;
   transition: 0.15s background-color;
 
   &:hover {

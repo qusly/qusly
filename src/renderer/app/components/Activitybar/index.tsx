@@ -4,7 +4,7 @@ import { observer } from 'mobx-react-lite';
 import store from '~/renderer/app/store';
 import { SidebarContent } from '~/renderer/app/store/activitybar';
 import { icons } from '~/renderer/constants';
-import { StyledActivitybar, StyledItem, ItemIcon } from './style';
+import { StyledActivitybar, StyledItem } from './style';
 
 interface ItemProps {
   content: SidebarContent;
@@ -20,9 +20,7 @@ const Item = observer(({ content, icon, disabled }: ItemProps) => {
   const selected = store.activitybar.content === content;
 
   return (
-    <StyledItem onClick={onItemClick(content)} disabled={disabled}>
-      <ItemIcon selected={selected} icon={icon} disabled={disabled} />
-    </StyledItem>
+    <StyledItem onClick={onItemClick(content)} selected={selected} disabled={disabled} icon={icon} />
   );
 });
 
