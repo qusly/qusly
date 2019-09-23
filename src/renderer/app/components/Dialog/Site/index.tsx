@@ -75,7 +75,7 @@ export const SiteDialog = observer(() => {
             <DropdownItem value='ftps'>FTPS</DropdownItem>
             <DropdownItem value='sftp'>SFTP</DropdownItem>
           </Dropdown>
-          <Input ref={portRef} placeholder='Port (optional)' style={{ marginLeft: 16, marginTop: 0 }} />
+          <Input ref={portRef} placeholder='Port (optional)' type='number' style={{ marginLeft: 16, marginTop: 0 }} />
         </Row>
         <Input ref={hostnameRef} placeholder='Hostname' onInput={onInput} />
         <Input ref={userRef} placeholder='User' onInput={onInput} />

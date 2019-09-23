@@ -18,4 +18,9 @@ export const Input = styled.input`
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);
   }
+
+  &[type=number]::-webkit-inner-spin-button, &[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+  }
 `;
