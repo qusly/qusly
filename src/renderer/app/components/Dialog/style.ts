@@ -52,7 +52,7 @@ export const Container = styled.div`
 
 export const Title = styled.div`
   padding: 16px;
-  font-size: 18px;
+  font-size: 20px;
 `;
 
 export const Content = styled.div`
