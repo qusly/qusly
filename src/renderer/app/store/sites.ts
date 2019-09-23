@@ -23,6 +23,8 @@ export class SitesStore {
     const { password } = site;
     const res = await this.db.insert({ ...site, password: '' });
 
+    this.list.push(res);
+
     await setPassword('qusly', `site-${res._id}`, password);
   }
 
