@@ -50,9 +50,12 @@ export class Store {
     window.removeEventListener('mousemove', this.onWindowMouseMove);
     window.removeEventListener('mousedown', this.onWindowMouseDown);
     window.removeEventListener('click', this.onWindowClick);
+    window.removeEventListener('mouseup', this.onWindowMouseUp);
+
     window.addEventListener('mousemove', this.onWindowMouseMove);
     window.addEventListener('mousedown', this.onWindowMouseDown);
     window.addEventListener('click', this.onWindowClick);
+    window.addEventListener('mouseup', this.onWindowMouseUp);
   }
 
   @action
@@ -74,6 +77,15 @@ export class Store {
   @action
   private onWindowClick = () => {
     this.drag.hide();
+  }
+
+  @action
+  private onWindowMouseUp = (e: MouseEvent) => {
+    if (e.button === 3) {
+      this.pages.current.path.goBack();
+    } else if (e.button === 4) {
+      this.pages.current.path.goForward();
+    }
   }
 }
 
