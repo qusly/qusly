@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { getPassword } from '~/utils/credentials';
 import store from '~/renderer/app/store';
 import { icons } from '~/renderer/constants';
 import { MenuContainer, MenuItem } from '..';
@@ -7,12 +8,14 @@ import { MenuDivider } from '../style';
 
 const onConnect = () => {
   const site = store.contextMenu.focusedSite;
+
   store.sites.openInTab(site);
 }
 
 const onEdit = async () => {
   const site = store.contextMenu.focusedSite;
-  site.password = await store.sites.getPassword(site._id);
+
+  site.password = await getPassword(site._id);
   store.dialog.show('edit-site');
 }
 
