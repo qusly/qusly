@@ -3,6 +3,7 @@ import { IProtocol } from 'qusly-core';
 import { observer } from 'mobx-react-lite';
 
 import store from '~/renderer/app/store';
+import { ISite } from '~/interfaces';
 import { ensureValue, getValues, setValues, clearValues } from '~/renderer/app/utils';
 import { Dropdown, DropdownItem } from '~/renderer/components/Dropdown';
 import { CloseButton, DialogContainer } from '..';
@@ -25,18 +26,26 @@ export const SiteDialog = observer(() => {
     setDisabled(!hasValue);
   }, []);
 
-  const onAdd = React.useCallback(() => {
+  const onSave = React.useCallback(() => {
     const [title, port, host, user, password] = getValues(titleRef, portRef, hostnameRef, userRef, passwordRef);
     const defaultPort = protocolRef.current.value === 'sftp' ? 22 : 21;
 
-    store.sites.add({
+    const site: ISite = {
       title: title || host,
       port: port.length ? parseInt(port, 10) : defaultPort,
       protocol: protocolRef.current.value as IProtocol,
       host,
       user,
       password,
-    });
+    }
+
+    if (store.dialog.content === 'add-site') {
+      store.sites.add(site);
+    } else {
+      const { _id } = store.contextMenu.focusedSite;
+
+      store.sites.update(_id, site);
+    }
 
     store.dialog.visible = false;
   }, []);
@@ -74,7 +83,7 @@ export const SiteDialog = observer(() => {
       </Content>
       <Buttons>
         <CloseButton />
-        <DialogButton label='Add' disabled={disabled} onClick={onAdd} />
+        <DialogButton label='Save' disabled={disabled} onClick={onSave} />
       </Buttons>
     </DialogContainer>
   );

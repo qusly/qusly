@@ -23,7 +23,7 @@ export class SitesStore {
     const { password } = site;
     const res = await this.db.insert({ ...site, password: '' });
 
-    setPassword('qusly', `site-${res._id}`, password);
+    await setPassword('qusly', `site-${res._id}`, password);
   }
 
   public async openInTab(site: ISite) {
@@ -33,5 +33,14 @@ export class SitesStore {
 
   public getPassword(_id: string) {
     return getPassword('qusly', `site-${_id}`);
+  }
+
+  public async update(_id: string, changed: ISite) {
+    const index = this.list.indexOf(this.list.find(r => r._id === _id));
+
+    this.list[index] = { ...this.list[index], ...changed };
+
+    await this.db.update({ _id: _id } as any, { ...changed, password: '' }); // TODO
+    await setPassword('qusly', `site-${_id}`, changed.password);
   }
 }
