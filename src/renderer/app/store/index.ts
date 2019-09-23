@@ -11,6 +11,8 @@ import { PagesStore } from './pages';
 import { PathViewStore } from './path-view';
 import { ContextMenuStore } from './context-menu';
 import { DragStore } from './drag';
+import { DialogStore } from './dialog';
+import { SitesStore } from './sites';
 
 export class Store {
   public addTab = new AddTabStore();
@@ -22,6 +24,8 @@ export class Store {
   public pathView = new PathViewStore();
   public contextMenu = new ContextMenuStore();
   public drag = new DragStore();
+  public dialog = new DialogStore();
+  public sites = new SitesStore();
 
   @observable
   public updateInfo = {

@@ -2,11 +2,11 @@ import * as React from 'react';
 import { observable, action } from 'mobx';
 
 import store from '.';
-import { IPos, ITreeItem } from '~/interfaces';
+import { IPos, ITreeItem, ISite } from '~/interfaces';
 import { getMenuPosition } from '~/renderer/app/utils';
 import { Tab } from '../models';
 
-export type ContextMenuContent = 'page' | 'file' | 'tab' | 'path' | 'explorer';
+export type ContextMenuContent = 'page' | 'file' | 'tab' | 'path' | 'explorer' | 'site';
 
 export class ContextMenuStore {
   @observable
@@ -26,6 +26,8 @@ export class ContextMenuStore {
   public focusedTab: Tab;
 
   public focusedExplorerItem: ITreeItem;
+
+  public focusedSite: ISite;
 
   @action
   public show = (content: ContextMenuContent) => {

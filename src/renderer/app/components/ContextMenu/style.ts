@@ -19,11 +19,12 @@ export const StyledContextMenu = styled.div`
   `}
 `;
 
-interface ItemProps {
-  icon: string;
-  disabled: boolean;
-  iconSize: number;
-  hidden: boolean;
+export interface IContextMenuItemProps {
+  icon?: string;
+  disabled?: boolean;
+  iconSize?: number;
+  hidden?: boolean;
+  value?: any;
 }
 
 export const StyledItem = styled.div`
@@ -34,7 +35,7 @@ export const StyledItem = styled.div`
   font-size: 14px;
   white-space: nowrap;
 
-  ${({ icon, disabled, iconSize, hidden }: ItemProps) => css`
+  ${({ icon, disabled, iconSize, hidden }: IContextMenuItemProps) => css`
     display: ${!hidden ? 'flex' : 'none'};
     color: ${disabled
       ? `rgba(0, 0, 0, ${transparency.text.disabled})`

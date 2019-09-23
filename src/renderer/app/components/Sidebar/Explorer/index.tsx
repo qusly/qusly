@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 
 import { ITreeItem } from '~/interfaces';
 import store from '~/renderer/app/store';
-import { Page } from '..';
+import { StyledPage, Header, Content } from '../style';
 import { StyledItem, Label, ExpandIcon, Icon } from './style';
 
 const onItemClick = (data: ITreeItem) => () => {
@@ -46,10 +46,13 @@ export const Explorer = observer(() => {
   if (!session) return null;
 
   return (
-    <Page title='Explorer' content='explorer'>
-      {session.tree.items.map(item => (
-        <Item key={item.path} data={item} depth={0} />
-      ))}
-    </Page>
+    <StyledPage visible={store.activitybar.content === 'explorer'}>
+      <Header>Explorer</Header>
+      <Content>
+        {session.tree.items.map(item => (
+          <Item key={item.path} data={item} depth={0} />
+        ))}
+      </Content>
+    </StyledPage>
   );
 });

@@ -5,6 +5,7 @@ import { resolve, join } from 'path';
 import { getPath } from '~/utils';
 import { runAutoUpdaterService } from './services/auto-updater';
 import { runMessagingService } from './services/messaging';
+import storage from './services/storage';
 
 export class AppWindow extends BrowserWindow {
   public constructor() {
@@ -27,6 +28,7 @@ export class AppWindow extends BrowserWindow {
 
     runAutoUpdaterService(this);
     runMessagingService(this);
+    storage.run();
 
     const windowDataPath = getPath('window-data.json');
 

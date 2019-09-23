@@ -8,6 +8,7 @@ import { PageMenu } from './Page';
 import { TabMenu } from './Tab';
 import { PathMenu } from './Path';
 import { ExplorerMenu } from './Explorer';
+import { SiteMenu } from './Site';
 import { StyledContextMenu, StyledItem } from './style';
 
 interface ItemProps {
@@ -38,7 +39,6 @@ export const MenuItem = ({ icon, onClick, children, disabled, iconSize, hidden }
   );
 };
 
-
 export const MenuContainer = observer(({ content, children }: { content: ContextMenuContent, children: any }) => {
   const selected = store.contextMenu.content === content;
   return selected && children;
@@ -54,6 +54,7 @@ export const ContextMenu = observer(() => {
       <TabMenu />
       <PathMenu />
       <ExplorerMenu />
+      <SiteMenu />
     </StyledContextMenu>
   );
 });

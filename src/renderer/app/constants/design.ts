@@ -9,4 +9,6 @@ export const APPBAR_HEIGHT = TABBAR_HEIGHT + TOOLBAR_HEIGHT;
 
 export const ACTIVITYBAR_WIDTH = 52;
 
-export const SIDEBAR_TITLE_HEIGHT = 36;
+export const SIDEBAR_HEADER_HEIGHT = 40;
+
+export const EASING_FUNCTION = 'cubic-bezier(0.4, 0, 0.2, 1)';

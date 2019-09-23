@@ -51,7 +51,7 @@ const config = {
     },
   },
 
-  externals: ['qusly-core'],
+  externals: ['qusly-core', 'keytar'],
 };
 
 function getConfig(...cfg) {
