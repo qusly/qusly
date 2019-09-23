@@ -1,37 +1,36 @@
 import styled, { css } from 'styled-components';
-import { centerIcon } from 'wexond-ui';
 
-import { TOOLBAR_BUTTON_WIDTH, TOOLBAR_HEIGHT } from '~/renderer/constants';
+import { centerIcon } from '~/renderer/mixins';
+import { TOOLBAR_HEIGHT, TOOLBAR_BUTTON_WIDTH } from '~/renderer/app/constants';
+
+interface IconProps {
+  size: number;
+  disabled: boolean;
+  opacity: number;
+}
 
 export const Icon = styled.div`
   width: 100%;
   height: 100%;
   will-change: background-image;
   transition: 0.15s background-image;
+  backface-visibility: hidden;
 
-  ${({
-    size,
-    disabled,
-    opacity,
-  }: {
-    size: number;
-    disabled: boolean;
-    opacity: number;
-  }) => css`
+  ${({ size, disabled, opacity }: IconProps) => css`
     ${centerIcon(size)};
     opacity: ${disabled ? 0.25 : opacity};
   `};
 `;
 
 export const Button = styled.div`
+  width: ${TOOLBAR_BUTTON_WIDTH}px;
   height: ${TOOLBAR_HEIGHT}px;
-  -webkit-app-region: no-drag;
   position: relative;
   transition: 0.2s background-color;
-  width: ${TOOLBAR_BUTTON_WIDTH}px;
+  backface-visibility: hidden;
 
   ${({ disabled }: { disabled: boolean }) => css`
-    pointer-events: ${disabled ? 'none' : 'auto'};
+    pointer-events: ${disabled ? 'none' : 'inherit'};
   `};
 `;
 
