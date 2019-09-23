@@ -16,6 +16,10 @@ const onEdit = async () => {
   store.dialog.show('edit-site');
 }
 
+const onDelete = () => {
+  store.dialog.show('delete-site');
+}
+
 export const SiteMenu = () => {
   return (
     <MenuContainer content='site'>
@@ -26,7 +30,7 @@ export const SiteMenu = () => {
       <MenuItem icon={icons.edit} onClick={onEdit}>
         Edit
       </MenuItem>
-      <MenuItem icon={icons.delete} iconSize={20}>
+      <MenuItem icon={icons.delete} iconSize={20} onClick={onDelete}>
         Delete
       </MenuItem>
     </MenuContainer>

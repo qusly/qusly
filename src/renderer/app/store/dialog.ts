@@ -1,6 +1,6 @@
 import { observable, action } from 'mobx';
 
-export type DialogContent = 'add-site' | 'edit-site';
+export type DialogContent = 'add-site' | 'edit-site' | 'delete-site';
 
 export class DialogStore {
   @observable

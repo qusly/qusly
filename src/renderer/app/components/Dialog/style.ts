@@ -14,11 +14,9 @@ export const StyledDialog = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: 0.15s opacity;
 
   ${({ visible }: { visible: boolean }) => css`
     pointer-events: ${visible ? 'auto' : 'none'};
-    opacity: ${visible ? 1 : 0};
   `}
 `;
 
@@ -27,6 +25,11 @@ export const Dark = styled.div`
   height: 100%;
   position: absolute;
   background-color: rgba(0, 0, 0, 0.54);
+  transition: 0.15s opacity;
+
+  ${({ visible }: { visible: boolean }) => css`
+    opacity: ${visible ? 1 : 0};
+  `}
 `;
 
 export const Container = styled.div`
@@ -36,12 +39,14 @@ export const Container = styled.div`
   background-color: #fff;
   border-radius: 16px;
   z-index: 11;
-  transition: 0.15s transform ${EASING_FUNCTION};
+  position: absolute;
   box-shadow: ${shadows(4)};
+  transition: 0.15s transform ${EASING_FUNCTION}, 0.15s opacity;
 
   ${({ visible }: { visible: boolean }) => css`
-    transform: translateY(${visible ? 0 : -16}px);
+    opacity: ${visible ? 1 : 0};
     pointer-events: ${visible ? 'auto' : 'none'};
+    transform: translateY(${visible ? 0 : -16}px);
   `}
 `;
 

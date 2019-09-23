@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 import { robotoRegular } from '~/renderer/mixins';
 
-interface Props {
+export interface IButtonProps {
   label: string;
   color?: string;
   background?: string;
@@ -23,7 +23,7 @@ export const Button = styled.div`
   position: relative;
   cursor: pointer;
 
-  ${({ type, label, color, background, disabled }: Props) => css`
+  ${({ type, label, color, background, disabled }: IButtonProps) => css`
     pointer-events: ${disabled ? 'none' : 'auto'};
     opacity: ${disabled ? 0.24 : 1};
     border: ${type === 'outlined'
