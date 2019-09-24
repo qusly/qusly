@@ -13,7 +13,6 @@ export const StyledFile = styled.div`
   align-items: center;
   flex-direction: column;
   padding: 0px 16px 8px 16px;
-  border-radius: 4px;
   position: relative;
   border-radius: 6px;
 

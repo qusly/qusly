@@ -6,7 +6,7 @@ export const StyledThumb = styled.div`
   width: fit-content;
   max-width: 164px;
   height: 48px;
-  border-radius: 8px;
+  border-radius: 12px;
   background-color: #fff;
   align-items: center;
   padding: 0px 12px;

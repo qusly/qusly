@@ -1,13 +1,13 @@
 import styled, { css } from 'styled-components';
 
-import { noButtons, body2, robotoMedium, robotoLight, robotoRegular } from '~/renderer/mixins';
+import { noButtons, robotoLight } from '~/renderer/mixins';
 import { SIDEBAR_HEADER_HEIGHT } from '~/renderer/app/constants';
 
 export const StyledSidebar = styled.div`
   height: 100%;
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
-  background-color: #F5F5F5;
+  background-color: #fafafa;
 `;
 
 export const StyledPage = styled.div`
