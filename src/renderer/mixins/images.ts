@@ -1,12 +1,14 @@
-export const centerIcon = (size: number | 'contain' = 'contain') => {
+export const centerIcon = (size: number | 'contain' = 'contain', useMask = false) => {
   let s: string = size.toString();
 
   if (typeof size === 'number') s += 'px';
 
+  const prefix = !useMask ? 'background' : 'mask';
+
   return `
-    background-size: ${s} ${size === 'contain' ? '' : 'auto'};
-    background-position: center;
-    background-repeat: no-repeat;
+    ${prefix}-size: ${s} ${size === 'contain' ? '' : 'auto'};
+    ${prefix}-position: center;
+    ${prefix}-repeat: no-repeat;
 `;
 };
 
