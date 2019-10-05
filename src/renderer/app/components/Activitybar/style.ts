@@ -1,8 +1,7 @@
 import styled, { css } from 'styled-components';
 
-import { centerIcon } from '~/renderer/mixins';
+import { centerIcon, centerVertical } from '~/renderer/mixins';
 import { transparency } from '~/renderer/constants';
-import { ACTIVITYBAR_WIDTH } from '~/renderer/app/constants';
 
 const getIconOpacity = (selected: boolean, disabled: boolean) => {
   if (disabled) return transparency.icons.disabled;
@@ -10,7 +9,7 @@ const getIconOpacity = (selected: boolean, disabled: boolean) => {
 }
 
 export const StyledActivitybar = styled.div`
-  width: ${ACTIVITYBAR_WIDTH}px;
+  width: 56px;
   height: 100%;
 `;
 
@@ -21,20 +20,33 @@ interface ItemProps {
 }
 
 export const StyledItem = styled.div`
-  width: ${ACTIVITYBAR_WIDTH}px;
-  height: ${ACTIVITYBAR_WIDTH}px;
+  width: 100%;
+  height: 40px;
   cursor: pointer;
+  position: relative;
 
   ${({ selected, disabled, icon }: ItemProps) => css`
     pointer-events: ${disabled ? 'none' : 'auto'};
-    /*border-left: ${selected ? '2px solid #000' : 'unset'};*/
+
+    &::before {
+      opacity: ${selected ? 1 : 0};
+    }
 
     &::after {
       opacity: ${getIconOpacity(selected, disabled)};
       background-image: url(${icon});
-      /*transform: translateX(${selected ? -1 : 0}px);*/
     }
   `}
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0px;
+    width: 3px;
+    height: 18px;
+    background-color: #000;
+    ${centerVertical()};
+  }
 
   &::after {
     content: '';
