@@ -17,7 +17,7 @@ export class SitesStore {
 
   @action
   private async load() {
-    this.list = await this.db.get({} as any); // TODO
+    this.list = await this.db.get({});
   }
 
   @action
@@ -44,7 +44,7 @@ export class SitesStore {
     changed = { ...changed, password: '' };
     this.list[index] = { ...this.list[index], ...changed };
 
-    await this.db.update({ _id } as any, changed); // TODO
+    await this.db.update({ _id }, changed);
     await setPassword(_id, password);
   }
 
@@ -52,7 +52,7 @@ export class SitesStore {
   public async remove(_id: string) {
     this.list = this.list.filter(r => r._id !== _id);
 
-    await this.db.remove({ _id } as any); // TODO
+    await this.db.remove({ _id });
     await deletePassword(_id);
   }
 }

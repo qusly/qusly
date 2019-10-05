@@ -25,10 +25,8 @@ export class Session {
     if (this.status === 'disconnected') {
       this.status = 'connecting';
 
-      const res = await this.client.connect(this.site);
-      if (!res.success) throw res.error;
-
-      const { path } = await this.client.pwd();
+      await this.client.connect(this.site);
+      const path = await this.client.pwd();
 
       this.startPath = path;
       this.status = 'connected';

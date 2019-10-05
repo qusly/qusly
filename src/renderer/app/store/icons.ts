@@ -35,10 +35,10 @@ export class IconsStore {
   public getIcon(file: IFile) {
     if (!file) return { icon: '', opacity: 1 };
 
-    let icon = file.type === 'directory' ? icons.folder : this.icons.get(file.ext);
-    const opacity = file.type === 'directory' || !icon ? transparency.icons.inactive : 1;
+    let icon = file.type === 'folder' ? icons.folder : this.icons.get(file.ext);
+    const opacity = file.type === 'folder' || !icon ? transparency.icons.inactive : 1;
 
-    if (!icon && file.type !== 'directory') {
+    if (!icon && file.type !== 'folder') {
       icon = icons.file;
     }
 
