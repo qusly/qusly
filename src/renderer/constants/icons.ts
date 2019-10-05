@@ -27,4 +27,5 @@ export const icons = {
   fileAdd: require('~/renderer/resources/icons/file-add.svg'),
   copy: require('~/renderer/resources/icons/copy.svg'),
   connect: require('~/renderer/resources/icons/connect.svg'),
+  folderOpen: require('~/renderer/resources/icons/folder-open.svg'),
 }

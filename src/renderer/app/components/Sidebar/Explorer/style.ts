@@ -34,8 +34,11 @@ export const Icon = styled.div`
   min-width: 20px;
   min-height: 20px;
   opacity: ${transparency.icons.inactive};
-  background-image: url(${icons.folder});
-  ${centerIcon(18)}
+  ${centerIcon(18)};
+
+  ${({ expanded }: { expanded: boolean }) => css`
+    background-image: url(${expanded ? icons.folderOpen : icons.folder});
+  `}
 `;
 
 export const Label = styled.div`

@@ -31,7 +31,7 @@ const Item = observer(({ data, depth }: { data: ITreeItem, depth: number }) => {
     <>
       <StyledItem onClick={onItemClick(data)} onContextMenu={onContextMenu(data)} style={{ paddingLeft: depth * 16 }}>
         <ExpandIcon onClick={onExpandClick(data)} expanded={expanded} />
-        <Icon />
+        <Icon expanded={expanded} />
         <Label>{file.name}</Label>
       </StyledItem>
       {expanded && data.children.map(item => (
