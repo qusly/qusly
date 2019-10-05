@@ -75,7 +75,7 @@ export const FileMenu = observer(() => {
         Delete
       </MenuItem>
       <MenuDivider />
-      <MenuItem icon={icons.download} hidden={!containsFile} disabled>
+      <MenuItem icon={icons.downloadOutline} hidden={!containsFile} disabled>
         Download
       </MenuItem>
       <MenuItem icon={icons.zip} iconSize={18} hidden={!containsFile} disabled>

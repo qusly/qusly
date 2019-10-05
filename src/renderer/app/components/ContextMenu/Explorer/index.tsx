@@ -33,7 +33,7 @@ export const ExplorerMenu = observer(() => {
         Open in new tab
       </MenuItem>
       <MenuDivider />
-      <MenuItem icon={icons.download} disabled>
+      <MenuItem icon={icons.downloadOutline} disabled>
         Download
       </MenuItem>
       <MenuDivider />

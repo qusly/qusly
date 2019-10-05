@@ -18,6 +18,8 @@ export const icons = {
   delete: require('~/renderer/resources/icons/delete.svg'),
   cut: require('~/renderer/resources/icons/cut.svg'),
   download: require('~/renderer/resources/icons/download.svg'),
+  downloadOutline: require('~/renderer/resources/icons/download-outline.svg'),
+  upload: require('~/renderer/resources/icons/upload.svg'),
   paste: require('~/renderer/resources/icons/paste.svg'),
   edit: require('~/renderer/resources/icons/edit.svg'),
   apps: require('~/renderer/resources/icons/apps.svg'),

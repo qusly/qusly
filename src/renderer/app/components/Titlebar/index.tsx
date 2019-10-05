@@ -24,7 +24,7 @@ export const Titlebar = observer(() => {
       {isDarwin ? <TrafficButtons /> : <Icon />}
       <Title>{!tab ? 'Qusly' : `${tab.title} - Qusly`}</Title>
       {store.updateInfo.available && (
-        <ToolbarButton icon={icons.download} onClick={onUpdateClick} />
+        <ToolbarButton icon={icons.downloadOutline} onClick={onUpdateClick} />
       )}
       {!isDarwin && (
         <WindowsControls

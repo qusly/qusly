@@ -3,6 +3,7 @@ import { Resizable } from 'resizable-box';
 
 import { Explorer } from './Explorer';
 import { Sites } from './Sites';
+import { Transfer } from './Transfer';
 import { StyledSidebar } from './style';
 
 export const Sidebar = () => {
@@ -11,6 +12,7 @@ export const Sidebar = () => {
       <StyledSidebar>
         <Explorer />
         <Sites />
+        <Transfer />
       </StyledSidebar>
     </Resizable >
   );
