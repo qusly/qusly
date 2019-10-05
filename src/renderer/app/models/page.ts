@@ -149,11 +149,7 @@ export class Page {
     for (const file of files) {
       const path = this.path.relative(file.name);
 
-      if (file.type === 'folder') {
-        await this.session.client.rimraf(path);
-      } else {
-        await this.session.client.unlink(path);
-      }
+      await this.session.client.delete(path);
     }
 
     await this.fetchFiles();
