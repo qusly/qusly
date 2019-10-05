@@ -7,13 +7,17 @@ export const sortFiles = (files: IFile[]): IFile[] => {
     const nameA = a.name.toUpperCase();
     const nameB = b.name.toUpperCase();
 
-    if (a.type === 'directory' && b.type === 'directory'
-      || a.type !== 'directory' && b.type !== 'directory') {
+    const isFirstFolder = a.type === 'folder';
+    const isSecondFolder = b.type === 'folder';
+
+    if (isFirstFolder && isSecondFolder
+      || !isFirstFolder && !isSecondFolder) {
       return nameA.localeCompare(nameB);
     }
 
-    if (b.type === 'directory') return 0;
-    if (a.type === 'directory') return -1;
+    if (isSecondFolder) return 0;
+    if (isFirstFolder) return -1;
+
     return 0;
   });
 }

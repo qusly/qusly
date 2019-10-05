@@ -52,13 +52,12 @@ export class Page {
     this.loading = true;
 
     const path = this.path.toString();
-    const res = await this.session.client.readDir(path);
-    if (!res.success) throw res.error;
+    const files = await this.session.client.readDir(path);
 
-    await store.icons.load(...res.files);
+    await store.icons.load(...files);
 
     this.tab.title = `${this.session.site.title} - ${path}`;
-    this.files = sortFiles(res.files);
+    this.files = sortFiles(files);
     this.loading = false;
 
     this.session.tree.update(this.treeItem, this.files);
@@ -99,7 +98,7 @@ export class Page {
 
   @action
   public async dropRemote() {
-    if (this.hoveredFile && this.hoveredFile.type === 'directory' && this.focusedFile !== this.hoveredFile) {
+    if (this.hoveredFile && this.hoveredFile.type === 'folder' && this.focusedFile !== this.hoveredFile) {
       this.loading = true;
 
       for (const file of this.selectedFiles) {
@@ -126,18 +125,17 @@ export class Page {
       file.name = newName;
       file.ext = ext;
 
-      if (file.type !== 'directory') {
+      if (file.type !== 'folder') {
         await store.icons.load(file);
       }
 
       const oldPath = this.path.relative(oldName);
       const newPath = this.path.relative(newName);
 
-      const res = await this.session.client.move(oldPath, newPath);
-
-      if (!res.success) {
+      try {
+        await this.session.client.move(oldPath, newPath);
+      } catch (error) {
         file.name = oldName;
-        throw res.error;
       }
 
       this.files = sortFiles(this.files);
@@ -151,11 +149,7 @@ export class Page {
     for (const file of files) {
       const path = this.path.relative(file.name);
 
-      if (file.type === 'directory') {
-        await this.session.client.rimraf(path);
-      } else {
-        await this.session.client.unlink(path);
-      }
+      await this.session.client.delete(path);
     }
 
     await this.fetchFiles();
@@ -193,12 +187,10 @@ export class Page {
   @action
   public async createBlank(type: 'folder' | 'file') {
     const path = this.path.toString();
-    const res = await this.session.client.createBlank(type, path, this.files);
-
-    if (!res.success) throw res.error;
+    const fileName = await this.session.client.createBlank(type, path, this.files);
 
     await this.fetchFiles();
-    const file = this.files.find(r => r.name === res.fileName);
+    const file = this.files.find(r => r.name === fileName);
 
     file.selected = true;
     this.focusedFile = file;

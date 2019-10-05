@@ -47,7 +47,7 @@ export const FileMenu = observer(() => {
   const page = store.pages.current;
   if (!page) return null;
 
-  const containsFile = !!page.selectedFiles.find(e => e.type !== 'directory');
+  const containsFile = !!page.selectedFiles.find(e => e.type !== 'folder');
   const multiple = page.selectedFiles.length > 1;
 
   return (

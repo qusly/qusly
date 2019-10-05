@@ -27,10 +27,8 @@ export class Tree {
     const path = !item ? '/' : item.path;
     const list = !item ? this.items : item.children;
 
-    const res = await this.session.client.readDir(path);
-    if (!res.success) throw res.error;
-
-    const items = formatTreeItems(res.files, path);
+    const files = await this.session.client.readDir(path);
+    const items = formatTreeItems(files, path);
 
     list.push(...items);
   }

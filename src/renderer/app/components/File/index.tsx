@@ -41,7 +41,7 @@ const onMouseDown = (data: IFile) => (e: React.MouseEvent) => {
 }
 
 const onDoubleClick = (data: IFile) => () => {
-  if (data.type === 'directory') {
+  if (data.type === 'folder') {
     store.pages.current.path.pushRelative(data.name);
   }
 }
@@ -104,8 +104,10 @@ export const File = selectableItem<Props>(observer(({ data }: Props) => {
   React.useEffect(() => {
     if (renamed) {
       const input = inputRef.current;
+
       input.value = name;
       input.focus();
+
       selectFileName(input);
       resizeTextarea(input);
     }
