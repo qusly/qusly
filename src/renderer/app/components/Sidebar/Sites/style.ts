@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { robotoRegular } from '~/renderer/mixins';
+import { robotoMedium, singleLine } from '~/renderer/mixins';
 import { transparency } from '~/renderer/constants';
 
 export const StyledSite = styled.div`
@@ -12,7 +12,7 @@ export const StyledSite = styled.div`
   justify-content: center;
   margin: 0 auto;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: 6px;
   transition: 0.15s background-color;
 
   &:hover {
@@ -22,17 +22,13 @@ export const StyledSite = styled.div`
 
 export const Label = styled.div`
   font-size: 14px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  ${robotoRegular()};
+  ${singleLine()}
+  ${robotoMedium()};
 `;
 
 export const Description = styled.div`
   font-size: 13px;
   margin-top: 4px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
   color: rgba(0, 0, 0, ${transparency.text.medium});
+  ${singleLine()}
 `;

@@ -104,3 +104,9 @@ export const maxLines = (count: number, lineHeight?: number) => `
   line-height: ${(lineHeight && `${lineHeight}px`) || 'unset'};
   max-height: ${(lineHeight && `${lineHeight * 2}px`) || 'unset'};
 `;
+
+export const singleLine = () => `
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+`;
