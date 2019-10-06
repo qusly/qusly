@@ -11,16 +11,3 @@ export const StyledTransfer = styled.div`
   background-color: #fff;
   z-index: 2;
 `;
-
-export const Section = styled.div`
-  width: 100%;
-  max-width: 640px;
-  margin: 16px auto 0px;
-`;
-
-export const Title = styled.div`
-  font-size: 20px;
-  color: #000;
-  padding-bottom: 4px;
-  ${robotoLight()};
-`;

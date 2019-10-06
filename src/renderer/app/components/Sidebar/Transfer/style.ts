@@ -51,7 +51,7 @@ export const Icon = styled.div`
 
   ${({ icon, selected }: { icon: string, selected: boolean }) => css`
     opacity: ${selected ? 1 : transparency.icons.inactive};
-    background: ${selected ? '#2196F3' : '#000'};
+    background-color: ${selected ? '#2196F3' : '#000'};
     mask-image: url(${icon});
   `}
 `;
