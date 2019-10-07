@@ -12,7 +12,6 @@ export class TransferStore {
 
   @computed
   public get sections() {
-    console.log("XDD");
     const sections: ITransferSection[] = [];
 
     this.items.forEach(item => {
