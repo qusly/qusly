@@ -12,6 +12,7 @@ export class TransferStore {
 
   @computed
   public get sections() {
+    console.log("XDD");
     const sections: ITransferSection[] = [];
 
     this.items.forEach(item => {
@@ -43,6 +44,8 @@ export class TransferStore {
   @action
   public handleTransferProgress = (e: ITransferClientProgress) => {
     const index = this.items.findIndex(r => r.id === e.id);
-    this.items[index] = { ...e, status: 'transfering' };
+    //this.items[index] = { ...e, status: 'transfering' };
+    this.items[index].buffered = e.buffered;
+    this.items[index].status = 'transfering';
   }
 }

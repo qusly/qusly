@@ -53,9 +53,13 @@ export class Session {
   }
 
   @action
-  public async download(remotePath: string) {
-    const fileName = basename(remotePath);
+  public async download(...paths: string[]) {
+    const promises = paths.map(path => {
+      const fileName = basename(path);
 
-    await this.downloadClient.transfer(resolve(downloadsPath, fileName), remotePath);
+      return this.downloadClient.transfer(resolve(downloadsPath, fileName), path);
+    });
+
+    return Promise.all(promises);
   }
 }

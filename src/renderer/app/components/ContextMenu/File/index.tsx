@@ -45,9 +45,9 @@ const onDelete = () => {
 
 const onDownload = () => {
   const page = store.pages.current;
-  const path = page.path.relative(page.focusedFile.name);
+  const paths = page.selectedFiles.map(r => page.path.relative(r.name));
 
-  page.session.download(path);
+  page.session.download(...paths);
 }
 
 export const FileMenu = observer(() => {
