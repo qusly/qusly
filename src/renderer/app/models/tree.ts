@@ -24,6 +24,7 @@ export class Tree {
       item.fetched = true;
     }
 
+    // TODO: Refactor
     const path = !item ? '/' : item.path;
     const list = !item ? this.items : item.children;
 

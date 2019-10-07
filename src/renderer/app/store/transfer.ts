@@ -1,49 +1,49 @@
 import { observable, computed, action } from 'mobx';
-import { ITransferType } from 'qusly-core';
+import { ITransferType, ITransferClientNew, ITransferClientProgress } from 'qusly-core';
 
-import { ITransferSection } from '~/interfaces';
-
-let sectionId = 0;
+import { ITransferSection, ISite, ITransferItem } from '~/interfaces';
 
 export class TransferStore {
   @observable
   public content: ITransferType = 'download';
 
   @observable
-  public downloadSections: ITransferSection[] = [
-    {
-      _id: 'wantoq',
-      title: "Nersent data center",
-      items: [
-        {
-          id: "1",
-          status: 'transfering',
-          localPath: "C:\\Users\\xnerh\\Desktop\\image.png",
-          remotePath: "/home/documents/image.png"
-        },
-        {
-          id: "2",
-          status: 'waiting',
-          localPath: "C:\\Users\\xnerh\\Desktop\\backup.rar",
-          remotePath: "/home/documents/backup.rar"
-        }
-      ]
-    }
-  ];
+  public downloadSections: ITransferSection[] = [];
 
   @observable
   public uploadSections: ITransferSection[] = [];
 
-  @computed
-  public get sections() {
-    return this.content === 'download' ? this.downloadSections : this.uploadSections;
+  public getSections(type?: ITransferType) {
+    type = type || this.content;
+    return type === 'download' ? this.downloadSections : this.uploadSections;
   }
 
-  public set sections(value: ITransferSection[]) {
-    if (this.content === 'download') {
-      this.downloadSections = value;
+  @action
+  public handleNewTransfer = (e: ITransferClientNew) => {
+    const sections = this.getSections(e.type);
+    const { _id, title } = (e.context as any)._config as ISite; // TODO: Make public site in qusly-core
+
+    const section = sections.find(r => r._id === _id);
+    const item: ITransferItem = { ...e, status: 'waiting' };
+
+    if (!section) {
+      sections.push({
+        _id,
+        title,
+        items: [item],
+      });
     } else {
-      this.uploadSections = value;
+      section.items.push(item);
     }
+  }
+
+  @action
+  public handleTransferProgress = (e: ITransferClientProgress) => {
+    const sections = this.getSections(e.type);
+    const { _id } = (e.context as any)._config as ISite; // TODO: Make public site in qusly-core
+    const section = sections.find(r => r._id === _id);
+    const index = section.items.findIndex(r => r.id === e.id);
+
+    section.items[index] = { ...e, status: 'transfering' };
   }
 }

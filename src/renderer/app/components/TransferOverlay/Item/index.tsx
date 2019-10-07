@@ -9,21 +9,22 @@ import { Button } from '~/renderer/components/Button';
 import { Progressbar } from '~/renderer/components/Progressbar';
 import { StyledItem, Icon, Container, Name, Label, Buttons } from './style';
 
-const TransferDetails = ({ data }: { data: ITransferItem }) => {
-  const buffered = prettyByte(data.buffered || 0);
-  const size = prettyByte(data.size || 0);
+const TransferDetails = observer(({ data }: { data: ITransferItem }) => {
+  const buffered = prettyByte(data.buffered);
+  const size = prettyByte(data.size);
+  const value = Math.round(data.buffered / data.size * 100);
 
   return (
     <>
       <Label style={{ marginTop: 16 }}>{data.speed} KB/s - {buffered} of {size}, {data.eta}s left</Label>
-      <Progressbar style={{ width: '100%', marginTop: 8 }} />
+      <Progressbar value={value} style={{ width: '100%', marginTop: 8 }} />
       <Buttons>
         <Button label='Pause' type='outlined' color='#2196F3' />
         <Button label='Cancel' type='outlined' color='#2196F3' />
       </Buttons>
     </>
   );
-}
+});
 
 export const Item = observer(({ data }: { data: ITransferItem }) => {
   const { icon, opacity } = store.icons.getPathIcon(data.remotePath) // todo;

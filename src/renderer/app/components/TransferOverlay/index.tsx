@@ -10,7 +10,7 @@ export const TransferOverlay = observer(() => {
 
   return (
     <StyledTransfer>
-      {store.transfer.sections.map(r => (
+      {store.transfer.getSections().map(r => (
         <Section key={r._id} data={r} />
       ))}
     </StyledTransfer>

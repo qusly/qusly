@@ -1,5 +1,7 @@
-import { Client } from 'qusly-core';
-
+import { remote } from 'electron';
+import { basename, resolve } from 'path';
+import { action } from 'mobx';
+import { Client, TransferClient } from 'qusly-core';
 import { ISite } from '~/interfaces';
 import store from '../store';
 import { Tree } from './tree';
@@ -7,6 +9,8 @@ import { Tree } from './tree';
 export type ConnectionStatus = 'connecting' | 'connected' | 'disconnected';
 
 let id = 0;
+
+const downloadsPath = remote.app.getPath('downloads');
 
 export class Session {
   public id = id++;
@@ -19,8 +23,14 @@ export class Session {
 
   public startPath: string;
 
-  constructor(public site: ISite) { }
+  public downloadClient = new TransferClient('download', 1);
 
+  constructor(public site: ISite) {
+    this.downloadClient.on('new', store.transfer.handleNewTransfer);
+    this.downloadClient.on('progress', store.transfer.handleTransferProgress);
+  }
+
+  @action
   public async connect() {
     if (this.status === 'disconnected') {
       this.status = 'connecting';
@@ -31,11 +41,21 @@ export class Session {
       this.startPath = path;
       this.status = 'connected';
       this.tree.fetch(this.tree.items[0]);
+
+      await this.downloadClient.connect(this.site);
     }
   }
 
+  @action
   public async close() {
     store.sessions.list = store.sessions.list.filter(r => r !== this);
     await this.client.disconnect();
+  }
+
+  @action
+  public async download(remotePath: string) {
+    const fileName = basename(remotePath);
+
+    await this.downloadClient.transfer(resolve(downloadsPath, fileName), remotePath);
   }
 }

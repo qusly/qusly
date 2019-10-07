@@ -165,11 +165,11 @@ export class Page {
   }
 
   @action
-  public async paste(wd = false) {
+  public async paste(workingDirectory = false) {
     if (this.cutFiles.length) {
       this.loading = true;
 
-      const dir = wd ? '' : this.focusedFile.name;
+      const dir = workingDirectory ? '' : this.focusedFile.name;
 
       for (const file of this.cutFiles) {
         const oldPath = `${this.cutPath}/${file.name}`;

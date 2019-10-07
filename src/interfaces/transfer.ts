@@ -1,8 +1,8 @@
 import { ITransferClientProgress } from 'qusly-core';
 
-import { ISite } from './site';
-
-export interface ITransferSection extends ISite {
+export interface ITransferSection {
+  _id?: string;
+  title?: string;
   items?: ITransferItem[];
 }
 
