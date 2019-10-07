@@ -8,42 +8,41 @@ export class TransferStore {
   public content: ITransferType = 'download';
 
   @observable
-  public downloadSections: ITransferSection[] = [];
+  public items: ITransferItem[] = [];
 
-  @observable
-  public uploadSections: ITransferSection[] = [];
+  @computed
+  public get sections() {
+    const sections: ITransferSection[] = [];
 
-  public getSections(type?: ITransferType) {
-    type = type || this.content;
-    return type === 'download' ? this.downloadSections : this.uploadSections;
+    this.items.forEach(item => {
+      if (item.type === this.content) {
+        const { _id, title } = (item.context as any)._config as ISite;
+        const section = sections.find(r => r._id === _id);
+
+        if (section) {
+          section.items.push(item);
+        } else {
+          sections.push({
+            _id,
+            title,
+            items: [item]
+          });
+        }
+      }
+    });
+
+    return sections;
   }
 
   @action
   public handleNewTransfer = (e: ITransferClientNew) => {
-    const sections = this.getSections(e.type);
-    const { _id, title } = (e.context as any)._config as ISite; // TODO: Make public site in qusly-core
-
-    const section = sections.find(r => r._id === _id);
     const item: ITransferItem = { ...e, status: 'waiting' };
-
-    if (!section) {
-      sections.push({
-        _id,
-        title,
-        items: [item],
-      });
-    } else {
-      section.items.push(item);
-    }
+    this.items.push(item);
   }
 
   @action
   public handleTransferProgress = (e: ITransferClientProgress) => {
-    const sections = this.getSections(e.type);
-    const { _id } = (e.context as any)._config as ISite; // TODO: Make public site in qusly-core
-    const section = sections.find(r => r._id === _id);
-    const index = section.items.findIndex(r => r.id === e.id);
-
-    section.items[index] = { ...e, status: 'transfering' };
+    const index = this.items.findIndex(r => r.id === e.id);
+    this.items[index] = { ...e, status: 'transfering' };
   }
 }
