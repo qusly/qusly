@@ -28,7 +28,7 @@ export const Icon = styled.div`
   `}
 `;
 
-export const Details = styled.div`
+export const Container = styled.div`
   width: 100%;
   height: 100%;
   padding: 12px 16px;
@@ -42,8 +42,17 @@ export const Name = styled.div`
   ${robotoMedium()};
 `;
 
-export const Path = styled.div`
+export const Label = styled.div`
   font-size: 14px;
   margin-top: 6px;
   color: rgba(0, 0, 0, ${transparency.text.medium});
+`;
+
+export const Buttons = styled.div`
+  display: flex;
+  margin-top: 16px;
+
+  & > *:not(:first-child) {
+    margin-left: 12px;
+  }
 `;
