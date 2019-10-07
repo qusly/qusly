@@ -10,7 +10,7 @@ export type ConnectionStatus = 'connecting' | 'connected' | 'disconnected';
 
 let id = 0;
 
-const downloadsPath = remote.app.getPath('downloads');
+const downloadsPath = resolve(remote.app.getPath('downloads'), 'qusly');
 
 export class Session {
   public id = id++;
@@ -26,8 +26,9 @@ export class Session {
   public downloadClient = new TransferClient('download', 1);
 
   constructor(public site: ISite) {
-    this.downloadClient.on('new', store.transfer.handleNewTransfer);
-    this.downloadClient.on('progress', store.transfer.handleTransferProgress);
+    this.downloadClient.on('new', store.transfer.onNew);
+    this.downloadClient.on('progress', store.transfer.onProgress);
+    this.downloadClient.on('finish', store.transfer.onFinish);
   }
 
   @action
@@ -53,13 +54,12 @@ export class Session {
   }
 
   @action
-  public async download(...paths: string[]) {
-    const promises = paths.map(path => {
+  public download(...paths: string[]) {
+    for (const path of paths) {
       const fileName = basename(path);
+      const localPath = resolve(downloadsPath, fileName);
 
-      return this.downloadClient.transfer(resolve(downloadsPath, fileName), path);
-    });
-
-    return Promise.all(promises);
+      this.downloadClient.transfer(localPath, path);
+    }
   }
 }
