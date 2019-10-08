@@ -5,6 +5,7 @@ import { robotoLight } from '~/renderer/mixins';
 export const StyledSection = styled.div`
   width: 100%;
   max-width: 640px;
+  padding: 0px 16px;
   margin: 16px auto 0px;
 `;
 

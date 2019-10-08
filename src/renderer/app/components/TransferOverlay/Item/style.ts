@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 import { transparency } from '~/renderer/constants';
-import { centerIcon, robotoMedium } from '~/renderer/mixins';
+import { centerIcon, robotoMedium, singleLine } from '~/renderer/mixins';
 
 export const StyledItem = styled.div`
   width: 100%;
@@ -18,7 +18,7 @@ export const StyledItem = styled.div`
 `;
 
 export const Icon = styled.div`
-  width: 80px;
+  min-width: 80px;
   height: 32px;
   ${centerIcon(32)};
 
@@ -34,11 +34,13 @@ export const Container = styled.div`
   padding: 12px 16px;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
   border-left: 1px solid rgba(0, 0, 0, ${transparency.dividers});
 `;
 
 export const Name = styled.div`
   font-size: 14px;
+  ${singleLine()};
   ${robotoMedium()};
 `;
 
@@ -46,6 +48,7 @@ export const Label = styled.div`
   font-size: 14px;
   margin-top: 6px;
   color: rgba(0, 0, 0, ${transparency.text.medium});
+  ${singleLine()};
 `;
 
 export const Buttons = styled.div`
