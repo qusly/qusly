@@ -2,6 +2,7 @@ import { remote } from 'electron';
 import { basename, resolve } from 'path';
 import { action } from 'mobx';
 import { Client, TransferClient } from 'qusly-core';
+
 import { ISite } from '~/interfaces';
 import store from '../store';
 import { Tree } from './tree';
@@ -59,7 +60,7 @@ export class Session {
       const fileName = basename(path);
       const localPath = resolve(downloadsPath, fileName);
 
-      this.downloadClient.transfer(localPath, path);
+      this.downloadClient.transfer(localPath, path, this.site);
     }
   }
 }

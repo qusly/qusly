@@ -1,5 +1,5 @@
 import { observable, computed, action } from 'mobx';
-import { ITransferType, ITransferClientItem } from 'qusly-core';
+import { ITransferType, ITransferItem } from 'qusly-core';
 
 import { ITransferSection, ISite } from '~/interfaces';
 
@@ -8,19 +8,16 @@ export class TransferStore {
   public content: ITransferType = 'download';
 
   @observable
-  public items: ITransferClientItem[] = [];
+  public items: ITransferItem[] = [];
 
   @computed
   public get sections() {
-    console.log("XD");
-
     const sections: ITransferSection[] = [];
 
     this.items.forEach(item => {
-      const { type, context } = item;
+      const { _id, title } = item.data as ISite;
 
-      if (type === this.content) {
-        const { _id, title } = context.config as ISite;
+      if (item.type === this.content) {
         const section = sections.find(r => r._id === _id);
 
         if (section) {
@@ -39,25 +36,23 @@ export class TransferStore {
   }
 
   @action
-  public onNew = (e: ITransferClientItem) => {
+  public onNew = (e: ITransferItem) => {
     this.items.push(e);
   }
 
   @action
-  public onProgress = (e: ITransferClientItem) => {
+  public onProgress = (e: ITransferItem) => {
     const item = this.items.find(r => r.id === e.id);
 
-    console.log(item.remotePath, item.id);
+    if (item.status !== 'transfering') {
+      item.status = 'transfering';
+    }
 
-    item.status = 'transfering';
-    item.buffered = e.buffered;
-    item.size = e.size;
-    item.eta = e.eta;
-    item.speed = e.speed;
+    item.info = e.info;
   }
 
   @action
-  public onFinish = (e: ITransferClientItem) => {
+  public onFinish = (e: ITransferItem) => {
     const item = this.items.find(r => r.id === e.id);
 
     item.status = 'finished';

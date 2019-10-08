@@ -10,4 +10,5 @@ export const StyledTransfer = styled.div`
   left: 0;
   background-color: #fff;
   z-index: 2;
+  overflow-y: auto;
 `;
