@@ -16,7 +16,9 @@ export const StyledDialog = styled.div`
   justify-content: center;
 
   ${({ visible }: { visible: boolean }) => css`
-    pointer-events: ${visible ? 'auto' : 'none'};
+    &, & * {
+      pointer-events: ${visible ? 'auto' : 'none !important'};
+    }
   `}
 `;
 

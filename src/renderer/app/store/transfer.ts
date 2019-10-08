@@ -37,7 +37,7 @@ export class TransferStore {
 
   @action
   public onNew = (e: ITransferItem) => {
-    this.items.push(e);
+    this.items.unshift(e);
   }
 
   @action
