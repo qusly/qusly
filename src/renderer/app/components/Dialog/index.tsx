@@ -14,6 +14,7 @@ export const onDialogClose = () => {
 
 export const DialogContainer = observer(({ content, children }: { content: DialogContent | DialogContent[], children: any }) => {
   const current = store.dialog.content;
+
   const contentVisible = React.useMemo(() => {
     return content instanceof Array ? content.indexOf(current) !== -1 : content === current
   }, [current]);

@@ -24,7 +24,7 @@ export const Button = styled.div`
   cursor: pointer;
 
   ${({ type, label, color, background, disabled }: IButtonProps) => css`
-    pointer-events: ${disabled ? 'none' : 'auto'};
+    pointer-events: ${disabled ? 'none' : 'inherit'};
     opacity: ${disabled ? 0.24 : 1};
     border: ${type === 'outlined'
       ? `1px solid ${background || '#2196F3'}`
