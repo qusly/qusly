@@ -5,11 +5,11 @@ import { Item } from '../Item';
 import { StyledSection, Title } from './style';
 
 export const Section = ({ data }: { data: ITransferSection }) => {
-  const { title, items } = data;
+  const { title, items, transfered } = data;
 
   return (
     <StyledSection>
-      <Title>{title}</Title>
+      <Title>{title} - {transfered} of {items.length}</Title>
       {items.map(r => (
         <Item key={r.id} data={r} />
       ))}

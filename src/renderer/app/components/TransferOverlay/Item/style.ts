@@ -27,7 +27,7 @@ export const Icon = styled.div`
 export const Container = styled.div`
   width: 100%;
   height: 100%;
-  padding: 12px 16px 12px 32px;
+  padding: 12px 32px 12px 16px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -45,6 +45,12 @@ export const Label = styled.div`
   margin-top: 6px;
   color: rgba(0, 0, 0, ${transparency.text.medium});
   ${singleLine()};
+`;
+
+export const Show = styled(Label)`
+  margin-top: 8px;
+  color: #2196F3;
+  cursor: pointer;
 `;
 
 export const Buttons = styled.div`

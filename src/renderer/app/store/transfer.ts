@@ -26,7 +26,8 @@ export class TransferStore {
           sections.push({
             _id,
             title,
-            items: [item]
+            items: [item],
+            transfered: 0,
           });
         }
       }
@@ -37,7 +38,7 @@ export class TransferStore {
 
   @action
   public onNew = (e: ITransferItem) => {
-    this.items.unshift(e);
+    this.items.push(e);
   }
 
   @action
@@ -53,8 +54,11 @@ export class TransferStore {
 
   @action
   public onFinish = (e: ITransferItem) => {
+    const section = this.sections.find(r => r._id === e.data._id);
     const item = this.items.find(r => r.id === e.id);
+
     item.status = 'finished';
+    section.transfered++;
   }
 
   @action

@@ -4,4 +4,5 @@ export interface ITransferSection {
   _id?: string;
   title?: string;
   items?: ITransferItem[];
+  transfered?: number;
 }

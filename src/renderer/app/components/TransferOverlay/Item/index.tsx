@@ -1,3 +1,4 @@
+import { shell } from 'electron';
 import * as React from 'react';
 import { observer } from 'mobx-react-lite';
 import { ITransferItem } from 'qusly-core';
@@ -7,7 +8,12 @@ import * as prettyByte from 'pretty-bytes';
 import store from '~/renderer/app/store';
 import { Button } from '~/renderer/components/Button';
 import { Progressbar } from '~/renderer/components/Progressbar';
-import { StyledItem, Icon, Container, Name, Label, Buttons, Close } from './style';
+import { StyledItem, Icon, Container, Name, Label, Buttons, Close, Show } from './style';
+
+const showInFolder = (data: ITransferItem) => () => {
+  const { localPath } = data.info;
+  shell.showItemInFolder(localPath);
+}
 
 const onClose = (id: string) => () => {
   store.transfer.remove(id);
@@ -34,7 +40,7 @@ const TransferDetails = observer(({ data }: { data: ITransferItem }) => {
 export const Item = observer(({ data }: { data: ITransferItem }) => {
   const { id, status, info } = data;
   const { remotePath } = info;
-  const { icon, opacity } = store.icons.getPathIcon(remotePath) // todo;
+  const { icon, opacity } = store.icons.getPathIcon(remotePath);
   const filename = basename(remotePath);
 
   return (
@@ -44,8 +50,13 @@ export const Item = observer(({ data }: { data: ITransferItem }) => {
         <Name>{filename}</Name>
         <Label>{remotePath}</Label>
         {status === 'transfering' && <TransferDetails data={data} />}
+        {status === 'finished' && (
+          <>
+            <Show onClick={showInFolder(data)}>Show in folder</Show>
+            <Close onClick={onClose(id)} />
+          </>
+        )}
       </Container>
-      {status === 'finished' && <Close onClick={onClose(id)} />}
     </StyledItem >
   );
 });
