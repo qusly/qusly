@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { transparency } from '~/renderer/constants';
+import { transparency, icons } from '~/renderer/constants';
 import { centerIcon, robotoMedium, singleLine } from '~/renderer/mixins';
 
 export const StyledItem = styled.div`
@@ -10,11 +10,7 @@ export const StyledItem = styled.div`
   margin-top: 12px;
   display: flex;
   align-items: center;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #fafafa;
-  }
+  position: relative;
 `;
 
 export const Icon = styled.div`
@@ -31,7 +27,7 @@ export const Icon = styled.div`
 export const Container = styled.div`
   width: 100%;
   height: 100%;
-  padding: 12px 16px;
+  padding: 12px 16px 12px 32px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -57,5 +53,21 @@ export const Buttons = styled.div`
 
   & > *:not(:first-child) {
     margin-left: 12px;
+  }
+`;
+
+export const Close = styled.div`
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  background-image: url(${icons.close});
+  opacity: ${transparency.icons.inactive};
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  ${centerIcon(16)};
+
+  &:hover {
+    opacity: 1;
   }
 `;

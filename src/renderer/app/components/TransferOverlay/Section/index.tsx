@@ -5,10 +5,12 @@ import { Item } from '../Item';
 import { StyledSection, Title } from './style';
 
 export const Section = ({ data }: { data: ITransferSection }) => {
+  const { title, items } = data;
+
   return (
     <StyledSection>
-      <Title>Nersent data center</Title>
-      {data.items.map(r => (
+      <Title>{title}</Title>
+      {items.map(r => (
         <Item key={r.id} data={r} />
       ))}
     </StyledSection>

@@ -7,7 +7,11 @@ import * as prettyByte from 'pretty-bytes';
 import store from '~/renderer/app/store';
 import { Button } from '~/renderer/components/Button';
 import { Progressbar } from '~/renderer/components/Progressbar';
-import { StyledItem, Icon, Container, Name, Label, Buttons } from './style';
+import { StyledItem, Icon, Container, Name, Label, Buttons, Close } from './style';
+
+const onClose = (id: string) => () => {
+  store.transfer.remove(id);
+}
 
 const TransferDetails = observer(({ data }: { data: ITransferItem }) => {
   const { info } = data;
@@ -28,7 +32,8 @@ const TransferDetails = observer(({ data }: { data: ITransferItem }) => {
 });
 
 export const Item = observer(({ data }: { data: ITransferItem }) => {
-  const { remotePath } = data.info;
+  const { id, status, info } = data;
+  const { remotePath } = info;
   const { icon, opacity } = store.icons.getPathIcon(remotePath) // todo;
   const filename = basename(remotePath);
 
@@ -38,9 +43,9 @@ export const Item = observer(({ data }: { data: ITransferItem }) => {
       <Container>
         <Name>{filename}</Name>
         <Label>{remotePath}</Label>
-        {data.status === 'transfering' && <TransferDetails data={data} />}
-        {data.status === 'finished' && <Label style={{ fontSize: 18 }}>Finished</Label>}
+        {status === 'transfering' && <TransferDetails data={data} />}
       </Container>
+      {status === 'finished' && <Close onClick={onClose(id)} />}
     </StyledItem >
   );
 });

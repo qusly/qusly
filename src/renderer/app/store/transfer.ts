@@ -54,7 +54,11 @@ export class TransferStore {
   @action
   public onFinish = (e: ITransferItem) => {
     const item = this.items.find(r => r.id === e.id);
-
     item.status = 'finished';
+  }
+
+  @action
+  public remove = (id: string) => {
+    this.items = this.items.filter(r => r.id !== id);
   }
 }
