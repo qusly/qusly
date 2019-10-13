@@ -11,6 +11,7 @@
 [![Travis](https://img.shields.io/travis/qusly/qusly.svg?style=flat-square)](https://travis-ci.com/qusly/qusly)
 [![Travis](https://img.shields.io/travis/qusly/qusly-core.svg?style=flat-square)](https://travis-ci.org/xnerhu/qusly-core.svg)
 [![Downloads](https://img.shields.io/github/downloads/qusly/qusly/total.svg?style=flat-square)](https://github.com/qusly/qusly/releases)
+[![Hits](http://hits.dwyl.io/qusly/qusly.svg")](https://github.com/qusly/qusly/releases)
 [![Discord](https://discordapp.com/api/guilds/307605794680209409/widget.png?style=shield)](https://discord.gg/P7Vn4VX)
 [![Github](https://img.shields.io/github/followers/xnerhu.svg?style=social&label=Follow)](https://github.com/xnerhu)
 
