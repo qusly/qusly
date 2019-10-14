@@ -19,7 +19,6 @@
     "name": "Mikołaj Palkiewicz",
     "email": "xnerhu@gmail.com"
   },
-  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/xNerhu/ftp-client.git"
