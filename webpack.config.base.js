@@ -1,16 +1,26 @@
 /* eslint-disable */
 const { resolve } = require('path');
 const merge = require('webpack-merge');
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const createStyledComponentsTransformer = require('typescript-plugin-styled-components').default;
 /* eslint-enable */
 
 const INCLUDE = resolve(__dirname, 'src');
 
 const dev = process.env.ENV === 'dev';
 
+const styledComponentsTransformer = createStyledComponentsTransformer({
+  minify: true,
+  displayName: dev,
+});
+
 const config = {
   mode: dev ? 'development' : 'production',
 
   devtool: dev ? 'eval-source-map' : 'source-map',
+
+  plugins: [],
 
   output: {
     path: resolve(__dirname, 'build'),
@@ -29,6 +39,9 @@ const config = {
             options: {
               experimentalWatchApi: true,
               transpileOnly: true,
+              getCustomTransformers: () => ({
+                before: [styledComponentsTransformer],
+              }),
             },
           },
         ],
@@ -53,6 +66,11 @@ const config = {
 
   externals: ['qusly-core', 'keytar'],
 };
+
+if (dev) {
+  config.plugins.push(new ForkTsCheckerWebpackPlugin());
+  config.plugins.push(new HardSourceWebpackPlugin());
+}
 
 function getConfig(...cfg) {
   return merge(config, ...cfg);

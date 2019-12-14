@@ -1,7 +1,6 @@
 /* eslint-disable */
 const { join, resolve } = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 
 const { getConfig, dev } = require('./webpack.config.base');
 /* eslint-enable */
@@ -31,7 +30,7 @@ const applyEntries = (scope, config, entries) => {
 
 const getBaseConfig = name => {
   const config = {
-    plugins: [new HardSourceWebpackPlugin()],
+    plugins: [],
 
     output: {},
     entry: {},
