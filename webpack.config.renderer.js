@@ -41,7 +41,14 @@ const getBaseConfig = name => {
         {
           test: /\.(png|gif|jpg|woff2|ttf|svg)$/,
           include: INCLUDE,
-          use: ['file-loader'],
+          use: [
+            {
+              loader: 'file-loader',
+              options: {
+                esModule: false,
+              },
+            },
+          ],
         },
       ],
     },
