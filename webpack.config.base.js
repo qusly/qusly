@@ -25,7 +25,6 @@ const config = {
   output: {
     path: resolve(__dirname, 'build'),
     filename: '[name].bundle.js',
-    libraryTarget: 'commonjs2',
   },
 
   module: {
@@ -48,6 +47,13 @@ const config = {
 
         include: INCLUDE,
       },
+      {
+        test: /\.node$/,
+        loader: 'awesome-node-loader',
+        options: {
+          name: '[contenthash].[ext]',
+        },
+      },
     ],
   },
 
@@ -63,8 +69,6 @@ const config = {
       '~': INCLUDE,
     },
   },
-
-  externals: ['qusly-core', 'keytar'],
 };
 
 if (dev) {

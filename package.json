@@ -49,6 +49,7 @@
     "@types/styled-components": "4.4.1",
     "@typescript-eslint/eslint-plugin": "^2.11.0",
     "@typescript-eslint/parser": "^2.11.0",
+    "awesome-node-loader": "^1.1.1",
     "cache-loader": "^4.1.0",
     "concurrently": "^5.0.1",
     "cross-env": "^6.0.3",
