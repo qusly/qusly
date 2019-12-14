@@ -2,6 +2,7 @@ import { ipcMain, app, Menu } from 'electron';
 import { resolve } from 'path';
 import { homedir, platform } from 'os';
 import { config } from 'dotenv';
+import { setPassword, getPassword, deletePassword } from 'keytar';
 
 import { getMainMenu } from './menus/main';
 import { AppWindow } from './app-window';
@@ -33,4 +34,16 @@ app.on('ready', () => {
   });
 
   Menu.setApplicationMenu(getMainMenu(appWindow));
+});
+
+ipcMain.handle('set-password', async (e, service, account, password) => {
+  await setPassword(service, account, password);
+});
+
+ipcMain.handle('get-password', async (e, service, account) => {
+  await getPassword(service, account);
+});
+
+ipcMain.handle('delete-password', async (e, service, account) => {
+  await deletePassword(service, account);
 });

@@ -1,17 +1,13 @@
-import {
-  setPassword as _setPassword,
-  getPassword as _getPassword,
-  deletePassword as _deletePassword,
-} from 'keytar';
+import { ipcRenderer } from 'electron';
 
 export const setPassword = (_id: string, password: string) => {
-  return _setPassword('qusly', `site-${_id}`, password);
+  return ipcRenderer.invoke('set-password', 'qusly', `site-${_id}`, password);
 };
 
 export const getPassword = (_id: string) => {
-  return _getPassword('qusly', `site-${_id}`);
+  return ipcRenderer.invoke('get-password', 'qusly', `site-${_id}`);
 };
 
 export const deletePassword = (_id: string) => {
-  return _deletePassword('qusly', `site-${_id}`);
+  return ipcRenderer.invoke('delete-password', 'qusly', `site-${_id}`);
 };
