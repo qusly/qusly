@@ -35,23 +35,6 @@ const getBaseConfig = name => {
     output: {},
     entry: {},
 
-    module: {
-      rules: [
-        {
-          test: /\.(png|gif|jpg|woff2|ttf|svg)$/,
-          include: INCLUDE,
-          use: [
-            {
-              loader: 'file-loader',
-              options: {
-                esModule: false,
-              },
-            },
-          ],
-        },
-      ],
-    },
-
     optimization: {
       splitChunks: {
         cacheGroups: {

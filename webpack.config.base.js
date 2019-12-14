@@ -30,6 +30,18 @@ const config = {
   module: {
     rules: [
       {
+        test: /\.(png|gif|jpg|woff2|ttf|svg)$/,
+        include: INCLUDE,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              esModule: false,
+            },
+          },
+        ],
+      },
+      {
         test: /\.tsx|ts$/,
         use: [
           'cache-loader',

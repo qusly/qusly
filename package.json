@@ -36,7 +36,7 @@
     "compile-linux": "npm run build && electron-builder -l -p always",
     "lint": "tslint \"src/**/*.ts*\"",
     "lint-fix": "prettier --write \"src/**/*.ts*\" -&& tslint \"src/**/*.ts*\" --fix",
-    "postinstall": "electron-builder install-app-deps"
+    "postinstall": "electron-rebuild -f -o keytar"
   },
   "devDependencies": {
     "@types/dotenv": "8.2.0",
