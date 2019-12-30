@@ -1,6 +1,5 @@
 import { ipcMain, app, Menu } from 'electron';
-import { resolve } from 'path';
-import { homedir, platform } from 'os';
+import { platform } from 'os';
 import { config } from 'dotenv';
 import { setPassword, getPassword, deletePassword } from 'keytar';
 
@@ -8,7 +7,6 @@ import { getMainMenu } from './menus/main';
 import { AppWindow } from './app-window';
 
 app.setName('Qusly');
-app.setPath('userData', resolve(homedir(), '.qusly'));
 
 (process.env as any)['ELECTRON_DISABLE_SECURITY_WARNINGS'] = true;
 
