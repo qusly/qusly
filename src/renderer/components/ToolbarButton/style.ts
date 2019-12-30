@@ -35,7 +35,7 @@ export const Button = styled.div`
 `;
 
 export const Circle = styled.div`
-  border-radius: 50%;
+  border-radius: 4px;
   width: 32px;
   height: 32px;
   position: absolute;
@@ -46,6 +46,6 @@ export const Circle = styled.div`
   transition: 0.2s background-color;
 
   &:hover {
-    background-color: rgba(0, 0, 0, 0.06);
+    background-color: rgba(0, 0, 0, 0.05);
   }
 `;
