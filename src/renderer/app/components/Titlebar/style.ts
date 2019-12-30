@@ -14,8 +14,9 @@ export const StyledTitlebar = styled.div`
 
 export const Title = styled.div`
   font-size: 12px;
-  margin-left: auto;
-  margin-right: auto;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 `;
 
 export const Handle = styled.div`
