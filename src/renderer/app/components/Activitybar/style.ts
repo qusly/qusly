@@ -6,10 +6,10 @@ import { transparency } from '~/renderer/constants';
 const getIconOpacity = (selected: boolean, disabled: boolean) => {
   if (disabled) return transparency.icons.disabled;
   return selected ? 1 : transparency.icons.inactive;
-}
+};
 
 export const StyledActivitybar = styled.div`
-  width: 56px;
+  width: 52px;
   height: 100%;
 `;
 
@@ -21,7 +21,7 @@ interface ItemProps {
 
 export const StyledItem = styled.div`
   width: 100%;
-  height: 40px;
+  height: 48px;
   cursor: pointer;
   position: relative;
 
@@ -39,7 +39,7 @@ export const StyledItem = styled.div`
   `}
 
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     left: 0px;
     width: 3px;
