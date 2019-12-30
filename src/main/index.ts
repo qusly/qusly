@@ -6,7 +6,7 @@ import { setPassword, getPassword, deletePassword } from 'keytar';
 import { getMainMenu } from './menus/main';
 import { AppWindow } from './app-window';
 
-app.setName('Qusly');
+app.name = 'Qusly';
 
 (process.env as any)['ELECTRON_DISABLE_SECURITY_WARNINGS'] = true;
 

@@ -33,7 +33,7 @@ export const Item = styled.div`
   cursor: pointer;
   color: rgba(0, 0, 0, 0.54);
   ${robotoRegular()};
-  
+
   &:hover {
     color: #000;
   }
