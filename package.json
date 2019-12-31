@@ -7,13 +7,10 @@
     "react",
     "styled-components",
     "electron",
-    "fuse-box",
-    "wexond",
     "ftp",
     "sftp",
     "client",
-    "qusly",
-    "nersent"
+    "qusly"
   ],
   "author": {
     "name": "Mikołaj Palkiewicz",
@@ -21,10 +18,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xNerhu/ftp-client.git"
+    "url": "git+https://github.com/qusly/qusly.git"
   },
   "bugs": {
-    "url": "https://github.com/xNerhu/ftp-client#issues"
+    "url": "https://github.com/qusly/qusly#issues"
   },
   "main": "./build/main.bundle.js",
   "scripts": {
