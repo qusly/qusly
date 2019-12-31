@@ -52,6 +52,9 @@ export class Page {
   @action
   public fetchFiles = async () => {
     try {
+      if (this.session.status === 'disconnected')
+        throw new Error('Attempt to fetch files in a disconnected session');
+
       this.loading = true;
 
       const path = this.path.toString();

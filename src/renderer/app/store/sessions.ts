@@ -26,10 +26,14 @@ export class SessionsStore {
     return session;
   }
 
-  private findSession({ host, port, protocol }: ISite) {
+  private findSession({ host, port, protocol, user, password }: ISite) {
     return this.list.find(
       ({ site }) =>
-        site.host === host && site.port === port && site.protocol === protocol,
+        site.host === host &&
+        site.port === port &&
+        site.protocol === protocol &&
+        site.user === user &&
+        site.password === password,
     );
   }
 }

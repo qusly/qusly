@@ -4,7 +4,11 @@ import { ISite } from '~/interfaces';
 import store from '../store';
 import { Tree } from './tree';
 
-export type ConnectionStatus = 'connecting' | 'connected' | 'disconnected';
+export type ConnectionStatus =
+  | 'connecting'
+  | 'connected'
+  | 'disconnected'
+  | 'errored';
 
 let id = 0;
 
@@ -34,6 +38,7 @@ export class Session {
         this.tree.fetch(this.tree.items[0]);
       }
     } catch (e) {
+      this.status = 'disconnected';
       // TODO: handle the error
       console.error(e);
     }
