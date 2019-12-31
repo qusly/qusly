@@ -49,8 +49,8 @@ export const MenuItem = ({
       disabled={disabled}
       hidden={hidden}
     >
-      <td style={{ paddingLeft: 8 }}></td>
-      <Icon iconSize={iconSize} icon={icon}></Icon>
+      <td style={{ paddingLeft: 10 }}></td>
+      <Icon disabled={disabled} iconSize={iconSize} icon={icon}></Icon>
       <Text>{children}</Text>
       <Accelerator>{accelerator}</Accelerator>
     </StyledItem>

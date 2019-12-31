@@ -81,7 +81,6 @@ export const Icon = styled.td`
         width: 20px;
         height: 20px;
         opacity: ${disabled ? transparency.icons.disabled : 0.87};
-        margin-right: 12px;
         background-image: url(${icon});
         backface-visibility: hidden;
         transform: translateZ(0);
