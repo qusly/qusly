@@ -4,13 +4,13 @@ import { shadows, centerIcon } from '~/renderer/mixins';
 import { transparency } from '~/renderer/constants';
 
 export const StyledContextMenu = styled.div`
-  width: 244px;
+  min-width: 128px;
   position: fixed;
   z-index: 1000;
-  padding: 8px 0px;
+  padding: 4px 0px;
   background-color: #fff;
-  border-radius: 8px;
-  box-shadow: ${shadows(6)};
+  border-radius: 4px;
+  box-shadow: ${shadows(4)};
 
   ${({ visible }: { visible: boolean }) => css`
     pointer-events: ${visible ? 'auto' : 'none'};
@@ -30,9 +30,9 @@ export interface IContextMenuItemProps {
 export const StyledItem = styled.div`
   width: 100%;
   height: 32px;
-  padding: 0px 16px;
+  padding: 0px 10px;
   align-items: center;
-  font-size: 14px;
+  font-size: 13px;
   white-space: nowrap;
 
   ${({ icon, disabled, iconSize, hidden }: IContextMenuItemProps) => css`
@@ -45,20 +45,21 @@ export const StyledItem = styled.div`
       background-color: ${!disabled ? 'rgba(0, 0, 0, 0.04)' : 'transparent'};
     }
 
-    ${icon && css`
-      &:before {
-        content: '';
-        width: 20px;
-        height: 20px;
-        opacity: ${disabled ? transparency.icons.disabled : 0.54};
-        margin-right: 12px;
-        background-image: url(${icon});
-        backface-visibility: hidden;
-        transform: translateZ(0);
-        -webkit-font-smoothing: subpixel-antialiased;
-        ${centerIcon(iconSize)};
-      }
-    `}
+    ${icon &&
+      css`
+        &:before {
+          content: '';
+          width: 20px;
+          height: 20px;
+          opacity: ${disabled ? transparency.icons.disabled : 0.87};
+          margin-right: 12px;
+          background-image: url(${icon});
+          backface-visibility: hidden;
+          transform: translateZ(0);
+          -webkit-font-smoothing: subpixel-antialiased;
+          ${centerIcon(iconSize)};
+        }
+      `}
   `}
 `;
 
@@ -66,5 +67,5 @@ export const MenuDivider = styled.div`
   width: 100%;
   height: 1px;
   background-color: rgba(0, 0, 0, ${transparency.dividers});
-  margin: 8px 0px;
+  margin: 4px 0px;
 `;
