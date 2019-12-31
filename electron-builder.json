@@ -20,7 +20,16 @@
     ]
   },
   "win": {
-    "target": ["zip", "nsis"]
+    "target": [
+      {
+        "target": "nsis-web",
+        "arch": ["x64", "ia32"]
+      },
+      {
+        "target": "zip",
+        "arch": ["x64", "ia32"]
+      }
+    ]
   },
   "mac": {
     "category": "public.app-category.utilities"
