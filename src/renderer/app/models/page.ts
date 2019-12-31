@@ -4,7 +4,7 @@ import { extname } from 'path';
 import store from '../store';
 import { Session } from './session';
 import { Location } from './location';
-import { IFile, ITreeItem } from '~/interfaces';
+import { IFile } from '~/interfaces';
 import { sortFiles } from '../utils';
 
 let id = 0;
@@ -51,19 +51,24 @@ export class Page {
 
   @action
   public fetchFiles = async () => {
-    this.loading = true;
+    try {
+      this.loading = true;
 
-    const path = this.path.toString();
-    const files = await this.session.client.readDir(path);
+      const path = this.path.toString();
+      const files = await this.session.client.readDir(path);
 
-    await store.icons.load(...files);
+      await store.icons.load(...files);
 
-    this.tab.title = this.session.site.title;
-    this.tab.subtitle = `${path}`;
-    this.files = sortFiles(files);
-    this.loading = false;
+      this.tab.title = this.session.site.title;
+      this.tab.subtitle = `${path}`;
+      this.files = sortFiles(files);
+      this.loading = false;
 
-    this.session.tree.update(this.treeItem, this.files);
+      this.session.tree.update(this.treeItem, this.files);
+    } catch (e) {
+      // TODO: handle the error
+      console.error(e);
+    }
   };
 
   @computed

@@ -22,15 +22,20 @@ export class Session {
   constructor(public site: ISite) {}
 
   public async connect() {
-    if (this.status === 'disconnected') {
-      this.status = 'connecting';
+    try {
+      if (this.status === 'disconnected') {
+        this.status = 'connecting';
 
-      await this.client.connect(this.site);
-      const path = await this.client.pwd();
+        await this.client.connect(this.site);
+        const path = await this.client.pwd();
 
-      this.startPath = path;
-      this.status = 'connected';
-      this.tree.fetch(this.tree.items[0]);
+        this.startPath = path;
+        this.status = 'connected';
+        this.tree.fetch(this.tree.items[0]);
+      }
+    } catch (e) {
+      // TODO: handle the error
+      console.error(e);
     }
   }
 
