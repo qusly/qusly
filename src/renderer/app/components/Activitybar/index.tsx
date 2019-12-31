@@ -30,9 +30,11 @@ const Item = observer(({ content, icon, disabled }: ItemProps) => {
 });
 
 export const Activitybar = () => {
+  const session = store.sessions.current;
+
   return (
     <StyledActivitybar>
-      <Item content="explorer" icon={icons.fileTree} />
+      <Item content="explorer" icon={icons.fileTree} disabled={!session} />
       <Item content="sites" icon={icons.sitesManager} />
       <Item content="search" icon={icons.search} disabled />
       <Item content="transfer" icon={icons.transfer} disabled />

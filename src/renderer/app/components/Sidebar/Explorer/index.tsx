@@ -8,7 +8,7 @@ import { StyledItem, Label, ExpandIcon, Icon } from './style';
 
 const onItemClick = (data: ITreeItem) => () => {
   store.pages.current.path.push(data.path);
-}
+};
 
 const onExpandClick = (data: ITreeItem) => (e: React.MouseEvent) => {
   e.stopPropagation();
@@ -17,26 +17,31 @@ const onExpandClick = (data: ITreeItem) => (e: React.MouseEvent) => {
 
   session.tree.fetch(data);
   data.expanded = !data.expanded;
-}
+};
 
 const onContextMenu = (data: ITreeItem) => () => {
   store.contextMenu.focusedExplorerItem = data;
   store.contextMenu.show('explorer');
-}
+};
 
-const Item = observer(({ data, depth }: { data: ITreeItem, depth: number }) => {
+const Item = observer(({ data, depth }: { data: ITreeItem; depth: number }) => {
   const { file, expanded } = data;
 
   return (
     <>
-      <StyledItem onClick={onItemClick(data)} onContextMenu={onContextMenu(data)} style={{ paddingLeft: depth * 16 }}>
+      <StyledItem
+        onClick={onItemClick(data)}
+        onContextMenu={onContextMenu(data)}
+        style={{ paddingLeft: depth * 16 }}
+      >
         <ExpandIcon onClick={onExpandClick(data)} expanded={expanded} />
         <Icon expanded={expanded} />
         <Label>{file.name}</Label>
       </StyledItem>
-      {expanded && data.children.map(item => (
-        <Item key={item.path} data={item} depth={depth + 1} />
-      ))}
+      {expanded &&
+        data.children.map(item => (
+          <Item key={item.path} data={item} depth={depth + 1} />
+        ))}
     </>
   );
 });
