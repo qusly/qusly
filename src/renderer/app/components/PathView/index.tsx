@@ -7,7 +7,7 @@ import { StyledPathView, Container, Item, Input } from './style';
 const onItemClick = (index: number) => (e: React.MouseEvent) => {
   e.stopPropagation();
   store.pages.current.path.goto(index);
-}
+};
 
 const onKeyDown = (e: React.KeyboardEvent) => {
   const input = store.pathView.inputRef.current;
@@ -24,11 +24,11 @@ const onKeyDown = (e: React.KeyboardEvent) => {
 
 const onBlur = () => {
   store.pathView.inputVisible = false;
-}
+};
 
 const onContextMenu = () => {
   store.contextMenu.show('path');
-}
+};
 
 export const PathView = observer(() => {
   const page = store.pages.current;
@@ -36,9 +36,14 @@ export const PathView = observer(() => {
 
   return (
     <StyledPathView onContextMenu={onContextMenu}>
-      <Container visible={!store.pathView.inputVisible} onClick={store.pathView.show}>
+      <Container
+        visible={!store.pathView.inputVisible}
+        onClick={store.pathView.show}
+      >
         {page.path.items.map((label, index) => (
-          <Item key={label} onClick={onItemClick(index)}>{label}</Item>
+          <Item key={label} onClick={onItemClick(index)}>
+            {label}
+          </Item>
         ))}
       </Container>
       <Input

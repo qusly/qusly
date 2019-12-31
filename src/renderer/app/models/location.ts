@@ -10,13 +10,15 @@ export class Location {
   @observable
   private pos = -1;
 
-  constructor(private page: Page) { }
+  constructor(private page: Page) {}
 
   @computed
   public get items() {
     if (this.pos === -1) return [];
 
-    const items = this.history[this.pos].split('/').filter(r => r.length);
+    const items = this.history[this.pos]?.split('/').filter(r => r.length);
+    if (!items) return [];
+
     return ['/', ...items];
   }
 
@@ -35,14 +37,14 @@ export class Location {
       this.pos--;
       await this.page.fetchFiles();
     }
-  }
+  };
 
   public goForward = async () => {
     if (this.canGoForward) {
       this.pos++;
       await this.page.fetchFiles();
     }
-  }
+  };
 
   @action
   public async push(path: string) {
@@ -80,6 +82,6 @@ export class Location {
   }
 
   public copyToClipboard() {
-    clipboard.writeText(this.toString(), 'clipboard')
+    clipboard.writeText(this.toString(), 'clipboard');
   }
 }
