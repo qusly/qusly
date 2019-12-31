@@ -11,9 +11,9 @@ export const getMainMenu = (window: BrowserWindow) => {
         { role: 'cut' },
         { role: 'copy' },
         { role: 'paste' },
-        { role: 'pasteandmatchstyle' },
+        { role: 'pasteAndMatchStyle' },
         { role: 'delete' },
-        { role: 'selectall' },
+        { role: 'selectAll' },
         { role: 'quit' },
         {
           label: 'Reload',

@@ -10,22 +10,22 @@ const onConnect = () => {
   const site = store.contextMenu.focusedSite;
 
   store.sites.openInTab(site);
-}
+};
 
 const onEdit = async () => {
   const site = store.contextMenu.focusedSite;
 
   site.password = await getPassword(site._id);
   store.dialog.show('edit-site');
-}
+};
 
 const onDelete = () => {
   store.dialog.show('delete-site');
-}
+};
 
 export const SiteMenu = () => {
   return (
-    <MenuContainer content='site'>
+    <MenuContainer content="site">
       <MenuItem icon={icons.connect} iconSize={18} onClick={onConnect}>
         Connect
       </MenuItem>

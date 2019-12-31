@@ -7,9 +7,15 @@ import {
 } from '~/renderer/app/components/ContextMenu/style';
 import { StyledDropdown, Menu, Label, DropIcon } from './styles';
 
-export const DropdownItem = ({ children }: { children: any }) => {
+export const DropdownItem = ({
+  children,
+  value,
+}: {
+  children: any;
+  value: string;
+}) => {
   return (
-    <StyledItem>
+    <StyledItem value={value}>
       <Text>{children}</Text>
     </StyledItem>
   );

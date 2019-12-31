@@ -6,7 +6,13 @@ import { IPos, ITreeItem, ISite } from '~/interfaces';
 import { getMenuPosition } from '~/renderer/app/utils';
 import { Tab } from '../models';
 
-export type ContextMenuContent = 'page' | 'file' | 'tab' | 'path' | 'explorer' | 'site';
+export type ContextMenuContent =
+  | 'page'
+  | 'file'
+  | 'tab'
+  | 'path'
+  | 'explorer'
+  | 'site';
 
 export class ContextMenuStore {
   @observable
@@ -15,13 +21,13 @@ export class ContextMenuStore {
   @observable
   public pos: IPos = {
     top: 0,
-    left: 0
-  }
+    left: 0,
+  };
 
   @observable
   public content: ContextMenuContent = 'file';
 
-  public ref = React.createRef<HTMLDivElement>();
+  public ref = React.createRef<HTMLTableElement>();
 
   public focusedTab: Tab;
 
@@ -34,5 +40,5 @@ export class ContextMenuStore {
     this.content = content;
     this.visible = true;
     this.pos = getMenuPosition(this.ref.current, store.mousePos);
-  }
+  };
 }
