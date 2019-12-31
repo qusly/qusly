@@ -1,9 +1,19 @@
 import * as React from 'react';
 
-import { StyledItem } from '~/renderer/app/components/ContextMenu/style';
+import {
+  StyledItem,
+  Items,
+  Text,
+} from '~/renderer/app/components/ContextMenu/style';
 import { StyledDropdown, Menu, Label, DropIcon } from './styles';
 
-export const DropdownItem = StyledItem;
+export const DropdownItem = ({ children }: { children: any }) => {
+  return (
+    <StyledItem>
+      <Text>{children}</Text>
+    </StyledItem>
+  );
+};
 
 interface Props {
   children?: any;
@@ -23,7 +33,7 @@ export class Dropdown extends React.PureComponent<Props, State> {
     expanded: false,
     value: null,
     label: '',
-  }
+  };
 
   public componentDidMount() {
     const { defaultValue } = this.props;
@@ -61,7 +71,7 @@ export class Dropdown extends React.PureComponent<Props, State> {
 
     this.setValue(newValue);
     this.toggle(false);
-  }
+  };
 
   public get value() {
     const { defaultValue } = this.props;
@@ -94,7 +104,7 @@ export class Dropdown extends React.PureComponent<Props, State> {
     e.stopPropagation();
     e.preventDefault();
     this.toggle(false);
-  }
+  };
 
   private toggle(value: boolean) {
     this.setState({ expanded: value });
@@ -113,21 +123,27 @@ export class Dropdown extends React.PureComponent<Props, State> {
     const { value, label, expanded } = this.state;
 
     return (
-      <StyledDropdown className='dropdown' onMouseDown={this.onMouseDown} style={style}>
+      <StyledDropdown
+        className="dropdown"
+        onMouseDown={this.onMouseDown}
+        style={style}
+      >
         <Label>{label}</Label>
         <DropIcon expanded={expanded} />
         <Menu visible={expanded}>
-          {React.Children.map(children, child => {
-            const { props } = child;
+          <Items>
+            {React.Children.map(children, child => {
+              const { props } = child;
 
-            return React.cloneElement(child, {
-              selected: value === props.value,
-              onMouseDown: (e: React.MouseEvent) => e.stopPropagation(),
-              onClick: this.onItemMouseClick(props.value)
-            });
-          })}
+              return React.cloneElement(child, {
+                selected: value === props.value,
+                onMouseDown: (e: React.MouseEvent) => e.stopPropagation(),
+                onClick: this.onItemMouseClick(props.value),
+              });
+            })}
+          </Items>
         </Menu>
       </StyledDropdown>
-    )
+    );
   }
 }

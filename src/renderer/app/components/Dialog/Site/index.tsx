@@ -4,7 +4,12 @@ import { observer } from 'mobx-react-lite';
 
 import store from '~/renderer/app/store';
 import { ISite } from '~/interfaces';
-import { ensureValue, getValues, setValues, clearValues } from '~/renderer/app/utils';
+import {
+  ensureValue,
+  getValues,
+  setValues,
+  clearValues,
+} from '~/renderer/app/utils';
 import { Dropdown, DropdownItem } from '~/renderer/components/Dropdown';
 import { CloseButton, DialogContainer } from '..';
 import { Title, Content, Buttons, DialogButton } from '../style';
@@ -27,7 +32,13 @@ export const SiteDialog = observer(() => {
   }, []);
 
   const onSave = React.useCallback(() => {
-    const [title, port, host, user, password] = getValues(titleRef, portRef, hostnameRef, userRef, passwordRef);
+    const [title, port, host, user, password] = getValues(
+      titleRef,
+      portRef,
+      hostnameRef,
+      userRef,
+      passwordRef,
+    );
     const defaultPort = protocolRef.current.value === 'sftp' ? 22 : 21;
 
     const site: ISite = {
@@ -37,7 +48,7 @@ export const SiteDialog = observer(() => {
       host,
       user,
       password,
-    }
+    };
 
     if (store.dialog.content === 'add-site') {
       store.sites.add(site);
@@ -52,9 +63,23 @@ export const SiteDialog = observer(() => {
 
   React.useEffect(() => {
     if (content === 'edit-site') {
-      const { title, protocol, port, host, user, password } = store.contextMenu.focusedSite;
+      const {
+        title,
+        protocol,
+        port,
+        host,
+        user,
+        password,
+      } = store.contextMenu.focusedSite;
 
-      setValues([titleRef, title], [protocolRef, protocol], [portRef, port], [hostnameRef, host], [userRef, user], [passwordRef, password]);
+      setValues(
+        [titleRef, title],
+        [protocolRef, protocol],
+        [portRef, port],
+        [hostnameRef, host],
+        [userRef, user],
+        [passwordRef, password],
+      );
       setDisabled(false);
     } else if (content === 'add-site') {
       protocolRef.current.value = 'sftp';
@@ -68,22 +93,31 @@ export const SiteDialog = observer(() => {
     <DialogContainer content={['add-site', 'edit-site']}>
       <Title>{content === 'edit-site' ? 'Edit' : 'New'} site</Title>
       <Content>
-        <Input ref={titleRef} placeholder='Title (optional)' />
+        <Input ref={titleRef} placeholder="Title (optional)" />
         <Row>
-          <Dropdown ref={protocolRef} defaultValue='sftp' style={{ width: '100%' }}>
-            <DropdownItem value='ftp'>FTP</DropdownItem>
-            <DropdownItem value='ftps'>FTPS</DropdownItem>
-            <DropdownItem value='sftp'>SFTP</DropdownItem>
+          <Dropdown
+            ref={protocolRef}
+            defaultValue="sftp"
+            style={{ width: '100%' }}
+          >
+            <DropdownItem value="ftp">FTP</DropdownItem>
+            <DropdownItem value="ftps">FTPS</DropdownItem>
+            <DropdownItem value="sftp">SFTP</DropdownItem>
           </Dropdown>
-          <Input ref={portRef} placeholder='Port (optional)' type='number' style={{ marginLeft: 16, marginTop: 0 }} />
+          <Input
+            ref={portRef}
+            placeholder="Port (optional)"
+            type="number"
+            style={{ marginLeft: 16, marginTop: 0 }}
+          />
         </Row>
-        <Input ref={hostnameRef} placeholder='Hostname' onInput={onInput} />
-        <Input ref={userRef} placeholder='User' onInput={onInput} />
-        <Input ref={passwordRef} placeholder='Password' onInput={onInput} />
+        <Input ref={hostnameRef} placeholder="Hostname" onInput={onInput} />
+        <Input ref={userRef} placeholder="User" onInput={onInput} />
+        <Input ref={passwordRef} placeholder="Password" onInput={onInput} />
       </Content>
       <Buttons>
         <CloseButton />
-        <DialogButton label='Save' disabled={disabled} onClick={onSave} />
+        <DialogButton label="Save" disabled={disabled} onClick={onSave} />
       </Buttons>
     </DialogContainer>
   );

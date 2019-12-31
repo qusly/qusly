@@ -3,13 +3,14 @@ import styled, { css } from 'styled-components';
 import { shadows, centerIcon } from '~/renderer/mixins';
 import { transparency } from '~/renderer/constants';
 
-export const StyledContextMenu = styled.div`
+export const StyledContextMenu = styled.table`
   position: fixed;
   z-index: 1000;
   padding: 4px 0px;
   background-color: #fff;
   border-radius: 4px;
   box-shadow: ${shadows(4)};
+  border-spacing: 0;
 
   ${({ visible }: { visible: boolean }) => css`
     pointer-events: ${visible ? 'auto' : 'none'};
@@ -18,7 +19,7 @@ export const StyledContextMenu = styled.div`
   `}
 `;
 
-export const Items = styled.table`
+export const Items = styled.tbody`
   display: table;
   border-collapse: collapse;
   width: 100%;
