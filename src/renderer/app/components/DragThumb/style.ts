@@ -1,6 +1,11 @@
 import styled, { css } from 'styled-components';
 
-import { shadows, centerIcon, robotoRegular, robotoMedium } from '~/renderer/mixins';
+import {
+  shadows,
+  centerIcon,
+  robotoRegular,
+  robotoMedium,
+} from '~/renderer/mixins';
 
 export const StyledThumb = styled.div`
   width: fit-content;
@@ -26,7 +31,7 @@ export const Icon = styled.div`
   min-height: 24px;
   ${centerIcon()};
 
-  ${({ icon, opacity }: { icon: string, opacity: number }) => css`
+  ${({ icon, opacity }: { icon: string; opacity: number }) => css`
     background-image: url(${icon});
     opacity: ${opacity};
   `}
@@ -44,7 +49,7 @@ export const Title = styled.div`
 export const Count = styled.div`
   width: 24px;
   height: 24px;
-  background-color: #F44336;
+  background-color: #f44336;
   color: #fff;
   display: flex;
   font-size: 13px;

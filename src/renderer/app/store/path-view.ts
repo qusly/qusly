@@ -23,5 +23,5 @@ export class PathViewStore {
         input.select();
       });
     }
-  }
+  };
 }

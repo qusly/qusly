@@ -28,9 +28,9 @@ export default class HorizontalScrollbar extends React.Component<Props, State> {
   };
 
   private container: HTMLDivElement;
-  private isScrollingToEnd: boolean = false;
+  private isScrollingToEnd = false;
   private scrollTimeout: any;
-  private unmounted: boolean = false;
+  private unmounted = false;
 
   public componentDidMount() {
     this.container = this.props.getContainer();

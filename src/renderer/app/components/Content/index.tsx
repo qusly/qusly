@@ -11,4 +11,4 @@ export const Content = () => {
       <Page />
     </StyledContent>
   );
-}
+};

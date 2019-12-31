@@ -19,8 +19,9 @@ export const Input = styled.input`
     background-color: rgba(0, 0, 0, 0.1);
   }
 
-  &[type=number]::-webkit-inner-spin-button, &[type=number]::-webkit-outer-spin-button { 
-    margin: 0; 
-    -webkit-appearance: none; 
+  &[type='number']::-webkit-inner-spin-button,
+  &[type='number']::-webkit-outer-spin-button {
+    margin: 0;
+    -webkit-appearance: none;
   }
 `;

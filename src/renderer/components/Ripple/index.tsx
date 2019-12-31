@@ -148,7 +148,7 @@ export default class Ripple extends React.PureComponent<IProps, IState> {
               sizeTransition
                 ? `, ${rippleTime}s width ${easing}, ${rippleTime}s height ${easing}`
                 : ''
-              }
+            }
             ${opacityTransition ? `, ${fadeOutTime}s opacity` : ''}`,
             backgroundColor: color,
             opacity: rippleOpacity,

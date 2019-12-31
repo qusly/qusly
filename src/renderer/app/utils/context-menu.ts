@@ -18,4 +18,4 @@ export const getMenuPosition = (el: HTMLElement, mousePos: IPos): IPos => {
   }
 
   return { top, left };
-}
+};

@@ -8,15 +8,15 @@ import { MenuDivider } from '../style';
 
 const onCopyPath = () => {
   store.pages.current.path.copyToClipboard();
-}
+};
 
 const onEdit = () => {
   store.pathView.show();
-}
+};
 
 export const PathMenu = observer(() => {
   return (
-    <MenuContainer content='path'>
+    <MenuContainer content="path">
       <MenuItem icon={icons.copy} onClick={onCopyPath}>
         Copy path
       </MenuItem>

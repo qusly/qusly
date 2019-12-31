@@ -13,5 +13,5 @@ export class DialogStore {
   public show = (content: DialogContent) => {
     this.content = content;
     this.visible = true;
-  }
+  };
 }

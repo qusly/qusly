@@ -5,7 +5,11 @@ import { ipcRenderer } from 'electron';
 import { WindowsControls } from 'react-windows-controls';
 
 import store from '~/renderer/app/store';
-import { closeWindow, maximizeWindow, minimizeWindow } from '~/renderer/app/utils';
+import {
+  closeWindow,
+  maximizeWindow,
+  minimizeWindow,
+} from '~/renderer/app/utils';
 import { ToolbarButton } from '~/renderer/components/ToolbarButton';
 import { icons } from '~/renderer/constants';
 import { StyledTitlebar, TrafficButtons, Handle, Icon, Title } from './style';

@@ -22,12 +22,12 @@ export const StyledPreloader = styled.div`
       stroke-dasharray: 1, 200;
       stroke-dashoffset: 0;
     }
-  
+
     50% {
       stroke-dasharray: 89, 200;
       stroke-dashoffset: -35px;
     }
-  
+
     100% {
       stroke-dasharray: 89, 200;
       stroke-dashoffset: -124px;

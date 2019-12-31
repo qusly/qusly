@@ -19,13 +19,13 @@ const onSelect = (items: string[]) => {
       item.selected = selected;
     }
   });
-}
+};
 
 const onMouseDown = (e: React.MouseEvent) => {
   if (!e.ctrlKey && !e.shiftKey && !store.drag.active) {
     store.pages.current.unselectFiles();
   }
-}
+};
 
 export const Page = observer(() => {
   const page = store.pages.current;
@@ -39,8 +39,9 @@ export const Page = observer(() => {
         onContextMenu={() => store.contextMenu.show('page')}
         style={{
           opacity: page.loading ? 0 : 1,
-          pointerEvents: page.loading ? 'none' : 'auto'
-        }}>
+          pointerEvents: page.loading ? 'none' : 'auto',
+        }}
+      >
         {page.files.map(file => (
           <File key={file.name} itemKey={file.name} data={file} />
         ))}

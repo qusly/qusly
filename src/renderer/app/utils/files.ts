@@ -10,8 +10,10 @@ export const sortFiles = (files: IFile[]): IFile[] => {
     const isFirstFolder = a.type === 'folder';
     const isSecondFolder = b.type === 'folder';
 
-    if (isFirstFolder && isSecondFolder
-      || !isFirstFolder && !isSecondFolder) {
+    if (
+      (isFirstFolder && isSecondFolder) ||
+      (!isFirstFolder && !isSecondFolder)
+    ) {
       return nameA.localeCompare(nameB);
     }
 
@@ -20,4 +22,4 @@ export const sortFiles = (files: IFile[]): IFile[] => {
 
     return 0;
   });
-}
+};

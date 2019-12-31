@@ -23,13 +23,14 @@ export const StyledFile = styled.div`
       ? '1px solid rgba(98, 0, 234, 0.12)'
       : '1px solid transparent'};
 
-    ${!cut && css`
-      &:hover {
-        background-color: ${selected
-        ? 'rgba(98, 0, 234, 0.12)'
-        : 'rgba(0, 0, 0, 0.08)'};
-      }
-    `}
+    ${!cut &&
+      css`
+        &:hover {
+          background-color: ${selected
+            ? 'rgba(98, 0, 234, 0.12)'
+            : 'rgba(0, 0, 0, 0.08)'};
+        }
+      `}
   `}
 `;
 
@@ -55,7 +56,7 @@ export const Label = styled.div`
 
 export const Input = styled.textarea`
   width: calc(100% + 2px);
-  min-height: calc(100% - 50px); 
+  min-height: calc(100% - 50px);
   border-radius: 4px;
   background-color: #fff;
   z-index: 1;

@@ -6,16 +6,18 @@ import { formatTreeItems } from '../utils';
 
 export class Tree {
   @observable
-  public items: ITreeItem[] = [{
-    path: '/',
-    file: {
-      name: '/'
-    },
-    expanded: true,
-    children: [],
-  } as any];
+  public items: ITreeItem[] = [
+    {
+      path: '/',
+      file: {
+        name: '/',
+      },
+      expanded: true,
+      children: [],
+    } as any,
+  ];
 
-  constructor(public session: Session) { }
+  constructor(public session: Session) {}
 
   @action
   public async fetch(item?: ITreeItem) {
@@ -49,7 +51,7 @@ export class Tree {
         children: child.children,
         expanded: child.expanded,
         fetched: child.fetched,
-      }
+      };
     });
   }
 

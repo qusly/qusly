@@ -10,7 +10,7 @@ const onOpen = () => {
   const { path } = store.contextMenu.focusedExplorerItem;
 
   store.pages.current.path.push(path);
-}
+};
 
 const onOpenInNewTab = () => {
   const page = store.pages.current;
@@ -21,11 +21,11 @@ const onOpenInNewTab = () => {
     site: page.session.site,
     path,
   });
-}
+};
 
 export const ExplorerMenu = observer(() => {
   return (
-    <MenuContainer content='explorer'>
+    <MenuContainer content="explorer">
       <MenuItem icon={icons.folderOutline} onClick={onOpen}>
         Open
       </MenuItem>

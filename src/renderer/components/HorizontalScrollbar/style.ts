@@ -22,7 +22,7 @@ export const Thumb = styled.div`
   transition: 0.2s opacity;
   -webkit-app-region: no-drag;
 
-  ${ ({ visible }: { visible: boolean }) => css`
+  ${({ visible }: { visible: boolean }) => css`
     opacity: ${visible ? 0.2 : 0};
   `}
 

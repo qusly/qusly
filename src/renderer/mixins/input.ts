@@ -10,4 +10,4 @@ export const customInput = () => {
     user-select: auto;
     ${robotoRegular()};
   `;
-}
+};

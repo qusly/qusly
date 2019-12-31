@@ -19,7 +19,7 @@ export class Session {
 
   public startPath: string;
 
-  constructor(public site: ISite) { }
+  constructor(public site: ISite) {}
 
   public async connect() {
     if (this.status === 'disconnected') {

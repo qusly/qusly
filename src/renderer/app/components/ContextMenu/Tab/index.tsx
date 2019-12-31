@@ -8,7 +8,7 @@ import { MenuDivider } from '../style';
 
 const onClose = () => {
   store.contextMenu.focusedTab.close();
-}
+};
 
 const onCloseOthers = () => {
   const pageId = store.contextMenu.focusedTab.pageId;
@@ -18,7 +18,7 @@ const onCloseOthers = () => {
       tab.close();
     }
   }
-}
+};
 
 const onCloseLeft = () => {
   const tabIndex = store.tabs.list.indexOf(store.contextMenu.focusedTab);
@@ -26,7 +26,7 @@ const onCloseLeft = () => {
   for (let i = 0; i < tabIndex; i++) {
     store.tabs.list[i].close();
   }
-}
+};
 
 const onCloseRight = () => {
   const tabIndex = store.tabs.list.indexOf(store.contextMenu.focusedTab);
@@ -34,13 +34,13 @@ const onCloseRight = () => {
   for (let i = tabIndex + 1; i < store.tabs.list.length; i++) {
     store.tabs.list[i].close();
   }
-}
+};
 
 const onCloseAll = () => {
   for (const tab of store.tabs.list) {
     tab.close();
   }
-}
+};
 
 const onRefresh = () => {
   store.pages.current.fetchFiles();
@@ -48,11 +48,11 @@ const onRefresh = () => {
 
 const onCopyPath = () => {
   store.pages.current.path.copyToClipboard();
-}
+};
 
 export const TabMenu = observer(() => {
   return (
-    <MenuContainer content='tab'>
+    <MenuContainer content="tab">
       <MenuItem icon={icons.close} onClick={onClose}>
         Close
       </MenuItem>
