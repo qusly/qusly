@@ -37,7 +37,7 @@ export const Container = styled.div`
   max-width: 512px;
   height: fit-content;
   background-color: #fff;
-  border-radius: 16px;
+  border-radius: 4px;
   z-index: 11;
   position: absolute;
   box-shadow: ${shadows(4)};
