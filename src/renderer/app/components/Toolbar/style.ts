@@ -10,6 +10,7 @@ export const StyledToolbar = styled.div`
   flex-flow: row;
   align-items: center;
   padding-right: 24px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 `;
 
 export const Search = styled.div`

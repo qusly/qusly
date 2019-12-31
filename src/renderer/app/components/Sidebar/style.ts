@@ -6,6 +6,8 @@ import { SIDEBAR_HEADER_HEIGHT } from '~/renderer/app/constants';
 export const StyledSidebar = styled.div`
   height: 100%;
   background-color: #fafafa;
+  position: relative;
+  z-index: 3;
 `;
 
 export const StyledPage = styled.div`

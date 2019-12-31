@@ -9,6 +9,7 @@ export const StyledTabbar = styled.div`
   position: relative;
   overflow: hidden;
   display: flex;
+  z-index: 2;
   background-color: #eee;
   transition: 0.3s opacity, 0.3s transform;
 `;
