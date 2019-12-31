@@ -10,7 +10,11 @@ export const StyledPathView = styled.div`
   cursor: text;
   position: relative;
   border-radius: 4px;
-  background-color: #f5f5f5;
+  background-color: rgba(0, 0, 0, 0.03);
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
 `;
 
 export const Container = styled.div`
