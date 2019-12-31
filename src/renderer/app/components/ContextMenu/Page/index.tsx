@@ -27,23 +27,29 @@ export const PageMenu = observer(() => {
   if (!page) return null;
 
   return (
-    <MenuContainer content='page'>
-      <MenuItem icon={icons.refresh} onClick={onRefresh}>
+    <MenuContainer content="page">
+      <MenuItem icon={icons.refresh} onClick={onRefresh} accelerator={'Ctrl+R'}>
         Refresh
       </MenuItem>
       <MenuDivider />
-      <MenuItem icon={icons.folderAdd} onClick={onNewFolder}>
+      <MenuItem
+        icon={icons.folderAdd}
+        onClick={onNewFolder}
+        accelerator={'Ctrl+Shift+N'}
+      >
         New folder
       </MenuItem>
       <MenuItem icon={icons.fileAdd} onClick={onNewFile}>
         New file
       </MenuItem>
-      {!!page.cutFiles.length && <>
-        <MenuDivider />
-        <MenuItem icon={icons.paste} iconSize={18} onClick={onPaste}>
-          Paste
-        </MenuItem>
-      </>}
+      {!!page.cutFiles.length && (
+        <>
+          <MenuDivider />
+          <MenuItem icon={icons.paste} iconSize={18} onClick={onPaste}>
+            Paste
+          </MenuItem>
+        </>
+      )}
     </MenuContainer>
   );
 });
