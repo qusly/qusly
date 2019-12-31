@@ -31,14 +31,16 @@ export class Page {
 
   public cutPath: string;
 
-  constructor(public session: Session) { }
+  constructor(public session: Session) {}
 
   public async load(path?: string) {
     await this.path.push(path);
   }
 
   public async close() {
-    const pages = store.pages.list.filter(r => r.session.id === this.session.id);
+    const pages = store.pages.list.filter(
+      r => r.session.id === this.session.id,
+    );
 
     if (!pages.length) {
       this.session.close();
@@ -56,12 +58,13 @@ export class Page {
 
     await store.icons.load(...files);
 
-    this.tab.title = `${this.session.site.title} - ${path}`;
+    this.tab.title = this.session.site.title;
+    this.tab.subtitle = `${path}/`;
     this.files = sortFiles(files);
     this.loading = false;
 
     this.session.tree.update(this.treeItem, this.files);
-  }
+  };
 
   @computed
   public get tab() {
@@ -98,7 +101,11 @@ export class Page {
 
   @action
   public async dropRemote() {
-    if (this.hoveredFile && this.hoveredFile.type === 'folder' && this.focusedFile !== this.hoveredFile) {
+    if (
+      this.hoveredFile &&
+      this.hoveredFile.type === 'folder' &&
+      this.focusedFile !== this.hoveredFile
+    ) {
       this.loading = true;
 
       for (const file of this.selectedFiles) {
@@ -119,7 +126,9 @@ export class Page {
 
     const oldName = file.name;
     const ext = extname(newName);
-    const exists = this.files.find(r => r.name.toLowerCase() === newName.toLowerCase() && r.ext === ext);
+    const exists = this.files.find(
+      r => r.name.toLowerCase() === newName.toLowerCase() && r.ext === ext,
+    );
 
     if (!exists && newName.length) {
       file.name = newName;
@@ -175,7 +184,7 @@ export class Page {
         const oldPath = `${this.cutPath}/${file.name}`;
         const newPath = this.path.relative(dir, file.name);
 
-        await this.session.client.move(oldPath, newPath)
+        await this.session.client.move(oldPath, newPath);
       }
 
       this.cutFiles = [];
@@ -187,7 +196,11 @@ export class Page {
   @action
   public async createBlank(type: 'folder' | 'file') {
     const path = this.path.toString();
-    const fileName = await this.session.client.createBlank(type, path, this.files);
+    const fileName = await this.session.client.createBlank(
+      type,
+      path,
+      this.files,
+    );
 
     await this.fetchFiles();
     const file = this.files.find(r => r.name === fileName);

@@ -79,6 +79,22 @@ export const StyledTitle = styled.div`
   font-size: 13px;
 `;
 
+export const Subtitle = styled.div`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  -webkit-font-smoothing: antialiased;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  ${body2()};
+  font-size: 13px;
+  color: black;
+  opacity: 0.54;
+  direction: rtl;
+  text-align: left;
+  margin-left: 8px;
+`;
+
 interface ContentProps {
   collapsed: boolean;
 }

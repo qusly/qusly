@@ -25,13 +25,16 @@ export class Tab {
   public id: number = id++;
 
   @observable
-  public isDragging: boolean = false;
+  public isDragging = false;
 
   @observable
-  public title: string = 'New tab';
+  public title = 'New tab';
 
   @observable
-  public width: number = 0;
+  public subtitle = '';
+
+  @observable
+  public width = 0;
 
   @observable
   public pageId: number;
@@ -88,7 +91,7 @@ export class Tab {
   public webContentsId: number;
   public findRequestId: number;
   public removeTimeout: any;
-  public isWindow: boolean = false;
+  public isWindow = false;
 
   constructor({ active } = defaultTabOptions) {
     if (active) {
@@ -112,7 +115,7 @@ export class Tab {
 
     const width =
       (containerWidth - ADD_TAB_MARGIN_LEFT) /
-      (tabs.length + store.tabs.removedTabs) -
+        (tabs.length + store.tabs.removedTabs) -
       TABS_PADDING;
 
     if (width > 200) {
@@ -125,7 +128,7 @@ export class Tab {
     return width;
   }
 
-  public getLeft(calcNewLeft: boolean = false) {
+  public getLeft(calcNewLeft = false) {
     const tabs = store.tabs.list.slice();
 
     const index = tabs.indexOf(this);

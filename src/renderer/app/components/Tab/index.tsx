@@ -11,6 +11,7 @@ import {
   StyledBorder,
   StyledOverlay,
   TabContainer,
+  Subtitle,
 } from './style';
 
 const removeTab = (tab: Tab) => () => {
@@ -54,9 +55,8 @@ const onContextMenu = (tab: Tab) => () => {
 const Content = observer(({ tab }: { tab: Tab }) => {
   return (
     <StyledContent collapsed={tab.isExpanded}>
-      <StyledTitle style={{ color: 'black' }}>
-        {tab.title}
-      </StyledTitle>
+      <StyledTitle style={{ color: 'black' }}>{tab.title}</StyledTitle>
+      <Subtitle>{tab.subtitle}</Subtitle>
     </StyledContent>
   );
 });
