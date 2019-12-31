@@ -1,4 +1,6 @@
 export const icons = {
+  back: require('~/renderer/resources/icons/back.svg'),
+  forward: require('~/renderer/resources/icons/forward.svg'),
   fileTree: require('~/renderer/resources/icons/file-tree.svg'),
   sitesManager: require('~/renderer/resources/icons/sites-manager.svg'),
   search: require('~/renderer/resources/icons/search.svg'),
@@ -28,4 +30,4 @@ export const icons = {
   copy: require('~/renderer/resources/icons/copy.svg'),
   connect: require('~/renderer/resources/icons/connect.svg'),
   folderOpen: require('~/renderer/resources/icons/folder-open.svg'),
-}
+};

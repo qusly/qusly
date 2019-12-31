@@ -13,14 +13,14 @@ export const NavigationButtons = observer(() => {
   return (
     <StyledContainer>
       <ToolbarButton
-        size={24}
-        icon={icons.chevronLeft}
+        size={20}
+        icon={icons.back}
         disabled={!page.path.canGoBack}
         onClick={page.path.goBack}
       />
       <ToolbarButton
-        size={24}
-        icon={icons.chevronRight}
+        size={20}
+        icon={icons.forward}
         disabled={!page.path.canGoForward}
         onClick={page.path.goForward}
       />

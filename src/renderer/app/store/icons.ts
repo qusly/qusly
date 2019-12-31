@@ -15,8 +15,12 @@ export class IconsStore {
 
     return new Promise(resolve => {
       const id = makeId(32);
-      const list = files.map(r => r.ext).filter((ext, index, arr) => ext.length
-        && arr.indexOf(ext) === index && !this.icons.get(ext));
+      const list = files
+        .map(r => r.ext)
+        .filter(
+          (ext, index, arr) =>
+            ext.length && arr.indexOf(ext) === index && !this.icons.get(ext),
+        );
 
       if (!list.length) return resolve();
 
@@ -36,7 +40,8 @@ export class IconsStore {
     if (!file) return { icon: '', opacity: 1 };
 
     let icon = file.type === 'folder' ? icons.folder : this.icons.get(file.ext);
-    const opacity = file.type === 'folder' || !icon ? transparency.icons.inactive : 1;
+    const opacity =
+      file.type === 'folder' || !icon ? transparency.icons.inactive : 1;
 
     if (!icon && file.type !== 'folder') {
       icon = icons.file;
