@@ -6,6 +6,7 @@
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "alwaysStrict": true,
+    "skipLibCheck": true,
 
     "module": "commonjs",
     "target": "es6",
@@ -22,5 +23,5 @@
       "~/*": ["./src/*"]
     }
   },
-  "include": ["./src"]
+  "include": ["./src/**/*.ts", "./src/**/*.tsx"]
 }
