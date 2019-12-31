@@ -76,7 +76,12 @@ export const FileMenu = observer(() => {
         Open with
       </MenuItem>
       {(multiple !== containsFile || !containsFile) && <MenuDivider />}
-      <MenuItem icon={icons.cut} iconSize={16} onClick={onCut}>
+      <MenuItem
+        icon={icons.cut}
+        iconSize={16}
+        onClick={onCut}
+        accelerator={'Ctrl+X'}
+      >
         Cut
       </MenuItem>
       <MenuItem
@@ -84,13 +89,24 @@ export const FileMenu = observer(() => {
         iconSize={18}
         onClick={onPaste}
         hidden={!page.cutFiles.length || containsFile}
+        accelerator={'Ctrl+V'}
       >
         Paste
       </MenuItem>
-      <MenuItem icon={icons.edit} onClick={onRename} hidden={multiple}>
+      <MenuItem
+        icon={icons.edit}
+        onClick={onRename}
+        hidden={multiple}
+        accelerator={'F2'}
+      >
         Rename
       </MenuItem>
-      <MenuItem icon={icons.delete} iconSize={20} onClick={onDelete}>
+      <MenuItem
+        icon={icons.delete}
+        iconSize={20}
+        onClick={onDelete}
+        accelerator={'Del'}
+      >
         Delete
       </MenuItem>
       <MenuDivider />

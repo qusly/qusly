@@ -4,7 +4,6 @@ import { shadows, centerIcon } from '~/renderer/mixins';
 import { transparency } from '~/renderer/constants';
 
 export const StyledContextMenu = styled.div`
-  min-width: 128px;
   position: fixed;
   z-index: 1000;
   padding: 4px 0px;
