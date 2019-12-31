@@ -75,7 +75,7 @@ export class TabsStore {
           const id = makeId(32);
 
           ipcRenderer.once(`get-testing-site-${id}`, (e, site: ISite) => {
-            this.addTab({ site, active: true });
+            if (site) this.addTab({ site, active: true });
           });
 
           ipcRenderer.send('get-testing-site', id);
