@@ -72,4 +72,4 @@ export const DialogButton = styled(Button)`
   &:first-child {
     margin-left: auto;
   }
-`
+`;

@@ -13,25 +13,25 @@ export interface IButtonProps {
 export const Button = styled.div`
   min-width: 80px;
   width: fit-content;
-  height: 36px;
+  height: 32px;
   padding: 0px 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  border-radius: 30px;
+  border-radius: 4px;
   position: relative;
   cursor: pointer;
 
   ${({ type, label, color, background, disabled }: IButtonProps) => css`
     pointer-events: ${disabled ? 'none' : 'auto'};
     opacity: ${disabled ? 0.24 : 1};
-    border: ${type === 'outlined'
-      ? `1px solid ${background || '#2196F3'}`
-      : 'unset'};
-    background-color: ${type === 'outlined'
-      ? 'transparent'
-      : background || '#2196F3'};
+    border: ${
+      type === 'outlined' ? `1px solid ${background || '#2196F3'}` : 'unset'
+    };
+    background-color: ${
+      type === 'outlined' ? 'transparent' : background || '#2196F3'
+    };
 
     &::before {
       background-color: ${color || '#fff'};

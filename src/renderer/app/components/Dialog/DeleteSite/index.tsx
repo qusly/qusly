@@ -9,18 +9,16 @@ const onDelete = () => {
 
   store.sites.remove(_id);
   store.dialog.visible = false;
-}
+};
 
 export const DeleteSiteDialog = () => {
   return (
-    <DialogContainer content='delete-site'>
+    <DialogContainer content="delete-site">
       <Title>Confirm</Title>
-      <Content>
-        Are you sure you want to delete this bookmark?
-      </Content>
+      <Content>Are you sure you want to delete this bookmark?</Content>
       <Buttons>
-        <SecondaryButton label='Delete' onClick={onDelete} />
-        <DialogButton label='Cancel' onClick={onDialogClose} />
+        <SecondaryButton label="Delete" onClick={onDelete} />
+        <DialogButton label="Cancel" onClick={onDialogClose} />
       </Buttons>
     </DialogContainer>
   );
