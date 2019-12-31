@@ -17,10 +17,11 @@
 
 </div>
 
-Qusly is an FTP client, built on top of Electron, React, Styled-components and [Qusly-core](https://www.github.com/qusly/qusly-core). It aims to be fast, beatiful and functional.
+Qusly is an FTP client, built on top of Electron, React, Styled-components and [qusly-core](https://www.github.com/qusly/qusly-core). It aims to be fast, beatiful and functional.
 
 ### Features
-- Supports __FTP, FTPS, SFTP__
+
+- Supports **FTP, FTPS, SFTP**
 - Has tabs
 - Full file operations e.g. rename, delete
 - Properties panel
@@ -33,10 +34,12 @@ and more! Check out [roadmap](https://github.com/qusly/qusly/projects/) to see w
 ![](https://i.imgur.com/7NRnj8i.png)
 
 ### Components
-- [Qusly Core](https://github.com/qusly/qusly-core)
+
+- [`qusly-core`](https://github.com/qusly/qusly-core)
 - Tab system from [Wexond](https://github.com/wexond/wexond)
 
 ### Running
+
 First of all, you need to have [Node.js](https://nodejs.org) installed.
 
 ```bash
