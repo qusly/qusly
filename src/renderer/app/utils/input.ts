@@ -20,15 +20,6 @@ export const selectFileName = (el: HTMLTextAreaElement | HTMLInputElement) => {
   el.setSelectionRange(0, endIndex);
 };
 
-type IFormControl =
-  | HTMLInputElement
-  | MutableRefObject<HTMLInputElement | Dropdown>;
-
-export const ensureValue = (...inputs: IFormControl[]) => {
-  const values = getValues(...inputs);
-  return values.findIndex(r => !r.length) === -1;
-};
-
 export const getValues = (...inputs: IFormControl[]) => {
   const values: string[] = [];
 
@@ -39,6 +30,15 @@ export const getValues = (...inputs: IFormControl[]) => {
   }
 
   return values;
+};
+
+type IFormControl =
+  | HTMLInputElement
+  | MutableRefObject<HTMLInputElement | Dropdown>;
+
+export const ensureValue = (...inputs: IFormControl[]) => {
+  const values = getValues(...inputs);
+  return values.findIndex(r => !r.length) === -1;
 };
 
 export const setValues = (...list: [IFormControl, any][]) => {

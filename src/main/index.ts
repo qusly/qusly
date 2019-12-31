@@ -35,13 +35,13 @@ app.on('ready', () => {
 });
 
 ipcMain.handle('set-password', async (e, service, account, password) => {
-  await setPassword(service, account, password);
+  return await setPassword(service, account, password);
 });
 
 ipcMain.handle('get-password', async (e, service, account) => {
-  await getPassword(service, account);
+  return await getPassword(service, account);
 });
 
 ipcMain.handle('delete-password', async (e, service, account) => {
-  await deletePassword(service, account);
+  return await deletePassword(service, account);
 });
