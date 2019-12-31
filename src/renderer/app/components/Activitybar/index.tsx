@@ -29,7 +29,7 @@ const Item = observer(({ content, icon, disabled }: ItemProps) => {
   );
 });
 
-export const Activitybar = () => {
+export const Activitybar = observer(() => {
   const session = store.sessions.current;
 
   return (
@@ -40,4 +40,4 @@ export const Activitybar = () => {
       <Item content="transfer" icon={icons.transfer} disabled />
     </StyledActivitybar>
   );
-};
+});
