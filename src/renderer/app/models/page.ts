@@ -59,7 +59,7 @@ export class Page {
     await store.icons.load(...files);
 
     this.tab.title = this.session.site.title;
-    this.tab.subtitle = `${path}/`;
+    this.tab.subtitle = `${path}`;
     this.files = sortFiles(files);
     this.loading = false;
 
