@@ -36,16 +36,13 @@ export class Store {
   public mousePos: IPos = {
     top: 0,
     left: 0,
-  }
+  };
 
   constructor() {
-    ipcRenderer.on(
-      'update-available',
-      (e, version: string) => {
-        this.updateInfo.version = version;
-        this.updateInfo.available = true;
-      },
-    );
+    ipcRenderer.on('update-available', (e, version: string) => {
+      this.updateInfo.version = version;
+      this.updateInfo.available = true;
+    });
 
     window.removeEventListener('mousemove', this.onWindowMouseMove);
     window.removeEventListener('mousedown', this.onWindowMouseDown);
@@ -63,21 +60,21 @@ export class Store {
     this.mousePos = {
       top: e.pageY,
       left: e.pageX,
-    }
+    };
 
     this.drag.update(this.mousePos);
-  }
+  };
 
   @action
   private onWindowMouseDown = () => {
     this.pathView.inputVisible = false;
     this.contextMenu.visible = false;
-  }
+  };
 
   @action
   private onWindowClick = () => {
     this.drag.hide();
-  }
+  };
 
   @action
   private onWindowMouseUp = (e: MouseEvent) => {
@@ -86,7 +83,7 @@ export class Store {
     } else if (e.button === 4) {
       this.pages.current.path.goForward();
     }
-  }
+  };
 }
 
 export default new Store();

@@ -27,6 +27,9 @@ export class SessionsStore {
   }
 
   private findSession({ host, port, protocol }: ISite) {
-    return this.list.find(({ site }) => site.host === host && site.port === port && site.protocol === protocol);
+    return this.list.find(
+      ({ site }) =>
+        site.host === host && site.port === port && site.protocol === protocol,
+    );
   }
 }

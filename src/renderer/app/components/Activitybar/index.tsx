@@ -14,23 +14,28 @@ interface ItemProps {
 
 const onItemClick = (content: SidebarContent) => () => {
   store.activitybar.content = content;
-}
+};
 
 const Item = observer(({ content, icon, disabled }: ItemProps) => {
   const selected = store.activitybar.content === content;
 
   return (
-    <StyledItem onClick={onItemClick(content)} selected={selected} disabled={disabled} icon={icon} />
+    <StyledItem
+      onClick={onItemClick(content)}
+      selected={selected}
+      disabled={disabled}
+      icon={icon}
+    />
   );
 });
 
 export const Activitybar = () => {
   return (
     <StyledActivitybar>
-      <Item content='explorer' icon={icons.fileTree} />
-      <Item content='sites' icon={icons.sitesManager} />
-      <Item content='search' icon={icons.search} disabled />
-      <Item content='transfer' icon={icons.transfer} disabled />
+      <Item content="explorer" icon={icons.fileTree} />
+      <Item content="sites" icon={icons.sitesManager} />
+      <Item content="search" icon={icons.search} disabled />
+      <Item content="transfer" icon={icons.transfer} disabled />
     </StyledActivitybar>
   );
-}
+};

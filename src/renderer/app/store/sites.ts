@@ -29,7 +29,11 @@ export class SitesStore {
   @action
   public async add(site: ISite) {
     const { password } = site;
-    const res = await this.db.insert({ ...site, password: '', date: new Date() });
+    const res = await this.db.insert({
+      ...site,
+      password: '',
+      date: new Date(),
+    });
 
     this.list.push(res);
 

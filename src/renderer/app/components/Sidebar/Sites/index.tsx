@@ -11,16 +11,16 @@ import { StyledSite, Label, Description } from './style';
 
 const onAdd = () => {
   store.dialog.show('add-site');
-}
+};
 
 const onClick = (site: ISite) => () => {
   store.sites.openInTab(site);
-}
+};
 
 const onContextMenu = (site: ISite) => () => {
   store.contextMenu.focusedSite = site;
   store.contextMenu.show('site');
-}
+};
 
 const Site = ({ data }: { data: ISite }) => {
   return (
@@ -32,9 +32,6 @@ const Site = ({ data }: { data: ISite }) => {
 };
 
 export const Sites = observer(() => {
-  const session = store.sessions.current;
-  if (!session) return null;
-
   return (
     <StyledPage visible={store.activitybar.content === 'sites'}>
       <Header>
