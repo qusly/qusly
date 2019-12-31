@@ -18,10 +18,10 @@ import HorizontalScrollbar from '~/renderer/components/HorizontalScrollbar';
 
 export class TabsStore {
   @observable
-  public isDragging: boolean = false;
+  public isDragging = false;
 
   @observable
-  public scrollbarVisible: boolean = false;
+  public scrollbarVisible = false;
 
   @observable
   public hoveredTabId: number;
@@ -35,12 +35,12 @@ export class TabsStore {
   @observable
   public selectedTabId = 0;
 
-  public removedTabs: number = 0;
+  public removedTabs = 0;
 
-  public lastScrollLeft: number = 0;
-  public lastMouseX: number = 0;
-  public mouseStartX: number = 0;
-  public tabStartX: number = 0;
+  public lastScrollLeft = 0;
+  public lastMouseX = 0;
+  public mouseStartX = 0;
+  public tabStartX = 0;
 
   public scrollbarRef = React.createRef<HorizontalScrollbar>();
   public containerRef = React.createRef<HTMLDivElement>();

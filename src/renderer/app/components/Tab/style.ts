@@ -27,7 +27,7 @@ export const StyledClose = styled.div`
 
   &:after {
     content: '';
-    border-radius: 50px;
+    border-radius: 4px;
     background-color: rgba(0, 0, 0, 0.08);
     transition: 0.2s opacity;
     position: absolute;
@@ -76,6 +76,7 @@ export const StyledTitle = styled.div`
   backface-visibility: hidden;
   transform: translateZ(0);
   ${body2()};
+  font-size: 13px;
 `;
 
 interface ContentProps {
