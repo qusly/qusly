@@ -51,7 +51,7 @@ export const Explorer = observer(() => {
   if (!session) return null;
 
   return (
-    <StyledPage visible={store.activitybar.content === 'explorer'}>
+    <StyledPage tabIndex={0} visible={store.activitybar.content === 'explorer'}>
       <Header>Explorer</Header>
       <Content>
         {session.tree.items.map(item => (

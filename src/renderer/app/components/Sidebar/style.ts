@@ -16,6 +16,12 @@ export const StyledSidebar = styled.div`
 export const StyledPage = styled.div`
   width: 100%;
   height: 100%;
+  outline: none;
+  border: none;
+
+  &:focus {
+    box-shadow: inset 0 0 0 2px #bbdefb;
+  }
 
   ${({ visible }: { visible: boolean }) => css`
     display: ${visible ? 'block' : 'none'};
