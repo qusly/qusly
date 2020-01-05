@@ -1,11 +1,7 @@
 import styled, { css } from 'styled-components';
-
-import {
-  shadows,
-  centerIcon,
-  robotoRegular,
-  robotoMedium,
-} from '~/renderer/mixins';
+import { shadows } from '~/renderer/mixins/shadows';
+import { centerIcon } from '~/renderer/mixins/images';
+import { robotoRegular, robotoMedium } from '~/renderer/mixins/typography';
 
 export const StyledThumb = styled.div`
   width: fit-content;
