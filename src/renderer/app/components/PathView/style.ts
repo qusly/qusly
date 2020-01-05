@@ -5,7 +5,7 @@ import { robotoMedium, robotoRegular, customInput } from '~/renderer/mixins';
 export const StyledPathView = styled.div`
   width: 100%;
   height: 30px;
-  margin-left: 8px;
+  margin-left: 10px;
   overflow: hidden;
   cursor: text;
   position: relative;

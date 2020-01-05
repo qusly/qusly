@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import {
-  TOOLBAR_BUTTON_WIDTH,
+  TOOLBAR_BUTTON_SIZE,
   TABBAR_HEIGHT,
   TAB_BAR_COLOR,
 } from '~/renderer/app/constants';
@@ -20,7 +20,7 @@ export const StyledTabbar = styled.div`
 
 export const TabsContainer = styled.div`
   height: 100%;
-  width: calc(100% - ${TOOLBAR_BUTTON_WIDTH}px);
+  width: calc(100% - ${TOOLBAR_BUTTON_SIZE}px);
   bottom: 0;
   position: absolute;
   overflow: hidden;

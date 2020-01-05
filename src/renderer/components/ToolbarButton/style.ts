@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 import { centerIcon } from '~/renderer/mixins';
-import { TOOLBAR_HEIGHT, TOOLBAR_BUTTON_WIDTH } from '~/renderer/app/constants';
+import { TOOLBAR_BUTTON_SIZE } from '~/renderer/app/constants';
 
 interface IconProps {
   size: number;
@@ -23,8 +23,8 @@ export const Icon = styled.div`
 `;
 
 export const Button = styled.div`
-  width: ${TOOLBAR_BUTTON_WIDTH}px;
-  height: ${TOOLBAR_HEIGHT}px;
+  width: ${TOOLBAR_BUTTON_SIZE}px;
+  height: ${TOOLBAR_BUTTON_SIZE}px;
   position: relative;
   transition: 0.2s background-color;
   backface-visibility: hidden;
@@ -36,8 +36,8 @@ export const Button = styled.div`
 
 export const Circle = styled.div`
   border-radius: 4px;
-  width: 32px;
-  height: 32px;
+  width: ${TOOLBAR_BUTTON_SIZE}px;
+  height: ${TOOLBAR_BUTTON_SIZE}px;
   position: absolute;
   top: 50%;
   left: 50%;
