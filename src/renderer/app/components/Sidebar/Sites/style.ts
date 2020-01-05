@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-
-import { robotoMedium, singleLine } from '~/renderer/mixins';
-import { transparency } from '~/renderer/constants';
+import { singleLine, robotoMedium } from '~/renderer/mixins/typography';
+import { transparency } from '~/renderer/constants/transparency';
 
 export const StyledSite = styled.div`
   width: calc(100% - 16px);

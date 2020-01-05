@@ -3,9 +3,9 @@ import { observer } from 'mobx-react-lite';
 import { ITransferType } from 'qusly-core';
 
 import store from '~/renderer/app/store';
-import { icons } from '~/renderer/constants';
 import { StyledPage, Header } from '../style';
 import { StyledButton, Icon, Label } from './style';
+import { icons } from '~/renderer/constants/icons';
 
 const Button = observer(
   ({

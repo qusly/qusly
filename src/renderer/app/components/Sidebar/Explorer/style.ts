@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components';
-
-import { icons, transparency } from '~/renderer/constants';
-import { centerIcon, robotoRegular } from '~/renderer/mixins';
+import { icons } from '~/renderer/constants/icons';
+import { transparency } from '~/renderer/constants/transparency';
+import { centerIcon } from '~/renderer/mixins/images';
+import { robotoRegular } from '~/renderer/mixins/typography';
 
 export const StyledItem = styled.div`
   width: 100%;

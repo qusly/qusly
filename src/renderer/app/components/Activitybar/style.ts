@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
-
-import { centerIcon, centerVertical } from '~/renderer/mixins';
-import { transparency } from '~/renderer/constants';
-import { ACTIVITY_BAR_COLOR } from '../../constants';
+import { transparency } from '~/renderer/constants/transparency';
+import { ACTIVITY_BAR_COLOR } from '../../constants/design';
+import { centerVertical } from '~/renderer/mixins/positioning';
+import { centerIcon } from '~/renderer/mixins/images';
 
 const getIconOpacity = (selected: boolean, disabled: boolean) => {
   if (disabled) return transparency.icons.disabled;
