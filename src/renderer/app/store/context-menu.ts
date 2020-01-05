@@ -3,8 +3,8 @@ import { observable, action } from 'mobx';
 
 import store from '.';
 import { IPos, ITreeItem, ISite } from '~/interfaces';
-import { getMenuPosition } from '~/renderer/app/utils';
-import { Tab } from '../models';
+import { Tab } from '../models/tab';
+import { getMenuPosition } from '../utils/context-menu';
 
 export type ContextMenuContent =
   | 'page'

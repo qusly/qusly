@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-
-import { customInput } from '~/renderer/mixins';
+import { customInput } from '~/renderer/mixins/input';
 
 export const Input = styled.input`
   width: 200px;

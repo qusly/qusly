@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-
-import { EASING_FUNCTION } from '~/renderer/app/constants';
+import { EASING_FUNCTION } from '~/renderer/app/constants/design';
 
 export const StyledProgressbar = styled.div`
   width: 240px;
@@ -11,7 +10,7 @@ export const StyledProgressbar = styled.div`
 export const Line = styled.div`
   width: 100%;
   height: 100%;
-  background-color: #2196F3;
+  background-color: #2196f3;
   opacity: 0.38;
   position: absolute;
 `;
