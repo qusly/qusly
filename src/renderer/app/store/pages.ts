@@ -25,7 +25,12 @@ export class PagesStore {
 
     this.list.push(page);
 
-    await session.connect();
-    await page.load(path || session.startPath);
+    try {
+      await session.connect();
+      await page.load(path || session.startPath);
+    } catch (e) {
+      // TODO: handle the error
+      console.error(e);
+    }
   }
 }
