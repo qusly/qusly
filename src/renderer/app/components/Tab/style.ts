@@ -9,7 +9,7 @@ interface CloseProps {
 
 export const StyledClose = styled.div`
   position: absolute;
-  right: 6px;
+  right: 4px;
   height: 22px;
   width: 22px;
   background-image: url('${icons.close}');

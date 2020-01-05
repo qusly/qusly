@@ -33,7 +33,7 @@ export const Header = styled.div`
   display: flex;
   align-items: center;
   padding-left: 16px;
-  padding-right: 4px;
+  padding-right: 8px;
   font-size: 16px;
   ${robotoLight()};
 
