@@ -9,10 +9,12 @@ export const Section = ({ data }: { data: ITransferSection }) => {
 
   return (
     <StyledSection>
-      <Title>{title} - {transfered} of {items.length}</Title>
+      <Title>
+        {title} - {transfered} of {items.length}
+      </Title>
       {items.map(r => (
         <Item key={r.id} data={r} />
       ))}
     </StyledSection>
   );
-}
+};

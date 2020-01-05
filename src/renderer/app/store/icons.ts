@@ -4,7 +4,8 @@ import { extname } from 'path';
 
 import { IFile } from '~/interfaces';
 import { makeId } from '~/utils';
-import { icons, transparency } from '~/renderer/constants';
+import { icons } from '~/renderer/constants/icons';
+import { transparency } from '~/renderer/constants/transparency';
 
 export class IconsStore {
   @observable
@@ -54,7 +55,7 @@ export class IconsStore {
   public getPathIcon(path: string) {
     return this.getIcon({
       type: 'file',
-      ext: extname(path)
+      ext: extname(path),
     });
   }
 }

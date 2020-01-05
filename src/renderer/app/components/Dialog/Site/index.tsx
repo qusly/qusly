@@ -4,16 +4,16 @@ import { observer } from 'mobx-react-lite';
 
 import store from '~/renderer/app/store';
 import { ISite } from '~/interfaces';
+import { Dropdown, DropdownItem } from '~/renderer/components/Dropdown';
+import { CloseButton, DialogContainer } from '..';
+import { Title, Content, Buttons, DialogButton } from '../style';
+import { Input, Row } from './style';
 import {
   ensureValue,
   getValues,
   setValues,
   clearValues,
-} from '~/renderer/app/utils';
-import { Dropdown, DropdownItem } from '~/renderer/components/Dropdown';
-import { CloseButton, DialogContainer } from '..';
-import { Title, Content, Buttons, DialogButton } from '../style';
-import { Input, Row } from './style';
+} from '~/renderer/app/utils/input';
 
 export const SiteDialog = observer(() => {
   const content = store.dialog.content;

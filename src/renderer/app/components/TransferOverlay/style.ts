@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-import { robotoLight } from '~/renderer/mixins';
-
 export const StyledTransfer = styled.div`
   width: 100%;
   height: 100%;

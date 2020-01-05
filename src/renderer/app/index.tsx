@@ -2,8 +2,8 @@ import { ipcRenderer } from 'electron';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import { fonts } from '~/renderer/constants';
 import App from './components/App';
+import { fonts } from '../constants/fonts';
 
 ipcRenderer.setMaxListeners(0);
 

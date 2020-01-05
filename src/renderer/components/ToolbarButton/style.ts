@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
-
-import { centerIcon } from '~/renderer/mixins';
-import { TOOLBAR_BUTTON_SIZE } from '~/renderer/app/constants';
+import { centerIcon } from '~/renderer/mixins/images';
+import { TOOLBAR_BUTTON_SIZE } from '~/renderer/app/constants/design';
 
 interface IconProps {
   size: number;

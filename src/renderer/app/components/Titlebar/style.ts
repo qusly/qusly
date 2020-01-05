@@ -1,8 +1,7 @@
 import styled from 'styled-components';
-
-import { centerIcon } from '~/renderer/mixins';
-import { icons } from '~/renderer/constants';
-import { TITLEBAR_HEIGHT, TITLE_BAR_COLOR } from '~/renderer/app/constants';
+import { TITLEBAR_HEIGHT, TITLE_BAR_COLOR } from '../../constants/design';
+import { icons } from '~/renderer/constants/icons';
+import { centerIcon } from '~/renderer/mixins/images';
 
 export const StyledTitlebar = styled.div`
   height: ${TITLEBAR_HEIGHT}px;

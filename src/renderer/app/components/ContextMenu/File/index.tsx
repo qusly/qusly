@@ -3,8 +3,8 @@ import { observer } from 'mobx-react-lite';
 
 import store from '~/renderer/app/store';
 import { MenuContainer, MenuItem } from '..';
-import { icons } from '~/renderer/constants';
 import { MenuDivider } from '../style';
+import { icons } from '~/renderer/constants/icons';
 
 const onOpen = () => {
   const page = store.pages.current;
@@ -48,7 +48,7 @@ const onDownload = () => {
   const paths = page.selectedFiles.map(r => page.path.relative(r.name));
 
   page.session.download(...paths);
-}
+};
 
 export const FileMenu = observer(() => {
   const page = store.pages.current;
@@ -117,7 +117,11 @@ export const FileMenu = observer(() => {
         Delete
       </MenuItem>
       <MenuDivider />
-      <MenuItem icon={icons.downloadOutline} hidden={!containsFile} onClick={onDownload}>
+      <MenuItem
+        icon={icons.downloadOutline}
+        hidden={!containsFile}
+        onClick={onDownload}
+      >
         Download
       </MenuItem>
       <MenuItem icon={icons.zip} iconSize={18} hidden={!containsFile} disabled>

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
-
-import { robotoMedium, robotoRegular, customInput } from '~/renderer/mixins';
+import { robotoRegular, robotoMedium } from '~/renderer/mixins/typography';
+import { customInput } from '~/renderer/mixins/input';
 
 export const StyledPathView = styled.div`
   width: 100%;

@@ -1,4 +1,4 @@
-import { transparency } from '../constants';
+import { transparency } from '../constants/transparency';
 
 export const pointer = () => `
     user-select: none;

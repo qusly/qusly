@@ -1,9 +1,11 @@
 import styled, { css } from 'styled-components';
 
-import { transparency, icons } from '~/renderer/constants';
-import { centerIcon, shadows } from '~/renderer/mixins';
-import { EASING_FUNCTION } from '~/renderer/app/constants';
 import { StyledContextMenu } from '~/renderer/app/components/ContextMenu/style';
+import { transparency } from '~/renderer/constants/transparency';
+import { icons } from '~/renderer/constants/icons';
+import { EASING_FUNCTION } from '~/renderer/app/constants/design';
+import { centerIcon } from '~/renderer/mixins/images';
+import { shadows } from '~/renderer/mixins/shadows';
 
 export const StyledDropdown = styled.div`
   width: 200px;

@@ -1,10 +1,7 @@
 import styled, { css } from 'styled-components';
-
-import { noButtons, robotoLight } from '~/renderer/mixins';
-import {
-  SIDEBAR_HEADER_HEIGHT,
-  SIDE_BAR_COLOR,
-} from '~/renderer/app/constants';
+import { SIDE_BAR_COLOR, SIDEBAR_HEADER_HEIGHT } from '../../constants/design';
+import { robotoLight } from '~/renderer/mixins/typography';
+import { noButtons } from '~/renderer/mixins/scroll';
 
 export const StyledSidebar = styled.div`
   height: 100%;

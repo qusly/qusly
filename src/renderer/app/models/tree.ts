@@ -1,8 +1,8 @@
-import { observable, action, computed } from 'mobx';
+import { observable, action } from 'mobx';
 
 import { Session } from './session';
 import { ITreeItem, IFile } from '~/interfaces';
-import { formatTreeItems } from '../utils';
+import { formatTreeItems } from '../utils/tree';
 
 export class Tree {
   @observable

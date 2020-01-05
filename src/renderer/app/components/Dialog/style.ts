@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
 
-import { EASING_FUNCTION } from '../../constants';
-import { shadows } from '~/renderer/mixins';
 import { Button } from '~/renderer/components/Button';
+import { shadows } from '~/renderer/mixins/shadows';
+import { EASING_FUNCTION } from '../../constants/design';
 
 export const StyledDialog = styled.div`
   width: 100vw;

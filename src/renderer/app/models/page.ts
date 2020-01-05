@@ -5,7 +5,7 @@ import store from '../store';
 import { Session } from './session';
 import { Location } from './location';
 import { IFile } from '~/interfaces';
-import { sortFiles } from '../utils';
+import { sortFiles } from '../utils/files';
 
 let id = 0;
 

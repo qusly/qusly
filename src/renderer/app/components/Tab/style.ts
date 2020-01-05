@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components';
-
-import { icons, transparency } from '~/renderer/constants';
-import { centerIcon, body2 } from '~/renderer/mixins';
+import { icons } from '~/renderer/constants/icons';
+import { centerIcon } from '~/renderer/mixins/images';
+import { transparency } from '~/renderer/constants/transparency';
+import { body2 } from '~/renderer/mixins/typography';
 
 interface CloseProps {
   visible: boolean;

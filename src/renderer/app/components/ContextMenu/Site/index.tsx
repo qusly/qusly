@@ -2,9 +2,9 @@ import * as React from 'react';
 
 import { getPassword } from '~/utils/credentials';
 import store from '~/renderer/app/store';
-import { icons } from '~/renderer/constants';
 import { MenuContainer, MenuItem } from '..';
 import { MenuDivider } from '../style';
+import { icons } from '~/renderer/constants/icons';
 
 const onConnect = () => {
   const site = store.contextMenu.focusedSite;

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-
-import { APPBAR_HEIGHT } from '~/renderer/app/constants';
+import { APPBAR_HEIGHT } from '../../constants/design';
 
 export const StyledAppbar = styled.div`
   width: 100%;

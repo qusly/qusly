@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-
-import { TOOLBAR_HEIGHT, TOOLBAR_COLOR } from '~/renderer/app/constants';
+import { TOOLBAR_HEIGHT, TOOLBAR_COLOR } from '../../constants/design';
 
 export const StyledToolbar = styled.div`
   width: 100%;
