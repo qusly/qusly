@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { observer } from 'mobx-react-lite';
 
-import { Tab } from '~/renderer/app/models';
 import store from '~/renderer/app/store';
 import {
   StyledTab,
@@ -13,7 +12,8 @@ import {
   TabContainer,
   Subtitle,
 } from './style';
-import { TOOLBAR_COLOR } from '../../constants';
+import { Tab } from '../../models/tab';
+import { TOOLBAR_COLOR } from '../../constants/design';
 
 const removeTab = (tab: Tab) => () => {
   tab.close();
