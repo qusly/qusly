@@ -11,7 +11,7 @@ export class SessionsStore {
   @computed
   public get current() {
     const tab = store.tabs.selectedTab;
-    return this.list.find(r => r.id === tab.sessionId);
+    return this.list.find(r => tab && r.id === tab.sessionId);
   }
 
   @action
