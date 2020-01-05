@@ -30,15 +30,23 @@ const onContextMenu = () => {
   store.contextMenu.show('path');
 };
 
+const onMouseDown = (e: React.MouseEvent) => {
+  e.stopPropagation();
+  store.pathView.show();
+};
+
 export const PathView = observer(() => {
   const page = store.pages.current;
   if (!page) return null;
 
   return (
-    <StyledPathView onContextMenu={onContextMenu}>
+    <StyledPathView
+      inputVisible={store.pathView.inputVisible}
+      onContextMenu={onContextMenu}
+    >
       <Container
         visible={!store.pathView.inputVisible}
-        onClick={store.pathView.show}
+        onMouseDown={onMouseDown}
       >
         {page.path.items.map((label, index) => (
           <Item key={label} onClick={onItemClick(index)}>

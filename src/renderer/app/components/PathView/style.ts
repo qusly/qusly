@@ -12,8 +12,12 @@ export const StyledPathView = styled.div`
   border-radius: 4px;
   background-color: rgba(0, 0, 0, 0.03);
 
+  ${({ inputVisible }: { inputVisible: boolean }) => css`
+    box-shadow: ${inputVisible ? `0 0 0 2px #BBDEFB` : 'none'};
+  `}
+
   &:hover {
-    background-color: rgba(0, 0, 0, 0.04);
+    background-color: rgba(0, 0, 0, 0.05);
   }
 `;
 
@@ -65,10 +69,10 @@ export const Input = styled.input`
   position: absolute;
   padding: 0px 12px;
   color: #000;
-  background-color: inherit;
   ${customInput()};
 
   ${({ visible }: { visible: boolean }) => css`
     display: ${visible ? 'block' : 'none'};
+    background-color: ${visible ? 'white' : 'inherit'};
   `}
 `;
