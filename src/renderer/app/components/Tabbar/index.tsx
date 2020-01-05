@@ -14,6 +14,8 @@ const onMouseEnter = () => (store.tabs.scrollbarVisible = true);
 const onMouseLeave = () => (store.tabs.scrollbarVisible = false);
 
 const onAddTabClick = () => {
+  if (!store.sessions.current) return;
+
   const { site } = store.sessions.current;
 
   store.tabs.addTab({
