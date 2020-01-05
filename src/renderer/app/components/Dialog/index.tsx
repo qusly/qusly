@@ -21,6 +21,7 @@ export const DialogContainer = observer(
     children: any;
   }) => {
     const current = store.dialog.content;
+
     const contentVisible = React.useMemo(() => {
       return content instanceof Array
         ? content.indexOf(current) !== -1

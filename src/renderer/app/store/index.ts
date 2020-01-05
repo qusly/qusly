@@ -13,6 +13,7 @@ import { ContextMenuStore } from './context-menu';
 import { DragStore } from './drag';
 import { DialogStore } from './dialog';
 import { SitesStore } from './sites';
+import { TransferStore } from './transfer';
 
 export class Store {
   public addTab = new AddTabStore();
@@ -26,6 +27,7 @@ export class Store {
   public drag = new DragStore();
   public dialog = new DialogStore();
   public sites = new SitesStore();
+  public transfer = new TransferStore();
 
   @observable
   public updateInfo = {

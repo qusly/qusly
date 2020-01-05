@@ -1,4 +1,7 @@
-import { Client } from 'qusly-core';
+import { remote } from 'electron';
+import { basename, resolve } from 'path';
+import { action } from 'mobx';
+import { Client, TransferClient } from 'qusly-core';
 
 import { ISite } from '~/interfaces';
 import store from '../store';
@@ -12,6 +15,8 @@ export type ConnectionStatus =
 
 let id = 0;
 
+const downloadsPath = resolve(remote.app.getPath('downloads'), 'qusly');
+
 export class Session {
   public id = id++;
 
@@ -23,29 +28,43 @@ export class Session {
 
   public startPath: string;
 
-  constructor(public site: ISite) {}
+  public downloadClient = new TransferClient('download', 1);
 
+  constructor(public site: ISite) {
+    this.downloadClient.on('new', store.transfer.onNew);
+    this.downloadClient.on('progress', store.transfer.onProgress);
+    this.downloadClient.on('finish', store.transfer.onFinish);
+  }
+
+  @action
   public async connect() {
-    try {
-      if (this.status === 'disconnected') {
-        this.status = 'connecting';
+    if (this.status === 'disconnected') {
+      this.status = 'connecting';
 
-        await this.client.connect(this.site);
-        const path = await this.client.pwd();
+      await this.client.connect(this.site);
+      const path = await this.client.pwd();
 
-        this.startPath = path;
-        this.status = 'connected';
-        this.tree.fetch(this.tree.items[0]);
-      }
-    } catch (e) {
-      this.status = 'disconnected';
-      // TODO: handle the error
-      console.error(e);
+      this.startPath = path;
+      this.status = 'connected';
+      this.tree.fetch(this.tree.items[0]);
+
+      await this.downloadClient.connect(this.site);
     }
   }
 
+  @action
   public async close() {
     store.sessions.list = store.sessions.list.filter(r => r !== this);
     await this.client.disconnect();
+  }
+
+  @action
+  public download(...paths: string[]) {
+    for (const path of paths) {
+      const fileName = basename(path);
+      const localPath = resolve(downloadsPath, fileName);
+
+      this.downloadClient.transfer(localPath, path, this.site);
+    }
   }
 }

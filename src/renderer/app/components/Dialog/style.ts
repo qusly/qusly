@@ -45,7 +45,7 @@ export const Container = styled.div`
 
   ${({ visible }: { visible: boolean }) => css`
     opacity: ${visible ? 1 : 0};
-    pointer-events: ${visible ? 'auto' : 'none'};
+    pointer-events: ${visible ? 'auto' : 'none !important'};
     transform: translateY(${visible ? 0 : -16}px);
   `}
 `;

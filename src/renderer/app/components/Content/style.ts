@@ -6,4 +6,5 @@ export const StyledContent = styled.div`
   height: 100%;
   flex: 1;
   background-color: ${CONTENT_COLOR};
+  position: relative;
 `;

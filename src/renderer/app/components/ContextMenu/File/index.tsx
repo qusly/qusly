@@ -43,6 +43,13 @@ const onDelete = () => {
   page.delete(page.selectedFiles);
 };
 
+const onDownload = () => {
+  const page = store.pages.current;
+  const paths = page.selectedFiles.map(r => page.path.relative(r.name));
+
+  page.session.download(...paths);
+}
+
 export const FileMenu = observer(() => {
   const page = store.pages.current;
   if (!page) return null;
@@ -110,7 +117,7 @@ export const FileMenu = observer(() => {
         Delete
       </MenuItem>
       <MenuDivider />
-      <MenuItem icon={icons.download} hidden={!containsFile} disabled>
+      <MenuItem icon={icons.downloadOutline} hidden={!containsFile} onClick={onDownload}>
         Download
       </MenuItem>
       <MenuItem icon={icons.zip} iconSize={18} hidden={!containsFile} disabled>

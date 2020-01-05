@@ -1,5 +1,6 @@
 import { ipcRenderer } from 'electron';
 import { observable, action } from 'mobx';
+import { extname } from 'path';
 
 import { IFile } from '~/interfaces';
 import { makeId } from '~/utils';
@@ -48,5 +49,12 @@ export class IconsStore {
     }
 
     return { icon, opacity };
+  }
+
+  public getPathIcon(path: string) {
+    return this.getIcon({
+      type: 'file',
+      ext: extname(path)
+    });
   }
 }
