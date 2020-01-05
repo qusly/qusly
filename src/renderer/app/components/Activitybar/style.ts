@@ -11,6 +11,7 @@ const getIconOpacity = (selected: boolean, disabled: boolean) => {
 export const StyledActivitybar = styled.div`
   width: 52px;
   height: 100%;
+  background-color: rgba(0, 0, 0, 0.02);
 `;
 
 interface ItemProps {

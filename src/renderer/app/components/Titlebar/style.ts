@@ -10,6 +10,7 @@ export const StyledTitlebar = styled.div`
   position: relative;
   align-items: center;
   justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.05);
 `;
 
 export const Title = styled.div`
