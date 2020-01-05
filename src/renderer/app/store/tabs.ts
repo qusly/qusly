@@ -6,15 +6,15 @@ import { TweenLite } from 'gsap';
 import store from '.';
 import { makeId } from '~/utils';
 import { ISite } from '~/interfaces';
-import { Tab } from '~/renderer/app/models';
-import {
-  TAB_ANIMATION_DURATION,
-  defaultTabOptions,
-  TABS_PADDING,
-  TAB_ANIMATION_EASING,
-  ADD_TAB_MARGIN_LEFT,
-} from '~/renderer/app/constants';
 import HorizontalScrollbar from '~/renderer/components/HorizontalScrollbar';
+import { Tab } from '../models/tab';
+import {
+  defaultTabOptions,
+  TAB_ANIMATION_DURATION,
+  TABS_PADDING,
+  ADD_TAB_MARGIN_LEFT,
+  TAB_ANIMATION_EASING,
+} from '../constants/tabs';
 
 export class TabsStore {
   @observable

@@ -1,8 +1,9 @@
 import { observable, computed, action } from 'mobx';
 
-import { Page, Tab } from '../models';
 import { ISite } from '~/interfaces';
 import store from '.';
+import { Page } from '../models/page';
+import { Tab } from '../models/tab';
 
 export class PagesStore {
   @observable
