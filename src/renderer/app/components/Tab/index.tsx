@@ -13,6 +13,7 @@ import {
   TabContainer,
   Subtitle,
 } from './style';
+import { TOOLBAR_COLOR } from '../../constants';
 
 const removeTab = (tab: Tab) => () => {
   tab.close();
@@ -98,7 +99,7 @@ export default observer(({ tab }: { tab: Tab }) => {
     >
       <TabContainer
         style={{
-          backgroundColor: tab.isSelected ? '#f7f7f7' : 'transparent',
+          backgroundColor: tab.isSelected ? TOOLBAR_COLOR : 'transparent',
         }}
       >
         <Content tab={tab} />

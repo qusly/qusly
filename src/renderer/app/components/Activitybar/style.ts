@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 
 import { centerIcon, centerVertical } from '~/renderer/mixins';
 import { transparency } from '~/renderer/constants';
+import { ACTIVITY_BAR_COLOR } from '../../constants';
 
 const getIconOpacity = (selected: boolean, disabled: boolean) => {
   if (disabled) return transparency.icons.disabled;
@@ -11,7 +12,7 @@ const getIconOpacity = (selected: boolean, disabled: boolean) => {
 export const StyledActivitybar = styled.div`
   width: 52px;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.02);
+  background-color: ${ACTIVITY_BAR_COLOR};
 `;
 
 interface ItemProps {

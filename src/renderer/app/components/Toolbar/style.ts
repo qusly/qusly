@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { TOOLBAR_HEIGHT } from '~/renderer/app/constants';
+import { TOOLBAR_HEIGHT, TOOLBAR_COLOR } from '~/renderer/app/constants';
 
 export const StyledToolbar = styled.div`
   width: 100%;
@@ -10,7 +10,7 @@ export const StyledToolbar = styled.div`
   flex-flow: row;
   align-items: center;
   padding-right: 24px;
-  background-color: #f7f7f7;
+  background-color: ${TOOLBAR_COLOR};
 `;
 
 export const Search = styled.div`

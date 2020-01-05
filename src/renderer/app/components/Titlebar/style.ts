@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { centerIcon } from '~/renderer/mixins';
 import { icons } from '~/renderer/constants';
-import { TITLEBAR_HEIGHT } from '~/renderer/app/constants';
+import { TITLEBAR_HEIGHT, TITLE_BAR_COLOR } from '~/renderer/app/constants';
 
 export const StyledTitlebar = styled.div`
   height: ${TITLEBAR_HEIGHT}px;
@@ -10,7 +10,7 @@ export const StyledTitlebar = styled.div`
   position: relative;
   align-items: center;
   justify-content: space-between;
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: ${TITLE_BAR_COLOR};
 `;
 
 export const Title = styled.div`

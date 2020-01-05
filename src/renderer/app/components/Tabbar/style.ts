@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-import { TOOLBAR_BUTTON_WIDTH, TABBAR_HEIGHT } from '~/renderer/app/constants';
+import {
+  TOOLBAR_BUTTON_WIDTH,
+  TABBAR_HEIGHT,
+  TAB_BAR_COLOR,
+} from '~/renderer/app/constants';
 import { ToolbarButton } from '~/renderer/components/ToolbarButton';
 
 export const StyledTabbar = styled.div`
@@ -10,7 +14,7 @@ export const StyledTabbar = styled.div`
   overflow: hidden;
   display: flex;
   z-index: 2;
-  background-color: rgba(0, 0, 0, 0.06);
+  background-color: ${TAB_BAR_COLOR};
   transition: 0.3s opacity, 0.3s transform;
 `;
 

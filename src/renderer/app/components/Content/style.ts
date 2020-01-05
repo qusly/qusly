@@ -1,8 +1,9 @@
 import styled from 'styled-components';
+import { CONTENT_COLOR } from '../../constants';
 
 export const StyledContent = styled.div`
   width: 100%;
   height: 100%;
   flex: 1;
-  background-color: #fdfdfd;
+  background-color: ${CONTENT_COLOR};
 `;
