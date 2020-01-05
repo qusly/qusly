@@ -38,6 +38,7 @@ export const Tabbar = observer(() => {
         icon={icons.add}
         onClick={onAddTabClick}
         divRef={(r: any) => (store.addTab.ref = r)}
+        disabled={!store.sessions.current}
       />
       <HorizontalScrollbar
         ref={store.tabs.scrollbarRef}
