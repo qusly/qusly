@@ -33,7 +33,7 @@ const Site = ({ data }: { data: ISite }) => {
 
 export const Sites = observer(() => {
   return (
-    <StyledPage visible={store.activitybar.content === 'sites'}>
+    <StyledPage tabIndex={0} visible={store.activitybar.content === 'sites'}>
       <Header>
         Sites
         <ToolbarButton icon={icons.add} onClick={onAdd} />
