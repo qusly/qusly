@@ -8,16 +8,25 @@ import * as prettyByte from 'pretty-bytes';
 import store from '~/renderer/app/store';
 import { Button } from '~/renderer/components/Button';
 import { Progressbar } from '~/renderer/components/Progressbar';
-import { StyledItem, Icon, Container, Name, Label, Buttons, Close, Show } from './style';
+import {
+  StyledItem,
+  Icon,
+  Container,
+  Name,
+  Label,
+  Buttons,
+  Close,
+  Show,
+} from './style';
 
 const showInFolder = (data: ITransferItem) => () => {
   const { localPath } = data.info;
   shell.showItemInFolder(localPath);
-}
+};
 
 const onClose = (id: string) => () => {
   store.transfer.remove(id);
-}
+};
 
 const TransferDetails = observer(({ data }: { data: ITransferItem }) => {
   const { info } = data;
@@ -27,11 +36,16 @@ const TransferDetails = observer(({ data }: { data: ITransferItem }) => {
 
   return (
     <>
-      <Label style={{ marginTop: 16 }}>{speed}/s - {buffered} of {size}, {info.eta}s left</Label>
-      <Progressbar value={info.percent} style={{ width: '100%', marginTop: 8 }} />
+      <Label style={{ marginTop: 16 }}>
+        {speed}/s - {buffered} of {size}, {info.eta}s left
+      </Label>
+      <Progressbar
+        value={info.percent}
+        style={{ width: '100%', marginTop: 8 }}
+      />
       <Buttons>
-        <Button label='Pause' type='outlined' color='#2196F3' />
-        <Button label='Cancel' type='outlined' color='#2196F3' />
+        <Button label="Pause" type="outlined" color="#2196F3" />
+        <Button label="Cancel" type="outlined" color="#2196F3" />
       </Buttons>
     </>
   );
@@ -57,6 +71,6 @@ export const Item = observer(({ data }: { data: ITransferItem }) => {
           </>
         )}
       </Container>
-    </StyledItem >
+    </StyledItem>
   );
 });

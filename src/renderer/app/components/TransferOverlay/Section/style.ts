@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-
-import { robotoLight } from '~/renderer/mixins';
+import { robotoLight } from '~/renderer/mixins/typography';
 
 export const StyledSection = styled.div`
   width: 100%;
