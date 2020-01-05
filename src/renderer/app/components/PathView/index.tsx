@@ -35,6 +35,8 @@ const onMouseDown = (e: React.MouseEvent) => {
   store.pathView.show();
 };
 
+const onItemMouseDown = (e: React.MouseEvent) => e.stopPropagation();
+
 export const PathView = observer(() => {
   const page = store.pages.current;
   if (!page) return null;
@@ -49,7 +51,11 @@ export const PathView = observer(() => {
         onMouseDown={onMouseDown}
       >
         {page.path.items.map((label, index) => (
-          <Item key={label} onClick={onItemClick(index)}>
+          <Item
+            key={label}
+            onMouseDown={onItemMouseDown}
+            onClick={onItemClick(index)}
+          >
             {label}
           </Item>
         ))}
