@@ -34,14 +34,14 @@ Qusly is an FTP client, built on top of `Electron` and `React`. It aims to be be
 
 ![](https://i.imgur.com/7NRnj8i.png)
 
-### [Roadmap](https://github.com/qusly/qusly/projects)
+# [Roadmap](https://github.com/qusly/qusly/projects)
 
-# Components
+## Components
 
 - [Qusly-Core](https://github.com/qusly/qusly-core)
 - Tabs system from [Wexond](https://github.com/wexond/wexond)
 
-# Running
+## Running
 
 Before running Qusly, please ensure you have **latest** [Node.js](https://nodejs.org) installed on your machine.
 
@@ -77,7 +77,7 @@ ENABLED=true
 You can set the protocol to `sftp`, `ftp` or `ftps`.
 Port is usually `21` for FTP(s) and `22` for SFTP.
 
-## Sponsors
+### Sponsors
 
 <a href="https://www.patreon.com/bePatron?u=21429620">
     <img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160">
