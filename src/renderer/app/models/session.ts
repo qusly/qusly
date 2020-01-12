@@ -1,7 +1,7 @@
 import { remote } from 'electron';
 import { basename, resolve } from 'path';
 import { action } from 'mobx';
-import { Client, TransferClient } from 'qusly-core';
+import { Client } from 'qusly-core';
 
 import { ISite } from '~/interfaces';
 import store from '../store';
@@ -28,12 +28,12 @@ export class Session {
 
   public startPath: string;
 
-  public downloadClient = new TransferClient('download', 1);
+  // public downloadClient = new TransferClient('download', 1);
 
   constructor(public site: ISite) {
-    this.downloadClient.on('new', store.transfer.onNew);
-    this.downloadClient.on('progress', store.transfer.onProgress);
-    this.downloadClient.on('finish', store.transfer.onFinish);
+    // this.downloadClient.on('new', store.transfer.onNew);
+    // this.downloadClient.on('progress', store.transfer.onProgress);
+    // this.downloadClient.on('finish', store.transfer.onFinish);
   }
 
   @action
@@ -48,7 +48,7 @@ export class Session {
       this.status = 'connected';
       this.tree.fetch(this.tree.items[0]);
 
-      await this.downloadClient.connect(this.site);
+      // await this.downloadClient.connect(this.site);
     }
   }
 
@@ -64,7 +64,7 @@ export class Session {
       const fileName = basename(path);
       const localPath = resolve(downloadsPath, fileName);
 
-      this.downloadClient.transfer(localPath, path, this.site);
+      // this.downloadClient.transfer(localPath, path, this.site);
     }
   }
 }
