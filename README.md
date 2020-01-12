@@ -14,6 +14,7 @@
 [![Hits](http://hits.dwyl.io/qusly/qusly.svg")](https://github.com/qusly/qusly/releases)
 [![Discord](https://discordapp.com/api/guilds/307605794680209409/widget.png?style=shield)](https://discord.gg/P7Vn4VX)
 [![Github](https://img.shields.io/github/followers/xnerhu.svg?style=social&label=Follow)](https://github.com/xnerhu)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fqusly%2Fqusly.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fqusly%2Fqusly?ref=badge_shield)
 
 </div>
 
@@ -64,3 +65,7 @@ Port is usually `21` for FTP(s) and `22` for SFTP.
 <a href="https://www.patreon.com/bePatron?u=21429620">
     <img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160">
 </a>
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fqusly%2Fqusly.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fqusly%2Fqusly?ref=badge_large)
