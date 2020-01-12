@@ -10,7 +10,7 @@
 [![Release](https://img.shields.io/github/release-pre/qusly/qusly.svg)](https://github.com/qusly/qusly/releases)
 [![Travis](https://img.shields.io/travis/qusly/qusly.svg?style=flat-square)](https://travis-ci.com/qusly/qusly)
 [![Downloads](https://img.shields.io/github/downloads/qusly/qusly/total.svg?style=flat-square)](https://github.com/qusly/qusly/releases)
-[![Hits](http://hits.dwyl.io/qusly/qusly.svg")](https://github.com/qusly/qusly/releases)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fqusly%2Fqusly.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fqusly%2Fqusly?ref=badge_shield)
 [![Discord](https://discordapp.com/api/guilds/307605794680209409/widget.png?style=shield)](https://discord.gg/P7Vn4VX)
 [![Github](https://img.shields.io/github/followers/xnerhu.svg?style=social&label=Follow)](https://github.com/xnerhu)
 
