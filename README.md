@@ -7,7 +7,6 @@
 
   <br />
 
-[![Release](https://img.shields.io/github/release-pre/qusly/qusly.svg)](https://github.com/qusly/qusly/releases)
 [![Travis](https://img.shields.io/travis/qusly/qusly.svg?style=flat-square)](https://travis-ci.com/qusly/qusly)
 [![Downloads](https://img.shields.io/github/downloads/qusly/qusly/total.svg?style=flat-square)](https://github.com/qusly/qusly/releases)
 [![Hits](http://hits.dwyl.io/qusly/qusly.svg")](https://github.com/qusly/qusly/releases)
