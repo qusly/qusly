@@ -7,7 +7,7 @@
 
   <br />
 
-[![Travis](https://img.shields.io/travis/qusly/qusly.svg?style=flat-square)](https://travis-ci.com/qusly/qusly)
+[![Actions Status](https://github.com/qusly/qusly/workflows/Build/badge.svg)](https://github.com/qusly/qusly/actions)
 [![Downloads](https://img.shields.io/github/downloads/qusly/qusly/total.svg?style=flat-square)](https://github.com/qusly/qusly/releases)
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fqusly%2Fqusly.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fqusly%2Fqusly?ref=badge_shield)
 [![Discord](https://discordapp.com/api/guilds/307605794680209409/widget.png?style=shield)](https://discord.gg/P7Vn4VX)
