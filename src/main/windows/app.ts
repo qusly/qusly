@@ -3,20 +3,23 @@ import { readFileSync, writeFileSync } from 'fs';
 import { resolve, join } from 'path';
 
 import { getPath } from '~/utils';
-import { runAutoUpdaterService } from './services/auto-updater';
-import { runMessagingService } from './services/messaging';
-import storage from './services/storage';
+import { runAutoUpdaterService } from '../services/auto-updater';
+import { runMessagingService } from '../services/messaging';
+import storage from '../services/storage';
 
-export class AppWindow extends BrowserWindow {
-  public constructor() {
-    super({
-      frame: false,
+export class AppWindow {
+  public instance: BrowserWindow;
+
+  constructor() {
+    this.instance = new BrowserWindow({
+      // frame: false,
       minWidth: 400,
       minHeight: 450,
       width: 900,
       height: 700,
       show: true,
       titleBarStyle: 'hiddenInset',
+      backgroundColor: '#fff',
       webPreferences: {
         plugins: true,
         nodeIntegration: true,
@@ -28,6 +31,7 @@ export class AppWindow extends BrowserWindow {
 
     runAutoUpdaterService(this);
     runMessagingService(this);
+
     storage.run();
 
     const windowDataPath = getPath('window-data.json');
@@ -43,44 +47,46 @@ export class AppWindow extends BrowserWindow {
 
     // Merge bounds from the last window state to the current window options.
     if (windowState) {
-      this.setBounds({ ...windowState.bounds });
+      this.instance.setBounds({ ...windowState.bounds });
     }
 
     if (windowState) {
       if (windowState.maximized) {
-        this.maximize();
+        this.instance.maximize();
       }
       if (windowState.fullscreen) {
-        this.setFullScreen(true);
+        this.instance.setFullScreen(true);
       }
     }
 
     // Update window bounds on resize and on move when window is not maximized.
-    this.on('resize', () => {
-      if (!this.isMaximized()) {
-        windowState.bounds = this.getBounds();
+    this.instance.on('resize', () => {
+      if (!this.instance.isMaximized()) {
+        windowState.bounds = this.instance.getBounds();
       }
     });
 
-    this.on('move', () => {
-      if (!this.isMaximized()) {
-        windowState.bounds = this.getBounds();
+    this.instance.on('move', () => {
+      if (!this.instance.isMaximized()) {
+        windowState.bounds = this.instance.getBounds();
       }
     });
 
     // Save current window state to file.
-    this.on('close', () => {
-      windowState.maximized = this.isMaximized();
-      windowState.fullscreen = this.isFullScreen();
+    this.instance.on('close', () => {
+      windowState.maximized = this.instance.isMaximized();
+      windowState.fullscreen = this.instance.isFullScreen();
 
       writeFileSync(windowDataPath, JSON.stringify(windowState));
     });
 
     if (process.env.ENV === 'dev') {
-      this.webContents.openDevTools({ mode: 'detach' });
-      this.loadURL('http://localhost:4444/app.html');
+      this.instance.webContents.openDevTools({ mode: 'right' });
+      this.instance.loadURL('http://localhost:4444/app.html');
     } else {
-      this.loadURL(join('file://', app.getAppPath(), 'build/app.html'));
+      this.instance.loadURL(
+        join('file://', app.getAppPath(), 'build/app.html'),
+      );
     }
   }
 }

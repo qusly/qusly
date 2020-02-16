@@ -15,6 +15,6 @@ export const runAutoUpdaterService = (appWindow: AppWindow) => {
   });
 
   autoUpdater.on('update-downloaded', ({ version }) => {
-    appWindow.webContents.send('update-available', version);
+    appWindow.instance.webContents.send('update-available', version);
   });
 };

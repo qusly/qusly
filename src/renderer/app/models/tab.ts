@@ -3,7 +3,6 @@ import * as React from 'react';
 import { ipcRenderer } from 'electron';
 
 import store from '~/renderer/app/store';
-import { ISite } from '~/interfaces';
 import {
   defaultTabOptions,
   ADD_TAB_MARGIN_LEFT,
@@ -16,8 +15,6 @@ let id = 1;
 export interface TabOptions {
   active?: boolean;
   index?: number;
-  path?: string;
-  site?: ISite;
 }
 
 export class Tab {
@@ -35,12 +32,6 @@ export class Tab {
 
   @observable
   public width = 0;
-
-  @observable
-  public pageId: number;
-
-  @observable
-  public sessionId: number;
 
   @computed
   public get isSelected() {
@@ -198,9 +189,6 @@ export class Tab {
         prevTab.select();
       }
     }
-
-    const page = store.pages.list.find(r => r.id === this.pageId);
-    page.close();
 
     this.removeTimeout = setTimeout(() => {
       store.tabs.removeTab(this.id);

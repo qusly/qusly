@@ -1,11 +1,8 @@
-import { ipcRenderer } from 'electron';
 import { observable, action } from 'mobx';
 import * as React from 'react';
 import { TweenLite } from 'gsap';
 
 import store from '.';
-import { makeId } from '~/utils';
-import { ISite } from '~/interfaces';
 import HorizontalScrollbar from '~/renderer/components/HorizontalScrollbar';
 import { Tab } from '../models/tab';
 import {
@@ -68,20 +65,6 @@ export class TabsStore {
       }
       this.rearrangeTabsTimer.time++;
     }, 1000);
-
-    if (process.env.ENV === 'dev') {
-      requestAnimationFrame(() => {
-        if (!this.list.length) {
-          const id = makeId(32);
-
-          ipcRenderer.once(`get-testing-site-${id}`, (e, site: ISite) => {
-            if (site) this.addTab({ site, active: true });
-          });
-
-          ipcRenderer.send('get-testing-site', id);
-        }
-      });
-    }
   }
 
   public resetRearrangeTabsTimer() {
@@ -126,10 +109,6 @@ export class TabsStore {
       this.list.splice(options.index, 0, tab);
     } else {
       this.list.push(tab);
-    }
-
-    if (options.site) {
-      store.pages.add(options.site, tab, options.path);
     }
 
     requestAnimationFrame(() => {

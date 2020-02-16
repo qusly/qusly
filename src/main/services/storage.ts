@@ -1,5 +1,4 @@
 import { ipcMain } from 'electron';
-import * as Datastore from 'nedb';
 
 import { getPath } from '~/utils';
 import {
@@ -10,7 +9,7 @@ import {
 } from '~/interfaces';
 
 interface Databases {
-  [key: string]: Datastore;
+  [key: string]: any; // todo
 }
 
 export class StorageService {
@@ -122,16 +121,16 @@ export class StorageService {
   }
 
   public run() {
-    for (const key in this.databases) {
-      this.databases[key] = this.createDatabase(key.toLowerCase());
-    }
+    // for (const key in this.databases) {
+    //   this.databases[key] = this.createDatabase(key.toLowerCase());
+    // }
   }
 
   private createDatabase = (name: string) => {
-    return new Datastore({
-      filename: getPath(`storage/${name}.db`),
-      autoload: true,
-    });
+    // return new Datastore({
+    //   filename: getPath(`storage/${name}.db`),
+    //   autoload: true,
+    // });
   };
 }
 

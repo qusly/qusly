@@ -2,6 +2,8 @@ import * as React from 'react';
 import { observer } from 'mobx-react-lite';
 
 import store from '~/renderer/app/store';
+import { Tab } from '../../models/tab';
+import { TOOLBAR_COLOR } from '../../constants/design';
 import {
   StyledTab,
   StyledContent,
@@ -12,8 +14,6 @@ import {
   TabContainer,
   Subtitle,
 } from './style';
-import { Tab } from '../../models/tab';
-import { TOOLBAR_COLOR } from '../../constants/design';
 
 const removeTab = (tab: Tab) => () => {
   tab.close();
@@ -46,11 +46,6 @@ const onMouseEnter = (tab: Tab) => () => {
 
 const onMouseLeave = () => {
   store.tabs.hoveredTabId = -1;
-};
-
-const onContextMenu = (tab: Tab) => () => {
-  store.contextMenu.focusedTab = tab;
-  store.contextMenu.show('tab');
 };
 
 const Content = observer(({ tab }: { tab: Tab }) => {
@@ -95,7 +90,6 @@ export default observer(({ tab }: { tab: Tab }) => {
       onMouseDown={onMouseDown(tab)}
       onMouseEnter={onMouseEnter(tab)}
       onMouseLeave={onMouseLeave}
-      onContextMenu={onContextMenu(tab)}
     >
       <TabContainer
         style={{

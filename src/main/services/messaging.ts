@@ -20,7 +20,7 @@ export const runMessagingService = (appWindow: AppWindow) => {
       port: parseInt(PORT),
     };
 
-    appWindow.webContents.send(
+    appWindow.instance.webContents.send(
       `get-testing-site-${id}`,
       ENABLED === 'true' ? site : null,
     );
@@ -35,6 +35,6 @@ export const runMessagingService = (appWindow: AppWindow) => {
       icons[ext] = icon;
     });
 
-    appWindow.webContents.send(`get-icons-${id}`, icons);
+    appWindow.instance.webContents.send(`get-icons-${id}`, icons);
   });
 };

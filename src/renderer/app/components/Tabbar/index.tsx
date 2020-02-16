@@ -14,13 +14,8 @@ const onMouseEnter = () => (store.tabs.scrollbarVisible = true);
 const onMouseLeave = () => (store.tabs.scrollbarVisible = false);
 
 const onAddTabClick = () => {
-  if (!store.sessions.current) return;
-
-  const { site } = store.sessions.current;
-
   store.tabs.addTab({
     active: true,
-    site,
   });
 };
 
@@ -38,7 +33,7 @@ export const Tabbar = observer(() => {
         icon={icons.add}
         onClick={onAddTabClick}
         divRef={(r: any) => (store.addTab.ref = r)}
-        disabled={!store.sessions.current}
+        disabled={false}
       />
       <HorizontalScrollbar
         ref={store.tabs.scrollbarRef}

@@ -7,6 +7,7 @@ export class AddTabStore {
 
   public setLeft(left: number, animation: boolean) {
     store.tabs.animateProperty('x', this.ref, left, animation);
+
     this.left = left;
   }
 }

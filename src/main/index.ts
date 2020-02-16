@@ -1,12 +1,10 @@
-import { ipcMain, app, Menu } from 'electron';
+import { app, Menu, ipcMain } from 'electron';
 import { platform } from 'os';
 import { config } from 'dotenv';
 import { setPassword, getPassword, deletePassword } from 'keytar';
 
 import { getMainMenu } from './menus/main';
-import { AppWindow } from './app-window';
-
-app.name = 'Qusly';
+import { AppWindow } from './windows';
 
 (process.env as any)['ELECTRON_DISABLE_SECURITY_WARNINGS'] = true;
 
@@ -20,6 +18,9 @@ if (process.env.ENV === 'dev') {
   config();
 }
 
+app.name = 'Qusly';
+app.allowRendererProcessReuse = true;
+
 let appWindow: AppWindow;
 
 app.on('ready', () => {
@@ -31,7 +32,7 @@ app.on('ready', () => {
     }
   });
 
-  Menu.setApplicationMenu(getMainMenu(appWindow));
+  Menu.setApplicationMenu(getMainMenu(appWindow.instance));
 });
 
 ipcMain.handle('set-password', async (e, service, account, password) => {
