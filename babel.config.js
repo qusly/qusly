@@ -5,7 +5,6 @@ const getStyledComponentsPlugin = () => {
     'babel-plugin-styled-components',
     dev
       ? {
-          ssr: true,
           displayName: true,
         }
       : {
@@ -30,7 +29,6 @@ const plugins = [
   '@babel/plugin-proposal-class-properties',
   '@babel/plugin-syntax-dynamic-import',
   'react-hot-loader/babel',
-  '@loadable/babel-plugin',
 ];
 
 module.exports = { presets, plugins };
