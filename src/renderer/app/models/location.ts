@@ -10,7 +10,7 @@ export class Location {
   @observable
   private pos = -1;
 
-  constructor(private page: Page) {}
+  constructor(private page: Page) { }
 
   @computed
   public get items() {
