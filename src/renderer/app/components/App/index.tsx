@@ -13,7 +13,6 @@ const App = () => {
     <>
       <GlobalStyle />
       <StyledApp>
-        xd
         <Tabbar />
       </StyledApp>
     </>

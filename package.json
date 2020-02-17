@@ -25,7 +25,7 @@
   },
   "main": "./build/main.bundle.js",
   "scripts": {
-    "dev": "concurrently \"cross-env ENV='dev' webpack\" \"cross-env ENV='dev' webpack-dev-server --config webpack.config.renderer.js\" ",
+    "dev": "cross-env ENV='dev' concurrently \"webpack\" \"webpack-dev-server --config webpack.config.renderer.js\" ",
     "build": "concurrently \"webpack --config webpack.config.renderer.js\" \"webpack\"",
     "start": "cross-env ENV='dev' electron .",
     "compile-win32": "npm run build && electron-builder -w -p always",

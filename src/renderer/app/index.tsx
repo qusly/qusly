@@ -33,8 +33,6 @@ styleElement.textContent = `
   }
 `;
 
-console.log('XDD');
-
 document.head.appendChild(styleElement);
 
 ReactDOM.render(<App />, document.getElementById('app'));

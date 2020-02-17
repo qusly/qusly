@@ -1,4 +1,4 @@
-const dev = process.env.NODE_ENV === 'development';
+const dev = process.env.ENV === 'dev';
 
 const getStyledComponentsPlugin = () => {
   return [
