@@ -1,19 +1,31 @@
 import React from 'react';
 
-interface ISelectableProvided {
-  innerRef: React.RefObject<any>;
-}
+import { SelectionContext } from '../SelectionArea';
 
 interface Props {
-  children?: (provided: ISelectableProvided) => JSX.Element;
+  data: any;
+  children?: (ref: React.Ref<any>) => JSX.Element;
 }
 
+let _id = 0;
+
 export const Selectable = (props: Props) => {
-  const ref = React.createRef<any>();
+  const { registry } = React.useContext(SelectionContext);
 
-  const children = React.useMemo(() => {
-    return props.children({ innerRef: ref });
-  }, [props.children]);
+  const id = React.useRef(_id++);
+  const ref = React.useRef<any>();
 
-  return children;
+  const setRef = React.useCallback((el: HTMLElement) => {
+    ref.current = el;
+  }, []);
+
+  React.useLayoutEffect(() => {
+    registry.register({ id: id.current, data: props.data, ref });
+
+    return () => {
+      registry.unregister(id.current);
+    };
+  }, [registry]);
+
+  return props.children(setRef);
 };

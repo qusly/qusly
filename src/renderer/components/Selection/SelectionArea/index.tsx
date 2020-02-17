@@ -5,12 +5,22 @@ import {
   getScrollMousePos,
   updateBoxRect,
   isBoxVisible,
+  elementsCollide,
+  arraysEqual,
 } from '~/renderer/utils';
 import { IPos } from '~/renderer/interfaces';
 import { Container, Box } from './style';
 
-interface Props extends React.HTMLAttributes<HTMLDivElement> {
+export interface ISelectionItem {
+  ref: React.RefObject<HTMLElement>;
+  data: any;
+}
+
+interface Props {
+  onSelect?: (items: any[]) => void;
   distance?: number;
+  className?: string;
+  style?: React.CSSProperties;
   children?: React.ReactNode;
 }
 
@@ -19,7 +29,55 @@ interface State {
   boxVisible?: boolean;
 }
 
-export const SelectionArea = ({ children, ...props }: Props) => {
+interface IContext {
+  registry?: Registry;
+}
+
+export const SelectionContext = React.createContext<IContext>(null);
+
+export interface IRegistryMap {
+  [key: number]: IRegistryItem;
+}
+
+export interface IRegistryItem {
+  ref: React.RefObject<any>;
+  id: number;
+  data?: any;
+}
+
+export class Registry {
+  public items: IRegistryMap = {};
+
+  protected lastSelected: any[];
+
+  constructor(public boxRef: React.RefObject<any>) {}
+
+  public register(item: IRegistryItem) {
+    this.items[item.id] = item;
+  }
+
+  public unregister(id: number) {
+    delete this.items[id];
+  }
+
+  public getSelected() {
+    const selected = Object.values(this.items).filter(r => {
+      return elementsCollide(r.ref.current, this.boxRef.current);
+    });
+
+    const same = arraysEqual(selected, this.lastSelected);
+
+    if (!same) {
+      this.lastSelected = selected;
+
+      return selected.map(r => r.data);
+    }
+
+    return false;
+  }
+}
+
+export const SelectionArea = (props: Props) => {
   const [state, setState] = useLargeState<State>({
     active: false,
     boxVisible: false,
@@ -30,6 +88,13 @@ export const SelectionArea = ({ children, ...props }: Props) => {
 
   const startPos = React.useRef<IPos>();
   const mousePos = React.useRef<IPos>(); // without scroll offset
+
+  const provider = React.useMemo<IContext>(
+    () => ({
+      registry: new Registry(boxRef),
+    }),
+    [boxRef],
+  );
 
   const onMouseDown = React.useCallback((e: React.MouseEvent) => {
     setState({ active: true });
@@ -52,24 +117,12 @@ export const SelectionArea = ({ children, ...props }: Props) => {
 
   const onWindowMouseMove = React.useCallback((e: MouseEvent) => {
     mousePos.current = [e.pageX, e.pageY];
-
-    updateBoxRect(
-      ref.current,
-      boxRef.current,
-      mousePos.current,
-      startPos.current,
-    );
+    resize();
   }, []);
 
   const onScroll = React.useCallback(() => {
     if (!state.active) return;
-
-    updateBoxRect(
-      ref.current,
-      boxRef.current,
-      mousePos.current,
-      startPos.current,
-    );
+    resize();
   }, [state.active]);
 
   const onMouseMove = React.useCallback(() => {
@@ -87,15 +140,40 @@ export const SelectionArea = ({ children, ...props }: Props) => {
     }
   }, [state]);
 
+  const resize = React.useCallback(() => {
+    updateBoxRect(
+      ref.current,
+      boxRef.current,
+      mousePos.current,
+      startPos.current,
+    );
+
+    const selected = provider.registry.getSelected();
+
+    if (selected !== false) {
+      props.onSelect(selected);
+    }
+  }, []);
+
+  React.useEffect(() => {
+    return () => {
+      window.removeEventListener('mousemove', onWindowMouseMove);
+      window.removeEventListener('mouseup', onMouseUp);
+    };
+  }, []);
+
   return (
     <Container
       ref={ref}
-      {...props}
+      className={props.className}
+      style={props.style}
       onMouseMove={onMouseMove}
       onMouseDown={onMouseDown}
       onScroll={onScroll}
     >
-      {children}
+      <SelectionContext.Provider value={provider}>
+        {props.children}
+      </SelectionContext.Provider>
       <Box
         ref={boxRef}
         style={{ display: state.boxVisible ? 'block' : 'none' }}
