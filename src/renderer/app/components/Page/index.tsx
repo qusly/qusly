@@ -1,17 +1,19 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 
-import store from '../../store';
+import { Selectable } from '~/renderer/components/Selection';
+import { Area, Item } from './style';
 
 export const Page = observer(() => {
-  const page = store.pages.selected;
-
   return (
-    <>
-      <div>
-        page id: {page?.id}
-        session id:{page?.session?.config?.id}
-      </div>
-    </>
+    <Area>
+      <Selectable>
+        {provided => (
+          <Item ref={provided.innerRef}>
+            <div>item</div>
+          </Item>
+        )}
+      </Selectable>
+    </Area>
   );
 });
