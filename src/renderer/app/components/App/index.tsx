@@ -1,8 +1,9 @@
 import { hot } from 'react-hot-loader/root';
-import * as React from 'react';
+import React from 'react';
 import { createGlobalStyle } from 'styled-components';
 
 import { Tabbar } from '../Tabbar';
+import { Page } from '../Page';
 import { Style } from '../../style';
 import { StyledApp } from './style';
 
@@ -14,6 +15,7 @@ const App = () => {
       <GlobalStyle />
       <StyledApp>
         <Tabbar />
+        <Page />
       </StyledApp>
     </>
   );

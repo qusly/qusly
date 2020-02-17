@@ -3,6 +3,7 @@ import * as React from 'react';
 import { ipcRenderer } from 'electron';
 
 import store from '~/renderer/app/store';
+import { ISite } from '~/interfaces';
 import {
   defaultTabOptions,
   ADD_TAB_MARGIN_LEFT,
@@ -15,6 +16,7 @@ let id = 1;
 export interface TabOptions {
   active?: boolean;
   index?: number;
+  config?: ISite;
 }
 
 export class Tab {
@@ -32,6 +34,9 @@ export class Tab {
 
   @observable
   public width = 0;
+
+  @observable
+  public pageId: number;
 
   @computed
   public get isSelected() {

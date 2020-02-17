@@ -1,17 +1,16 @@
 import { ipcMain } from 'electron';
 import { IProtocol } from 'qusly-core';
 
-import { AppWindow } from '../app-window';
+import { AppWindow } from '../windows/';
 import { ISite } from '~/interfaces';
-import { makeId } from '~/utils';
 import { getIcon } from '../utils/icons';
 
 export const runMessagingService = (appWindow: AppWindow) => {
-  ipcMain.on(`get-testing-site`, (e, id: string) => {
+  ipcMain.on(`get-dev-site-config`, e => {
     const { HOSTNAME, USER, PASSWORD, PROTOCOL, PORT, ENABLED } = process.env;
 
     const site: ISite = {
-      _id: makeId(32),
+      id: -1,
       title: HOSTNAME,
       host: HOSTNAME,
       password: PASSWORD,
@@ -20,10 +19,7 @@ export const runMessagingService = (appWindow: AppWindow) => {
       port: parseInt(PORT),
     };
 
-    appWindow.instance.webContents.send(
-      `get-testing-site-${id}`,
-      ENABLED === 'true' ? site : null,
-    );
+    e.sender.send(`get-dev-site-config`, ENABLED === 'true' ? site : null);
   });
 
   ipcMain.on('get-icons', async (e, list: string[], id: string) => {

@@ -13,12 +13,6 @@ const onMouseEnter = () => (store.tabs.scrollbarVisible = true);
 
 const onMouseLeave = () => (store.tabs.scrollbarVisible = false);
 
-const onAddTabClick = () => {
-  store.tabs.addTab({
-    active: true,
-  });
-};
-
 export const Tabbar = observer(() => {
   return (
     <StyledTabbar>
@@ -31,7 +25,7 @@ export const Tabbar = observer(() => {
       </TabsContainer>
       <AddTab
         icon={icons.add}
-        onClick={onAddTabClick}
+        onClick={store.addTab.onClick}
         divRef={(r: any) => (store.addTab.ref = r)}
         disabled={false}
       />

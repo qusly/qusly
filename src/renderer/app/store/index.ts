@@ -3,10 +3,14 @@ import { observable } from 'mobx';
 
 import { TabsStore } from './tabs';
 import { AddTabStore } from './add-tab';
+import { SessionsStore } from './sessions';
+import { PagesStore } from './pages';
 
 export class Store {
   public tabs = new TabsStore();
   public addTab = new AddTabStore();
+  public sessions = new SessionsStore();
+  public pages = new PagesStore();
 
   @observable
   public updateInfo = {

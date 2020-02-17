@@ -10,4 +10,15 @@ export class AddTabStore {
 
     this.left = left;
   }
+
+  public onClick = () => {
+    const session = store.sessions.selected;
+
+    if (session) {
+      store.tabs.addTab({
+        active: true,
+        config: session.config,
+      });
+    }
+  };
 }

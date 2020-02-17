@@ -12,6 +12,7 @@ import {
   ADD_TAB_MARGIN_LEFT,
   TAB_ANIMATION_EASING,
 } from '../constants/tabs';
+import { getDevSiteConfig } from '../utils';
 
 export class TabsStore {
   @observable
@@ -65,6 +66,14 @@ export class TabsStore {
       }
       this.rearrangeTabsTimer.time++;
     }, 1000);
+
+    requestAnimationFrame(async () => {
+      const config = await getDevSiteConfig();
+
+      if (config) {
+        this.addTab({ config, active: true });
+      }
+    });
   }
 
   public resetRearrangeTabsTimer() {
@@ -109,6 +118,12 @@ export class TabsStore {
       this.list.splice(options.index, 0, tab);
     } else {
       this.list.push(tab);
+    }
+
+    if (options.config) {
+      const page = store.pages.add(options.config);
+
+      tab.pageId = page.id;
     }
 
     requestAnimationFrame(() => {
