@@ -1,44 +1,11 @@
 const { resolve } = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const { getConfig, dev } = require('./webpack.config.base');
 
 const PORT = 4444;
 const INCLUDE = resolve(__dirname, 'src');
-
-// const applyEntries = (scope, config, entries) => {
-//   for (const entry of entries) {
-//     config.entry[entry] = [`./src/renderer/${entry}`];
-//     config.plugins.push(getHtml(scope, entry));
-
-//     if (dev) {
-//       config.entry[entry].unshift('react-hot-loader/patch');
-//     }
-//   }
-// };
-
-// const getBaseConfig = name => {
-//   const config = {
-//     plugins: [],
-
-//     output: {},
-//     entry: {},
-
-//     optimization: {
-//       splitChunks: {
-//         cacheGroups: {
-//           vendor: {
-//             chunks: 'initial',
-//             name: `vendor.${name}`,
-//             minChunks: 2,
-//           },
-//         },
-//       },
-//     },
-//   };
-
-//   return config;
-// };
 
 const appConfig = getConfig({
   name: 'app',
