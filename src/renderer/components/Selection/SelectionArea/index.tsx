@@ -93,7 +93,7 @@ export const SelectionArea = (props: Props) => {
     () => ({
       registry: new Registry(boxRef),
     }),
-    [boxRef],
+    [],
   );
 
   const onMouseDown = React.useCallback((e: React.MouseEvent) => {

@@ -27,4 +27,7 @@ export const Item = styled.div`
   width: 64px;
   height: 64px;
   background-color: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

@@ -14,7 +14,8 @@ const Item = React.forwardRef(
       <StyledItem
         ref={ref}
         style={{
-          color: props.selected ? '#fff' : '#000',
+          backgroundColor: props.selected ? 'green' : 'red',
+          color: props.selected ? '#fff' : '#000fff',
         }}
       >
         {props.data.label}
