@@ -13,4 +13,5 @@ export const Box = styled.div`
   background-color: rgba(0, 0, 0, 0.08);
   border: 1px solid rgba(0, 0, 0, 0.12);
   pointer-events: none;
+  display: none;
 `;

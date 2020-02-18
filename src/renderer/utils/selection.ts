@@ -92,3 +92,9 @@ export const elementsCollide = (first: HTMLElement, second: HTMLElement) => {
     rect1.top > rect2.bottom
   );
 };
+
+export const toggleBox = (ref: HTMLElement, visible = false) => {
+  Object.assign(ref.style, {
+    display: visible ? 'block' : 'none',
+  });
+};

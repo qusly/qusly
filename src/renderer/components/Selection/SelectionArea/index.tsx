@@ -7,6 +7,7 @@ import {
   isBoxVisible,
   elementsCollide,
   arraysEqual,
+  toggleBox,
 } from '~/renderer/utils';
 import { IPos } from '~/renderer/interfaces';
 import { Container, Box } from './style';
@@ -26,7 +27,6 @@ interface Props {
 
 interface State {
   active?: boolean;
-  boxVisible?: boolean;
 }
 
 interface IContext {
@@ -80,11 +80,11 @@ export class Registry {
 export const SelectionArea = (props: Props) => {
   const [state, setState] = useLargeState<State>({
     active: false,
-    boxVisible: false,
   });
 
   const ref = React.useRef<HTMLDivElement>();
   const boxRef = React.useRef<HTMLDivElement>();
+  const boxVisible = React.useRef(false);
 
   const startPos = React.useRef<IPos>();
   const mousePos = React.useRef<IPos>(); // without scroll offset
@@ -111,12 +111,29 @@ export const SelectionArea = (props: Props) => {
 
     startPos.current = null;
     mousePos.current = null;
+    boxVisible.current = false;
 
-    setState({ active: false, boxVisible: false });
+    toggleBox(boxRef.current);
+    setState({ active: false });
   }, []);
 
   const onWindowMouseMove = React.useCallback((e: MouseEvent) => {
     mousePos.current = [e.pageX, e.pageY];
+
+    if (!boxVisible.current) {
+      const visible = isBoxVisible(
+        mousePos.current,
+        startPos.current,
+        ref.current,
+        props.distance,
+      );
+
+      if (visible) {
+        boxVisible.current = true;
+        toggleBox(boxRef.current, true);
+      }
+    }
+
     resize();
   }, []);
 
@@ -127,17 +144,6 @@ export const SelectionArea = (props: Props) => {
 
   const onMouseMove = React.useCallback(() => {
     if (!state.active) return;
-
-    const visible = isBoxVisible(
-      mousePos.current,
-      startPos.current,
-      ref.current,
-      props.distance,
-    );
-
-    if (state.boxVisible !== visible) {
-      setState({ boxVisible: visible });
-    }
   }, [state]);
 
   const resize = React.useCallback(() => {
@@ -174,14 +180,11 @@ export const SelectionArea = (props: Props) => {
       <SelectionContext.Provider value={provider}>
         {props.children}
       </SelectionContext.Provider>
-      <Box
-        ref={boxRef}
-        style={{ display: state.boxVisible ? 'block' : 'none' }}
-      />
+      {state.active && <Box ref={boxRef} />}
     </Container>
   );
 };
 
 SelectionArea.defaultProps = {
-  distance: 5,
+  distance: 10,
 } as Props;
