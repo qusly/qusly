@@ -7,18 +7,22 @@ import { StyledFile } from './style';
 
 interface Props {
   data: IFile;
+  onMouseDown?: (e: React.MouseEvent) => void;
+  onMouseUp?: (e: React.MouseEvent) => void;
 }
 
 export const File = observer(
-  ({ data }: Props, ref: React.Ref<any>) => {
+  ({ data, onMouseDown, onMouseUp }: Props, ref: React.Ref<any>) => {
     const page = store.pages.current;
 
     const selectedIndex = page.selectedFiles.indexOf(data);
     const selected = selectedIndex !== -1;
 
-    const onMouseDown = React.useCallback(
+    const _onMouseDown = React.useCallback(
       (e: React.MouseEvent) => {
         e.stopPropagation();
+
+        if (onMouseDown) onMouseDown(e);
 
         if (e.button !== 0) return;
 
@@ -46,7 +50,12 @@ export const File = observer(
     );
 
     return (
-      <StyledFile ref={ref} selected={selected} onMouseDown={onMouseDown}>
+      <StyledFile
+        ref={ref}
+        selected={selected}
+        onMouseDown={_onMouseDown}
+        onMouseUp={onMouseUp}
+      >
         {data.name}
       </StyledFile>
     );

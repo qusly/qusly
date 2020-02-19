@@ -5,29 +5,11 @@ import { Session } from './session';
 
 let id = 0;
 
-const _files: IFile[] = [
-  {
-    name: 'a',
-  },
-  {
-    name: 'b',
-  },
-  {
-    name: 'c',
-  },
-  {
-    name: 'd',
-  },
-  {
-    name: 'e',
-  },
-  {
-    name: 'f',
-  },
-  {
-    name: 'g',
-  },
-];
+const _files: IFile[] = Array.from(Array(50).keys()).map(r => {
+  return {
+    name: r.toString(),
+  } as IFile;
+});
 
 export class Page {
   @observable

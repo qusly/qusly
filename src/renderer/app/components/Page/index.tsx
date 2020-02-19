@@ -5,26 +5,43 @@ import { IFile } from 'qusly-core';
 
 import store from '../../store';
 import { File } from '../File';
+import { DragDrop, Droppable } from '~/renderer/components/FileDragDrop';
 import { StyledPage } from './style';
 
 export const Page = observer(() => {
   const page = store.pages.current;
 
+  const onMouseDown = React.useCallback((e: React.MouseEvent) => {
+    if (!e.ctrlKey && !e.shiftKey) {
+      store.pages.current.selectedFiles = [];
+    }
+  }, []);
+
   const onSelection = React.useCallback((files: IFile[]) => {
     store.pages.current.selectedFiles = files;
   }, []);
 
-  const onMouseDown = React.useCallback(() => {
-    store.pages.current.selectedFiles = [];
+  const onDrop = React.useCallback((item: IFile) => {
+    console.log(item);
   }, []);
 
   return (
-    <StyledPage onSelection={onSelection} onMouseDown={onMouseDown}>
-      {page?.files.map(r => (
-        <Selectable key={r.name} data={r}>
-          {innerRef => <File ref={innerRef} data={r} />}
-        </Selectable>
-      ))}
+    <StyledPage
+      onSelection={onSelection}
+      onMouseDown={onMouseDown}
+      fast={page?.files.length >= 50}
+    >
+      <DragDrop onDrop={onDrop} selected={page?.selectedFiles}>
+        {page?.files.map(r => (
+          <Selectable key={r.name} data={r}>
+            {innerRef => (
+              <Droppable data={r}>
+                {provided => <File ref={innerRef} data={r} {...provided} />}
+              </Droppable>
+            )}
+          </Selectable>
+        ))}
+      </DragDrop>
     </StyledPage>
   );
 });

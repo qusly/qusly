@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 
 export const StyledFile = styled.div`
+  height: 96px;
   display: flex;
   align-items: center;
   flex-direction: column;
