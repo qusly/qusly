@@ -1,57 +1,30 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
+import { Selectable } from 'rectangle-selection';
+import { IFile } from 'qusly-core';
 
-import { Selectable } from '~/renderer/components/Selection';
-import { Area, Item as StyledItem } from './style';
-
-interface IItem {
-  label: string;
-}
-
-const Item = React.forwardRef(
-  (props: { data: IItem; selected: boolean }, ref) => {
-    return (
-      <StyledItem
-        ref={ref}
-        style={{
-          backgroundColor: props.selected ? 'green' : 'red',
-          color: props.selected ? '#fff' : '#000fff',
-        }}
-      >
-        {props.data.label}
-      </StyledItem>
-    );
-  },
-);
+import store from '../../store';
+import { File } from '../File';
+import { StyledPage } from './style';
 
 export const Page = observer(() => {
-  const [items, setItems] = React.useState<IItem[]>([
-    { label: 'First' },
-    { label: 'Second' },
-    { label: 'Third' },
-  ]);
+  const page = store.pages.current;
 
-  const [selected, setSelected] = React.useState<string[]>([]);
+  const onSelection = React.useCallback((files: IFile[]) => {
+    store.pages.current.selectedFiles = files;
+  }, []);
 
-  const onSelect = (data: IItem[]) => {
-    const selected = data.map(r => r.label);
-
-    setSelected(selected);
-  };
+  const onMouseDown = React.useCallback(() => {
+    store.pages.current.selectedFiles = [];
+  }, []);
 
   return (
-    <Area onSelect={onSelect}>
-      {items.map(r => (
-        <Selectable key={r.label} data={r}>
-          {innerRef => (
-            <Item
-              data={r}
-              ref={innerRef}
-              selected={selected.indexOf(r.label) !== -1}
-            />
-          )}
+    <StyledPage onSelection={onSelection} onMouseDown={onMouseDown}>
+      {page?.files.map(r => (
+        <Selectable key={r.name} data={r}>
+          {innerRef => <File ref={innerRef} data={r} />}
         </Selectable>
       ))}
-    </Area>
+    </StyledPage>
   );
 });

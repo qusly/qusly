@@ -87,6 +87,7 @@
     "react-dom": "^16.12.0",
     "react-hot-loader": "^4.12.19",
     "react-windows-controls": "^1.1.1",
+    "rectangle-selection": "^2.0.0",
     "styled-components": "^5.0.1",
     "terser": "^4.6.3",
     "terser-webpack-plugin": "^2.3.5",

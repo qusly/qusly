@@ -1,4 +1,4 @@
-import { observable, computed } from 'mobx';
+import { observable, computed, action } from 'mobx';
 
 import { Page } from '../models';
 import { ISite } from '~/interfaces';
@@ -9,12 +9,13 @@ export class PagesStore {
   public list: Page[] = [];
 
   @computed
-  public get selected() {
+  public get current() {
     const tab = store.tabs.selectedTab;
 
     return this.list.find(r => r.id === tab.pageId);
   }
 
+  @action
   public add(config: ISite) {
     const session = store.sessions.create(config);
     const page = session.createNewPage();

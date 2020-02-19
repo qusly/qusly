@@ -12,8 +12,8 @@ export class SessionsStore {
   public selectedId = 0;
 
   @computed
-  public get selected() {
-    return store.pages.selected?.session;
+  public get current() {
+    return store.pages.current?.session;
   }
 
   @action

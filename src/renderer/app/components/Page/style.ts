@@ -1,8 +1,7 @@
 import styled from 'styled-components';
+import { SelectionArea } from 'rectangle-selection';
 
-import { SelectionArea } from '~/renderer/components/Selection';
-
-export const Area = styled(SelectionArea)`
+export const StyledPage = styled(SelectionArea)`
   width: 512px;
   min-height: 512px;
   max-height: 100%;
@@ -21,13 +20,4 @@ export const Area = styled(SelectionArea)`
     width: 1px;
     height: 1024px;
   }
-`;
-
-export const Item = styled.div`
-  width: 64px;
-  height: 64px;
-  background-color: red;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `;
