@@ -17,6 +17,7 @@ export interface TabOptions {
   active?: boolean;
   index?: number;
   config?: ISite;
+  path?: string;
 }
 
 export class Tab {

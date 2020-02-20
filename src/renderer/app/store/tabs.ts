@@ -110,18 +110,20 @@ export class TabsStore {
 
   @action
   public addTab(options = defaultTabOptions) {
+    const { index, config, path } = options;
+
     this.removedTabs = 0;
 
     const tab = new Tab(options);
 
-    if (options.index !== undefined) {
-      this.list.splice(options.index, 0, tab);
+    if (index !== undefined) {
+      this.list.splice(index, 0, tab);
     } else {
       this.list.push(tab);
     }
 
-    if (options.config) {
-      const page = store.pages.add(options.config);
+    if (config) {
+      const page = store.pages.add(config, path);
 
       tab.pageId = page.id;
     }

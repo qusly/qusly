@@ -6,6 +6,7 @@ import { getPath } from '~/utils';
 import { runAutoUpdaterService } from '../services/auto-updater';
 import { runMessagingService } from '../services/messaging';
 import storage from '../services/storage';
+import { ConcurrentClient } from 'qusly-core';
 
 export class AppWindow {
   public instance: BrowserWindow;
@@ -88,5 +89,9 @@ export class AppWindow {
         join('file://', app.getAppPath(), 'build/app.html'),
       );
     }
+
+    async () => {
+      // const client = new ConcurrentClient(1);
+    };
   }
 }

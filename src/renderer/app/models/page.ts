@@ -22,12 +22,35 @@ export class Page {
   @observable
   public selectedFiles: IFile[] = [];
 
+  @observable
+  public loading = true;
+
   public anchorFile: IFile;
 
   public history = new History();
 
   constructor(public session: Session, path?: string) {
     this.history.push(path);
+  }
+
+  @action
+  public async prepare() {
+    setTimeout(async () => {
+      await this.session.connect();
+      await this.fetch();
+    }, 100);
+  }
+
+  @action
+  public async fetch() {
+    this.loading = true;
+
+    const path = this.history.path;
+
+    const files = await this.session.client.readDir(path);
+    console.log(files);
+    // this.files = files;
+    this.loading = false;
   }
 
   @action

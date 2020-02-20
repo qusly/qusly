@@ -21,35 +21,6 @@ const Button = observer(({ path }: { path: string }) => {
 export const Page = observer(() => {
   const page = store.pages.current;
 
-  return (
-    <div>
-      path: {page?.history.path}
-      <br />
-      <br />
-      <button
-        onClick={() => page.history.goBack()}
-        disabled={!page?.history.canGoBack}
-      >
-        Back
-      </button>
-      <button
-        onClick={() => page.history.goForward()}
-        disabled={!page?.history.canGoForward}
-      >
-        Forward
-      </button>
-      <br />
-      <br />
-      <Button path="/a" />
-      <Button path="/b" />
-      <Button path="/c" />
-      <Button path="/d" />
-      <Button path="/b2" />
-    </div>
-  );
-});
-
-/*
   const onMouseDown = React.useCallback((e: React.MouseEvent) => {
     if (!e.ctrlKey && !e.shiftKey) {
       store.pages.current.selectedFiles = [];
@@ -83,4 +54,4 @@ export const Page = observer(() => {
       </DragDrop>
     </StyledPage>
   );
-  */
+});
