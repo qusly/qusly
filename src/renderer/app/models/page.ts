@@ -2,6 +2,7 @@ import { observable, action } from 'mobx';
 import { IFile } from 'qusly-core';
 
 import { Session } from './session';
+import { History } from './history';
 
 let id = 0;
 
@@ -23,7 +24,11 @@ export class Page {
 
   public anchorFile: IFile;
 
-  constructor(public session: Session) {}
+  public history = new History();
+
+  constructor(public session: Session, path?: string) {
+    this.history.push(path);
+  }
 
   @action
   public selectFiles = (start: number, end: number) => {

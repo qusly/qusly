@@ -14,7 +14,7 @@ const App = () => {
     <>
       <GlobalStyle />
       <StyledApp>
-        {/* <Tabbar /> */}
+        <Tabbar />
         <Page />
       </StyledApp>
     </>

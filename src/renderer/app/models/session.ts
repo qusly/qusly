@@ -18,8 +18,8 @@ export class Session {
   }
 
   @action
-  public createNewPage() {
-    const page = new Page(this);
+  public createNewPage(path?: string) {
+    const page = new Page(this, path);
 
     return page;
   }

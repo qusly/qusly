@@ -16,9 +16,9 @@ export class PagesStore {
   }
 
   @action
-  public add(config: ISite) {
+  public add(config: ISite, path?: string) {
     const session = store.sessions.create(config);
-    const page = session.createNewPage();
+    const page = session.createNewPage(path);
 
     this.list.push(page);
 

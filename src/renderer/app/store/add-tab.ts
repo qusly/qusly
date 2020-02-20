@@ -12,7 +12,7 @@ export class AddTabStore {
   }
 
   public onClick = () => {
-    const session = store.sessions.selected;
+    const session = store.sessions.current;
 
     if (session) {
       store.tabs.addTab({
