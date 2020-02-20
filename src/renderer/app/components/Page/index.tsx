@@ -7,6 +7,11 @@ import store from '../../store';
 import { File } from '../File';
 import { DragDrop, Droppable } from '~/renderer/components/FileDragDrop';
 import { StyledPage } from './style';
+import {
+  Skeleton,
+  SkeletonCircle,
+  SkeletonText,
+} from '~/renderer/components/Skeleton';
 
 const Button = observer(({ path }: { path: string }) => {
   const page = store.pages.current;
@@ -41,6 +46,15 @@ export const Page = observer(() => {
       onMouseDown={onMouseDown}
       fast={page?.files.length >= 50}
     >
+      {/* <Skeleton style={{ width: 256, height: 256 }} />
+      <SkeletonCircle style={{ width: 64, height: 64, marginTop: 64 }} /> */}
+      <SkeletonText />
+      <p>xd</p>
+    </StyledPage>
+  );
+});
+
+/*
       <DragDrop onDrop={onDrop} selected={page?.selectedFiles}>
         {page?.files.map(r => (
           <Selectable key={r.name} data={r}>
@@ -52,6 +66,4 @@ export const Page = observer(() => {
           </Selectable>
         ))}
       </DragDrop>
-    </StyledPage>
-  );
-});
+      */
