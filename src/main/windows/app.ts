@@ -6,10 +6,12 @@ import { getPath } from '~/utils';
 import { runAutoUpdaterService } from '../services/auto-updater';
 import { runMessagingService } from '../services/messaging';
 import storage from '../services/storage';
-import { ConcurrentClient } from 'qusly-core';
+import { Core } from '../services/core';
 
 export class AppWindow {
   public instance: BrowserWindow;
+
+  public core = new Core(this);
 
   constructor() {
     this.instance = new BrowserWindow({

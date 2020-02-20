@@ -35,10 +35,8 @@ export class Page {
 
   @action
   public async prepare() {
-    setTimeout(async () => {
-      await this.session.connect();
-      await this.fetch();
-    }, 100);
+    await this.session.connect();
+    await this.fetch();
   }
 
   @action
@@ -48,8 +46,8 @@ export class Page {
     const path = this.history.path;
 
     const files = await this.session.client.readDir(path);
-    console.log(files);
-    // this.files = files;
+
+    this.files = files;
     this.loading = false;
   }
 
