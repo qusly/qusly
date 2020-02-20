@@ -14,7 +14,7 @@ export class IconsStore {
   public map: IMap = {};
 
   @action
-  public async load(...list: string[]) {
+  public async load(list: string[]) {
     if (!list || !list.length) return;
 
     const data: IMap = await ipcRenderer.invoke('get-icons', list);
@@ -23,7 +23,7 @@ export class IconsStore {
   }
 
   public getFileIcon(file: IFile): IFileIcon {
-    const base64 = this.map[file.ext];
+    const base64 = file.ext && this.map[file.ext];
 
     if (base64) {
       return { data: base64, opacity: 1 };

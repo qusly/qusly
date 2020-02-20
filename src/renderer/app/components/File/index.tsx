@@ -3,7 +3,7 @@ import { IFile } from 'qusly-core';
 import { observer } from 'mobx-react-lite';
 
 import store from '../../store';
-import { StyledFile } from './style';
+import { StyledFile, Label, Icon } from './style';
 
 interface Props {
   data: IFile;
@@ -14,6 +14,11 @@ interface Props {
 export const File = observer(
   ({ data, onMouseDown, onMouseUp }: Props, ref: React.Ref<any>) => {
     const page = store.pages.current;
+
+    const icon = React.useMemo(() => store.icons.getFileIcon(data), [
+      data.type,
+      data.ext,
+    ]);
 
     const selectedIndex = page.selectedFiles.indexOf(data);
     const selected = selectedIndex !== -1;
@@ -49,6 +54,14 @@ export const File = observer(
       [page.selectedFiles, page.anchorFile, selected],
     );
 
+    const iconStyle = React.useMemo<React.CSSProperties>(
+      () => ({
+        backgroundImage: `url(${icon.data})`,
+        opacity: icon.opacity,
+      }),
+      [icon],
+    );
+
     return (
       <StyledFile
         ref={ref}
@@ -56,7 +69,8 @@ export const File = observer(
         onMouseDown={_onMouseDown}
         onMouseUp={onMouseUp}
       >
-        {data.name}
+        <Icon style={iconStyle} />
+        <Label>{data.name}</Label>
       </StyledFile>
     );
   },

@@ -40,6 +40,8 @@ export const Page = observer(() => {
     console.log(item);
   }, []);
 
+  console.log('xd');
+
   return (
     <StyledPage
       onSelection={onSelection}
