@@ -1,4 +1,5 @@
 import { ipcRenderer } from 'electron';
+import { IFile } from 'qusly-core';
 
 import { ISite } from '~/interfaces';
 
@@ -25,11 +26,11 @@ export class Client {
     await ipcRenderer.invoke('core-connect', this.config);
   }
 
-  public readDir(path: string) {
+  public readDir(path: string): Promise<IFile[]> {
     return ipcRenderer.invoke('core-read-dir', this.id, path);
   }
 
-  public pwd() {
+  public pwd(): Promise<string> {
     return ipcRenderer.invoke('core-pwd', this.id);
   }
 }

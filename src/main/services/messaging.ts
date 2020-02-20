@@ -28,8 +28,8 @@ export const runMessagingService = (appWindow: AppWindow) => {
 
     const icons: { [key: string]: string } = {};
 
-    data.forEach(({ ext, icon }) => {
-      icons[ext] = icon;
+    data.forEach(({ ext, data }) => {
+      icons[ext] = data;
     });
 
     return icons;

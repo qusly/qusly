@@ -3,6 +3,7 @@ import { IFile } from 'qusly-core';
 
 import { Session } from './session';
 import { History } from './history';
+import store from '../store';
 
 let id = 0;
 
@@ -44,6 +45,9 @@ export class Page {
     this.loading = true;
 
     const files = await this.session.client.readDir(this.history.path);
+    const icons = files.map(r => r.ext);
+
+    await store.icons.load(icons);
 
     this.files = files;
     this.loading = false;
