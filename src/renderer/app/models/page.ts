@@ -43,9 +43,7 @@ export class Page {
   public async fetch() {
     this.loading = true;
 
-    const path = this.history.path;
-
-    const files = await this.session.client.readDir(path);
+    const files = await this.session.client.readDir(this.history.path);
 
     this.files = files;
     this.loading = false;

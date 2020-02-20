@@ -18,7 +18,7 @@ export class Core {
       return this.clients.get(site.id).connect(site);
     });
 
-    ipcMain.handle('core-read-dir', (e, id: number, path: string) => {
+    ipcMain.handle('core-read-dir', async (e, id: number, path: string) => {
       return this.clients.get(id).readDir(path);
     });
 
