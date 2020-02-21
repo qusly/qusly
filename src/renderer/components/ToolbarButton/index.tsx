@@ -4,47 +4,20 @@ import { observer } from 'mobx-react-lite';
 import { transparency } from '~/renderer/constants/transparency';
 import { Button, Icon, Circle } from './style';
 
-interface Props {
-  onClick?: (e?: React.SyntheticEvent<HTMLDivElement>) => void;
-  onMouseDown?: (e?: React.SyntheticEvent<HTMLDivElement>) => void;
-  size?: number;
-  style?: any;
-  icon: string;
-  divRef?: (ref: HTMLDivElement) => void;
-  disabled?: boolean;
-  className?: string;
-  children?: any;
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
   opacity?: number;
+  size?: number;
+  icon?: string;
+  disabled?: boolean;
 }
 
 export const ToolbarButton = observer(
-  ({
-    icon,
-    onClick,
-    onMouseDown,
-    size,
-    disabled,
-    className,
-    divRef,
-    children,
-    opacity,
-    style,
-  }: Props) => {
-    style = { ...style };
-
+  (
+    { icon, size, disabled, children, opacity, ...props }: Props,
+    ref: React.RefObject<HTMLDivElement>,
+  ) => {
     return (
-      <Button
-        onClick={onClick}
-        onMouseDown={onMouseDown}
-        className={'toolbar-button ' + (className || '')}
-        style={style}
-        ref={(r: HTMLDivElement) => {
-          if (typeof divRef === 'function') {
-            divRef(r);
-          }
-        }}
-        disabled={disabled}
-      >
+      <Button ref={ref} disabled={disabled} {...props}>
         <Icon
           style={{ backgroundImage: `url(${icon})` }}
           size={size}
@@ -56,10 +29,11 @@ export const ToolbarButton = observer(
       </Button>
     );
   },
+  { forwardRef: true },
 );
 
 (ToolbarButton as any).defaultProps = {
   size: 20,
   opacity: transparency.icons.inactive,
   autoInvert: true,
-};
+} as Props;

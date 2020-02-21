@@ -1,4 +1,4 @@
-import styled, { css, keyframes } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { SelectionArea } from 'rectangle-selection';
 
 import { APPBAR_HEIGHT, FILE_HEIGHT } from '../../constants';
@@ -11,6 +11,7 @@ export const StyledPage = styled.div`
 export const StyledPageGridBase = css`
   width: 100%;
   height: 100%;
+  padding: 24px;
   display: grid;
   grid-gap: 16px;
   grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));

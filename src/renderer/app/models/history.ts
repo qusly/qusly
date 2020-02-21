@@ -18,18 +18,18 @@ export class History {
   }
 
   @action
-  public goBack() {
+  public goBack = () => {
     if (this.canGoBack) {
       this.pos--;
     }
-  }
+  };
 
   @action
-  public goForward() {
+  public goForward = () => {
     if (this.canGoForward) {
       this.pos++;
     }
-  }
+  };
 
   @action
   public push(path: string) {
@@ -42,5 +42,24 @@ export class History {
   @computed
   public get path() {
     return this.list[this.pos];
+  }
+
+  @computed
+  public get folders() {
+    if (!this.path) return ['/'];
+    return ['/', ...this.path?.split('/')].filter(r => r.length);
+  }
+
+  @action
+  public go(n: number) {
+    this.pos = n;
+  }
+
+  @action
+  public goToFolder(n: number) {
+    const folders = this.folders.slice(1, n);
+    const path = `/${folders.join('/')}`;
+
+    this.push(path);
   }
 }

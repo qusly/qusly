@@ -9,6 +9,8 @@ export class Session {
 
   public status: 'disconnected' | 'connecting' | 'connected' = 'disconnected';
 
+  public startingDir: string;
+
   constructor(public config: ISite) {}
 
   public async connect() {
@@ -18,6 +20,8 @@ export class Session {
 
     try {
       await this.client.connect(this.config);
+
+      this.startingDir = await this.client.pwd();
     } catch (error) {
       console.log(error);
     }
@@ -27,9 +31,9 @@ export class Session {
 
   @action
   public createNewPage(path?: string) {
-    const page = new Page(this, path);
+    const page = new Page(this);
 
-    page.prepare();
+    page.prepare(path);
 
     return page;
   }

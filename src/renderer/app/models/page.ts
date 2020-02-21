@@ -17,22 +17,24 @@ export class Page {
 
   public files = new PageFiles(this);
 
-  constructor(public session: Session, path?: string) {
-    this.history.push(path);
-  }
+  constructor(public session: Session) {}
 
   @action
-  public async prepare() {
+  public async prepare(path?: string) {
     await this.session.connect();
     await this.fetch();
+
+    const _path = path || this.session.startingDir;
+
+    this.history.push(_path);
   }
 
   @action
-  public async fetch() {
+  public fetch = async () => {
     this.loading = true;
     await this.files.fetch();
     this.loading = false;
-  }
+  };
 
   public get client() {
     return this.session.client;

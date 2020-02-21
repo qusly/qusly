@@ -16,7 +16,7 @@ export const StyledClose = styled.div`
   background-image: url('${icons.close}');
   transition: 0.1s opacity;
   z-index: 10;
-  ${centerIcon(15)};
+  ${centerIcon(16)};
 
   ${({ visible }: CloseProps) => css`
     opacity: ${visible ? transparency.icons.inactive : 0};
@@ -28,7 +28,7 @@ export const StyledClose = styled.div`
 
   &:after {
     content: '';
-    border-radius: 4px;
+    border-radius: 100%;
     background-color: rgba(0, 0, 0, 0.08);
     transition: 0.2s opacity;
     position: absolute;

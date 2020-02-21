@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 import { ToolbarButton } from '~/renderer/components/ToolbarButton';
 import { TABBAR_HEIGHT, TOOLBAR_BUTTON_SIZE } from '../../constants/design';
+import { centerVertical } from '~/renderer/mixins';
 
 export const StyledTabbar = styled.div`
   width: 100%;
@@ -26,8 +27,9 @@ export const TabsContainer = styled.div`
 `;
 
 export const AddTab = styled(ToolbarButton)`
-  height: ${TABBAR_HEIGHT}px;
+  width: 28px;
+  height: 28px;
   position: absolute;
-  left: 0;
-  bottom: 0;
+  left: 2px;
+  ${centerVertical()};
 `;

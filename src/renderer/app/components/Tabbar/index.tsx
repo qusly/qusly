@@ -4,8 +4,18 @@ import { observer } from 'mobx-react-lite';
 import store from '~/renderer/app/store';
 import HorizontalScrollbar from '~/renderer/components/HorizontalScrollbar';
 import { icons } from '~/renderer/constants/icons';
-import { Tabs } from '../Tabs';
+import Tab from '../Tab';
 import { AddTab, StyledTabbar, TabsContainer } from './style';
+
+const Tabs = observer(() => {
+  return (
+    <>
+      {store.tabs.list.map(item => (
+        <Tab key={item.id} tab={item} />
+      ))}
+    </>
+  );
+});
 
 const getContainer = () => store.tabs.containerRef.current;
 
@@ -25,9 +35,9 @@ export const Tabbar = observer(() => {
       </TabsContainer>
       <AddTab
         icon={icons.add}
+        size={18}
         onClick={store.addTab.onClick}
-        divRef={(r: any) => (store.addTab.ref = r)}
-        disabled={false}
+        ref={store.addTab.ref}
       />
       <HorizontalScrollbar
         ref={store.tabs.scrollbarRef}
