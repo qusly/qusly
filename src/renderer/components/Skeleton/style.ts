@@ -1,4 +1,13 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const animation = keyframes`
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+`;
 
 export const Skeleton = styled.div`
   border-radius: 8px;
@@ -14,7 +23,7 @@ export const Skeleton = styled.div`
     top: 0;
     left: -100%;
     position: absolute;
-    animation: skeleton-animation 1.5s ease-in-out infinite;
+    animation: ${animation} 1.5s ease-in-out infinite;
     background-image: linear-gradient(
       90deg,
       rgba(255, 255, 255, 0),

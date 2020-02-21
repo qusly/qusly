@@ -8,7 +8,6 @@ export const StyledFile = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  background-color: rgba(0, 0, 0, 0.04);
 
   &.selected {
     background-color: rgba(98, 0, 234, 0.08);

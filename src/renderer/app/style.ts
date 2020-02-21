@@ -17,13 +17,4 @@ export const Style = css`
   * {
     box-sizing: border-box;
   }
-
-  @keyframes skeleton-animation {
-    0% {
-      left: -100%;
-    }
-    100% {
-      left: 100%;
-    }
-  }
 `;

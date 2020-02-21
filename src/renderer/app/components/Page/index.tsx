@@ -1,17 +1,18 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 import { Selectable } from 'rectangle-selection';
-import { IFile } from 'qusly-core';
 
 import store from '../../store';
 import { File } from '../File';
 import { DragDrop, Droppable } from '~/renderer/components/FileDragDrop';
-import { StyledPage } from './style';
 import {
   Skeleton,
   SkeletonCircle,
   SkeletonText,
 } from '~/renderer/components/Skeleton';
+import { IFile } from '~/renderer/interfaces';
+import { FilesSkeleton } from '~/renderer/components/FilesSkeleton';
+import { StyledPage, Grid } from './style';
 
 const Button = observer(({ path }: { path: string }) => {
   const page = store.pages.current;
@@ -41,12 +42,18 @@ export const Page = observer(() => {
   }, []);
 
   return (
-    <StyledPage onSelection={onSelection} onMouseDown={onMouseDown}>
-      {page?.files.list.map(r => (
-        <Selectable key={r.name} data={r}>
-          {innerRef => <File ref={innerRef} data={r} />}
-        </Selectable>
-      ))}
+    <StyledPage>
+      {page?.loading === false ? (
+        <Grid onSelection={onSelection} onMouseDown={onMouseDown}>
+          {page?.files.list.map(r => (
+            <Selectable key={r.name} data={r}>
+              {innerRef => <File ref={innerRef} data={r} />}
+            </Selectable>
+          ))}
+        </Grid>
+      ) : (
+        <FilesSkeleton />
+      )}
     </StyledPage>
   );
 });
