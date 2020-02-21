@@ -12,14 +12,15 @@ export const StyledFileBase = css`
 
 export const StyledFile = styled.div`
   border-radius: 4px;
+  transition: 0.1s background-color;
   ${StyledFileBase};
-
-  &.selected {
-    background-color: rgba(0, 0, 0, 0.06);
-  }
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.04);
+  }
+
+  &.selected {
+    background-color: rgba(0, 0, 0, 0.08);
   }
 `;
 
