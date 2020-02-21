@@ -19,7 +19,7 @@ export class PageFiles {
   constructor(protected page: Page) {}
 
   @action
-  public async fetch() {
+  public fetch = async () => {
     this.page.loading = true;
 
     const path = this.page.history.path;
@@ -33,7 +33,7 @@ export class PageFiles {
     this.list = files;
     this._selected = [];
     this.page.loading = false;
-  }
+  };
 
   @action
   public async move(files: IFile[], dest: IFile) {

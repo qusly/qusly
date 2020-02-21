@@ -29,7 +29,7 @@ export const Navigation = observer(() => {
         size={BUTTON_SIZE}
         icon={icons.refresh}
         disabled={page?.loading}
-        onClick={page?.fetch}
+        onClick={page?.files.fetch}
       />
     </StyledNavigation>
   );
