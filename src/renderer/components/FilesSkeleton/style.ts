@@ -9,7 +9,7 @@ export const ANIMATION_TIME = 1600;
 const animation = keyframes`
   0% {
     opacity: 0;
-    transform: translateY(64px);
+    transform: translateY(32px);
   }
   25%, 80% {
     opacity: 1;
