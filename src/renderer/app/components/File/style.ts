@@ -1,16 +1,25 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { centerIcon } from '~/renderer/mixins/images';
 import { FILE_HEIGHT } from '../../constants';
 
-export const StyledFile = styled.div`
+export const StyledFileBase = css`
   height: ${FILE_HEIGHT}px;
   display: flex;
   align-items: center;
   flex-direction: column;
+`;
+
+export const StyledFile = styled.div`
+  border-radius: 4px;
+  ${StyledFileBase};
 
   &.selected {
-    background-color: rgba(98, 0, 234, 0.08);
+    background-color: rgba(0, 0, 0, 0.06);
+  }
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
   }
 `;
 

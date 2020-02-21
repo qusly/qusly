@@ -1,16 +1,19 @@
 import React from 'react';
 
-import { StyledFile } from '~/renderer/app/components/File/style';
 import { SkeletonCircle, SkeletonText } from '../Skeleton';
 import { getRandomNumber } from '~/renderer/utils';
-import { StyledFilesSkeleton, ANIMATION_TIME } from './style';
+import {
+  StyledFilesSkeleton,
+  ANIMATION_TIME,
+  StyledSkeletonFile,
+} from './style';
 
 const Item = () => {
   return (
-    <StyledFile>
+    <StyledSkeletonFile>
       <SkeletonCircle style={{ width: 48, height: 48, margin: '8px 0px' }} />
       <SkeletonText style={{ height: 16, borderRadius: 4 }} />
-    </StyledFile>
+    </StyledSkeletonFile>
   );
 };
 
@@ -28,6 +31,8 @@ export const FilesSkeleton = () => {
     setCount(getRandomNumber(15, 30));
 
     requestAnimationFrame(() => {
+      if (!ref.current.style) return;
+
       ref.current.style.display = 'grid';
       setTimeout(onTimeout, ANIMATION_TIME);
     });
