@@ -46,9 +46,11 @@ export class PageFiles {
         const srcPath = `${path}/${file.name}`;
         const destPath = `${dest}/${file.name}`;
 
-        await this.page.client.move(srcPath, destPath);
+        if (srcPath !== destPath) {
+          await this.page.client.move(srcPath, destPath);
 
-        this.list = this.list.filter(r => r !== file);
+          this.list = this.list.filter(r => r !== file);
+        }
       }
     } catch (err) {
       console.log(err);
