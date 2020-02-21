@@ -31,7 +31,7 @@ export const FilesSkeleton = () => {
     setCount(getRandomNumber(15, 30));
 
     requestAnimationFrame(() => {
-      if (!ref.current.style) return;
+      if (!ref.current) return;
 
       ref.current.style.display = 'grid';
       setTimeout(onTimeout, ANIMATION_TIME);
