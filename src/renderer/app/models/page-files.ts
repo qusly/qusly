@@ -19,7 +19,9 @@ export class PageFiles {
 
   @action
   public async fetch() {
-    const files = await this.page.client.readDir(this.page.history.path);
+    const path = this.page.history.path;
+
+    const files = await this.page.client.readDir(path);
     const icons = files.map(r => r.ext);
 
     await store.icons.load(icons);

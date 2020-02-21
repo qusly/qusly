@@ -7,6 +7,8 @@ export class History {
   @observable
   public pos = -1;
 
+  public listen: (path: string) => void;
+
   @computed
   public get canGoBack() {
     return this.list.length && this.pos > 0;
@@ -21,6 +23,7 @@ export class History {
   public goBack = () => {
     if (this.canGoBack) {
       this.pos--;
+      this.emitListen();
     }
   };
 
@@ -28,14 +31,17 @@ export class History {
   public goForward = () => {
     if (this.canGoForward) {
       this.pos++;
+      this.emitListen();
     }
   };
 
   @action
-  public push(path: string) {
+  public push(path: string, emit = true) {
     if (path) {
       this.pos++;
       this.list = [...this.list.slice(0, this.pos), path];
+
+      if (emit) this.emitListen();
     }
   }
 
@@ -46,20 +52,31 @@ export class History {
 
   @computed
   public get folders() {
-    if (!this.path) return ['/'];
+    if (!this.path) return [];
     return ['/', ...this.path?.split('/')].filter(r => r.length);
   }
 
   @action
   public go(n: number) {
     this.pos = n;
+    this.emitListen();
   }
 
   @action
   public goToFolder(n: number) {
     const folders = this.folders.slice(1, n);
-    const path = `/${folders.join('/')}`;
 
-    this.push(path);
+    this.push(`/${folders.join('/')}`);
+  }
+
+  @action
+  public pushFolder(folder: string) {
+    this.push(`${this.path}/${folder}`);
+  }
+
+  protected emitListen() {
+    if (this.listen) {
+      this.listen(this.path);
+    }
   }
 }

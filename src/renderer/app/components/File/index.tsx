@@ -29,6 +29,12 @@ export const File = observer(
       [data, onMouseDown],
     );
 
+    const onDoubleClick = React.useCallback(() => {
+      if (data.type === 'folder') {
+        store.pages.current.history.pushFolder(data.name);
+      }
+    }, [data]);
+
     const iconStyle = React.useMemo<React.CSSProperties>(
       () => ({
         backgroundImage: `url(${icon.data})`,
@@ -51,6 +57,7 @@ export const File = observer(
         }}
         onMouseUp={onMouseUp}
         onMouseDown={_onMouseDown}
+        onDoubleClick={onDoubleClick}
       >
         <Icon style={iconStyle} />
         <Label>{data.name}</Label>

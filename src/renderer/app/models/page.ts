@@ -17,7 +17,13 @@ export class Page {
 
   public files = new PageFiles(this);
 
-  constructor(public session: Session) {}
+  constructor(public session: Session) {
+    this.history.listen = this.listenHistory;
+  }
+
+  public get client() {
+    return this.session.client;
+  }
 
   @action
   public async prepare(path?: string) {
@@ -26,7 +32,7 @@ export class Page {
 
     const _path = path || this.session.startingDir;
 
-    this.history.push(_path);
+    this.history.push(_path, false);
   }
 
   @action
@@ -36,7 +42,9 @@ export class Page {
     this.loading = false;
   };
 
-  public get client() {
-    return this.session.client;
-  }
+  @action
+  public listenHistory = (path: string) => {
+    if (!path || this.loading) return;
+    this.fetch();
+  };
 }
