@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import { centerIcon } from '~/renderer/mixins/images';
 
@@ -7,12 +7,11 @@ export const StyledFile = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.04);
 
-  ${({ selected }: { selected: boolean }) => css`
-    background-color: ${selected
-      ? `rgba(98, 0, 234, 0.08)`
-      : 'rgba(0, 0, 0, 0.04)'};
-  `}
+  &.selected {
+    background-color: rgba(98, 0, 234, 0.08);
+  }
 `;
 
 export const Icon = styled.div`

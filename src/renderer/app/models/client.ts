@@ -1,7 +1,8 @@
 import { ipcRenderer } from 'electron';
-import { IFile } from 'qusly-core';
+import { IFile as ICoreFile } from 'qusly-core';
 
 import { ISite } from '~/interfaces';
+import { IFile } from '~/renderer/interfaces';
 
 export class Client {
   public config: ISite;
@@ -26,8 +27,14 @@ export class Client {
     await ipcRenderer.invoke('core-connect', this.config);
   }
 
-  public readDir(path: string): Promise<IFile[]> {
-    return ipcRenderer.invoke('core-read-dir', this.id, path);
+  public async readDir(path: string): Promise<IFile[]> {
+    const files: ICoreFile[] = await ipcRenderer.invoke(
+      'core-read-dir',
+      this.id,
+      path,
+    );
+
+    return files.map((r, index) => ({ ...r, index }));
   }
 
   public pwd(): Promise<string> {

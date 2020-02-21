@@ -1,9 +1,9 @@
 import React from 'react';
-import { IFile } from 'qusly-core';
 import { observer } from 'mobx-react-lite';
 
 import store from '../../store';
 import { StyledFile, Label, Icon } from './style';
+import { IFile } from '~/renderer/interfaces';
 
 interface Props {
   data: IFile;
@@ -12,16 +12,11 @@ interface Props {
 }
 
 export const File = observer(
-  ({ data, onMouseDown, onMouseUp }: Props, ref: React.Ref<any>) => {
-    const page = store.pages.current;
-
+  ({ data, onMouseDown, onMouseUp }: Props, ref: any) => {
     const icon = React.useMemo(() => store.icons.getFileIcon(data), [
       data.type,
       data.ext,
     ]);
-
-    const selectedIndex = page.selectedFiles.indexOf(data);
-    const selected = selectedIndex !== -1;
 
     const _onMouseDown = React.useCallback(
       (e: React.MouseEvent) => {
@@ -29,29 +24,9 @@ export const File = observer(
 
         if (onMouseDown) onMouseDown(e);
 
-        if (e.button !== 0) return;
-
-        if (e.ctrlKey) {
-          if (selected) {
-            page.selectedFiles.splice(selectedIndex, 1);
-          } else {
-            page.selectedFiles.push(data);
-          }
-        }
-
-        if (e.shiftKey) {
-          const focusedIndex = page.files.indexOf(page.anchorFile);
-
-          page.selectFiles(page.files.indexOf(data), focusedIndex);
-        } else {
-          page.anchorFile = data;
-        }
-
-        if (!e.ctrlKey && !e.shiftKey) {
-          page.selectedFiles = [data];
-        }
+        store.pages.current.files.onFileMouseDown(e, data);
       },
-      [page.selectedFiles, page.anchorFile, selected],
+      [data, onMouseDown],
     );
 
     const iconStyle = React.useMemo<React.CSSProperties>(
@@ -62,12 +37,20 @@ export const File = observer(
       [icon],
     );
 
+    React.useLayoutEffect(() => {
+      return () => {
+        delete store.pages.current.files.refs[data.index];
+      };
+    }, [data]);
+
     return (
       <StyledFile
-        ref={ref}
-        selected={selected}
-        onMouseDown={_onMouseDown}
+        ref={r => {
+          ref(r);
+          if (r) store.pages.current.files.refs[data.index] = r;
+        }}
         onMouseUp={onMouseUp}
+        onMouseDown={_onMouseDown}
       >
         <Icon style={iconStyle} />
         <Label>{data.name}</Label>

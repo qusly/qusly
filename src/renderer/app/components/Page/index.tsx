@@ -28,27 +28,30 @@ export const Page = observer(() => {
 
   const onMouseDown = React.useCallback((e: React.MouseEvent) => {
     if (!e.ctrlKey && !e.shiftKey) {
-      store.pages.current.selectedFiles = [];
+      store.pages.current.files.selected = [];
     }
   }, []);
 
-  const onSelection = React.useCallback((files: IFile[]) => {
-    store.pages.current.selectedFiles = files;
+  const onSelection = React.useCallback((selected: IFile[]) => {
+    store.pages.current.files.selected = selected;
   }, []);
 
   const onDrop = React.useCallback((item: IFile) => {
     console.log(item);
   }, []);
 
-  console.log('xd');
-
   return (
-    <StyledPage
-      onSelection={onSelection}
-      onMouseDown={onMouseDown}
-      fast={page?.files.length >= 50}
-    >
-      <DragDrop onDrop={onDrop} selected={page?.selectedFiles}>
+    <StyledPage onSelection={onSelection} onMouseDown={onMouseDown}>
+      {page?.files.list.map(r => (
+        <Selectable key={r.name} data={r}>
+          {innerRef => <File ref={innerRef} data={r} />}
+        </Selectable>
+      ))}
+    </StyledPage>
+  );
+});
+
+/*      <DragDrop onDrop={onDrop} selected={page?.selectedFiles}>
         {page?.files.map(r => (
           <Selectable key={r.name} data={r}>
             {innerRef => (
@@ -59,6 +62,4 @@ export const Page = observer(() => {
           </Selectable>
         ))}
       </DragDrop>
-    </StyledPage>
-  );
-});
+      */
