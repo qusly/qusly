@@ -11,14 +11,17 @@ export class PageFiles {
   @observable
   protected _selected: IFile[] = [];
 
-  public refs: HTMLDivElement[] = [];
+  @observable
+  public anchorFile: IFile;
 
-  protected anchorFile: IFile;
+  public refs: HTMLDivElement[] = [];
 
   constructor(protected page: Page) {}
 
   @action
   public async fetch() {
+    this.page.loading = true;
+
     const path = this.page.history.path;
 
     const files = await this.page.client.readDir(path);
@@ -29,6 +32,27 @@ export class PageFiles {
     this.refs = [];
     this.list = files;
     this._selected = [];
+    this.page.loading = false;
+  }
+
+  @action
+  public async move(files: IFile[], dest: IFile) {
+    this.selected = [];
+
+    const path = this.page.history.path;
+
+    try {
+      for (const file of files) {
+        const srcPath = `${path}/${file.name}`;
+        const destPath = `${path}/${dest.name}/${file.name}`;
+
+        await this.page.client.move(srcPath, destPath);
+
+        this.list = this.list.filter(r => r !== file);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   public get selected() {
@@ -41,7 +65,7 @@ export class PageFiles {
     this.selectFiles(this._selected);
   }
 
-  public selectFilesGroup = (start: number, end: number) => {
+  public selectGroup = (start: number, end: number) => {
     if (start > end) [start, end] = [end, start];
 
     this.selected = this.list.slice(start, end + 1);
@@ -74,13 +98,36 @@ export class PageFiles {
       const anchorIndex = this.list.indexOf(this.anchorFile);
       const destIndex = this.list.indexOf(data);
 
-      this.selectFilesGroup(anchorIndex, destIndex);
+      this.selectGroup(anchorIndex, destIndex);
     } else {
       this.anchorFile = data;
     }
 
-    if (!e.ctrlKey && !e.shiftKey) {
+    if (!selected && !e.ctrlKey && !e.shiftKey) {
       this.selected = [data];
     }
+  };
+
+  public onFileMouseUp = (e: React.MouseEvent, data: IFile) => {
+    if (e.ctrlKey || e.shiftKey) return;
+
+    const index = this.selected.indexOf(data);
+    const selected = index !== -1;
+
+    if (selected) {
+      this.selected = [data];
+    }
+  };
+
+  public onSelection = (selected: IFile[]) => {
+    this.selected = selected;
+  };
+
+  public onDrop = (dest: IFile) => {
+    if (dest.type !== 'folder' || !this.selected.length) return;
+
+    const files = this.selected.filter(r => r !== dest);
+
+    this.move(files, dest);
   };
 }

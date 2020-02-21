@@ -25,5 +25,9 @@ export class Core {
     ipcMain.handle('core-pwd', (e, id: number) => {
       return this.clients.get(id).pwd();
     });
+
+    ipcMain.handle('core-move', (e, id: number, src: string, dest: string) => {
+      return this.clients.get(id).move(src, dest);
+    });
   }
 }

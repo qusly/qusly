@@ -26,7 +26,6 @@ export const Folder = styled.div`
   display: flex;
   align-items: center;
   font-size: 14px;
-  font-weight: 300;
   padding-left: 4px;
   cursor: pointer;
   color: rgba(0, 0, 0, 0.54);

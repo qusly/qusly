@@ -40,4 +40,8 @@ export class Client {
   public pwd(): Promise<string> {
     return ipcRenderer.invoke('core-pwd', this.id);
   }
+
+  public move(src: string, dest: string) {
+    return ipcRenderer.invoke('core-move', this.id, src, dest);
+  }
 }

@@ -37,19 +37,21 @@ export const Page = observer(() => {
     store.pages.current.files.selected = selected;
   }, []);
 
-  const onDrop = React.useCallback((item: IFile) => {
-    console.log(item);
-  }, []);
-
   return (
     <StyledPage>
       {page?.loading === false ? (
-        <Grid onSelection={onSelection} onMouseDown={onMouseDown}>
-          {page?.files.list.map(r => (
-            <Selectable key={r.name} data={r}>
-              {innerRef => <File ref={innerRef} data={r} />}
-            </Selectable>
-          ))}
+        <Grid onSelection={page?.files.onSelection} onMouseDown={onMouseDown}>
+          <DragDrop onDrop={page?.files.onDrop}>
+            {page?.files.list.map(r => (
+              <Selectable key={r.name} data={r}>
+                {innerRef => (
+                  <Droppable data={r}>
+                    {provided => <File ref={innerRef} data={r} {...provided} />}
+                  </Droppable>
+                )}
+              </Selectable>
+            ))}
+          </DragDrop>
         </Grid>
       ) : (
         <FilesSkeleton />
@@ -57,16 +59,3 @@ export const Page = observer(() => {
     </StyledPage>
   );
 });
-
-/*      <DragDrop onDrop={onDrop} selected={page?.selectedFiles}>
-        {page?.files.map(r => (
-          <Selectable key={r.name} data={r}>
-            {innerRef => (
-              <Droppable data={r}>
-                {provided => <File ref={innerRef} data={r} {...provided} />}
-              </Droppable>
-            )}
-          </Selectable>
-        ))}
-      </DragDrop>
-      */

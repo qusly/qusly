@@ -28,7 +28,7 @@ export class Page {
   @action
   public async prepare(path?: string) {
     await this.session.connect();
-    await this.fetch();
+    await this.files.fetch();
 
     const _path = path || this.session.startingDir;
 
@@ -36,15 +36,9 @@ export class Page {
   }
 
   @action
-  public fetch = async () => {
-    this.loading = true;
-    await this.files.fetch();
-    this.loading = false;
-  };
-
-  @action
   public listenHistory = (path: string) => {
-    if (!path || this.loading) return;
-    this.fetch();
+    if (path && !this.loading) {
+      this.files.fetch();
+    }
   };
 }

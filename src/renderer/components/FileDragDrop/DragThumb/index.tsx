@@ -1,27 +1,31 @@
 import React from 'react';
-import { IFile } from 'qusly-core';
+import { observer } from 'mobx-react-lite';
 
+import store from '~/renderer/app/store';
 import { StyledThumb, Icon, Title, Count } from './style';
 
-export interface IDragThumbProps {
-  file?: IFile;
-  count?: number;
-  children?: React.ReactNode;
-}
+export const DragThumb = observer(
+  (props: any, ref: any) => {
+    const page = store.pages.current;
+    const file = page?.files.anchorFile;
+    const count = page?.files.selected.length;
 
-export const DragThumb = React.forwardRef(
-  (props: IDragThumbProps, ref: React.Ref<HTMLDivElement>) => {
-    const { file, count, children } = props;
+    const icon = React.useMemo(() => {
+      return store.icons.getFileIcon(file);
+    }, [file]);
 
-    const icon = '';
-    const opacity = 1;
+    const iconStyle: React.CSSProperties = {
+      backgroundImage: `url(${icon?.data})`,
+      opacity: icon?.opacity,
+    };
 
     return (
       <StyledThumb ref={ref}>
-        <Icon icon={icon} opacity={opacity} />
+        <Icon style={iconStyle} />
         <Title>{file?.name}</Title>
         {count > 1 && <Count>{count}</Count>}
       </StyledThumb>
     );
   },
+  { forwardRef: true },
 );

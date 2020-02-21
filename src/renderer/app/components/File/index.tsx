@@ -29,6 +29,15 @@ export const File = observer(
       [data, onMouseDown],
     );
 
+    const _onMouseUp = React.useCallback(
+      (e: React.MouseEvent) => {
+        if (onMouseUp) onMouseUp(e);
+
+        store.pages.current.files.onFileMouseUp(e, data);
+      },
+      [data, onMouseUp],
+    );
+
     const onDoubleClick = React.useCallback(() => {
       if (data.type === 'folder') {
         store.pages.current.history.pushFolder(data.name);
@@ -55,8 +64,8 @@ export const File = observer(
           ref(r);
           if (r) store.pages.current.files.refs[data.index] = r;
         }}
-        onMouseUp={onMouseUp}
         onMouseDown={_onMouseDown}
+        onMouseUp={_onMouseUp}
         onDoubleClick={onDoubleClick}
       >
         <Icon style={iconStyle} />

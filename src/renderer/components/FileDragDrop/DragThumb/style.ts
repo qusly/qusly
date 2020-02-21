@@ -24,11 +24,6 @@ export const Icon = styled.div`
   min-width: 24px;
   min-height: 24px;
   ${centerIcon()};
-
-  ${({ icon, opacity }: { icon: string; opacity: number }) => css`
-    background-image: url(${icon});
-    opacity: ${opacity};
-  `}
 `;
 
 export const Title = styled.div`

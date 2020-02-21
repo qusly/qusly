@@ -14,11 +14,10 @@ export const DragDropContext = React.createContext<IDragDropContext>(null);
 interface Props {
   onDrop?: (dest: any) => any;
   distance?: number;
-  selected?: IFile[];
   children?: React.ReactNode;
 }
 
-export const DragDrop = ({ selected, onDrop, distance, children }: Props) => {
+export const DragDrop = ({ onDrop, distance, children }: Props) => {
   const active = React.useRef(false);
   const thumbVisible = React.useRef(false);
 
@@ -67,7 +66,9 @@ export const DragDrop = ({ selected, onDrop, distance, children }: Props) => {
     thumbVisible.current = false;
     startPos.current = null;
 
-    thumbRef.current.style.display = 'none';
+    if (thumbRef.current) {
+      thumbRef.current.style.display = 'none';
+    }
 
     window.removeEventListener('mousemove', onWindowMouseMove);
     window.removeEventListener('mouseup', onWindowMouseUp);
@@ -86,14 +87,12 @@ export const DragDrop = ({ selected, onDrop, distance, children }: Props) => {
       <DragDropContext.Provider value={provider}>
         {children}
       </DragDropContext.Provider>
-      {selected.length !== 0 && (
-        <DragThumb ref={thumbRef} file={selected[0]} count={selected.length} />
-      )}
+      <DragThumb ref={thumbRef} />
     </>
   );
 };
 
 DragDrop.defaultProps = {
-  distance: 10,
+  distance: 20,
   selected: [],
 } as Props;
