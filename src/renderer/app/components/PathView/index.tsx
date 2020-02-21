@@ -4,8 +4,16 @@ import { observer } from 'mobx-react-lite';
 import store from '../../store';
 import { StyledPathView, Folders, Folder } from './style';
 
-const onFolderClick = (index: number) => () => {
-  store.pages.current.history.goToFolder(index);
+const onFolderMouseUp = (index: number) => () => {
+  const page = store.pages.current;
+
+  if (!page.isDragging) {
+    store.pages.current.history.goToFolder(index);
+  } else {
+    const path = page.history.folderPath(index);
+
+    page.files.move(page.files.selected, path);
+  }
 };
 
 export const PathView = observer(() => {
@@ -17,7 +25,7 @@ export const PathView = observer(() => {
       {folders && (
         <Folders>
           {folders.map((r, index) => (
-            <Folder key={r} onClick={onFolderClick(index)}>
+            <Folder key={r} onMouseUp={onFolderMouseUp(index)}>
               {r}
             </Folder>
           ))}

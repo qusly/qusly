@@ -5,24 +5,9 @@ import { Selectable } from 'rectangle-selection';
 import store from '../../store';
 import { File } from '../File';
 import { DragDrop, Droppable } from '~/renderer/components/FileDragDrop';
-import {
-  Skeleton,
-  SkeletonCircle,
-  SkeletonText,
-} from '~/renderer/components/Skeleton';
 import { IFile } from '~/renderer/interfaces';
 import { FilesSkeleton } from '~/renderer/components/FilesSkeleton';
 import { StyledPage, Grid } from './style';
-
-const Button = observer(({ path }: { path: string }) => {
-  const page = store.pages.current;
-
-  const onClick = () => {
-    page.history.push(path);
-  };
-
-  return <button onClick={onClick}>{path}</button>;
-});
 
 export const Page = observer(() => {
   const page = store.pages.current;
@@ -31,10 +16,6 @@ export const Page = observer(() => {
     if (!e.ctrlKey && !e.shiftKey) {
       store.pages.current.files.selected = [];
     }
-  }, []);
-
-  const onSelection = React.useCallback((selected: IFile[]) => {
-    store.pages.current.files.selected = selected;
   }, []);
 
   return (

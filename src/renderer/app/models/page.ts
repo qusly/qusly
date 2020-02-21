@@ -17,6 +17,8 @@ export class Page {
 
   public files = new PageFiles(this);
 
+  public isDragging = false;
+
   constructor(public session: Session) {
     this.history.listen = this.listenHistory;
   }

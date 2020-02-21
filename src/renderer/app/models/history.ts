@@ -64,14 +64,18 @@ export class History {
 
   @action
   public goToFolder(n: number) {
-    const folders = this.folders.slice(1, n);
-
-    this.push(`/${folders.join('/')}`);
+    this.push(this.folderPath(n));
   }
 
   @action
   public pushFolder(folder: string) {
     this.push(`${this.path}/${folder}`);
+  }
+
+  public folderPath(n: number) {
+    const folders = this.folders.slice(1, n + 1);
+
+    return `/${folders.join('/')}`;
   }
 
   protected emitListen() {

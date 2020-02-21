@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { DragDropContext } from '../DragDrop';
+import { DragDropContext, IFileDroppableData } from '../DragDrop';
 
 interface IDraggableProvided {
   onMouseDown?: (e: React.MouseEvent) => void;
@@ -8,7 +8,7 @@ interface IDraggableProvided {
 }
 
 interface Props {
-  data?: any;
+  data: IFileDroppableData;
   children?: (provided: IDraggableProvided) => JSX.Element;
 }
 

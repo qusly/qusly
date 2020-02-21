@@ -1,18 +1,21 @@
 import React from 'react';
-import { IFile } from 'qusly-core';
 import { IPos, cursorDistance } from 'rectangle-selection';
 
 import { DragThumb } from '../DragThumb';
+import { IFile } from '~/renderer/interfaces';
+import store from '~/renderer/app/store';
+
+export type IFileDroppableData = IFile;
 
 interface IDragDropContext {
   onDrag?: (e: React.MouseEvent) => void;
-  onDrop?: (data: any) => void;
+  onDrop?: (data: IFileDroppableData) => void;
 }
 
 export const DragDropContext = React.createContext<IDragDropContext>(null);
 
 interface Props {
-  onDrop?: (dest: any) => any;
+  onDrop?: (dest: IFileDroppableData) => any;
   distance?: number;
   children?: React.ReactNode;
 }
@@ -27,14 +30,16 @@ export const DragDrop = ({ onDrop, distance, children }: Props) => {
 
   const onDrag = React.useCallback((e: React.MouseEvent) => {
     startPos.current = [e.pageX, e.pageY];
+
     active.current = true;
+    store.pages.current.isDragging = true;
 
     window.addEventListener('mousemove', onWindowMouseMove);
     window.addEventListener('mouseup', onWindowMouseUp);
   }, []);
 
-  const _onDrop = React.useCallback((data: any) => {
-    if (active.current) {
+  const _onDrop = React.useCallback((data: IFileDroppableData) => {
+    if (active.current && thumbVisible.current) {
       if (onDrop) onDrop(data);
     }
   }, []);
@@ -65,6 +70,7 @@ export const DragDrop = ({ onDrop, distance, children }: Props) => {
     active.current = false;
     thumbVisible.current = false;
     startPos.current = null;
+    store.pages.current.isDragging = false;
 
     if (thumbRef.current) {
       thumbRef.current.style.display = 'none';

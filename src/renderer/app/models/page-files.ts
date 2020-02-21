@@ -36,7 +36,7 @@ export class PageFiles {
   };
 
   @action
-  public async move(files: IFile[], dest: IFile) {
+  public async move(files: IFile[], dest: string) {
     this.selected = [];
 
     const path = this.page.history.path;
@@ -44,7 +44,7 @@ export class PageFiles {
     try {
       for (const file of files) {
         const srcPath = `${path}/${file.name}`;
-        const destPath = `${path}/${dest.name}/${file.name}`;
+        const destPath = `${dest}/${file.name}`;
 
         await this.page.client.move(srcPath, destPath);
 
@@ -127,7 +127,8 @@ export class PageFiles {
     if (dest.type !== 'folder' || !this.selected.length) return;
 
     const files = this.selected.filter(r => r !== dest);
+    const path = `${this.page.history.path}/${dest.name}`;
 
-    this.move(files, dest);
+    this.move(files, path);
   };
 }
