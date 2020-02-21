@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
 import { centerIcon } from '~/renderer/mixins/images';
+import { FILE_HEIGHT } from '../../constants';
 
 export const StyledFile = styled.div`
-  height: 96px;
+  height: ${FILE_HEIGHT}px;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -15,16 +16,17 @@ export const StyledFile = styled.div`
 `;
 
 export const Icon = styled.div`
-  width: 48px;
-  height: 48px;
-  ${centerIcon(32)};
+  width: 32px;
+  height: 32px;
+  margin: 8px 0px;
+  ${centerIcon()};
 `;
 
 export const Label = styled.div`
   max-width: 100%;
-  margin-top: 8px;
   font-size: 13px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  padding: 0px 8px;
 `;

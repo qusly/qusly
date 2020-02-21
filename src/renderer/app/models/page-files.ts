@@ -4,15 +4,9 @@ import { Page } from './page';
 import store from '../store';
 import { IFile } from '~/renderer/interfaces';
 
-const _files: IFile[] = Array.from(Array(50).keys()).map(r => {
-  return {
-    name: r.toString(),
-  } as IFile;
-});
-
 export class PageFiles {
   @observable
-  public list: IFile[] = [..._files];
+  public list: IFile[] = [];
 
   @observable
   protected _selected: IFile[] = [];
