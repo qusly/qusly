@@ -25,7 +25,7 @@ export const FilesSkeleton = () => {
 
     ref.current.style.display = 'none';
 
-    setCount(getRandomNumber(10, 30));
+    setCount(getRandomNumber(15, 30));
 
     requestAnimationFrame(() => {
       ref.current.style.display = 'grid';
