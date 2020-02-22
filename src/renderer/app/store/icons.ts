@@ -23,15 +23,13 @@ export class IconsStore {
   }
 
   public getFileIcon(file: IFile): IFileIcon {
-    const base64 = file?.ext && this.map[file.ext];
-
-    if (base64) {
-      return { data: base64, opacity: 1 };
-    } else {
-      return {
-        data: file?.type === 'folder' ? icons.folder : icons.file,
-        opacity: transparency.icons.inactive,
-      };
+    if (file?.ext && file?.type !== 'folder') {
+      return { data: this.map[file.ext], opacity: 1 };
     }
+
+    return {
+      data: file?.type === 'folder' ? icons.folder : icons.file,
+      opacity: transparency.icons.inactive,
+    };
   }
 }
