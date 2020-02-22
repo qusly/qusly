@@ -3,6 +3,7 @@ import { observable, action } from 'mobx';
 import { Page } from './page';
 import store from '../store';
 import { IFile } from '~/renderer/interfaces';
+import { sortFiles } from '../utils';
 
 export class PageFiles {
   @observable
@@ -30,7 +31,7 @@ export class PageFiles {
     await store.icons.load(icons);
 
     this.refs = [];
-    this.list = files;
+    this.list = sortFiles(files);
     this._selected = [];
     this.page.loading = false;
   };
