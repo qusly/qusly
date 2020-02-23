@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Tabbar } from '../Tabbar';
 import { Navigation } from '../Navigation';
-import { PathView } from '../Pathview';
+import { PathView } from '../PathView';
 import { StyledAppbar, StyledToolbar } from './style';
 
 const Toolbar = () => {
