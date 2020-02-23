@@ -1,4 +1,5 @@
 import { observable, action } from 'mobx';
+import { extname } from 'path';
 
 import { Page } from './page';
 import store from '../store';
@@ -15,6 +16,9 @@ export class PageFiles {
   @observable
   public anchorFile: IFile;
 
+  @observable
+  public renamingFile = false;
+
   public refs: HTMLDivElement[] = [];
 
   constructor(protected page: Page) {}
@@ -24,11 +28,9 @@ export class PageFiles {
     this.page.loading = true;
 
     const path = this.page.history.path;
-
     const files = await this.page.client.readDir(path);
-    const icons = files.map(r => r.ext);
 
-    await store.icons.load(icons);
+    await store.icons.loadFiles(...files);
 
     this.refs = [];
     this.list = sortFiles(files);
@@ -58,6 +60,49 @@ export class PageFiles {
     }
   }
 
+  @action
+  public async rename(file: IFile, name: string) {
+    this.renamingFile = false;
+
+    if (this.exists(name)) return;
+
+    const oldName = file.name;
+    const path = this.page.history.path;
+
+    try {
+      await this.page.client.move(`${path}/${oldName}`, `${path}/${name}`);
+      await store.icons.load(name);
+
+      this.editFileData(file, { ext: extname(name), name: name });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  @action
+  protected editFileData(file: IFile, data: Partial<IFile>) {
+    const index = this.list.indexOf(file);
+
+    const list = [
+      ...this.list.slice(0, index),
+      {
+        ...file,
+        ...data,
+      },
+      ...this.list.slice(index + 1, this.list.length),
+    ];
+
+    this.list = sortFiles(list);
+  }
+
+  public exists(name: string) {
+    const ext = extname(name);
+
+    return this.list.find(
+      r => r.name.toLowerCase() === name.toLowerCase() && r.ext === ext,
+    );
+  }
+
   public get selected() {
     return this._selected;
   }
@@ -68,6 +113,7 @@ export class PageFiles {
     this.selectFiles(this._selected);
   }
 
+  @action
   public selectGroup = (start: number, end: number) => {
     if (start > end) [start, end] = [end, start];
 
@@ -78,11 +124,14 @@ export class PageFiles {
     items.forEach(r => {
       const ref = this.refs[r.index];
 
+      if (!ref) return;
+
       if (select) ref.classList.add('selected');
       else ref.classList.remove('selected');
     });
   }
 
+  @action
   public onFileMouseDown = (e: React.MouseEvent, data: IFile) => {
     if (e.button !== 0) return;
 
@@ -113,6 +162,7 @@ export class PageFiles {
     }
   };
 
+  @action
   public onFileMouseUp = (e: React.MouseEvent, data: IFile) => {
     if (e.button === 2 || (!e.ctrlKey && !e.shiftKey)) {
       const selected = this.selected.includes(data);
@@ -130,10 +180,12 @@ export class PageFiles {
     }
   };
 
+  @action
   public onSelection = (selected: IFile[]) => {
     this.selected = selected;
   };
 
+  @action
   public onDrop = (dest: IFile) => {
     if (dest.type !== 'folder' || !this.selected.length) return;
 

@@ -33,8 +33,7 @@ const onPaste = () => {
 };
 
 const onRename = () => {
-  // const page = store.pages.current;
-  // page.focusedFile.renamed = true;
+  store.pages.current.files.renamingFile = true;
 };
 
 const onDelete = () => {

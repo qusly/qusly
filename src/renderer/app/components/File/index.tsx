@@ -2,8 +2,9 @@ import React from 'react';
 import { observer } from 'mobx-react-lite';
 
 import store from '../../store';
-import { StyledFile, Label, Icon } from './style';
 import { IFile } from '~/renderer/interfaces';
+import { resizeTextarea, selectFileName } from '~/renderer/utils';
+import { StyledFile, LabelContainer, Label, Icon, Input } from './style';
 
 interface Props {
   data: IFile;
@@ -13,10 +14,10 @@ interface Props {
 
 export const File = observer(
   ({ data, onMouseDown, onMouseUp }: Props, ref: any) => {
-    const icon = React.useMemo(() => store.icons.getFileIcon(data), [
-      data.type,
-      data.ext,
-    ]);
+    const page = store.pages.current;
+    const icon = store.icons.getFileIcon(data);
+
+    const nameInputRef = React.useRef<HTMLTextAreaElement>();
 
     const _onMouseDown = React.useCallback(
       (e: React.MouseEvent) => {
@@ -44,6 +45,22 @@ export const File = observer(
       }
     }, [data]);
 
+    const onKeyDown = React.useCallback(
+      (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+        if (e.key === 'Enter') {
+          e.stopPropagation();
+          page.files.rename(data, nameInputRef.current.value);
+        } else {
+          resizeTextarea(nameInputRef.current);
+        }
+      },
+      [data],
+    );
+
+    const onBlur = React.useCallback(() => {
+      store.pages.current.files.rename(data, nameInputRef.current.value);
+    }, [data]);
+
     const iconStyle = React.useMemo<React.CSSProperties>(
       () => ({
         backgroundImage: `url(${icon.data})`,
@@ -51,6 +68,19 @@ export const File = observer(
       }),
       [icon],
     );
+
+    const renaming =
+      page?.files?.renamingFile && page.files.anchorFile === data;
+
+    React.useEffect(() => {
+      if (renaming) {
+        nameInputRef.current.value = data.name;
+        nameInputRef.current.focus();
+
+        resizeTextarea(nameInputRef.current);
+        selectFileName(nameInputRef.current);
+      }
+    }, [renaming, data]);
 
     React.useLayoutEffect(() => {
       return () => {
@@ -69,7 +99,12 @@ export const File = observer(
         onDoubleClick={onDoubleClick}
       >
         <Icon style={iconStyle} />
-        <Label>{data.name}</Label>
+        <LabelContainer>
+          <Label>{data.name}</Label>
+          {renaming && (
+            <Input ref={nameInputRef} onKeyDown={onKeyDown} onBlur={onBlur} />
+          )}
+        </LabelContainer>
       </StyledFile>
     );
   },

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { centerIcon } from '~/renderer/mixins/images';
+import { centerIcon, customInput } from '~/renderer/mixins';
 import { FILE_HEIGHT } from '../../constants';
 
 export const StyledFileBase = css`
@@ -31,11 +31,35 @@ export const Icon = styled.div`
   ${centerIcon()};
 `;
 
+export const LabelContainer = styled.div`
+  width: 100%;
+  position: relative;
+`;
+
 export const Label = styled.div`
-  max-width: 100%;
-  font-size: 13px;
-  overflow: hidden;
-  white-space: nowrap;
+  width: 100%;
   text-overflow: ellipsis;
   padding: 0px 8px;
+  overflow: hidden;
+  text-align: center;
+  font-size: 13px;
+`;
+
+export const Input = styled.textarea`
+  width: 100%;
+  height: calc(100% + 2px);
+  overflow: hidden;
+  position: absolute;
+  text-align: center;
+  text-align-last: center;
+  top: -1px;
+  left: 0px;
+  letter-spacing: 0.25px;
+  padding: 0px 8px;
+  color: #000;
+  font-size: 13px;
+  z-index: 1;
+  ${customInput()};
+  background-color: #fff;
+  border: 1px solid red;
 `;
