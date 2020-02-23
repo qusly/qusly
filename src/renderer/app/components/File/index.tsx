@@ -23,9 +23,12 @@ export const File = observer(
       (e: React.MouseEvent) => {
         e.stopPropagation();
 
+        const page = store.pages.current;
+
+        if (page.files.renamingFile) return;
         if (onMouseDown) onMouseDown(e);
 
-        store.pages.current.files.onFileMouseDown(e, data);
+        page.files.onFileMouseDown(e, data);
       },
       [data, onMouseDown],
     );
