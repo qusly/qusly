@@ -15,9 +15,11 @@ export class IconsStore {
 
   @action
   public async load(...list: string[]) {
-    if (!list || !list.length) return;
+    const _list = list.filter(r => !this.map.has(r));
 
-    const data: IGetIconsRes = await ipcRenderer.invoke('get-icons', list);
+    if (!_list || !_list.length) return;
+
+    const data: IGetIconsRes = await ipcRenderer.invoke('get-icons', _list);
 
     for (const ext in data) {
       this.map.set(ext, data[ext]);
