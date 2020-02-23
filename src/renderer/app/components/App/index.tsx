@@ -4,6 +4,7 @@ import { createGlobalStyle } from 'styled-components';
 
 import { Page } from '../Page';
 import { Appbar } from '../Appbar';
+import { ContextMenu } from '../ContextMenu';
 import { Style } from '../../style';
 import { StyledApp } from './style';
 
@@ -16,6 +17,7 @@ const App = () => {
       <StyledApp>
         <Appbar />
         <Page />
+        <ContextMenu />
       </StyledApp>
     </>
   );

@@ -122,6 +122,16 @@ export class PageFiles {
     }
   };
 
+  public onFileContextMenu = (e: React.MouseEvent, data: IFile) => {
+    // const isSelected = this.selected.includes(data);
+
+    // if (!isSelected) {
+    //   this.selected = [data];
+    // }
+
+    store.contextMenu.show(e, 'file');
+  };
+
   public onSelection = (selected: IFile[]) => {
     this.selected = selected;
   };
