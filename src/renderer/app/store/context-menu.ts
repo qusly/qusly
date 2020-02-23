@@ -38,8 +38,9 @@ export class ContextMenuStore {
   };
 
   public hide = () => {
-    window.removeEventListener('mousedown', this.hide);
-
-    this.visible = false;
+    if (this.visible) {
+      window.removeEventListener('mousedown', this.hide);
+      this.visible = false;
+    }
   };
 }

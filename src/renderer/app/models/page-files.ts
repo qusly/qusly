@@ -86,6 +86,8 @@ export class PageFiles {
   public onFileMouseDown = (e: React.MouseEvent, data: IFile) => {
     if (e.button !== 0) return;
 
+    store.contextMenu.hide();
+
     const index = this.selected.indexOf(data);
     const selected = index !== -1;
 
@@ -112,24 +114,20 @@ export class PageFiles {
   };
 
   public onFileMouseUp = (e: React.MouseEvent, data: IFile) => {
-    if (e.ctrlKey || e.shiftKey) return;
+    if (e.button === 2 || (!e.ctrlKey && !e.shiftKey)) {
+      const selected = this.selected.includes(data);
 
-    const index = this.selected.indexOf(data);
-    const selected = index !== -1;
+      if (e.button === 2) {
+        store.contextMenu.show(e, 'file');
 
-    if (selected) {
-      this.selected = [data];
+        if (!selected) {
+          this.selected = [data];
+          this.anchorFile = data;
+        }
+      } else if (selected) {
+        this.selected = [data];
+      }
     }
-  };
-
-  public onFileContextMenu = (e: React.MouseEvent, data: IFile) => {
-    // const isSelected = this.selected.includes(data);
-
-    // if (!isSelected) {
-    //   this.selected = [data];
-    // }
-
-    store.contextMenu.show(e, 'file');
   };
 
   public onSelection = (selected: IFile[]) => {

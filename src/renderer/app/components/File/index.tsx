@@ -44,13 +44,6 @@ export const File = observer(
       }
     }, [data]);
 
-    const onContextMenu = React.useCallback(
-      e => {
-        store.pages.current.files.onFileContextMenu(e, data);
-      },
-      [data],
-    );
-
     const iconStyle = React.useMemo<React.CSSProperties>(
       () => ({
         backgroundImage: `url(${icon.data})`,
@@ -73,7 +66,6 @@ export const File = observer(
         }}
         onMouseDown={_onMouseDown}
         onMouseUp={_onMouseUp}
-        onContextMenu={onContextMenu}
         onDoubleClick={onDoubleClick}
       >
         <Icon style={iconStyle} />
