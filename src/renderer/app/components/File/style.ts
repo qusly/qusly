@@ -1,13 +1,13 @@
 import styled, { css } from 'styled-components';
 
 import { centerIcon, customInput } from '~/renderer/mixins';
-import { FILE_HEIGHT } from '../../constants';
 
 export const StyledFileBase = css`
-  height: ${FILE_HEIGHT}px;
+  height: fit-content;
   display: flex;
   align-items: center;
   flex-direction: column;
+  padding-bottom: 8px;
 `;
 
 export const StyledFile = styled.div`
@@ -38,11 +38,12 @@ export const LabelContainer = styled.div`
 
 export const Label = styled.div`
   width: 100%;
-  text-overflow: ellipsis;
   padding: 0px 8px;
-  overflow: hidden;
   text-align: center;
   font-size: 13px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 
 export const Input = styled.textarea`
