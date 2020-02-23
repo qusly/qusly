@@ -4,7 +4,9 @@ import { observer } from 'mobx-react-lite';
 import store from '../../store';
 import { StyledPathView, Folders, Folder } from './style';
 
-const onFolderMouseUp = (index: number) => () => {
+const onFolderMouseUp = (index: number) => (e: React.MouseEvent) => {
+  if (e.button !== 0) return;
+
   const page = store.pages.current;
 
   if (!page.isDragging) {

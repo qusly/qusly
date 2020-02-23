@@ -29,6 +29,8 @@ export const DragDrop = ({ onDrop, distance, children }: Props) => {
   const thumbRef = React.useRef<HTMLDivElement>();
 
   const onDrag = React.useCallback((e: React.MouseEvent) => {
+    if (e.button !== 0) return;
+
     startPos.current = [e.pageX, e.pageY];
 
     active.current = true;
