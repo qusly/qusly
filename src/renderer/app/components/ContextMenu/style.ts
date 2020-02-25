@@ -1,18 +1,18 @@
 import styled, { css } from 'styled-components';
-import { shadows } from '~/renderer/mixins/shadows';
+
+import { shadows, centerIcon } from '~/renderer/mixins';
 import { transparency } from '~/renderer/constants/transparency';
-import { centerIcon } from '~/renderer/mixins/images';
 
 export const StyledContextMenu = styled.table`
   position: fixed;
   z-index: 1000;
   padding: 4px 0px;
-  background-color: #fff;
   border-radius: 4px;
   border-spacing: 0;
   pointer-events: none;
   opacity: 0;
   transition: unset;
+  backdrop-filter: blur(32px);
   box-shadow: ${shadows(4)};
 
   ${({ visible }: { visible: boolean }) => css`
@@ -71,9 +71,7 @@ export const Icon = styled.td`
       css`
         width: 20px;
         height: 20px;
-        opacity: ${disabled
-          ? transparency.icons.disabled
-          : transparency.icons.inactive};
+        opacity: ${disabled ? transparency.icons.disabled : 1};
         background-image: url(${icon});
         backface-visibility: hidden;
         transform: translateZ(0);
