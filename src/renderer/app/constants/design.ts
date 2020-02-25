@@ -1,5 +1,7 @@
 export const EASING_FUNCTION = 'cubic-bezier(0.4, 0, 0.2, 1)';
 
+export const CARD_SHADOW = '0px 6px 16px 0px rgba(0, 0, 0, 0.12)';
+
 export const TITLEBAR_HEIGHT = 32;
 
 export const TABBAR_HEIGHT = 32;

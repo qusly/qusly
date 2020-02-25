@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 
 import { shadows, centerIcon } from '~/renderer/mixins';
 import { transparency } from '~/renderer/constants/transparency';
+import { CARD_SHADOW } from '../../constants';
 
 export const StyledContextMenu = styled.table`
   position: fixed;
@@ -12,8 +13,10 @@ export const StyledContextMenu = styled.table`
   pointer-events: none;
   opacity: 0;
   transition: unset;
-  backdrop-filter: blur(32px);
-  box-shadow: ${shadows(4)};
+  background-color: rgba(255, 255, 255, 0.79);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, ${transparency.dividers});
+  box-shadow: ${CARD_SHADOW};
 
   ${({ visible }: { visible: boolean }) => css`
     ${visible &&
@@ -52,7 +55,7 @@ export const StyledItem = styled.tr`
       : '#000'};
 
     &:hover {
-      background-color: ${!disabled ? 'rgba(0, 0, 0, 0.04)' : 'transparent'};
+      background-color: ${!disabled ? '#E0E0E0' : 'transparent'};
     }
   `}
 `;
