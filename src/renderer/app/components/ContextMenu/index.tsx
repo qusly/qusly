@@ -37,6 +37,13 @@ export const MenuItem = ({
     if (onClick) onClick(e);
   };
 
+  const iconStyle = React.useMemo<any>(
+    () => ({
+      '-webkit-mask-image': `url(${icon})`,
+    }),
+    [icon],
+  );
+
   return (
     <StyledItem
       onMouseDown={e => e.stopPropagation()}
@@ -45,7 +52,14 @@ export const MenuItem = ({
       hidden={hidden}
     >
       <td style={{ paddingLeft: 10 }}></td>
-      <Icon icon={icon} iconSize={iconSize} disabled={disabled}></Icon>
+      {icon && (
+        <Icon
+          className="context-menu-item-icon"
+          iconSize={iconSize}
+          disabled={disabled}
+          style={iconStyle}
+        ></Icon>
+      )}
       <Text>{children}</Text>
       <Accelerator>{accelerator}</Accelerator>
     </StyledItem>

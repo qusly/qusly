@@ -54,9 +54,17 @@ export const StyledItem = styled.tr`
       ? `rgba(0, 0, 0, ${transparency.text.disabled})`
       : '#000'};
 
-    &:hover {
-      background-color: ${!disabled ? '#E0E0E0' : 'transparent'};
-    }
+    ${!disabled &&
+      css`
+        &:hover {
+          background-color: #ff9010;
+          color: #fff;
+
+          & .context-menu-item-icon {
+            background-color: #fff;
+          }
+        }
+      `}
   `}
 `;
 
@@ -69,18 +77,16 @@ export const Accelerator = styled.td`
 `;
 
 export const Icon = styled.td`
-  ${({ icon, disabled, iconSize }: IContextMenuItemProps) => css`
-    ${icon &&
-      css`
-        width: 20px;
-        height: 20px;
-        opacity: ${disabled ? transparency.icons.disabled : 1};
-        background-image: url(${icon});
-        backface-visibility: hidden;
-        transform: translateZ(0);
-        -webkit-font-smoothing: subpixel-antialiased;
-        ${centerIcon(iconSize)};
-      `}
+  width: 20px;
+  height: 20px;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-font-smoothing: subpixel-antialiased;
+  background-color: #000;
+
+  ${({ disabled, iconSize }: IContextMenuItemProps) => css`
+    opacity: ${disabled ? transparency.icons.disabled : 1};
+    ${centerIcon(iconSize, true)};
   `}
 `;
 
