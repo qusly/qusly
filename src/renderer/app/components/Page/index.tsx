@@ -5,8 +5,7 @@ import { Selectable } from 'rectangle-selection';
 import store from '../../store';
 import { File } from '../File';
 import { DragDrop, Droppable } from '~/renderer/components/FileDragDrop';
-import { FilesSkeleton } from '~/renderer/components/FilesSkeleton';
-import { StyledPage, Grid } from './style';
+import { StyledPage, Grid, Preloader } from './style';
 
 export const Page = observer(() => {
   const page = store.pages.current;
@@ -34,7 +33,7 @@ export const Page = observer(() => {
           </DragDrop>
         </Grid>
       ) : (
-        <FilesSkeleton />
+        <Preloader />
       )}
     </StyledPage>
   );

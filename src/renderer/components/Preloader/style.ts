@@ -1,50 +1,61 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
+
+const rotateAnimation = keyframes`
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+`;
+
+const dashAnimation = keyframes`
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35px;
+  }
+
+  100% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124px;
+  }
+`;
+
+interface Props {
+  size: number;
+  thickness: number;
+  color: string;
+}
 
 export const StyledPreloader = styled.div`
   transform-origin: center center;
-  animation: preloader-rotate 2s linear infinite;
+  animation: ${rotateAnimation} 2s linear infinite;
   z-index: 5;
+  position: relative;
 
-  ${({ size }: { size: number }) => css`
+  ${({ size, thickness, color }: Props) => css`
     width: ${size}px;
     height: ${size}px;
+
+    & circle {
+      stroke-width: ${thickness};
+      stroke: ${color};
+    }
   `};
-
-  @keyframes preloader-rotate {
-    100% {
-      -webkit-transform: rotate(360deg);
-      transform: rotate(360deg);
-    }
-  }
-
-  @keyframes preloader-dash {
-    0% {
-      stroke-dasharray: 1, 200;
-      stroke-dashoffset: 0;
-    }
-
-    50% {
-      stroke-dasharray: 89, 200;
-      stroke-dashoffset: -35px;
-    }
-
-    100% {
-      stroke-dasharray: 89, 200;
-      stroke-dashoffset: -124px;
-    }
-  }
 `;
 
 export const Path = styled.circle`
   stroke-dasharray: 1, 200;
   stroke-dashoffset: 0;
-  animation: preloader-dash 1.5s ease-in-out infinite,
+  animation: ${dashAnimation} 1.5s ease-in-out infinite,
     color 6s ease-in-out infinite;
   stroke-linecap: square;
   transition: 0.3s stroke;
+  position: relative;
+`;
 
-  ${({ color, thickness }: { color: string; thickness: number }) => css`
-    stroke-width: ${thickness};
-    stroke: ${color};
-  `};
+export const Background = styled.circle`
+  stroke-opacity: 0.54;
 `;
