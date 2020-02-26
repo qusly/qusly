@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 
 import { centerIcon, customInput } from '~/renderer/mixins';
+import { PRIMARY_COLOR } from '../../constants';
 
 export const StyledFileBase = css`
   height: fit-content;
@@ -62,5 +63,5 @@ export const Input = styled.textarea`
   z-index: 1;
   ${customInput()};
   background-color: #fff;
-  border: 1px solid red;
+  border: 1px solid ${PRIMARY_COLOR};
 `;

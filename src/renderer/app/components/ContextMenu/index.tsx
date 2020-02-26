@@ -37,13 +37,6 @@ export const MenuItem = ({
     if (onClick) onClick(e);
   };
 
-  const iconStyle = React.useMemo<any>(
-    () => ({
-      '-webkit-mask-image': `url(${icon})`,
-    }),
-    [icon],
-  );
-
   return (
     <StyledItem
       onMouseDown={e => e.stopPropagation()}
@@ -57,7 +50,9 @@ export const MenuItem = ({
           className="context-menu-item-icon"
           iconSize={iconSize}
           disabled={disabled}
-          style={iconStyle}
+          style={{
+            WebkitMaskImage: `url(${icon})`,
+          }}
         ></Icon>
       )}
       <Text>{children}</Text>
@@ -82,9 +77,11 @@ export const ContextMenu = observer(() => {
       visible={store.contextMenu.visible}
       style={{ top, left }}
     >
-      <Container>
-        <FileMenu />
-      </Container>
+      {store.contextMenu.visible && (
+        <Container>
+          <FileMenu />
+        </Container>
+      )}
     </StyledContextMenu>
   );
 });

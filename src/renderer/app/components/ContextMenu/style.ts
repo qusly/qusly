@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
 
-import { shadows, centerIcon } from '~/renderer/mixins';
-import { transparency } from '~/renderer/constants/transparency';
-import { CARD_SHADOW } from '../../constants';
+import { centerIcon } from '~/renderer/mixins';
+import { transparency } from '~/renderer/constants';
+import { CARD_SHADOW, PRIMARY_COLOR } from '../../constants';
 
 export const StyledContextMenu = styled.table`
   position: fixed;
@@ -15,7 +15,6 @@ export const StyledContextMenu = styled.table`
   transition: unset;
   background-color: rgba(255, 255, 255, 0.79);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(0, 0, 0, ${transparency.dividers});
   box-shadow: ${CARD_SHADOW};
 
   ${({ visible }: { visible: boolean }) => css`
@@ -57,7 +56,7 @@ export const StyledItem = styled.tr`
     ${!disabled &&
       css`
         &:hover {
-          background-color: #ff9010;
+          background-color: ${PRIMARY_COLOR};
           color: #fff;
 
           & .context-menu-item-icon {

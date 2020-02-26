@@ -5,7 +5,6 @@ import { Selectable } from 'rectangle-selection';
 import store from '../../store';
 import { File } from '../File';
 import { DragDrop, Droppable } from '~/renderer/components/FileDragDrop';
-import { IFile } from '~/renderer/interfaces';
 import { FilesSkeleton } from '~/renderer/components/FilesSkeleton';
 import { StyledPage, Grid } from './style';
 

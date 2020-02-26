@@ -12,3 +12,5 @@ export const TOOLBAR_BUTTON_SIZE = 32;
 export const APPBAR_HEIGHT = TABBAR_HEIGHT + TOOLBAR_HEIGHT;
 
 export const TOOLBAR_COLOR = '#fafafa';
+
+export const PRIMARY_COLOR = '#ff9010';
