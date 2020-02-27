@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
+import { centerVertical } from '~/renderer/mixins';
 import { ToolbarButton } from '~/renderer/components/ToolbarButton';
 import {
   TABBAR_HEIGHT,
   TOOLBAR_BUTTON_SIZE,
   BACKGROUND_COLOR,
 } from '../../constants/design';
-import { centerVertical } from '~/renderer/mixins';
 
 export const StyledTabbar = styled.div`
   width: 100%;
@@ -17,6 +17,7 @@ export const StyledTabbar = styled.div`
   z-index: 2;
   background-color: ${BACKGROUND_COLOR};
   transition: 0.3s opacity, 0.3s transform;
+  -webkit-app-region: drag;
 `;
 
 export const TabsContainer = styled.div`

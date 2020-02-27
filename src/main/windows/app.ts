@@ -15,7 +15,7 @@ export class AppWindow {
 
   constructor() {
     this.instance = new BrowserWindow({
-      // frame: false,
+      frame: false,
       minWidth: 400,
       minHeight: 450,
       width: 900,
@@ -91,9 +91,5 @@ export class AppWindow {
         join('file://', app.getAppPath(), 'build/app.html'),
       );
     }
-
-    async () => {
-      // const client = new ConcurrentClient(1);
-    };
   }
 }

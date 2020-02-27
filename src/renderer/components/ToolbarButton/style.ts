@@ -9,6 +9,7 @@ export const Button = styled.div`
   position: relative;
   transition: 0.2s background-color;
   backface-visibility: hidden;
+  -webkit-app-region: no-drag;
 
   ${({ disabled }: { disabled: boolean }) => css`
     pointer-events: ${disabled ? 'none' : 'inherit'};
