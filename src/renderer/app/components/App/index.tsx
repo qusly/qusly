@@ -2,11 +2,13 @@ import { hot } from 'react-hot-loader/root';
 import React from 'react';
 import { createGlobalStyle } from 'styled-components';
 
-import { Page } from '../Page';
-import { Appbar } from '../Appbar';
+import { Sidebar } from '../Sidebar';
 import { ContextMenu } from '../ContextMenu';
+import { Titlebar } from '../Titlebar';
+import { ContentView } from '../ContentView';
+import { Activitybar } from '../Activitybar';
 import { Style } from '../../style';
-import { StyledApp } from './style';
+import { StyledApp, Container } from './style';
 
 const GlobalStyle = createGlobalStyle`${Style}`;
 
@@ -15,8 +17,12 @@ const App = () => {
     <>
       <GlobalStyle />
       <StyledApp>
-        <Appbar />
-        <Page />
+        <Titlebar />
+        <Container>
+          <Activitybar />
+          <Sidebar />
+          <ContentView />
+        </Container>
         <ContextMenu />
       </StyledApp>
     </>

@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
-import { APPBAR_HEIGHT, TOOLBAR_HEIGHT, TOOLBAR_COLOR } from '../../constants';
+import { APPBAR_HEIGHT, TOOLBAR_HEIGHT } from '../../constants';
 
 export const StyledAppbar = styled.div`
+  width: 100%;
   height: ${APPBAR_HEIGHT}px;
 `;
 
@@ -14,5 +15,4 @@ export const StyledToolbar = styled.div`
   flex-flow: row;
   align-items: center;
   padding-right: 24px;
-  background-color: ${TOOLBAR_COLOR};
 `;

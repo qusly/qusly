@@ -10,7 +10,6 @@ export const Style = css`
     cursor: default;
     margin: 0;
     padding: 0;
-    overflow: hidden;
     ${body2()};
   }
 

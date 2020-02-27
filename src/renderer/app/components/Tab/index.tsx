@@ -93,7 +93,7 @@ export default observer(({ tab }: { tab: Tab }) => {
     >
       <TabContainer
         style={{
-          backgroundColor: tab.isSelected ? TOOLBAR_COLOR : 'transparent',
+          backgroundColor: tab.isSelected ? '#fff' : 'transparent',
         }}
       >
         <Content tab={tab} />

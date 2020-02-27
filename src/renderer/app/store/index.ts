@@ -6,6 +6,7 @@ import { AddTabStore } from './add-tab';
 import { SessionsStore } from './sessions';
 import { PagesStore } from './pages';
 import { IconsStore } from './icons';
+import { SidebarStore } from './sidebar';
 import { ContextMenuStore } from './context-menu';
 
 export class Store {
@@ -14,6 +15,7 @@ export class Store {
   public sessions = new SessionsStore();
   public pages = new PagesStore();
   public icons = new IconsStore();
+  public sidebar = new SidebarStore();
   public contextMenu = new ContextMenuStore();
 
   @observable
