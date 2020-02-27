@@ -16,6 +16,11 @@ export const robotoMedium = () => `
   font-weight: 500;
 `;
 
+export const robotoBold = () => `
+  font-family: Roboto;
+  font-weight: 700;
+`;
+
 export const h1 = () => `
   ${robotoLight()};
   letter-spacing: ${getLetterSpacing(96, -1.5)}rem;

@@ -1,4 +1,4 @@
-import styled, { css, keyframes } from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { SelectionArea } from 'rectangle-selection';
 
 import { APPBAR_HEIGHT } from '../../constants';
@@ -24,8 +24,8 @@ const gridAnimation = keyframes`
 export const Grid = styled(SelectionArea)`
   width: 100%;
   height: 100%;
-  padding: 24px;
   display: grid;
+  padding: 8px 24px;
   grid-gap: 16px;
   grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
   grid-template-rows: repeat(auto-fill, 72px);

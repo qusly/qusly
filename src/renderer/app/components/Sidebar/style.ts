@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { robotoMedium } from '~/renderer/mixins';
+import { robotoBold } from '~/renderer/mixins';
 
 export const StyledSidebar = styled.div`
   width: 256px;
@@ -13,8 +13,7 @@ export const Header = styled.div`
   height: 48px;
   display: flex;
   align-items: center;
-  padding-left: 16px;
-  padding-right: 8px;
+  padding: 0px 16px;
   font-size: 16px;
-  ${robotoMedium()};
+  ${robotoBold()};
 `;

@@ -31,6 +31,13 @@ styleElement.textContent = `
     font-weight: 500;
     src: url(${fonts.robotoMedium}) format('woff2');
   }
+
+  @font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    src: url(${fonts.robotoBold}) format('woff2');
+  }
 `;
 
 document.head.appendChild(styleElement);
