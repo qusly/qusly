@@ -108,17 +108,12 @@ export class PageFiles {
   }
 
   public set selected(files: IFile[]) {
-    this.selectFiles(this._selected, false);
+    const unselect = this._selected.filter(r => !files.includes(r));
+
+    this.selectFiles(unselect, false);
     this._selected = files;
     this.selectFiles(this._selected);
   }
-
-  @action
-  public selectGroup = (start: number, end: number) => {
-    if (start > end) [start, end] = [end, start];
-
-    this.selected = this.list.slice(start, end + 1);
-  };
 
   protected selectFiles(items: IFile[], select = true) {
     items.forEach(r => {
@@ -130,6 +125,13 @@ export class PageFiles {
       else ref.classList.remove('selected');
     });
   }
+
+  @action
+  public selectGroup = (start: number, end: number) => {
+    if (start > end) [start, end] = [end, start];
+
+    this.selected = this.list.slice(start, end + 1);
+  };
 
   @action
   public onFileMouseDown = (e: React.MouseEvent, data: IFile) => {
