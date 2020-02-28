@@ -13,8 +13,8 @@ export const StyledContextMenu = styled.table`
   pointer-events: none;
   opacity: 0;
   transition: unset;
-  background-color: rgba(255, 255, 255, 0.79);
-  backdrop-filter: blur(12px);
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
   box-shadow: ${CARD_SHADOW};
 
   ${({ visible }: { visible: boolean }) => css`
