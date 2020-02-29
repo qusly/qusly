@@ -1,8 +1,18 @@
 import { observable, action } from 'mobx';
+import { EventEmitter } from 'events';
 
-import { IDialogData } from '~/renderer/interfaces';
+import {
+  IDialogData,
+  IDialogRes,
+  IDialogFieldsMap,
+} from '~/renderer/interfaces';
 
-export class DialogStore {
+export declare interface DialogStore {
+  once(event: 'save', listener: (fields: IDialogFieldsMap) => void): this;
+  once(event: 'cancel', listener: () => void): this;
+}
+
+export class DialogStore extends EventEmitter {
   @observable
   public visible = false;
 
@@ -13,10 +23,38 @@ export class DialogStore {
   public show(data: IDialogData) {
     this.data = data;
     this.visible = true;
+
+    return new Promise<IDialogRes>((resolve, reject) => {
+      this.once('save', fields => {
+        const values: IDialogRes = {};
+
+        for (const field in fields) {
+          values[field] = fields[field].value;
+        }
+
+        this.removeAllListeners();
+        resolve(values);
+      });
+
+      this.once('cancel', () => {
+        this.removeAllListeners();
+        reject('cancel');
+      });
+    });
   }
 
   @action
   public hide() {
     this.visible = false;
   }
+
+  public onSave = (fields: IDialogFieldsMap) => {
+    this.hide();
+    this.emit('save', fields);
+  };
+
+  public onCancel = () => {
+    this.hide();
+    this.emit('cancel');
+  };
 }

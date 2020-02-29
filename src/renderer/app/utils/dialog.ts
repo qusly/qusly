@@ -5,7 +5,7 @@ export const getRenameFileDialog = (): IDialogData => {
   const page = store.pages.current;
 
   return {
-    title: 'Rename file',
+    title: 'Rename a file',
     fields: [
       {
         type: 'input',

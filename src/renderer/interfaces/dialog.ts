@@ -14,3 +14,7 @@ export interface IDialogField {
   value?: string;
   placeholder?: string;
 }
+
+export interface IDialogRes {
+  [key: string]: string;
+}

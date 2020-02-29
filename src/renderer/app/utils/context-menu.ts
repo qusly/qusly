@@ -102,8 +102,10 @@ export const getFileContextMenu = (): IContextMenuData => {
       label: 'Rename',
       icon: icons.edit,
       accelerator: 'F2',
-      onSelect: () => {
-        store.dialog.show(getRenameFileDialog());
+      onSelect: async () => {
+        const { name } = await store.dialog.show(getRenameFileDialog());
+
+        page.files.rename(page.files.anchorFile, name);
       },
       hidden: multiple,
     },

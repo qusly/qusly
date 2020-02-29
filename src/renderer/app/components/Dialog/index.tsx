@@ -11,10 +11,16 @@ import {
   Button,
   OkButton,
 } from './style';
-import { IDialogFieldsMap, IDialogData } from '~/renderer/interfaces';
+import { IDialogFieldsMap } from '~/renderer/interfaces';
 
-const Item = ({ data }: { data: IDialogData }) => {
+const Item = observer(() => {
+  const { data } = store.dialog;
+
   const fields = React.useRef<IDialogFieldsMap>({});
+
+  const onSave = React.useCallback(() => {
+    store.dialog.onSave(fields.current);
+  }, []);
 
   React.useLayoutEffect(() => {
     if (data) {
@@ -38,15 +44,15 @@ const Item = ({ data }: { data: IDialogData }) => {
         return null;
       })}
       <Buttons>
-        <Button>Cancel</Button>
-        <OkButton>Save</OkButton>
+        <Button onClick={store.dialog.onCancel}>Cancel</Button>
+        <OkButton onClick={onSave}>Save</OkButton>
       </Buttons>
     </>
   );
-};
+});
 
 export const Dialog = observer(() => {
-  const { visible, data } = store.dialog;
+  const { visible } = store.dialog;
 
   const onClick = React.useCallback(() => {
     store.dialog.visible = false;
@@ -60,7 +66,7 @@ export const Dialog = observer(() => {
     <StyledDialog visible={visible} onClick={onClick}>
       {visible && (
         <Container onClick={onContainerClick}>
-          <Item data={data} />
+          <Item />
         </Container>
       )}
     </StyledDialog>
