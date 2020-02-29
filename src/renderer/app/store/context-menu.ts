@@ -4,20 +4,9 @@ import { observable, action } from 'mobx';
 import { setMenuPosition } from '../utils';
 import { IContextMenuData } from '~/renderer/interfaces';
 
-export type IContextMenuContent =
-  | 'page'
-  | 'file'
-  | 'tab'
-  | 'path'
-  | 'explorer'
-  | 'site';
-
 export class ContextMenuStore {
   @observable
   public visible = false;
-
-  @observable
-  public content: IContextMenuContent = 'file';
 
   @observable
   public data: IContextMenuData = [];
@@ -29,7 +18,7 @@ export class ContextMenuStore {
     e: MouseEvent | React.MouseEvent<any>,
     data: IContextMenuData,
   ) => {
-    if (this.ref.current) {
+    if (this.ref.current && e.button === 2) {
       window.removeEventListener('mousedown', this.hide);
       window.addEventListener('mousedown', this.hide);
 

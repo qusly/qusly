@@ -6,6 +6,7 @@ import store from '../../store';
 import { File } from '../File';
 import { DragDrop, Droppable } from '~/renderer/components/FileDragDrop';
 import { icons } from '~/renderer/constants';
+import { getPageContextMenu } from '../../constants';
 import { StyledPage, Grid, Preloader } from './style';
 
 export const Page = observer(() => {
@@ -18,31 +19,7 @@ export const Page = observer(() => {
   }, []);
 
   const onMouseUp = React.useCallback((e: React.MouseEvent) => {
-    if (e.button === 2) {
-      store.contextMenu.show(e, [
-        {
-          label: 'Refresh',
-          accelerator: 'Ctrl+R',
-          icon: icons.refresh,
-          onSelect: store.pages.current.files.fetch,
-        },
-        {
-          label: 'New folder',
-          icon: icons.folderAdd,
-          accelerator: 'Ctrl+Shift+N',
-        },
-        {
-          label: 'New file',
-          icon: icons.fileAdd,
-        },
-        {
-          label: 'Paste',
-          icon: icons.paste,
-          iconSize: 18,
-          onSelect: store.pages.current.files.onPaste,
-        },
-      ]);
-    }
+    store.contextMenu.show(e, getPageContextMenu());
   }, []);
 
   return (
