@@ -6,7 +6,7 @@ export const resizeTextarea = (ref: HTMLTextAreaElement) => {
   });
 };
 
-export const selectFileName = (ref: HTMLTextAreaElement) => {
+export const selectFileName = (ref: HTMLTextAreaElement | HTMLInputElement) => {
   const dotIndex = ref.value.lastIndexOf('.');
   const endIndex = dotIndex <= 0 ? ref.value.length : dotIndex;
 

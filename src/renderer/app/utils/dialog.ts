@@ -14,5 +14,13 @@ export const getRenameFileDialog = (): IDialogData => {
         value: page.files.anchorFile.name,
       },
     ],
+    onMount: fields => {
+      const input = fields.name;
+      const dotIndex = input.value.lastIndexOf('.');
+      const endIndex = dotIndex <= 0 ? input.value.length : dotIndex;
+
+      input.focus();
+      input.setSelectionRange(0, endIndex, 'forward');
+    },
   };
 };

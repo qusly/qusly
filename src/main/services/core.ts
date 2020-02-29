@@ -9,7 +9,7 @@ export class Core {
 
   constructor(public appWindow: AppWindow) {
     ipcMain.handle('core-create', (e, id: number) => {
-      if (!this.clients.has(id)) {
+      if (true || !this.clients.has(id)) {
         this.clients.set(id, new Client());
       }
     });

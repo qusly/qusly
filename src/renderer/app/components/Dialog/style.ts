@@ -1,14 +1,9 @@
 import styled, { css } from 'styled-components';
 
-import { CARD_SHADOW, PRIMARY_COLOR } from '../../constants';
-import {
-  robotoMedium,
-  noUserSelect,
-  robotoBold,
-  button,
-} from '~/renderer/mixins';
+import { CARD_SHADOW } from '../../constants';
+import { robotoMedium, noUserSelect, robotoBold } from '~/renderer/mixins';
 
-export const Background = styled.div`
+export const StyledDialog = styled.div`
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.64);
@@ -28,7 +23,7 @@ export const Background = styled.div`
   `}
 `;
 
-export const StyledDialog = styled.div`
+export const Container = styled.div`
   width: 100%;
   max-width: 344px;
   background-color: #fff;
@@ -87,7 +82,7 @@ export const Button = styled.div`
   }
 
   &:hover::before {
-    opacity: 0.12;
+    opacity: 0.08;
   }
 `;
 
