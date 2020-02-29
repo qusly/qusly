@@ -55,7 +55,6 @@
     "@types/styled-components": "5.0.1",
     "@typescript-eslint/eslint-plugin": "^2.21.0",
     "@typescript-eslint/parser": "^2.21.0",
-    "awesome-node-loader": "^1.1.1",
     "babel-loader": "^8.0.6",
     "babel-plugin-styled-components": "^1.10.7",
     "concurrently": "^5.1.0",
@@ -95,7 +94,7 @@
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
-    "sqlite3": "^4.1.1",
-    "keytar": "^5.4.0"
+    "keytar": "^5.4.0",
+    "sqlite3": "^4.1.1"
   }
 }
