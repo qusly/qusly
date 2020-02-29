@@ -56,10 +56,6 @@ Commands below will run Qusly in the development mode.
 $ npm run dev
 ```
 
-```bash
-$ npm run start
-```
-
 You can configure the environment file for better development experience. It will automatically create a new session on hot reload.
 
 Change name of the `.env.example` to `.env`.
