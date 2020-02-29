@@ -5,6 +5,7 @@ import { Page } from './page';
 import store from '../store';
 import { IFile } from '~/renderer/interfaces';
 import { sortFiles } from '../utils';
+import { icons } from '~/renderer/constants';
 
 interface ICutData {
   files?: IFile[];
@@ -183,7 +184,81 @@ export class PageFiles {
       const selected = this.selected.includes(data);
 
       if (e.button === 2) {
-        store.contextMenu.show(e, 'file');
+        const containsFile = !!this.selected.find(r => r.type !== 'folder');
+        const multiple = this.selected.length > 1;
+
+        store.contextMenu.show(e, [
+          {
+            label: 'Open',
+            icon: icons.folderOutline,
+            hidden: multiple || containsFile,
+            onSelect: () => {
+              this.page.history.pushFolder(this.anchorFile.name);
+            },
+          },
+          {
+            label: 'Open in new tab',
+            icon: icons.openInNew,
+            iconSize: 18,
+            hidden: containsFile,
+            onSelect: () => {
+              const path = this.page.history.path;
+
+              store.tabs.addTab({
+                config: this.page.session.config,
+                path: `${path}/${this.anchorFile.name}`,
+                active: true,
+              });
+            },
+          },
+          {
+            label: 'Open with',
+            icon: icons.apps,
+            iconSize: 18,
+            hidden: multiple || !containsFile,
+            disabled: true,
+          },
+          {
+            label: 'Cut',
+            icon: icons.cut,
+            iconSize: 16,
+            accelerator: 'Ctrl+X',
+            onSelect: () => {
+              this.cutFiles(...this.selected);
+            },
+          },
+          {
+            label: 'Paste',
+            icon: icons.paste,
+            iconSize: 18,
+            accelerator: 'Ctrl+V',
+            onSelect: this.onPaste,
+            hidden: !this.cutFiles.length || containsFile,
+          },
+          {
+            label: 'Rename',
+            icon: icons.edit,
+            hidden: multiple,
+            accelerator: 'F2',
+          },
+          {
+            label: 'Delete',
+            icon: icons.delete,
+            iconSize: 20,
+            accelerator: 'Del',
+          },
+          {
+            label: 'Download',
+            icon: icons.downloadOutline,
+            hidden: !containsFile,
+          },
+          {
+            label: 'Details',
+            icon: icons.details,
+            iconSize: 18,
+            disabled: true,
+          },
+        ]);
 
         if (!selected) {
           this.selected = [data];

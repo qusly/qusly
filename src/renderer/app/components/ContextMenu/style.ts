@@ -43,9 +43,9 @@ export const StyledItem = styled.tr`
   align-items: center;
   font-size: 13px;
   white-space: nowrap;
+  display: table-row;
 
-  ${({ disabled, hidden }: IContextMenuItemProps) => css`
-    display: ${!hidden ? 'table-row' : 'none'};
+  ${({ disabled }: IContextMenuItemProps) => css`
     color: ${disabled
       ? `rgba(0, 0, 0, ${transparency.text.disabled})`
       : '#000'};

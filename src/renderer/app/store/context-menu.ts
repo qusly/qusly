@@ -3,6 +3,7 @@ import { observable, action } from 'mobx';
 import { IPos } from 'rectangle-selection';
 
 import { getMenuPosition } from '../utils';
+import { IContextMenuData } from '~/renderer/interfaces';
 
 export type IContextMenuContent =
   | 'page'
@@ -22,18 +23,21 @@ export class ContextMenuStore {
   @observable
   public content: IContextMenuContent = 'file';
 
+  @observable
+  public data: IContextMenuData = [];
+
   public ref = React.createRef<HTMLTableElement>();
 
   @action
   public show = (
     e: MouseEvent | React.MouseEvent<any>,
-    content: IContextMenuContent,
+    data: IContextMenuData,
   ) => {
     if (this.ref.current) {
       window.removeEventListener('mousedown', this.hide);
       window.addEventListener('mousedown', this.hide);
 
-      this.content = content;
+      this.data = data;
       this.visible = true;
       this.pos = getMenuPosition(e, this.ref.current);
     }

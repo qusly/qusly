@@ -2,9 +2,7 @@ import * as React from 'react';
 import { observer } from 'mobx-react-lite';
 
 import store from '~/renderer/app/store';
-import { IContextMenuContent } from '~/renderer/app/store/context-menu';
-import { FileMenu } from './File';
-import { PageMenu } from './Page';
+import { IContextMenuItem } from '~/renderer/interfaces';
 import {
   StyledContextMenu,
   StyledItem,
@@ -12,38 +10,25 @@ import {
   Text,
   Icon,
   Container,
+  MenuDivider,
 } from './style';
 
-interface ItemProps {
-  onClick?: (e: React.MouseEvent) => void;
-  icon?: string;
-  disabled?: boolean;
-  iconSize?: number;
-  hidden?: boolean;
-  children: any;
-  accelerator?: string;
-}
+const Item = ({ data }: { data: IContextMenuItem }) => {
+  const { onSelect, disabled, icon, iconSize, accelerator, label } = data;
 
-export const MenuItem = ({
-  icon,
-  iconSize,
-  onClick,
-  children,
-  disabled,
-  hidden,
-  accelerator,
-}: ItemProps) => {
-  const onItemClick = (e: React.MouseEvent) => {
-    store.contextMenu.visible = false;
-    if (onClick) onClick(e);
-  };
+  const onClick = React.useCallback(
+    (e: React.MouseEvent) => {
+      store.contextMenu.visible = false;
+      if (onSelect) onSelect();
+    },
+    [onSelect],
+  );
 
   return (
     <StyledItem
       onMouseDown={e => e.stopPropagation()}
-      onClick={onItemClick}
+      onClick={onClick}
       disabled={disabled}
-      hidden={hidden}
     >
       <td style={{ paddingLeft: 10 }}></td>
       {icon && (
@@ -56,32 +41,29 @@ export const MenuItem = ({
           }}
         ></Icon>
       )}
-      <Text>{children}</Text>
+      <Text>{label}</Text>
       <Accelerator>{accelerator}</Accelerator>
     </StyledItem>
   );
 };
 
-export const MenuContainer = observer(
-  ({ content, children }: { content: IContextMenuContent; children: any }) => {
-    const selected = store.contextMenu.content === content;
-    return selected && children;
-  },
-);
-
 export const ContextMenu = observer(() => {
-  const [left, top] = store.contextMenu.pos;
+  const { pos, visible, data } = store.contextMenu;
+  const [left, top] = pos;
 
   return (
     <StyledContextMenu
       ref={store.contextMenu.ref}
-      visible={store.contextMenu.visible}
+      visible={visible}
       style={{ top, left }}
     >
-      {store.contextMenu.visible && (
+      {visible && (
         <Container>
-          <FileMenu />
-          <PageMenu />
+          {data.map((r, index) => {
+            if (r.hidden) return null;
+            if (r.type === 'divider') return <MenuDivider key={index} />;
+            return <Item key={r.label} data={r} />;
+          })}
         </Container>
       )}
     </StyledContextMenu>
