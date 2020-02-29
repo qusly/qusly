@@ -1,8 +1,7 @@
 import React from 'react';
 import { observable, action } from 'mobx';
-import { IPos } from 'rectangle-selection';
 
-import { getMenuPosition } from '../utils';
+import { setMenuPosition } from '../utils';
 import { IContextMenuData } from '~/renderer/interfaces';
 
 export type IContextMenuContent =
@@ -16,9 +15,6 @@ export type IContextMenuContent =
 export class ContextMenuStore {
   @observable
   public visible = false;
-
-  @observable
-  public pos: IPos = [0, 0];
 
   @observable
   public content: IContextMenuContent = 'file';
@@ -39,7 +35,8 @@ export class ContextMenuStore {
 
       this.data = data;
       this.visible = true;
-      this.pos = getMenuPosition(e, this.ref.current);
+
+      setMenuPosition(e, this.ref.current);
     }
   };
 

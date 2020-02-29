@@ -49,14 +49,9 @@ const Item = ({ data }: { data: IContextMenuItem }) => {
 
 export const ContextMenu = observer(() => {
   const { pos, visible, data } = store.contextMenu;
-  const [left, top] = pos;
 
   return (
-    <StyledContextMenu
-      ref={store.contextMenu.ref}
-      visible={visible}
-      style={{ top, left }}
-    >
+    <StyledContextMenu ref={store.contextMenu.ref} visible={visible}>
       {visible && (
         <Container>
           {data.map((r, index) => {
