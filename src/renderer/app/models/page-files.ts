@@ -14,9 +14,6 @@ export class PageFiles {
   protected _selected: IFile[] = [];
 
   @observable
-  protected _cut: IFile[] = [];
-
-  @observable
   public anchorFile: IFile;
 
   @observable
@@ -126,29 +123,6 @@ export class PageFiles {
 
       if (select) ref.classList.add('selected');
       else ref.classList.remove('selected');
-    });
-  }
-
-  public get cut() {
-    return this._cut;
-  }
-
-  public set cut(files: IFile[]) {
-    const unselect = this._cut.filter(r => !files.includes(r));
-
-    this.cutFiles(unselect, false);
-    this._cut = files;
-    this.cutFiles(this._cut);
-  }
-
-  protected cutFiles(items: IFile[], cut = true) {
-    items.forEach(r => {
-      const ref = this.refs[r.index];
-
-      if (!ref) return;
-
-      if (cut) ref.classList.add('cut');
-      else ref.classList.remove('cut');
     });
   }
 

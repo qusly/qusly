@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { centerIcon, customInput } from '~/renderer/mixins';
+import { centerIcon, customInput, robotoBold } from '~/renderer/mixins';
 import { PRIMARY_COLOR } from '../../constants';
 
 export const StyledFileBase = css`
@@ -15,6 +15,7 @@ export const StyledFile = styled.div`
   border-radius: 4px;
   transition: 0.1s background-color;
   ${StyledFileBase};
+  position: relative;
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.04);
@@ -24,15 +25,20 @@ export const StyledFile = styled.div`
     background-color: rgba(0, 0, 0, 0.08);
   }
 
-  &.cut {
-    opacity: 0.79;
-  }
+  ${({ cut }: { cut: boolean }) => css`
+    ${cut &&
+      css`
+        border: 1px dashed #000;
+        opacity: 0.79;
+      `}
+  `}
 `;
 
 export const Icon = styled.div`
   width: 32px;
   height: 32px;
   margin: 8px 0px;
+  z-index: 1;
   ${centerIcon()};
 `;
 

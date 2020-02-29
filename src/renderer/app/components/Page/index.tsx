@@ -16,12 +16,18 @@ export const Page = observer(() => {
     }
   }, []);
 
-  console.log('page rerender');
+  const onContextMenu = React.useCallback((e: React.MouseEvent) => {
+    store.contextMenu.show(e, 'page');
+  }, []);
 
   return (
     <StyledPage>
       {page?.loading === false ? (
-        <Grid onSelection={page?.files.onSelection} onMouseDown={onMouseDown}>
+        <Grid
+          onSelection={page?.files.onSelection}
+          onMouseDown={onMouseDown}
+          onContextMenu={onContextMenu}
+        >
           <DragDrop onDrop={page?.files.onDrop}>
             {page?.files.list.map(r => (
               <Selectable key={r.name} data={r}>

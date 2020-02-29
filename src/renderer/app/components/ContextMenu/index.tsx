@@ -4,6 +4,7 @@ import { observer } from 'mobx-react-lite';
 import store from '~/renderer/app/store';
 import { IContextMenuContent } from '~/renderer/app/store/context-menu';
 import { FileMenu } from './File';
+import { PageMenu } from './Page';
 import {
   StyledContextMenu,
   StyledItem,
@@ -80,6 +81,7 @@ export const ContextMenu = observer(() => {
       {store.contextMenu.visible && (
         <Container>
           <FileMenu />
+          <PageMenu />
         </Container>
       )}
     </StyledContextMenu>

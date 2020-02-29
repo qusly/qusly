@@ -100,9 +100,10 @@ export const File = observer(
         onMouseDown={_onMouseDown}
         onMouseUp={_onMouseUp}
         onDoubleClick={onDoubleClick}
+        cut={data?.state?.cut}
       >
         <Icon style={iconStyle} />
-        <LabelContainer>
+        <LabelContainer className="label-container">
           <Label>{data.name}</Label>
           {renaming && (
             <Input ref={nameInputRef} onKeyDown={onKeyDown} onBlur={onBlur} />

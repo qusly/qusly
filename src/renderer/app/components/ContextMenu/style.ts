@@ -55,6 +55,8 @@ export const StyledItem = styled.tr`
 
     ${!disabled &&
       css`
+        cursor: pointer;
+
         &:hover {
           background-color: ${PRIMARY_COLOR};
           color: #fff;

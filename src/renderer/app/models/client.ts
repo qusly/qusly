@@ -34,9 +34,7 @@ export class Client {
       path,
     );
 
-    return files.map(
-      (r, index) => ({ ...r, index, state: { cut: false } } as IFile),
-    );
+    return files.map((r, index) => ({ ...r, index } as IFile));
   }
 
   public pwd(): Promise<string> {

@@ -26,7 +26,7 @@ const onOpenInNewTab = () => {
 const onCut = () => {
   const page = store.pages.current;
 
-  page.files.cut = [page.files.anchorFile];
+  page.files.anchorFile.state = { cut: true };
 };
 
 const onPaste = () => {
