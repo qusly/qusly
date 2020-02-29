@@ -24,13 +24,9 @@ const onOpenInNewTab = () => {
 };
 
 const onCut = () => {
-  const page = store.pages.current;
+  const files = store.pages.current.files;
 
-  page.files.anchorFile.state = { cut: true };
-};
-
-const onPaste = () => {
-  // store.pages.current.paste();
+  files.cutFiles(...files.selected);
 };
 
 const onRename = () => {
@@ -92,7 +88,7 @@ export const FileMenu = observer(() => {
       <MenuItem
         icon={icons.paste}
         iconSize={18}
-        onClick={onPaste}
+        onClick={page?.files.onPaste}
         hidden={false /*!page.cutFiles.length || containsFile*/}
         accelerator={'Ctrl+V'}
       >

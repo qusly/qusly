@@ -16,6 +16,7 @@ export const File = observer(
   ({ data, onMouseDown, onMouseUp }: Props, ref: any) => {
     const page = store.pages.current;
     const icon = store.icons.getFileIcon(data);
+    const cut = page?.files.cutData.files.includes(data);
 
     const nameInputRef = React.useRef<HTMLTextAreaElement>();
 
@@ -103,7 +104,7 @@ export const File = observer(
         onMouseDown={_onMouseDown}
         onMouseUp={_onMouseUp}
         onDoubleClick={onDoubleClick}
-        cut={data?.state?.cut}
+        cut={cut}
       >
         <Icon style={iconStyle} />
         <LabelContainer className="label-container">

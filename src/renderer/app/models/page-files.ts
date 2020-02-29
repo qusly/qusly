@@ -6,6 +6,11 @@ import store from '../store';
 import { IFile } from '~/renderer/interfaces';
 import { sortFiles } from '../utils';
 
+interface ICutData {
+  files?: IFile[];
+  src?: string;
+}
+
 export class PageFiles {
   @observable
   public list: IFile[] = [];
@@ -20,6 +25,9 @@ export class PageFiles {
   public renamingFile = false;
 
   public refs: HTMLDivElement[] = [];
+
+  @observable
+  public cutData: ICutData = { files: [] };
 
   constructor(protected page: Page) {}
 
@@ -39,20 +47,25 @@ export class PageFiles {
   };
 
   @action
-  public async move(files: IFile[], dest: string) {
+  public async move(files: IFile[], dest: string, src?: string) {
     this.selected = [];
 
-    const path = this.page.history.path;
+    const currentPath = this.page.history.path;
+    const path = src ?? currentPath;
 
     try {
       for (const file of files) {
         const srcPath = `${path}/${file.name}`;
         const destPath = `${dest}/${file.name}`;
 
-        if (srcPath !== destPath) {
-          await this.page.client.move(srcPath, destPath);
+        if (srcPath === destPath) continue;
 
+        await this.page.client.move(srcPath, destPath);
+
+        if (path === currentPath) {
           this.list = this.list.filter(r => r !== file);
+        } else {
+          this.list = sortFiles([...this.list, file]);
         }
       }
     } catch (err) {
@@ -196,4 +209,26 @@ export class PageFiles {
 
     this.move(files, path);
   };
+
+  @action
+  public onPaste = () => {
+    const { files, src } = this.cutData;
+
+    let dest = this.page.history.path;
+
+    if (dest === src) {
+      dest += `/${this.anchorFile.name}`;
+    }
+
+    this.cutData.files = [];
+    this.move(files, dest, src);
+  };
+
+  @action
+  public cutFiles(...files: IFile[]) {
+    this.cutData = {
+      files,
+      src: this.page.history.path,
+    };
+  }
 }

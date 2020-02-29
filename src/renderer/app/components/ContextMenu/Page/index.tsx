@@ -18,13 +18,8 @@ const onNewFile = () => {
   // store.pages.current.createBlank('file');
 };
 
-const onPaste = () => {
-  // store.pages.current.paste(true);
-};
-
 export const PageMenu = observer(() => {
   const page = store.pages.current;
-  if (!page) return null;
 
   return (
     <MenuContainer content="page">
@@ -42,17 +37,18 @@ export const PageMenu = observer(() => {
       <MenuItem icon={icons.fileAdd} onClick={onNewFile}>
         New file
       </MenuItem>
-    </MenuContainer>
-  );
-});
-
-/*
-      {!!page.cutFiles.length && (
+      {!!page?.files.cutData.files.length && (
         <>
           <MenuDivider />
-          <MenuItem icon={icons.paste} iconSize={18} onClick={onPaste}>
+          <MenuItem
+            icon={icons.paste}
+            iconSize={18}
+            onClick={page?.files.onPaste}
+          >
             Paste
           </MenuItem>
         </>
       )}
-      */
+    </MenuContainer>
+  );
+});

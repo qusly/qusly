@@ -29,12 +29,14 @@ export class ContextMenuStore {
     e: MouseEvent | React.MouseEvent<any>,
     content: IContextMenuContent,
   ) => {
-    window.removeEventListener('mousedown', this.hide);
-    window.addEventListener('mousedown', this.hide);
+    if (this.ref.current) {
+      window.removeEventListener('mousedown', this.hide);
+      window.addEventListener('mousedown', this.hide);
 
-    this.content = content;
-    this.visible = true;
-    this.pos = getMenuPosition(e, this.ref.current);
+      this.content = content;
+      this.visible = true;
+      this.pos = getMenuPosition(e, this.ref.current);
+    }
   };
 
   public hide = () => {
