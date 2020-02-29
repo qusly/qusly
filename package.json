@@ -85,6 +85,7 @@
     "react-windows-controls": "^1.1.1",
     "rectangle-selection": "^2.4.0",
     "slash": "^3.0.0",
+    "source-map-support": "^0.5.16",
     "styled-components": "^5.0.1",
     "terser": "^4.6.4",
     "terser-webpack-plugin": "^2.3.5",
@@ -95,7 +96,7 @@
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
-    "sqlite3": "^4.1.1",
-    "keytar": "^5.4.0"
+    "keytar": "^5.4.0",
+    "sqlite3": "^4.1.1"
   }
 }
