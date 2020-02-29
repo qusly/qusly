@@ -26,9 +26,6 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Bundle the app
-        run: yarn build
-
       - name: Build the app
         uses: samuelmeuli/action-electron-builder@v1
         with:

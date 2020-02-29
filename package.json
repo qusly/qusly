@@ -33,7 +33,7 @@
     "compile-linux": "npm run build && electron-builder -l -p always",
     "lint": "eslint \"src/**/*.ts*\" \"src/**/*.tsx*\"",
     "lint-fix": "npm run lint -- --fix",
-    "rebuild": "electron-rebuild install-app-deps"
+    "rebuild": "electron-rebuild -f -o keytar"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",
