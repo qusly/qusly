@@ -1,6 +1,7 @@
 import store from '../store';
 import { IContextMenuData } from '~/renderer/interfaces';
 import { icons } from '~/renderer/constants';
+import { getRenameFileDialog } from './dialog';
 
 export const getPageContextMenu = (): IContextMenuData => {
   const page = store.pages.current;
@@ -100,8 +101,11 @@ export const getFileContextMenu = (): IContextMenuData => {
     {
       label: 'Rename',
       icon: icons.edit,
-      hidden: multiple,
       accelerator: 'F2',
+      onSelect: () => {
+        store.dialog.show(getRenameFileDialog());
+      },
+      hidden: multiple,
     },
     { type: 'divider' },
     {

@@ -5,11 +5,11 @@ import { ERROR_COLOR } from '~/renderer/app/constants';
 
 export const Input = styled.input`
   width: 100%;
-  height: 36px;
+  height: 32px;
   border: none;
   outline: none;
   padding-left: 16px;
-  border-radius: 64px;
+  border-radius: 4px;
   background-color: rgba(0, 0, 0, 0.08);
   will-change: background-color;
   transition: 0.1s background-color;

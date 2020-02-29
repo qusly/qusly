@@ -1,7 +1,12 @@
 import styled, { css } from 'styled-components';
 
-import { CARD_SHADOW } from '../../constants';
-import { robotoMedium, noUserSelect, robotoBold } from '~/renderer/mixins';
+import { CARD_SHADOW, PRIMARY_COLOR } from '../../constants';
+import {
+  robotoMedium,
+  noUserSelect,
+  robotoBold,
+  button,
+} from '~/renderer/mixins';
 
 export const Background = styled.div`
   width: 100%;
@@ -28,29 +33,69 @@ export const StyledDialog = styled.div`
   max-width: 344px;
   background-color: #fff;
   border-radius: 8px;
+  padding: 20px;
   box-shadow: ${CARD_SHADOW};
 `;
 
 export const Title = styled.div`
   font-size: 20px;
-  padding: 20px;
+  padding-bottom: 16px;
   ${robotoBold()};
   ${noUserSelect()};
 `;
 
-export const DialogButtons = styled.div`
+export const Buttons = styled.div`
   width: 100%;
-  margin-bottom: 12px;
+  margin-top: 20px;
   display: flex;
   align-items: center;
-  padding-right: 16px;
-
-  & > div {
-    min-width: 96px;
-  }
 
   & > :first-child {
     margin-left: auto;
-    margin-right: 4px;
+    margin-right: 6px;
+  }
+`;
+
+export const Button = styled.div`
+  min-width: 80px;
+  width: fit-content;
+  height: 32px;
+  padding: 0px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 4px;
+  position: relative;
+  cursor: pointer;
+  color: #000;
+  font-size: 12px;
+  background-color: rgba(0, 0, 0, 0.08);
+  ${robotoMedium()};
+
+  &::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0;
+    background-color: #000;
+    position: absolute;
+    will-change: opacity;
+    transition: 0.2s opacity;
+  }
+
+  &:hover::before {
+    opacity: 0.12;
+  }
+`;
+
+export const OkButton = styled(Button)`
+  color: #fff;
+  background-color: #2196f3;
+
+  &::before {
+    background-color: #fff;
   }
 `;

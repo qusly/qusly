@@ -1,17 +1,17 @@
 import { observable, action } from 'mobx';
 
-export type IDialogContent = 'rename-file';
+import { IDialogData } from '~/renderer/interfaces';
 
 export class DialogStore {
   @observable
   public visible = false;
 
   @observable
-  public content: IDialogContent;
+  public data: IDialogData;
 
   @action
-  public show(content: IDialogContent) {
-    this.content = content;
+  public show(data: IDialogData) {
+    this.data = data;
     this.visible = true;
   }
 

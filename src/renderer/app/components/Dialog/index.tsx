@@ -2,18 +2,19 @@ import React from 'react';
 import { observer } from 'mobx-react-lite';
 
 import store from '../../store';
-import { IDialogContent } from '../../store/dialog';
-import { RenameFileDialog } from './RenameFile';
-import { Background, StyledDialog } from './style';
-
-export const DialogContainer = observer(
-  ({ content, children }: { content: IDialogContent; children: any }) => {
-    const selected = store.dialog.content === content;
-    return selected && children;
-  },
-);
+import { Input } from '~/renderer/components/Input';
+import {
+  Background,
+  StyledDialog,
+  Title,
+  Buttons,
+  Button,
+  OkButton,
+} from './style';
 
 export const Dialog = observer(() => {
+  const { visible, data } = store.dialog;
+
   const onBackgroundClick = React.useCallback(() => {
     store.dialog.visible = false;
   }, []);
@@ -23,14 +24,22 @@ export const Dialog = observer(() => {
   }, []);
 
   return (
-    <Background visible={store.dialog.visible} onClick={onBackgroundClick}>
-      <StyledDialog onClick={onClick}>
-        {store.dialog.visible && (
-          <>
-            <RenameFileDialog />
-          </>
-        )}
-      </StyledDialog>
+    <Background visible={visible} onClick={onBackgroundClick}>
+      {visible && (
+        <StyledDialog onClick={onClick}>
+          <Title>{data.title}</Title>
+          {data.fields.map(r => {
+            if (r.type === 'input') {
+              return <Input key={r.label} defaultValue={r.value} />;
+            }
+            return null;
+          })}
+          <Buttons>
+            <Button>Cancel</Button>
+            <OkButton>Save</OkButton>
+          </Buttons>
+        </StyledDialog>
+      )}
     </Background>
   );
 });
