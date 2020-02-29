@@ -1,8 +1,10 @@
 import { observable, action } from 'mobx';
 
+import store from '../store';
 import { Session } from './session';
 import { History } from './history';
 import { PageFiles } from './page-files';
+import { getPageContextMenu } from '../utils';
 
 let id = 0;
 
@@ -41,5 +43,15 @@ export class Page {
     if (path && !this.loading) {
       this.files.fetch();
     }
+  };
+
+  public onMouseDown = (e: React.MouseEvent) => {
+    if (!e.ctrlKey && !e.shiftKey) {
+      store.pages.current.files.selected = [];
+    }
+  };
+
+  public onMouseUp = (e: React.MouseEvent) => {
+    store.contextMenu.show(e, getPageContextMenu());
   };
 }

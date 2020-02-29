@@ -16,21 +16,28 @@ export const getPageContextMenu = (): IContextMenuData => {
     },
     { type: 'divider' },
     {
-      label: 'New folder',
-      icon: icons.folderAdd,
-      accelerator: 'Ctrl+Shift+N',
-    },
-    {
-      label: 'New file',
-      icon: icons.fileAdd,
-    },
-    { type: 'divider', hidden: noCutFiles },
-    {
       label: 'Paste',
       icon: icons.paste,
       iconSize: 18,
       onSelect: page.files.onPaste,
       hidden: noCutFiles,
+    },
+    { type: 'divider', hidden: noCutFiles },
+    {
+      label: 'New folder',
+      icon: icons.folderAdd,
+      accelerator: 'Ctrl+Shift+N',
+      disabled: true,
+    },
+    {
+      label: 'New file',
+      icon: icons.fileAdd,
+      disabled: true,
+    },
+    {
+      label: 'Upload',
+      icon: icons.uploadOutline,
+      disabled: true,
     },
   ];
 };
@@ -106,6 +113,12 @@ export const getFileContextMenu = (): IContextMenuData => {
     {
       label: 'Download',
       icon: icons.downloadOutline,
+      disabled: true,
+    },
+    {
+      label: 'Upload',
+      icon: icons.uploadOutline,
+      disabled: true,
     },
     { type: 'divider' },
     {
@@ -113,6 +126,7 @@ export const getFileContextMenu = (): IContextMenuData => {
       icon: icons.delete,
       iconSize: 20,
       accelerator: 'Del',
+      disabled: true,
     },
   ];
 };
