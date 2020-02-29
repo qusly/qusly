@@ -7,6 +7,7 @@ import { ContextMenu } from '../ContextMenu';
 import { Titlebar } from '../Titlebar';
 import { ContentView } from '../ContentView';
 import { Activitybar } from '../Activitybar';
+import { Dialog } from '../Dialog';
 import { Style } from '../../style';
 import { StyledApp, Container } from './style';
 
@@ -24,6 +25,7 @@ const App = () => {
           <ContentView />
         </Container>
         <ContextMenu />
+        <Dialog />
       </StyledApp>
     </>
   );

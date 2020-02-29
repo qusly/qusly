@@ -8,6 +8,7 @@ import { PagesStore } from './pages';
 import { IconsStore } from './icons';
 import { SidebarStore } from './sidebar';
 import { ContextMenuStore } from './context-menu';
+import { DialogStore } from './dialog';
 
 export class Store {
   public tabs = new TabsStore();
@@ -17,6 +18,7 @@ export class Store {
   public icons = new IconsStore();
   public sidebar = new SidebarStore();
   public contextMenu = new ContextMenuStore();
+  public dialog = new DialogStore();
 
   @observable
   public updateInfo = {

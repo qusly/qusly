@@ -30,7 +30,7 @@ const onCut = () => {
 };
 
 const onRename = () => {
-  store.pages.current.files.renamingFile = true;
+  store.dialog.show('rename-file');
 };
 
 const onDelete = () => {
