@@ -42,11 +42,6 @@ export const Icon = styled.div`
   ${centerIcon()};
 `;
 
-export const LabelContainer = styled.div`
-  width: 100%;
-  position: relative;
-`;
-
 export const Label = styled.div`
   width: 100%;
   padding: 0px 8px;

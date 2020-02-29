@@ -3,8 +3,7 @@ import { observer } from 'mobx-react-lite';
 
 import store from '../../store';
 import { IFile } from '~/renderer/interfaces';
-import { resizeTextarea, selectFileName } from '~/renderer/utils';
-import { StyledFile, LabelContainer, Label, Icon, Input } from './style';
+import { StyledFile, Label, Icon } from './style';
 
 interface Props {
   data: IFile;
@@ -17,8 +16,6 @@ export const File = observer(
     const page = store.pages.current;
     const icon = store.icons.getFileIcon(data);
     const cut = page?.files.cutData.files.includes(data);
-
-    const nameInputRef = React.useRef<HTMLTextAreaElement>();
 
     const _onMouseDown = React.useCallback(
       (e: React.MouseEvent) => {
@@ -52,22 +49,6 @@ export const File = observer(
       }
     }, [data]);
 
-    const onKeyDown = React.useCallback(
-      (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-        if (e.key === 'Enter') {
-          e.stopPropagation();
-          page.files.rename(data, nameInputRef.current.value);
-        } else {
-          resizeTextarea(nameInputRef.current);
-        }
-      },
-      [data],
-    );
-
-    const onBlur = React.useCallback(() => {
-      store.pages.current.files.rename(data, nameInputRef.current.value);
-    }, [data]);
-
     const iconStyle = React.useMemo<React.CSSProperties>(
       () => ({
         backgroundImage: `url(${icon.data})`,
@@ -75,19 +56,6 @@ export const File = observer(
       }),
       [icon],
     );
-
-    const renaming =
-      page?.files?.renamingFile && page.files.anchorFile === data;
-
-    React.useEffect(() => {
-      if (renaming) {
-        nameInputRef.current.value = data.name;
-        nameInputRef.current.focus();
-
-        resizeTextarea(nameInputRef.current);
-        selectFileName(nameInputRef.current);
-      }
-    }, [renaming, data]);
 
     React.useLayoutEffect(() => {
       return () => {
@@ -107,12 +75,7 @@ export const File = observer(
         cut={cut}
       >
         <Icon style={iconStyle} />
-        <LabelContainer className="label-container">
-          <Label>{data.name}</Label>
-          {renaming && (
-            <Input ref={nameInputRef} onKeyDown={onKeyDown} onBlur={onBlur} />
-          )}
-        </LabelContainer>
+        <Label>{data.name}</Label>
       </StyledFile>
     );
   },
