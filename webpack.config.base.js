@@ -15,6 +15,14 @@ const styledComponentsTransformer = createStyledComponentsTransformer({
   displayName: dev,
 });
 
+const getExternals = arr => {
+  const ext = {};
+  for (const item of arr) {
+    ext[item] = `require('${item}')`;
+  }
+  return ext;
+};
+
 const config = {
   mode: dev ? 'development' : 'production',
 
@@ -59,13 +67,6 @@ const config = {
 
         include: INCLUDE,
       },
-      {
-        test: /\.node$/,
-        loader: 'awesome-node-loader',
-        options: {
-          name: '[contenthash].[ext]',
-        },
-      },
     ],
   },
 
@@ -81,6 +82,24 @@ const config = {
       '~': INCLUDE,
     },
   },
+
+  stats: {
+    cached: false,
+    cachedAssets: false,
+    chunks: false,
+    chunkModules: false,
+    children: false,
+    colors: true,
+    hash: false,
+    modules: false,
+    reasons: false,
+    timings: true,
+    version: false,
+  },
+
+  plugins: [],
+
+  externals: getExternals(['keytar']),
 };
 
 if (dev) {
