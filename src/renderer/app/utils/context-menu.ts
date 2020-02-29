@@ -106,7 +106,7 @@ export const getFileContextMenu = (): IContextMenuData => {
         const res = await store.dialog.show(getRenameFileDialog());
 
         if (res) {
-          page.files.rename(page.files.anchorFile, name);
+          page.files.rename(page.files.anchorFile, res.name);
         }
       },
       hidden: multiple,
