@@ -21,10 +21,14 @@ export class DialogStore extends EventEmitter {
 
   @action
   public show(data: IDialogData) {
+    if (this.visible) {
+      this.emit('cancel');
+    }
+
     this.data = data;
     this.visible = true;
 
-    return new Promise<IDialogRes>((resolve, reject) => {
+    return new Promise<IDialogRes>(resolve => {
       this.once('save', fields => {
         const values: IDialogRes = {};
 
