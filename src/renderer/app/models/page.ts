@@ -30,11 +30,10 @@ export class Page {
   @action
   public async prepare(path?: string) {
     await this.session.connect();
+
+    this.history.push(path ?? this.session.startingDir, false);
+
     await this.files.fetch();
-
-    const _path = path || this.session.startingDir;
-
-    this.history.push(_path, false);
   }
 
   @action
