@@ -23,6 +23,10 @@ export const StyledFile = styled.div`
   &.selected {
     background-color: rgba(0, 0, 0, 0.08);
   }
+
+  &.cut {
+    opacity: 0.79;
+  }
 `;
 
 export const Icon = styled.div`

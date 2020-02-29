@@ -16,6 +16,8 @@ export const Page = observer(() => {
     }
   }, []);
 
+  console.log('page rerender');
+
   return (
     <StyledPage>
       {page?.loading === false ? (

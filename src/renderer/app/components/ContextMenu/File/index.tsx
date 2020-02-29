@@ -24,8 +24,9 @@ const onOpenInNewTab = () => {
 };
 
 const onCut = () => {
-  // const page = store.pages.current;
-  // page.cut(page.selectedFiles);
+  const page = store.pages.current;
+
+  page.files.cut = [page.files.anchorFile];
 };
 
 const onPaste = () => {
