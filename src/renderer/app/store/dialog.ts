@@ -38,7 +38,7 @@ export class DialogStore extends EventEmitter {
 
       this.once('cancel', () => {
         this.removeAllListeners();
-        reject('cancel');
+        resolve();
       });
     });
   }

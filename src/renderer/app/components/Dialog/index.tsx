@@ -54,16 +54,12 @@ const Item = observer(() => {
 export const Dialog = observer(() => {
   const { visible } = store.dialog;
 
-  const onClick = React.useCallback(() => {
-    store.dialog.visible = false;
-  }, []);
-
   const onContainerClick = React.useCallback((e: React.MouseEvent) => {
     e.stopPropagation();
   }, []);
 
   return (
-    <StyledDialog visible={visible} onClick={onClick}>
+    <StyledDialog visible={visible} onClick={store.dialog.onCancel}>
       {visible && (
         <Container onClick={onContainerClick}>
           <Item />
