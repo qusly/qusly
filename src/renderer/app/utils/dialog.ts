@@ -22,5 +22,8 @@ export const getRenameFileDialog = (): IDialogData => {
       input.focus();
       input.setSelectionRange(0, endIndex, 'forward');
     },
+    onUnmount: fields => {
+      console.log('unmount');
+    },
   };
 };

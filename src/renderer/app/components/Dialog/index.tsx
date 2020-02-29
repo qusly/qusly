@@ -26,6 +26,12 @@ const Item = observer(() => {
     if (data) {
       data.onMount(fields.current);
     }
+
+    return () => {
+      if (data.onUnmount) {
+        data.onUnmount(fields.current);
+      }
+    };
   }, [data]);
 
   return (

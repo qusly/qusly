@@ -1,7 +1,8 @@
 export interface IDialogData {
   title: string;
   fields?: IDialogField[];
-  onMount: (fields: IDialogFieldsMap) => void;
+  onMount?: (fields: IDialogFieldsMap) => void;
+  onUnmount?: (fields: IDialogFieldsMap) => void;
 }
 
 export interface IDialogFieldsMap {
