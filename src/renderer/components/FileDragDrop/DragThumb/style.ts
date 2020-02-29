@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { centerIcon } from '~/renderer/mixins/images';
 import { robotoRegular, robotoMedium } from '~/renderer/mixins/typography';
 import { blurBackground } from '~/renderer/mixins';
+import { PRIMARY_COLOR } from '~/renderer/app/constants';
 
 export const StyledThumb = styled.div`
   width: fit-content;
@@ -37,7 +38,6 @@ export const Title = styled.div`
 export const Count = styled.div`
   width: 24px;
   height: 24px;
-  background-color: #f44336;
   color: #fff;
   display: flex;
   font-size: 13px;
@@ -47,5 +47,6 @@ export const Count = styled.div`
   position: absolute;
   top: -8px;
   right: -8px;
+  background-color: ${PRIMARY_COLOR};
   ${robotoMedium()};
 `;
