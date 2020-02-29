@@ -1,23 +1,22 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
-import { shadows } from '~/renderer/mixins/shadows';
 import { centerIcon } from '~/renderer/mixins/images';
 import { robotoRegular, robotoMedium } from '~/renderer/mixins/typography';
+import { blurBackground } from '~/renderer/mixins';
 
 export const StyledThumb = styled.div`
   width: fit-content;
   max-width: 164px;
   height: 48px;
   display: none;
-  border-radius: 12px;
-  background-color: #fff;
+  border-radius: 64px;
   align-items: center;
   padding: 0px 12px;
   pointer-events: none;
   position: fixed;
   justify-content: flex-start;
   z-index: 1000;
-  box-shadow: ${shadows(4)};
+  ${blurBackground};
 `;
 
 export const Icon = styled.div`
@@ -46,7 +45,7 @@ export const Count = styled.div`
   justify-content: center;
   border-radius: 100%;
   position: absolute;
-  top: -12px;
-  left: calc(100% - 12px);
+  top: -8px;
+  right: -8px;
   ${robotoMedium()};
 `;

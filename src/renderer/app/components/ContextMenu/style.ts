@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
 
-import { centerIcon } from '~/renderer/mixins';
+import { centerIcon, blurBackground } from '~/renderer/mixins';
 import { transparency } from '~/renderer/constants';
-import { CARD_SHADOW, PRIMARY_COLOR } from '../../constants';
+import { PRIMARY_COLOR } from '../../constants';
 
 export const StyledContextMenu = styled.table`
   position: fixed;
@@ -12,10 +12,7 @@ export const StyledContextMenu = styled.table`
   border-spacing: 0;
   pointer-events: none;
   opacity: 0;
-  transition: unset;
-  background-color: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(10px);
-  box-shadow: ${CARD_SHADOW};
+  ${blurBackground};
 
   ${({ visible }: { visible: boolean }) => css`
     ${visible &&
