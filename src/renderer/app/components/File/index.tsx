@@ -35,9 +35,12 @@ export const File = observer(
 
     const _onMouseUp = React.useCallback(
       (e: React.MouseEvent) => {
+        const page = store.pages.current;
+
+        if (!page.isDragging) e.stopPropagation();
         if (onMouseUp) onMouseUp(e);
 
-        store.pages.current.files.onFileMouseUp(e, data);
+        page.files.onFileMouseUp(e, data);
       },
       [data, onMouseUp],
     );

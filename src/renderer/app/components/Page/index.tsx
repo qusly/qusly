@@ -16,8 +16,10 @@ export const Page = observer(() => {
     }
   }, []);
 
-  const onContextMenu = React.useCallback((e: React.MouseEvent) => {
-    store.contextMenu.show(e, 'page');
+  const onMouseUp = React.useCallback((e: React.MouseEvent) => {
+    if (e.button === 2) {
+      store.contextMenu.show(e, 'page');
+    }
   }, []);
 
   return (
@@ -26,7 +28,7 @@ export const Page = observer(() => {
         <Grid
           onSelection={page?.files.onSelection}
           onMouseDown={onMouseDown}
-          onContextMenu={onContextMenu}
+          onMouseUp={onMouseUp}
         >
           <DragDrop onDrop={page?.files.onDrop}>
             {page?.files.list.map(r => (
