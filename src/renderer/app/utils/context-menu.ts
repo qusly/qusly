@@ -3,12 +3,16 @@ import { IContextMenuData } from '~/renderer/interfaces';
 import { icons } from '~/renderer/constants';
 
 export const getPageContextMenu = (): IContextMenuData => {
+  const page = store.pages.current;
+
+  const noCutFiles = !page.files.cutData.files.length;
+
   return [
     {
       label: 'Refresh',
       accelerator: 'Ctrl+R',
       icon: icons.refresh,
-      onSelect: store.pages.current.files.fetch,
+      onSelect: page.files.fetch,
     },
     { type: 'divider' },
     {
@@ -20,12 +24,13 @@ export const getPageContextMenu = (): IContextMenuData => {
       label: 'New file',
       icon: icons.fileAdd,
     },
-    { type: 'divider' },
+    { type: 'divider', hidden: noCutFiles },
     {
       label: 'Paste',
       icon: icons.paste,
       iconSize: 18,
-      onSelect: store.pages.current.files.onPaste,
+      onSelect: page.files.onPaste,
+      hidden: noCutFiles,
     },
   ];
 };
@@ -83,7 +88,7 @@ export const getFileContextMenu = (): IContextMenuData => {
       iconSize: 18,
       accelerator: 'Ctrl+V',
       onSelect: page.files.onPaste,
-      hidden: !page.files.cutFiles.length || containsFile,
+      hidden: !page.files.cutData.files.length || containsFile,
     },
     {
       label: 'Rename',

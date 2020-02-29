@@ -6,7 +6,7 @@ import store from '../../store';
 import { File } from '../File';
 import { DragDrop, Droppable } from '~/renderer/components/FileDragDrop';
 import { icons } from '~/renderer/constants';
-import { getPageContextMenu } from '../../constants';
+import { getPageContextMenu } from '../../utils';
 import { StyledPage, Grid, Preloader } from './style';
 
 export const Page = observer(() => {

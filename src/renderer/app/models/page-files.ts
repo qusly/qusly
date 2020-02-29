@@ -4,8 +4,7 @@ import { extname } from 'path';
 import { Page } from './page';
 import store from '../store';
 import { IFile } from '~/renderer/interfaces';
-import { sortFiles } from '../utils';
-import { getFileContextMenu } from '../constants';
+import { sortFiles, getFileContextMenu } from '../utils';
 
 interface ICutData {
   files?: IFile[];

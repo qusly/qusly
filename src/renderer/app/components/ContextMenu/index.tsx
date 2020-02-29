@@ -19,7 +19,7 @@ const Item = ({ data }: { data: IContextMenuItem }) => {
   const onClick = React.useCallback(
     (e: React.MouseEvent) => {
       store.contextMenu.visible = false;
-      if (onSelect) onSelect();
+      if (onSelect && !disabled) onSelect();
     },
     [onSelect],
   );
@@ -48,7 +48,7 @@ const Item = ({ data }: { data: IContextMenuItem }) => {
 };
 
 export const ContextMenu = observer(() => {
-  const { pos, visible, data } = store.contextMenu;
+  const { visible, data } = store.contextMenu;
 
   return (
     <StyledContextMenu ref={store.contextMenu.ref} visible={visible}>
