@@ -6,6 +6,14 @@ const INCLUDE = resolve(__dirname, 'src');
 
 const dev = process.env.ENV === 'dev';
 
+const getExternals = arr => {
+  const ext = {};
+  for (const item of arr) {
+    ext[item] = `require('${item}')`;
+  }
+  return ext;
+};
+
 const config = {
   mode: dev ? 'development' : 'production',
 
@@ -22,13 +30,6 @@ const config = {
         test: /\.tsx|ts$/,
         loader: 'babel-loader',
         include: INCLUDE,
-      },
-      {
-        test: /\.node$/,
-        loader: 'awesome-node-loader',
-        options: {
-          name: '[contenthash].[ext]',
-        },
       },
     ],
   },
@@ -61,6 +62,8 @@ const config = {
   },
 
   plugins: [],
+
+  externals: getExternals(['keytar', 'sqlite3']),
 };
 
 if (dev) {
