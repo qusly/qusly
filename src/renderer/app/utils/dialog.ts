@@ -22,7 +22,7 @@ export const getRenameFileDialog = (): IDialogData => {
       const endIndex = dotIndex <= 0 ? input.value.length : dotIndex;
 
       input.focus();
-      input.setSelectionRange(0, endIndex, 'forward');
+      input.setSelectionRange(0, endIndex);
     },
   };
 };

@@ -67,13 +67,9 @@ const Content = observer(() => {
 export const Dialog = observer(() => {
   const { visible } = store.dialog;
 
-  const onContainerClick = React.useCallback((e: React.MouseEvent) => {
-    e.stopPropagation();
-  }, []);
-
   return (
-    <StyledDialog visible={visible} onClick={() => store.dialog.hide()}>
-      <Container visible={visible} onClick={onContainerClick}>
+    <StyledDialog visible={visible}>
+      <Container visible={visible}>
         <Content />
       </Container>
     </StyledDialog>
