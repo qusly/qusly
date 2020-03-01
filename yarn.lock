@@ -6464,10 +6464,10 @@ querystringify@^2.1.1:
   resolved "https://registry.yarnpkg.com/querystringify/-/querystringify-2.1.1.tgz#60e5a5fd64a7f8bfa4d2ab2ed6fdf4c85bad154e"
   integrity sha512-w7fLxIRCRT7U8Qu53jQnJyPkYZIaR4n5151KMfcJlO/A9397Wxb1amJvROTK6TOnp7PfoAmg/qXiNHI+08jRfA==
 
-qusly-core@^2.4.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/qusly-core/-/qusly-core-2.4.0.tgz#9fd9922f37c0eaadb2b450aa2609f1182b278f06"
-  integrity sha512-oBKMQWnEXESv1nOgGG57rMZKRo6vi4jsWCGzp56PO5SYj82EO0akzOaUG+jxtfE+MFasd4xeGo0H7qDQeA/v9Q==
+qusly-core@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/qusly-core/-/qusly-core-2.5.0.tgz#4f58d52460c2dd5eb8cd70d3fd1ef7ccf3b519e9"
+  integrity sha512-DPjLbpKbdC07h/cuePPBZDhKfE4SJH7odU/Y3FOqwWIxHtPuM3a2n1XP+X+9FbzUM+d3K1V3QS1IAWiIq5c0dw==
   dependencies:
     basic-ftp "4.5.3"
     ssh2 "0.8.7"
