@@ -35,7 +35,10 @@ export const File = observer(
       (e: React.MouseEvent) => {
         const page = store.pages.current;
 
-        if (!page.isDragging) e.stopPropagation();
+        if (!page.isDragging && e.button !== 3 && e.button !== 4) {
+          e.stopPropagation();
+        }
+
         if (onMouseUp) onMouseUp(e);
 
         page.files.onFileMouseUp(e, data);

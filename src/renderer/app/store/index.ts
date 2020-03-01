@@ -31,7 +31,17 @@ export class Store {
       this.updateInfo.version = version;
       this.updateInfo.available = true;
     });
+
+    window.addEventListener('mouseup', this.onWindowMouseUp);
   }
+
+  private onWindowMouseUp = (e: MouseEvent) => {
+    if (e.button === 3) {
+      this.pages.current.history.goBack();
+    } else if (e.button === 4) {
+      this.pages.current.history.goForward();
+    }
+  };
 }
 
 export default new Store();
