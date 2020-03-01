@@ -44,4 +44,12 @@ export class Client {
   public move(src: string, dest: string) {
     return ipcRenderer.invoke('core-move', this.id, src, dest);
   }
+
+  public touch(path: string) {
+    return ipcRenderer.invoke('core-touch', this.id, path);
+  }
+
+  public mkdir(path: string) {
+    return ipcRenderer.invoke('core-mkdir', this.id, path);
+  }
 }

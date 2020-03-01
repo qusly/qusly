@@ -24,7 +24,7 @@ const Content = observer(() => {
   React.useLayoutEffect(() => {
     const fieldsMap = store.dialog.fieldsMap;
 
-    if (data) {
+    if (data?.onMount) {
       data.onMount(fieldsMap);
     }
 

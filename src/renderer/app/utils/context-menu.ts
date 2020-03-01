@@ -1,7 +1,7 @@
 import store from '../store';
 import { IContextMenuData } from '~/renderer/interfaces';
 import { icons } from '~/renderer/constants';
-import { getRenameFileDialog } from './dialog';
+import { getRenameFileDialog, getNewFileDialog } from './dialog';
 
 export const getPageContextMenu = (): IContextMenuData => {
   const page = store.pages.current;
@@ -28,12 +28,18 @@ export const getPageContextMenu = (): IContextMenuData => {
       label: 'New folder',
       icon: icons.folderAdd,
       accelerator: 'Ctrl+Shift+N',
-      disabled: true,
+      onSelect: async () => {
+        const res = await store.dialog.show(getNewFileDialog('folder'));
+        if (res) page.files.mkdir(res.name);
+      },
     },
     {
       label: 'New file',
       icon: icons.fileAdd,
-      disabled: true,
+      onSelect: async () => {
+        const res = await store.dialog.show(getNewFileDialog());
+        if (res) page.files.mkdir(res.name);
+      },
     },
     {
       label: 'Upload',

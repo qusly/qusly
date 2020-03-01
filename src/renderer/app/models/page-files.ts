@@ -1,5 +1,6 @@
 import { observable, action } from 'mobx';
 import { extname } from 'path';
+import { createFileName } from 'qusly-core';
 
 import { Page } from './page';
 import store from '../store';
@@ -87,6 +88,21 @@ export class PageFiles {
       await store.icons.load(name);
 
       this.editFileData(file, { ext: extname(name), name: name });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  public getUniqueFileName(type: 'folder' | 'file') {
+    return createFileName(this.list, `new ${type}`);
+  }
+
+  public async mkdir(name: string) {
+    const path = `${this.page.history.path}/${name}`;
+
+    try {
+      await this.page.client.mkdir(path);
+      await this.fetch();
     } catch (err) {
       console.log(err);
     }

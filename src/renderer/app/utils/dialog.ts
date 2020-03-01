@@ -26,3 +26,22 @@ export const getRenameFileDialog = (): IDialogData => {
     },
   };
 };
+
+export const getNewFileDialog = (
+  type: 'file' | 'folder' = 'file',
+): IDialogData => {
+  const page = store.pages.current;
+
+  return {
+    title: `New ${type}`,
+    fields: [
+      {
+        type: 'input',
+        label: 'name',
+        placeholder: 'Name',
+        saveOnEnter: true,
+        value: page.files.getUniqueFileName(type),
+      },
+    ],
+  };
+};
