@@ -33,7 +33,7 @@
     "compile-linux": "npm run build && electron-builder -l -p always",
     "lint": "eslint \"src/**/*.ts*\" \"src/**/*.tsx*\"",
     "lint-fix": "npm run lint -- --fix",
-    "rebuild": "electron-rebuild -f -o keytar"
+    "rebuild": "electron-builder install-app-deps"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",
@@ -55,14 +55,13 @@
     "@types/styled-components": "5.0.1",
     "@typescript-eslint/eslint-plugin": "^2.21.0",
     "@typescript-eslint/parser": "^2.21.0",
-    "awesome-node-loader": "^1.1.1",
     "babel-loader": "^8.0.6",
     "babel-plugin-styled-components": "^1.10.7",
     "concurrently": "^5.1.0",
     "cross-env": "^7.0.0",
     "dotenv": "8.2.0",
     "electron": "8.0.2",
-    "electron-builder": "22.3.2",
+    "electron-builder": "22.3.4",
     "electron-rebuild": "^1.10.0",
     "electron-updater": "^4.2.2",
     "eslint": "^6.8.0",
@@ -73,7 +72,6 @@
     "gsap": "^3.2.2",
     "hard-source-webpack-plugin": "^0.13.1",
     "html-webpack-plugin": "^3.2.0",
-    "keytar": "^5.4.0",
     "knex": "^0.20.10",
     "mobx": "^5.15.4",
     "mobx-react-lite": "^1.5.2",
@@ -84,7 +82,7 @@
     "react-dom": "^16.13.0",
     "react-hot-loader": "^4.12.19",
     "react-windows-controls": "^1.1.1",
-    "rectangle-selection": "^2.3.0",
+    "rectangle-selection": "^2.4.0",
     "slash": "^3.0.0",
     "styled-components": "^5.0.1",
     "terser": "^4.6.4",
@@ -96,6 +94,7 @@
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
+    "keytar": "^5.4.0",
     "sqlite3": "^4.1.1"
   }
 }
