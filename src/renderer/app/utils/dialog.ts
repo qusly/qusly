@@ -3,15 +3,16 @@ import store from '../store';
 
 export const getRenameFileDialog = (): IDialogData => {
   const page = store.pages.current;
+  const file = page.files.anchorFile;
 
   return {
-    title: 'Rename file',
+    title: `Rename ${file.type === 'folder' ? 'folder' : 'file'}`,
     fields: [
       {
         type: 'input',
         label: 'name',
         placeholder: 'New name',
-        value: page.files.anchorFile.name,
+        value: file.name,
         saveOnEnter: true,
       },
     ],
