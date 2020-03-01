@@ -9,6 +9,7 @@ import { IconsStore } from './icons';
 import { SidebarStore } from './sidebar';
 import { ContextMenuStore } from './context-menu';
 import { DialogStore } from './dialog';
+import { PathViewStore } from './path-view';
 
 export class Store {
   public tabs = new TabsStore();
@@ -19,6 +20,7 @@ export class Store {
   public sidebar = new SidebarStore();
   public contextMenu = new ContextMenuStore();
   public dialog = new DialogStore();
+  public pathView = new PathViewStore();
 
   @observable
   public updateInfo = {

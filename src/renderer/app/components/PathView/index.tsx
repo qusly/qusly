@@ -2,8 +2,7 @@ import React from 'react';
 import { observer } from 'mobx-react-lite';
 
 import store from '../../store';
-import { getPathViewContextMenu } from '../ContextMenu/Appbar';
-import { StyledPathView, Folders, Folder } from './style';
+import { StyledPathView, Folders, Folder, Input } from './style';
 
 const onFolderMouseUp = (index: number) => (e: React.MouseEvent) => {
   if (e.button !== 0) return;
@@ -23,12 +22,12 @@ export const PathView = observer(() => {
   const page = store.pages.current;
   const folders = page?.history.folders;
 
-  const onContextMenu = React.useCallback((e: React.MouseEvent) => {
-    store.contextMenu.show(e, getPathViewContextMenu());
-  }, []);
-
   return (
-    <StyledPathView onContextMenu={onContextMenu}>
+    <StyledPathView
+      onMouseDown={store.pathView.show}
+      onContextMenu={store.pathView.onContextMenu}
+      inputVisible={store.pathView.visible}
+    >
       {folders && (
         <Folders>
           {folders.map((r, index) => (
@@ -38,6 +37,12 @@ export const PathView = observer(() => {
           ))}
         </Folders>
       )}
+      <Input
+        ref={store.pathView.ref}
+        visible={store.pathView.visible}
+        onBlur={store.pathView.hide}
+        onKeyDown={store.pathView.onKeyDown}
+      />
     </StyledPathView>
   );
 });
