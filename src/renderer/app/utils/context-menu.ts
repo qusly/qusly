@@ -34,7 +34,7 @@ export const getPageContextMenu = (): IContextMenuData => {
       accelerator: 'Ctrl+Shift+N',
       onSelect: async () => {
         const res = await store.dialog.show(getNewFileDialog('folder'));
-        if (res) page.files.mkdir(res.name);
+        if (res) page.files.createBlank(res.name, 'folder');
       },
     },
     {
@@ -42,7 +42,7 @@ export const getPageContextMenu = (): IContextMenuData => {
       icon: icons.fileAdd,
       onSelect: async () => {
         const res = await store.dialog.show(getNewFileDialog());
-        if (res) page.files.mkdir(res.name);
+        if (res) page.files.createBlank(res.name, 'file');
       },
     },
     {

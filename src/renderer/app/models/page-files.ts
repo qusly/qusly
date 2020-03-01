@@ -97,11 +97,16 @@ export class PageFiles {
     return createFileName(this.list, `new ${type}`);
   }
 
-  public async mkdir(name: string) {
+  public async createBlank(name: string, type: 'folder' | 'file') {
     const path = `${this.page.history.path}/${name}`;
 
     try {
-      await this.page.client.mkdir(path);
+      if (type === 'folder') {
+        await this.page.client.mkdir(path);
+      } else {
+        await this.page.client.touch(path);
+      }
+
       await this.fetch();
     } catch (err) {
       console.log(err);
