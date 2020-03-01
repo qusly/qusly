@@ -52,4 +52,8 @@ export class Client {
   public mkdir(path: string) {
     return ipcRenderer.invoke('core-mkdir', this.id, path);
   }
+
+  public delete(path: string) {
+    return ipcRenderer.invoke('core-delete', this.id, path);
+  }
 }

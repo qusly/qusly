@@ -42,23 +42,28 @@ const Content = observer(() => {
   return (
     <>
       <Title>{title}</Title>
-      {fields.map(r => {
-        if (r.type === 'input') {
-          return (
-            <Input
-              key={r.label}
-              ref={ref => (store.dialog.fieldsMap[r.label] = ref)}
-              placeholder={r.placeholder}
-              defaultValue={r.value}
-              onKeyDown={r.saveOnEnter ? handleEnter : undefined}
-            />
-          );
-        }
-        return null;
-      })}
+      {fields &&
+        fields.map(r => {
+          if (r.type === 'input') {
+            return (
+              <Input
+                key={r.label}
+                ref={ref => (store.dialog.fieldsMap[r.label] = ref)}
+                placeholder={r.placeholder}
+                defaultValue={r.value}
+                onKeyDown={r.saveOnEnter ? handleEnter : undefined}
+              />
+            );
+          }
+          return null;
+        })}
       <Buttons>
-        <Button onClick={() => store.dialog.hide()}>Cancel</Button>
-        <OkButton onClick={() => store.dialog.hide('save')}>Save</OkButton>
+        <Button onClick={() => store.dialog.hide()}>
+          {data.cancelButton ?? 'Cancel'}
+        </Button>
+        <OkButton onClick={() => store.dialog.hide('save')}>
+          {data.submitButton ?? 'Save'}
+        </OkButton>
       </Buttons>
     </>
   );

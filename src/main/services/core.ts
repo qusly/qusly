@@ -38,5 +38,9 @@ export class Core {
     ipcMain.handle('core-mkdir', (e, id: number, path: string) => {
       return this.clients.get(id).mkdir(path);
     });
+
+    ipcMain.handle('core-delete', (e, id: number, path: string) => {
+      return this.clients.get(id).delete(path);
+    });
   }
 }

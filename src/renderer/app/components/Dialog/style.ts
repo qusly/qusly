@@ -34,6 +34,7 @@ export const Container = styled.div`
   background-color: #fff;
   border-radius: 8px;
   padding: 20px;
+  overflow: hidden;
   box-shadow: ${CARD_SHADOW};
   will-change: margin-top;
   transition: 0.15s ${EASING_FUNCTION} margin-top;
@@ -46,6 +47,8 @@ export const Container = styled.div`
 export const Title = styled.div`
   font-size: 20px;
   padding-bottom: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
   ${robotoBold()};
   ${noUserSelect()};
 `;

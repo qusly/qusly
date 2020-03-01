@@ -108,6 +108,20 @@ export class PageFiles {
     }
   }
 
+  public async delete(files: IFile[]) {
+    try {
+      for (const file of files) {
+        const path = `${this.page.history.path}/${file.name}`;
+
+        await this.page.client.delete(path);
+
+        this.list = this.list.filter(r => r !== file);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   @action
   protected editFileData(file: IFile, data: Partial<IFile>) {
     const index = this.list.indexOf(file);

@@ -1,7 +1,11 @@
 import store from '../store';
 import { IContextMenuData } from '~/renderer/interfaces';
 import { icons } from '~/renderer/constants';
-import { getRenameFileDialog, getNewFileDialog } from './dialog';
+import {
+  getRenameFileDialog,
+  getNewFileDialog,
+  getDeleteFileDialog,
+} from './dialog';
 
 export const getPageContextMenu = (): IContextMenuData => {
   const page = store.pages.current;
@@ -140,7 +144,10 @@ export const getFileContextMenu = (): IContextMenuData => {
       icon: icons.delete,
       iconSize: 20,
       accelerator: 'Del',
-      disabled: true,
+      onSelect: async () => {
+        const res = await store.dialog.show(getDeleteFileDialog());
+        if (res) await page.files.delete(page.files.selected);
+      },
     },
   ];
 };

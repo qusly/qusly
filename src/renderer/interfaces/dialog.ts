@@ -3,6 +3,8 @@ export interface IDialogData {
   fields?: IDialogField[];
   onMount?: (fields: IDialogFieldsMap) => void;
   onUnmount?: (fields: IDialogFieldsMap) => void;
+  cancelButton?: string;
+  submitButton?: string;
 }
 
 export interface IDialogFieldsMap {

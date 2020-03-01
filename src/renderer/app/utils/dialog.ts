@@ -43,5 +43,25 @@ export const getNewFileDialog = (
         value: page.files.getUniqueFileName(type),
       },
     ],
+    submitButton: 'Add',
+  };
+};
+
+export const getDeleteFileDialog = (): IDialogData => {
+  const page = store.pages.current;
+  const selected = page.files.selected;
+  const file = page.files.anchorFile;
+
+  let title = 'Delete ';
+
+  if (selected.length > 1) {
+    title += `these ${selected.length} items?`;
+  } else {
+    title += `${file.type === 'folder' ? 'folder' : 'file'} ${file.name}?`;
+  }
+
+  return {
+    title,
+    submitButton: 'Delete',
   };
 };
