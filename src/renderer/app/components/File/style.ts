@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { centerIcon, customInput, robotoBold } from '~/renderer/mixins';
-import { PRIMARY_COLOR } from '../../constants';
+import { centerIcon } from '~/renderer/mixins';
 
 export const StyledFileBase = css`
   height: fit-content;
@@ -50,23 +49,4 @@ export const Label = styled.div`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-`;
-
-export const Input = styled.textarea`
-  width: 100%;
-  height: calc(100% + 2px);
-  overflow: hidden;
-  position: absolute;
-  text-align: center;
-  text-align-last: center;
-  top: -1px;
-  left: 0px;
-  letter-spacing: 0.25px;
-  padding: 0px 8px;
-  color: #000;
-  font-size: 13px;
-  z-index: 1;
-  ${customInput()};
-  background-color: #fff;
-  border: 1px solid ${PRIMARY_COLOR};
 `;
