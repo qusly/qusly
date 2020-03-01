@@ -1,3 +1,4 @@
+import { clipboard } from 'electron';
 import { observable, action, computed } from 'mobx';
 
 export class History {
@@ -83,4 +84,14 @@ export class History {
       this.listen(this.path);
     }
   }
+
+  public copyToClipboard = () => {
+    clipboard.writeText(this.path, 'clipboard');
+  };
+
+  @action
+  public deleteHistory = () => {
+    this.list = [this.path];
+    this.pos = 0;
+  };
 }
