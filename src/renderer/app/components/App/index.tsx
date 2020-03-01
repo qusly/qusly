@@ -23,9 +23,9 @@ const App = () => {
           <Activitybar />
           <Sidebar />
           <ContentView />
+          <ContextMenu />
+          <Dialog />
         </Container>
-        <ContextMenu />
-        <Dialog />
       </StyledApp>
     </>
   );

@@ -12,8 +12,8 @@ import {
   OkButton,
 } from './style';
 
-const Item = observer(() => {
-  const { title, fields } = store.dialog.data;
+const Content = observer(() => {
+  const data = store.dialog.data;
 
   const handleEnter = React.useCallback((e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
@@ -22,18 +22,22 @@ const Item = observer(() => {
   }, []);
 
   React.useLayoutEffect(() => {
-    const { data, fieldsMap } = store.dialog;
+    const fieldsMap = store.dialog.fieldsMap;
 
     if (data) {
       data.onMount(fieldsMap);
     }
 
     return () => {
-      if (data.onUnmount) {
+      if (data?.onUnmount) {
         data.onUnmount(fieldsMap);
       }
     };
-  }, []);
+  }, [data]);
+
+  if (!data || !store.dialog.visible) return null;
+
+  const { title, fields } = data;
 
   return (
     <>
@@ -68,12 +72,10 @@ export const Dialog = observer(() => {
   }, []);
 
   return (
-    <StyledDialog visible={visible} onClick={store.dialog.onCancel}>
-      {visible && (
-        <Container onClick={onContainerClick}>
-          <Item />
-        </Container>
-      )}
+    <StyledDialog visible={visible} onClick={() => store.dialog.hide()}>
+      <Container visible={visible} onClick={onContainerClick}>
+        <Content />
+      </Container>
     </StyledDialog>
   );
 });

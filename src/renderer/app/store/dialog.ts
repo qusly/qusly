@@ -50,10 +50,10 @@ export class DialogStore extends EventEmitter {
   }
 
   @action
-  public hide(action: 'cancel' | 'save' = 'cancel') {
+  public hide = (action: 'cancel' | 'save' = 'cancel') => {
     if (this.visible) {
       this.visible = false;
       this.emit(action);
     }
-  }
+  };
 }

@@ -11,4 +11,5 @@ export const Container = styled.div`
   width: 100%;
   height: calc(100% - ${TITLEBAR_HEIGHT}px);
   display: flex;
+  position: relative;
 `;

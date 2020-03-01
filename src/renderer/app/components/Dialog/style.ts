@@ -1,25 +1,30 @@
 import styled, { css } from 'styled-components';
 
-import { CARD_SHADOW } from '../../constants';
+import { CARD_SHADOW, EASING_FUNCTION } from '../../constants';
 import { robotoMedium, noUserSelect, robotoBold } from '~/renderer/mixins';
 
 export const StyledDialog = styled.div`
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.64);
-  position: fixed;
+  background-color: rgba(0, 0, 0, 0.72);
+  position: absolute;
   top: 0;
   left: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 100;
+  opacity: 0;
+  pointer-events: none;
   will-change: opacity;
-  transition: 0.1s opacity;
 
   ${({ visible }: { visible: boolean }) => css`
-    opacity: ${visible ? 1 : 0};
-    pointer-events: ${visible ? 'auto' : 'none'};
+    ${visible &&
+      css`
+        opacity: 1;
+        pointer-events: auto;
+        transition: 0.15s opacity;
+      `}
   `}
 `;
 
@@ -30,6 +35,12 @@ export const Container = styled.div`
   border-radius: 8px;
   padding: 20px;
   box-shadow: ${CARD_SHADOW};
+  will-change: margin-top;
+  transition: 0.15s ${EASING_FUNCTION} margin-top;
+
+  ${({ visible }: { visible: boolean }) => css`
+    margin-top: ${visible ? 0 : -12}px;
+  `};
 `;
 
 export const Title = styled.div`
