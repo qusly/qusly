@@ -104,19 +104,6 @@ export const getFileContextMenu = (): IContextMenuData => {
       onSelect: page.files.onPaste,
       hidden: !page.files.cutData.files.length || containsFile,
     },
-    {
-      label: 'Rename',
-      icon: icons.edit,
-      accelerator: 'F2',
-      onSelect: async () => {
-        const res = await store.dialog.show(getRenameFileDialog());
-
-        if (res) {
-          page.files.rename(page.files.anchorFile, res.name);
-        }
-      },
-      hidden: multiple,
-    },
     { type: 'divider' },
     {
       label: 'Details',
@@ -135,6 +122,19 @@ export const getFileContextMenu = (): IContextMenuData => {
       disabled: true,
     },
     { type: 'divider' },
+    {
+      label: 'Rename',
+      icon: icons.edit,
+      accelerator: 'F2',
+      onSelect: async () => {
+        const res = await store.dialog.show(getRenameFileDialog());
+
+        if (res) {
+          page.files.rename(page.files.anchorFile, res.name);
+        }
+      },
+      hidden: multiple,
+    },
     {
       label: 'Delete',
       icon: icons.delete,
