@@ -1,11 +1,11 @@
-import store from '../store';
+import store from '~/renderer/app/store';
 import { IContextMenuData } from '~/renderer/interfaces';
 import { icons } from '~/renderer/constants';
 import {
-  getRenameFileDialog,
   getNewFileDialog,
+  getRenameFileDialog,
   getDeleteFileDialog,
-} from './dialog';
+} from '../../Dialog/Page';
 
 export const getPageContextMenu = (): IContextMenuData => {
   const page = store.pages.current;

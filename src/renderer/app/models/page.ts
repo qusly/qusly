@@ -4,7 +4,7 @@ import store from '../store';
 import { Session } from './session';
 import { History } from './history';
 import { PageFiles } from './page-files';
-import { getPageContextMenu } from '../utils';
+import { getPageContextMenu } from '../components/ContextMenu/Page';
 
 let id = 0;
 

@@ -5,7 +5,8 @@ import { createFileName } from 'qusly-core';
 import { Page } from './page';
 import store from '../store';
 import { IFile } from '~/renderer/interfaces';
-import { sortFiles, getFileContextMenu } from '../utils';
+import { sortFiles } from '../utils';
+import { getFileContextMenu } from '../components/ContextMenu/Page';
 
 interface ICutData {
   files?: IFile[];

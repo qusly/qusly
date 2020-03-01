@@ -1,5 +1,5 @@
 import { IDialogData } from '~/renderer/interfaces';
-import store from '../store';
+import store from '~/renderer/app/store';
 
 export const getRenameFileDialog = (): IDialogData => {
   const page = store.pages.current;
