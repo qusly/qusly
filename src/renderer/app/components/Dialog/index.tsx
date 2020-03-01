@@ -11,47 +11,50 @@ import {
   Button,
   OkButton,
 } from './style';
-import { IDialogFieldsMap } from '~/renderer/interfaces';
 
 const Item = observer(() => {
-  const { data } = store.dialog;
+  const { title, fields } = store.dialog.data;
 
-  const fields = React.useRef<IDialogFieldsMap>({});
-
-  const onSave = React.useCallback(() => {
-    store.dialog.onSave(fields.current);
+  const handleEnter = React.useCallback((e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      store.dialog.hide('save');
+    }
   }, []);
 
   React.useLayoutEffect(() => {
+    const { data, fieldsMap } = store.dialog;
+
     if (data) {
-      data.onMount(fields.current);
+      data.onMount(fieldsMap);
     }
 
     return () => {
       if (data.onUnmount) {
-        data.onUnmount(fields.current);
+        data.onUnmount(fieldsMap);
       }
     };
-  }, [data]);
+  }, []);
 
   return (
     <>
-      <Title>{data.title}</Title>
-      {data.fields.map(r => {
+      <Title>{title}</Title>
+      {fields.map(r => {
         if (r.type === 'input') {
           return (
             <Input
               key={r.label}
+              ref={ref => (store.dialog.fieldsMap[r.label] = ref)}
+              placeholder={r.placeholder}
               defaultValue={r.value}
-              ref={ref => (fields.current[r.label] = ref)}
+              onKeyDown={r.saveOnEnter ? handleEnter : undefined}
             />
           );
         }
         return null;
       })}
       <Buttons>
-        <Button onClick={store.dialog.onCancel}>Cancel</Button>
-        <OkButton onClick={onSave}>Save</OkButton>
+        <Button onClick={() => store.dialog.hide()}>Cancel</Button>
+        <OkButton onClick={() => store.dialog.hide('save')}>Save</OkButton>
       </Buttons>
     </>
   );

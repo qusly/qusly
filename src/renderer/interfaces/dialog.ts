@@ -14,6 +14,7 @@ export interface IDialogField {
   label?: string;
   value?: string;
   placeholder?: string;
+  saveOnEnter?: boolean;
 }
 
 export interface IDialogRes {

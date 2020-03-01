@@ -8,7 +8,7 @@ import {
 } from '~/renderer/interfaces';
 
 export declare interface DialogStore {
-  once(event: 'save', listener: (fields: IDialogFieldsMap) => void): this;
+  once(event: 'save', listener: () => void): this;
   once(event: 'cancel', listener: () => void): this;
 }
 
@@ -18,6 +18,8 @@ export class DialogStore extends EventEmitter {
 
   @observable
   public data: IDialogData;
+
+  public fieldsMap: IDialogFieldsMap = {};
 
   @action
   public show(data: IDialogData) {
@@ -29,11 +31,11 @@ export class DialogStore extends EventEmitter {
     this.visible = true;
 
     return new Promise<IDialogRes>(resolve => {
-      this.once('save', fields => {
+      this.once('save', () => {
         const values: IDialogRes = {};
 
-        for (const field in fields) {
-          values[field] = fields[field].value;
+        for (const field in this.fieldsMap) {
+          values[field] = this.fieldsMap[field].value;
         }
 
         this.removeAllListeners();
@@ -48,17 +50,10 @@ export class DialogStore extends EventEmitter {
   }
 
   @action
-  public hide() {
-    this.visible = false;
+  public hide(action: 'cancel' | 'save' = 'cancel') {
+    if (this.visible) {
+      this.visible = false;
+      this.emit(action);
+    }
   }
-
-  public onSave = (fields: IDialogFieldsMap) => {
-    this.hide();
-    this.emit('save', fields);
-  };
-
-  public onCancel = () => {
-    this.hide();
-    this.emit('cancel');
-  };
 }
