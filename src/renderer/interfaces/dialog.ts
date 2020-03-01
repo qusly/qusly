@@ -1,6 +1,7 @@
 export interface IDialogData {
   title: string;
   fields?: IDialogField[];
+  focusedField?: string;
   onMount?: (fields: IDialogFieldsMap) => void;
   onUnmount?: (fields: IDialogFieldsMap) => void;
   cancelButton?: string;

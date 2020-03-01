@@ -34,6 +34,7 @@ export const getNewFileDialog = (
 
   return {
     title: `New ${type}`,
+    focusedField: 'name',
     fields: [
       {
         type: 'input',

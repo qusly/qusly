@@ -28,6 +28,13 @@ const Content = observer(() => {
       data.onMount(fieldsMap);
     }
 
+    requestAnimationFrame(() => {
+      if (data?.focusedField) {
+        fieldsMap[data.focusedField].focus();
+        fieldsMap[data.focusedField].select();
+      }
+    });
+
     return () => {
       if (data?.onUnmount) {
         data.onUnmount(fieldsMap);
