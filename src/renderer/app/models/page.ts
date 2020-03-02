@@ -1,4 +1,4 @@
-import { observable, action } from 'mobx';
+import { observable, action, computed } from 'mobx';
 
 import store from '../store';
 import { Session } from './session';
@@ -12,9 +12,6 @@ export class Page {
   @observable
   public id = id++;
 
-  @observable
-  public loading = true;
-
   public history = new History();
 
   public files = new PageFiles(this);
@@ -27,6 +24,19 @@ export class Page {
 
   public get client() {
     return this.session.client;
+  }
+
+  @computed
+  public get tab() {
+    return store.tabs.list.find(r => r.pageId === this.id);
+  }
+
+  public get loading() {
+    return this.tab.loading;
+  }
+
+  public set loading(loading: boolean) {
+    this.tab.loading = loading;
   }
 
   @action
