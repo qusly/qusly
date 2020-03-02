@@ -4,6 +4,7 @@ import { observer } from 'mobx-react-lite';
 import store from '~/renderer/app/store';
 import { Tab } from '../../models/tab';
 import { getTabContextMenu } from '../ContextMenu/Appbar';
+import { Preloader } from '~/renderer/components/Preloader';
 import {
   StyledTab,
   StyledContent,
@@ -12,9 +13,7 @@ import {
   StyledBorder,
   StyledOverlay,
   TabContainer,
-  Subtitle,
 } from './style';
-import { Preloader } from '~/renderer/components/Preloader';
 
 const removeTab = (tab: Tab) => () => {
   tab.close();
@@ -57,14 +56,11 @@ const Content = observer(({ tab }: { tab: Tab }) => {
   return (
     <StyledContent collapsed={tab.isExpanded}>
       {tab.loading && (
-        <Preloader
-          thickness={6}
-          size={16}
-          style={{ minWidth: 16, marginRight: 8 }}
-        />
+        <Preloader thickness={6} size={16} style={{ minWidth: 16 }} />
       )}
-      <StyledTitle style={{ color: 'black' }}>{tab.title}</StyledTitle>
-      <Subtitle>{tab.subtitle}</Subtitle>
+      <StyledTitle style={{ marginLeft: tab.loading ? 8 : 0 }}>
+        {tab.title}
+      </StyledTitle>
     </StyledContent>
   );
 });

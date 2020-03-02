@@ -78,12 +78,7 @@ export const StyledTitle = styled.div`
   transform: translateZ(0);
   ${body2()};
   font-size: 13px;
-  color: black;
-`;
-
-export const Subtitle = styled(StyledTitle)`
-  opacity: 0.54;
-  margin-left: 8px;
+  transition: 0.2s margin-left;
 `;
 
 interface ContentProps {
