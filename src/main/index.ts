@@ -1,3 +1,5 @@
+import 'source-map-support/register';
+
 import { app, Menu, ipcMain } from 'electron';
 import { platform } from 'os';
 import { config } from 'dotenv';

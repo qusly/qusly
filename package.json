@@ -25,7 +25,8 @@
   },
   "main": "./build/main.bundle.js",
   "scripts": {
-    "dev": "cross-env ENV='dev' concurrently \"webpack\" \"webpack-dev-server --config webpack.config.renderer.js\" ",
+    "dev": "cross-env START=1 npm run watch",
+    "watch": "cross-env ENV='dev' concurrently \"webpack\" \"webpack-dev-server --config webpack.config.renderer.js\" ",
     "build": "concurrently \"webpack --config webpack.config.renderer.js\" \"webpack\"",
     "start": "cross-env ENV='dev' electron .",
     "compile-win32": "npm run build && electron-builder -w -p always",
@@ -84,6 +85,7 @@
     "react-windows-controls": "^1.1.1",
     "rectangle-selection": "^2.4.0",
     "slash": "^3.0.0",
+    "source-map-support": "^0.5.16",
     "styled-components": "^5.0.1",
     "terser": "^4.6.4",
     "terser-webpack-plugin": "^2.3.5",
