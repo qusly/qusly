@@ -44,6 +44,7 @@ export class Page {
     await this.session.connect();
 
     this.history.push(path ?? this.session.startingDir, false);
+    this.updateTabTitle();
 
     await this.files.fetch();
   }
@@ -51,6 +52,7 @@ export class Page {
   @action
   public listenHistory = (path: string) => {
     if (path && !this.loading) {
+      this.updateTabTitle();
       this.files.fetch();
     }
   };
@@ -64,4 +66,12 @@ export class Page {
   public onMouseUp = (e: React.MouseEvent) => {
     store.contextMenu.show(e, getPageContextMenu());
   };
+
+  @action
+  public updateTabTitle(path?: string) {
+    const _path = path ?? this.history.path;
+    const { host } = this.session.config;
+
+    this.tab.title = _path ? `${_path} - ${host}` : host;
+  }
 }

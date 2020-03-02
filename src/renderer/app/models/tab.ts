@@ -31,9 +31,6 @@ export class Tab {
   public title = 'New tab';
 
   @observable
-  public subtitle = '';
-
-  @observable
   public loading = true;
 
   @observable

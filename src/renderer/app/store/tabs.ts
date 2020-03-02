@@ -126,6 +126,7 @@ export class TabsStore {
       const page = store.pages.add(config, path);
 
       tab.pageId = page.id;
+      tab.title = config.host;
     }
 
     requestAnimationFrame(() => {
