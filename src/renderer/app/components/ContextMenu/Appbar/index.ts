@@ -16,7 +16,7 @@ export const getPathViewContextMenu = (): IContextMenuData => {
     {
       label: 'Edit path',
       icon: icons.edit,
-      disabled: true,
+      onSelect: store.pathView.show,
     },
     {
       label: 'Delete history',
