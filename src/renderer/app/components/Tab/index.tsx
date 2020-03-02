@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 
 import store from '~/renderer/app/store';
 import { Tab } from '../../models/tab';
-import { TOOLBAR_COLOR } from '../../constants/design';
+import { getTabContextMenu } from '../ContextMenu/Appbar';
 import {
   StyledTab,
   StyledContent,
@@ -48,6 +48,10 @@ const onMouseLeave = () => {
   store.tabs.hoveredTabId = -1;
 };
 
+const onContextMenu = (tab: Tab) => (e: React.MouseEvent) => {
+  store.contextMenu.show(e, getTabContextMenu(tab));
+};
+
 const Content = observer(({ tab }: { tab: Tab }) => {
   return (
     <StyledContent collapsed={tab.isExpanded}>
@@ -90,6 +94,7 @@ export default observer(({ tab }: { tab: Tab }) => {
       onMouseDown={onMouseDown(tab)}
       onMouseEnter={onMouseEnter(tab)}
       onMouseLeave={onMouseLeave}
+      onContextMenu={onContextMenu(tab)}
     >
       <TabContainer
         style={{

@@ -13,7 +13,13 @@ import {
   MenuDivider,
 } from './style';
 
-const Item = ({ data }: { data: IContextMenuItem }) => {
+const Item = ({
+  data,
+  forceIcon,
+}: {
+  data: IContextMenuItem;
+  forceIcon: boolean;
+}) => {
   const { onSelect, disabled, icon, iconSize, accelerator, label } = data;
 
   const onClick = React.useCallback(
@@ -31,14 +37,18 @@ const Item = ({ data }: { data: IContextMenuItem }) => {
       disabled={disabled}
     >
       <td style={{ paddingLeft: 10 }}></td>
-      {icon && (
+      {(icon || forceIcon) && (
         <Icon
           className="context-menu-item-icon"
           iconSize={iconSize}
           disabled={disabled}
-          style={{
-            WebkitMaskImage: `url(${icon})`,
-          }}
+          style={
+            icon
+              ? {
+                  WebkitMaskImage: `url(${icon})`,
+                }
+              : { opacity: 0 }
+          }
         ></Icon>
       )}
       <Text>{label}</Text>
@@ -54,10 +64,10 @@ export const ContextMenu = observer(() => {
     <StyledContextMenu ref={store.contextMenu.ref} visible={visible}>
       {visible && (
         <Container>
-          {data.map((r, index) => {
+          {data.items.map((r, index) => {
             if (r.hidden) return null;
             if (r.type === 'divider') return <MenuDivider key={index} />;
-            return <Item key={r.label} data={r} />;
+            return <Item key={r.label} data={r} forceIcon={data.forceIcons} />;
           })}
         </Container>
       )}

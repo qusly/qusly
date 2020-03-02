@@ -1,4 +1,7 @@
-export type IContextMenuData = IContextMenuItem[];
+export type IContextMenuData = {
+  forceIcons?: boolean;
+  items: IContextMenuItem[];
+};
 
 export interface IContextMenuItem {
   type?: 'item' | 'divider';
