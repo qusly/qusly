@@ -35,7 +35,12 @@ export const File = observer(
       (e: React.MouseEvent) => {
         const page = store.pages.current;
 
-        if (!page.isDragging && e.button !== 3 && e.button !== 4) {
+        if (
+          !page.isSelecting &&
+          !page.isDragging &&
+          e.button !== 3 &&
+          e.button !== 4
+        ) {
           e.stopPropagation();
         }
 

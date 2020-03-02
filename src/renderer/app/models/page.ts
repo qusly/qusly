@@ -4,7 +4,6 @@ import store from '../store';
 import { Session } from './session';
 import { History } from './history';
 import { PageFiles } from './page-files';
-import { getPageContextMenu } from '../components/ContextMenu/Page';
 
 let id = 0;
 
@@ -17,6 +16,8 @@ export class Page {
   public files = new PageFiles(this);
 
   public isDragging = false;
+
+  public isSelecting = false;
 
   constructor(public session: Session) {
     this.history.listen = this.listenHistory;
@@ -55,16 +56,6 @@ export class Page {
       this.updateTabTitle();
       this.files.fetch();
     }
-  };
-
-  public onMouseDown = (e: React.MouseEvent) => {
-    if (!e.ctrlKey && !e.shiftKey) {
-      store.pages.current.files.selected = [];
-    }
-  };
-
-  public onMouseUp = (e: React.MouseEvent) => {
-    store.contextMenu.show(e, getPageContextMenu());
   };
 
   @action

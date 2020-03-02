@@ -5,7 +5,26 @@ import { Selectable } from 'rectangle-selection';
 import store from '../../store';
 import { File } from '../File';
 import { DragDrop, Droppable } from '~/renderer/components/FileDragDrop';
+import { getPageContextMenu } from '../ContextMenu/Page';
 import { StyledPage, Grid } from './style';
+
+const onMouseDown = (e: React.MouseEvent) => {
+  if (!e.ctrlKey && !e.shiftKey) {
+    store.pages.current.files.selected = [];
+  }
+};
+
+const onMouseUp = (e: React.MouseEvent) => {
+  store.contextMenu.show(e, getPageContextMenu());
+};
+
+const onSelectionStart = () => {
+  store.pages.current.isSelecting = true;
+};
+
+const onSelectionEnd = () => {
+  store.pages.current.isSelecting = false;
+};
 
 export const Page = observer(() => {
   const page = store.pages.current;
@@ -14,8 +33,10 @@ export const Page = observer(() => {
     <StyledPage>
       <Grid
         onSelection={page?.files.onSelection}
-        onMouseDown={page?.onMouseDown}
-        onMouseUp={page?.onMouseUp}
+        onSelectionStart={onSelectionStart}
+        onSelectionEnd={onSelectionEnd}
+        onMouseDown={onMouseDown}
+        onMouseUp={onMouseUp}
       >
         <DragDrop onDrop={page?.files.onDrop}>
           {page?.files.list.map(r => (
