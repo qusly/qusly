@@ -1,3 +1,5 @@
+const { spawn } = require('child_process');
+
 const { getConfig, dev } = require('./webpack.config.base');
 
 const mainConfig = getConfig({
