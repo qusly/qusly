@@ -38,7 +38,13 @@ export class PathViewStore {
   };
 
   public onContextMenu = (e: React.MouseEvent) => {
-    store.contextMenu.show(e, getPathViewContextMenu());
+    if (!this.visible) {
+      store.contextMenu.show(e, getPathViewContextMenu());
+    }
+  };
+
+  public onMouseDown = (e: React.MouseEvent) => {
+    if (e.button === 0) this.show();
   };
 
   public onKeyDown = (e: React.KeyboardEvent) => {

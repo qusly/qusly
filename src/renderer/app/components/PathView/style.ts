@@ -28,7 +28,7 @@ export const Folders = styled.div`
   align-items: center;
 `;
 
-export const Folder = styled.div`
+export const StyledFolder = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
