@@ -31,7 +31,7 @@ export const Page = observer(() => {
           </DragDrop>
         </Grid>
       ) : (
-        <Preloader />
+        <Preloader background />
       )}
     </StyledPage>
   );

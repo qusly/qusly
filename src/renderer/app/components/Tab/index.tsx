@@ -14,6 +14,7 @@ import {
   TabContainer,
   Subtitle,
 } from './style';
+import { Preloader } from '~/renderer/components/Preloader';
 
 const removeTab = (tab: Tab) => () => {
   tab.close();
@@ -55,6 +56,13 @@ const onContextMenu = (tab: Tab) => (e: React.MouseEvent) => {
 const Content = observer(({ tab }: { tab: Tab }) => {
   return (
     <StyledContent collapsed={tab.isExpanded}>
+      {tab.loading && (
+        <Preloader
+          thickness={6}
+          size={16}
+          style={{ minWidth: 16, marginRight: 8 }}
+        />
+      )}
       <StyledTitle style={{ color: 'black' }}>{tab.title}</StyledTitle>
       <Subtitle>{tab.subtitle}</Subtitle>
     </StyledContent>

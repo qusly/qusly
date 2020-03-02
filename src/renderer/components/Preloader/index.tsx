@@ -6,6 +6,7 @@ export interface Props extends React.HTMLAttributes<HTMLDivElement> {
   color?: string;
   thickness?: number;
   size?: number;
+  background?: boolean;
 }
 
 const circleProps: React.SVGProps<SVGCircleElement> = {
@@ -16,12 +17,18 @@ const circleProps: React.SVGProps<SVGCircleElement> = {
   strokeMiterlimit: '10',
 };
 
-export const Preloader = ({ color, size, thickness, ...props }: Props) => {
+export const Preloader = ({
+  color,
+  size,
+  thickness,
+  background,
+  ...props
+}: Props) => {
   return (
     <div {...props}>
       <StyledPreloader size={size} color={color} thickness={thickness}>
         <svg viewBox="25 25 50 50">
-          <Background {...(circleProps as any)} />
+          {background && <Background {...(circleProps as any)} />}
           <Path {...(circleProps as any)} />
         </svg>
       </StyledPreloader>
@@ -33,4 +40,5 @@ Preloader.defaultProps = {
   thickness: 6,
   size: 30,
   color: '#3F51B5',
+  background: false,
 };

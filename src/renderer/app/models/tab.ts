@@ -34,6 +34,9 @@ export class Tab {
   public subtitle = '';
 
   @observable
+  public loading = true;
+
+  @observable
   public width = 0;
 
   @observable
