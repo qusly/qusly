@@ -8,7 +8,6 @@ export const getTabContextMenu = (tab: Tab): IContextMenuData => {
   const page = store.pages.current;
 
   return {
-    forceIcons: true,
     items: [
       {
         label: 'Close',
@@ -42,6 +41,7 @@ export const getTabContextMenu = (tab: Tab): IContextMenuData => {
           }
         },
       },
+      { type: 'divider' },
       {
         label: 'Refresh',
         onSelect: page.files.fetch,
