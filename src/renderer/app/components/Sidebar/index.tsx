@@ -6,16 +6,14 @@ import { ISidebarContent } from '../../store/sidebar';
 import Explorer from './Explorer';
 import { StyledSidebar } from './style';
 
-interface IContentProps {
+interface IPageProps {
   content: ISidebarContent;
   children?: any;
 }
 
-export const SidebarContent = observer(
-  ({ content, children }: IContentProps) => {
-    return store.sidebar.content === content ? children : undefined;
-  },
-);
+export const SidebarPage = observer(({ content, children }: IPageProps) => {
+  return store.sidebar.content === content ? children : undefined;
+});
 
 export const Sidebar = () => {
   return (

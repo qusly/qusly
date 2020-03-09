@@ -1,12 +1,23 @@
 import styled from 'styled-components';
 
-import { robotoBold } from '~/renderer/mixins';
+import { robotoBold, noButtons } from '~/renderer/mixins';
 
 export const StyledSidebar = styled.div`
   width: 256px;
   height: 100%;
   position: relative;
   background-color: rgba(0, 0, 0, 0.04);
+`;
+
+export const Content = styled.div`
+  height: calc(100% - 48px);
+  overflow-y: auto;
+
+  ${noButtons({
+    color: 'rgba(0, 0, 0, 0.12)',
+    hoverColor: 'rgba(0, 0, 0, 0.32)',
+    alwaysVisible: false,
+  })};
 `;
 
 export const Header = styled.div`

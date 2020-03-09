@@ -32,7 +32,7 @@ export class Tree {
     files.forEach(r => {
       if (r.type === 'folder') {
         let path = `/${r.name}`;
-        if (folder.path !== '/') path = `/${path}`;
+        if (folder.path !== '/') path = folder.path + path;
 
         subfolders.push({ name: r.name, path });
       }

@@ -1,10 +1,10 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
 
-import { SidebarContent } from '../';
+import { SidebarPage } from '../';
 import { ITreeFolder } from '~/renderer/interfaces';
 import store from '~/renderer/app/store';
-import { Header } from '../style';
+import { Header, Content } from '../style';
 import { StyledFolder, ExpandIcon, Icon } from './style';
 
 interface IFolderProps {
@@ -23,10 +23,10 @@ const Folder = observer(({ data, depth }: IFolderProps) => {
 
   return (
     <>
-      <StyledFolder onClick={onClick} style={{ paddingLeft: (depth + 1) * 16 }}>
+      <StyledFolder onClick={onClick} style={{ paddingLeft: depth * 16 + 16 }}>
         <ExpandIcon expanded={data.expanded} />
         <Icon />
-        {data.name}
+        {data.path}
       </StyledFolder>
       {data.expanded &&
         data?.children?.map(r => (
@@ -40,11 +40,13 @@ export default observer(() => {
   const session = store.sessions.current;
 
   return (
-    <SidebarContent content="explorer">
+    <SidebarPage content="explorer">
       <Header>Explorer</Header>
-      {session?.tree.items.map(r => (
-        <Folder key={r.path} data={r} depth={0} />
-      ))}
-    </SidebarContent>
+      <Content>
+        {session?.tree.items.map(r => (
+          <Folder key={r.path} data={r} depth={0} />
+        ))}
+      </Content>
+    </SidebarPage>
   );
 });
