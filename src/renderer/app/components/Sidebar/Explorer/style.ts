@@ -6,7 +6,6 @@ import { icons, transparency } from '~/renderer/constants';
 export const StyledFolder = styled.div`
   width: 100%;
   padding: 8px;
-  font-size: 13px;
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -36,4 +35,12 @@ export const Icon = styled.div`
   opacity: ${transparency.icons.inactive};
   margin-right: 6px;
   ${centerIcon()};
+`;
+
+export const Label = styled.div`
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
 `;

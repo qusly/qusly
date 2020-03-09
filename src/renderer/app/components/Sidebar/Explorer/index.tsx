@@ -5,7 +5,7 @@ import { SidebarPage } from '../';
 import { ITreeFolder } from '~/renderer/interfaces';
 import store from '~/renderer/app/store';
 import { Header, Content } from '../style';
-import { StyledFolder, ExpandIcon, Icon } from './style';
+import { StyledFolder, ExpandIcon, Icon, Label } from './style';
 
 interface IFolderProps {
   data: ITreeFolder;
@@ -26,7 +26,7 @@ const Folder = observer(({ data, depth }: IFolderProps) => {
       <StyledFolder onClick={onClick} style={{ paddingLeft: depth * 16 + 16 }}>
         <ExpandIcon expanded={data.expanded} />
         <Icon />
-        {data.path}
+        <Label>{data.path}</Label>
       </StyledFolder>
       {data.expanded &&
         data?.children?.map(r => (
