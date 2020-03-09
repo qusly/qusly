@@ -31,10 +31,10 @@ export class Tree {
 
     files.forEach(r => {
       if (r.type === 'folder') {
-        subfolders.push({
-          name: r.name,
-          path: `${folder.path}/${r.name}`,
-        });
+        let path = `/${r.name}`;
+        if (folder.path !== '/') path = `/${path}`;
+
+        subfolders.push({ name: r.name, path });
       }
     });
 
