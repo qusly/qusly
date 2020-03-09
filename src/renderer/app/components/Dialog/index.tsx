@@ -9,17 +9,26 @@ import {
   Title,
   Buttons,
   Button,
-  OkButton,
+  SubmitButton,
 } from './style';
+
+const onInput = (e: React.KeyboardEvent) => {
+  if (e.key === 'Enter') {
+    store.dialog.hide('save');
+  }
+};
+
+const onCancelButtonClick = (e: React.MouseEvent) => {
+  e.stopPropagation();
+  store.dialog.hide();
+};
+
+const onSubmitButtonClick = () => {
+  store.dialog.hide('save');
+};
 
 const Content = observer(() => {
   const data = store.dialog.data;
-
-  const handleEnter = React.useCallback((e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
-      store.dialog.hide('save');
-    }
-  }, []);
 
   React.useLayoutEffect(() => {
     const fieldsMap = store.dialog.fieldsMap;
@@ -58,30 +67,38 @@ const Content = observer(() => {
                 ref={ref => (store.dialog.fieldsMap[r.label] = ref)}
                 placeholder={r.placeholder}
                 defaultValue={r.value}
-                onKeyDown={r.saveOnEnter ? handleEnter : undefined}
+                onKeyDown={r.saveOnEnter ? onInput : undefined}
               />
             );
           }
           return null;
         })}
       <Buttons>
-        <Button onClick={() => store.dialog.hide()}>
+        <Button onClick={onCancelButtonClick}>
           {data.cancelButton ?? 'Cancel'}
         </Button>
-        <OkButton onClick={() => store.dialog.hide('save')}>
+        <SubmitButton onClick={onSubmitButtonClick}>
           {data.submitButton ?? 'Save'}
-        </OkButton>
+        </SubmitButton>
       </Buttons>
     </>
   );
 });
 
+const onBackgroundClick = () => {
+  store.dialog.hide();
+};
+
+const onContainerClick = (e: React.MouseEvent) => {
+  e.stopPropagation();
+};
+
 export const Dialog = observer(() => {
   const { visible } = store.dialog;
 
   return (
-    <StyledDialog visible={visible}>
-      <Container visible={visible}>
+    <StyledDialog visible={visible} onClick={onBackgroundClick}>
+      <Container visible={visible} onClick={onContainerClick}>
         <Content />
       </Container>
     </StyledDialog>

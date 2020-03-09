@@ -52,9 +52,9 @@ export class DialogStore extends EventEmitter {
   @action
   public hide = (action: 'cancel' | 'save' = 'cancel') => {
     if (this.visible) {
+      this.emit(action);
       this.visible = false;
       this.fieldsMap = {};
-      this.emit(action);
     }
   };
 }

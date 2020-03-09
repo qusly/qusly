@@ -100,7 +100,7 @@ export const Button = styled.div`
   }
 `;
 
-export const OkButton = styled(Button)`
+export const SubmitButton = styled(Button)`
   color: #fff;
   background-color: #2196f3;
 
