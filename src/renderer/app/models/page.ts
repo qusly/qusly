@@ -42,7 +42,7 @@ export class Page {
 
   @action
   public async prepare(path?: string) {
-    await this.session.connect();
+    await this.session.prepare();
 
     this.history.push(path ?? this.session.startingDir, false);
     this.updateTabTitle();
