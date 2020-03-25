@@ -46,7 +46,7 @@ export const Container = styled.div`
 
 export const Title = styled.div`
   font-size: 20px;
-  padding-bottom: 16px;
+  padding-bottom: 20px;
   overflow: hidden;
   text-overflow: ellipsis;
   ${robotoBold()};
