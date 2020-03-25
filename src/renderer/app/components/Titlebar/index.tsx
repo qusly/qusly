@@ -6,13 +6,13 @@ import { WindowsControls } from 'react-windows-controls';
 
 import store from '~/renderer/app/store';
 import { ToolbarButton } from '~/renderer/components/ToolbarButton';
-import { StyledTitlebar, TrafficButtons, Handle, Icon, Title } from './style';
 import { icons } from '~/renderer/constants/icons';
 import {
   closeWindow,
   maximizeWindow,
   minimizeWindow,
 } from '../../utils/window';
+import { StyledTitlebar, TrafficButtons, Handle, Title } from './style';
 
 const onUpdateClick = () => {
   ipcRenderer.send('update-install');
@@ -25,7 +25,7 @@ export const Titlebar = observer(() => {
   return (
     <StyledTitlebar>
       <Handle />
-      {isDarwin ? <TrafficButtons /> : <Icon />}
+      {isDarwin && <TrafficButtons />}
       <Title>{!tab ? 'Qusly' : `${tab.title} - Qusly`}</Title>
       {store.updateInfo.available && (
         <ToolbarButton icon={icons.downloadOutline} onClick={onUpdateClick} />
@@ -35,7 +35,11 @@ export const Titlebar = observer(() => {
           onClose={closeWindow}
           onMaximize={maximizeWindow}
           onMinimize={minimizeWindow}
-          style={{ WebkitAppRegion: 'no-drag', height: '100%' }}
+          style={{
+            WebkitAppRegion: 'no-drag',
+            height: '100%',
+            marginLeft: 'auto',
+          }}
         />
       )}
     </StyledTitlebar>
