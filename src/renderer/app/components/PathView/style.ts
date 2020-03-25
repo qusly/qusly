@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { robotoMedium, customInput } from '~/renderer/mixins';
+import { customInput } from '~/renderer/mixins';
 import { PRIMARY_COLOR } from '../../constants';
 
 export const StyledPathView = styled.div`
@@ -26,34 +26,6 @@ export const Folders = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
-`;
-
-export const StyledFolder = styled.div`
-  height: 100%;
-  display: flex;
-  align-items: center;
-  font-size: 14px;
-  padding-left: 4px;
-  cursor: pointer;
-  color: rgba(0, 0, 0, 0.54);
-
-  &:hover {
-    color: #000;
-  }
-
-  &:first-child {
-    padding-left: 12px;
-  }
-
-  &:last-child {
-    color: #000;
-    ${robotoMedium()};
-  }
-
-  &:not(:first-child):not(:last-child):after {
-    content: '/';
-    padding-left: 4px;
-  }
 `;
 
 export const Input = styled.input`
