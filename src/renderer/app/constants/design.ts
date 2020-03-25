@@ -6,7 +6,7 @@ export const PRIMARY_COLOR = '#ff9010';
 
 export const TOOLBAR_COLOR = '#fafafa';
 
-export const BACKGROUND_COLOR = 'rgba(0, 0, 0, 0.06)';
+export const BACKGROUND_COLOR = '#f0f0f2';
 
 export const ERROR_COLOR = '#b00020';
 

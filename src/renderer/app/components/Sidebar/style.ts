@@ -6,7 +6,7 @@ export const StyledSidebar = styled.div`
   width: 256px;
   height: 100%;
   position: relative;
-  background-color: rgba(0, 0, 0, 0.04);
+  background-color: #fafafc;
 `;
 
 export const Content = styled.div`
