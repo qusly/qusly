@@ -17,6 +17,7 @@ export const Button = styled.div`
   color: #000;
   font-size: 12px;
   background-color: rgba(0, 0, 0, 0.08);
+  transition: 0.15s transform;
   ${robotoMedium()};
 
   &::before {
@@ -34,6 +35,10 @@ export const Button = styled.div`
 
   &:hover::before {
     opacity: 0.08;
+  }
+
+  &:active {
+    transform: scale(0.95);
   }
 `;
 
