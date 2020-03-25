@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 
 import { centerIcon } from '~/renderer/mixins';
+import { PRIMARY_COLOR } from '../../constants';
 
 export const StyledFileBase = css`
   height: fit-content;
@@ -12,23 +13,23 @@ export const StyledFileBase = css`
 
 export const StyledFile = styled.div`
   border-radius: 4px;
-  transition: 0.1s background-color;
   ${StyledFileBase};
   position: relative;
-
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.04);
-  }
+  border: 1px solid transparent;
+  transition: 0.1s background-color, 0.1s border;
 
   &.selected {
-    background-color: rgba(0, 0, 0, 0.08);
+    border: 1px solid ${PRIMARY_COLOR};
+  }
+
+  &:not(.selected):hover {
+    background-color: rgba(0, 0, 0, 0.04);
   }
 
   ${({ cut }: { cut: boolean }) => css`
     ${cut &&
       css`
-        border: 1px dashed #000;
-        opacity: 0.79;
+        border: 1px dashed ${PRIMARY_COLOR};
       `}
   `}
 `;
