@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { PRIMARY_COLOR } from '~/renderer/app/constants';
 import { Path, StyledPreloader, Background } from './style';
 
 export interface Props extends React.HTMLAttributes<HTMLDivElement> {
@@ -39,6 +40,6 @@ export const Preloader = ({
 Preloader.defaultProps = {
   thickness: 6,
   size: 30,
-  color: '#3F51B5',
+  color: PRIMARY_COLOR,
   background: false,
 };
