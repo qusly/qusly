@@ -3,14 +3,8 @@ import { observer } from 'mobx-react-lite';
 
 import store from '../../store';
 import { Input } from '~/renderer/components/Input';
-import {
-  StyledDialog,
-  Container,
-  Title,
-  Buttons,
-  Button,
-  SubmitButton,
-} from './style';
+import { Button, SubmitButton } from '~/renderer/components/Button';
+import { StyledDialog, Container, Title, Buttons } from './style';
 
 const onInput = (e: React.KeyboardEvent) => {
   if (e.key === 'Enter') {
