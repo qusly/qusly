@@ -33,7 +33,7 @@
     "compile-linux": "npm run build && electron-builder -l -p always",
     "lint": "eslint \"src/**/*.ts*\" \"src/**/*.tsx*\"",
     "lint-fix": "npm run lint -- --fix",
-    "postinstall": "electron-rebuild -f -o keytar"
+    "rebuild": "electron-builder install-app-deps"
   },
   "devDependencies": {
     "@types/dotenv": "8.2.0",
@@ -54,7 +54,6 @@
     "electron": "7.1.7",
     "electron-builder": "21.2.0",
     "electron-ext-icon": "^1.0.1",
-    "electron-rebuild": "^1.8.8",
     "electron-updater": "^4.2.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.9.0",
@@ -65,8 +64,7 @@
     "gsap": "^3.0.4",
     "hard-source-webpack-plugin": "^0.13.1",
     "html-webpack-plugin": "^3.2.0",
-    "keytar": "^5.0.0",
-    "mobx": "^5.15.1",
+    "mobx": "^5.15.4",
     "mobx-react-lite": "^1.5.2",
     "nedb": "^1.8.0",
     "prettier": "^1.19.1",
@@ -86,5 +84,8 @@
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.10.1",
     "webpack-merge": "^4.2.2"
+  },
+  "dependencies": {
+    "keytar": "^5.4.0"
   }
 }
