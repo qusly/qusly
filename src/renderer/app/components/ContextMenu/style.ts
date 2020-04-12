@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
-
-import { shadows, centerIcon } from '~/renderer/mixins';
-import { transparency } from '~/renderer/constants';
+import { shadows } from '~/renderer/mixins/shadows';
+import { transparency } from '~/renderer/constants/transparency';
+import { centerIcon } from '~/renderer/mixins/images';
 
 export const StyledContextMenu = styled.table`
   position: fixed;

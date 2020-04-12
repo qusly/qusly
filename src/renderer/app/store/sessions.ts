@@ -1,8 +1,8 @@
 import { observable, computed, action } from 'mobx';
 
 import { ISite } from '~/interfaces';
-import { Session } from '../models';
 import store from '.';
+import { Session } from '../models/session';
 
 export class SessionsStore {
   @observable

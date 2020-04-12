@@ -3,8 +3,8 @@ import { observer } from 'mobx-react-lite';
 
 import store from '~/renderer/app/store';
 import { SidebarContent } from '~/renderer/app/store/activitybar';
-import { icons } from '~/renderer/constants';
 import { StyledActivitybar, StyledItem } from './style';
+import { icons } from '~/renderer/constants/icons';
 
 interface ItemProps {
   content: SidebarContent;

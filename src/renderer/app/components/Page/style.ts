@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
-
-import { centerBoth, noButtons } from '~/renderer/mixins';
-import { APPBAR_HEIGHT } from '~/renderer/app/constants';
+import { APPBAR_HEIGHT } from '../../constants/design';
+import { noButtons } from '~/renderer/mixins/scroll';
+import { centerBoth } from '~/renderer/mixins/positioning';
 
 export const StyledPage = styled.div`
   width: 100%;

@@ -4,7 +4,7 @@ import { IProtocol } from 'qusly-core';
 import { AppWindow } from '../app-window';
 import { ISite } from '~/interfaces';
 import { makeId } from '~/utils';
-import { getIcon } from '../utils';
+import { getIcon } from '../utils/icons';
 
 export const runMessagingService = (appWindow: AppWindow) => {
   ipcMain.on(`get-testing-site`, (e, id: string) => {

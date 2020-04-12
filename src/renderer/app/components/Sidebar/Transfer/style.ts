@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
-
-import { centerIcon } from '~/renderer/mixins';
-import { transparency } from '~/renderer/constants';
+import { centerIcon } from '~/renderer/mixins/images';
+import { transparency } from '~/renderer/constants/transparency';
 
 export const StyledButton = styled.div`
   width: calc(100% - 16px);

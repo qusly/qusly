@@ -3,8 +3,8 @@ import { observer } from 'mobx-react-lite';
 
 import store from '~/renderer/app/store';
 import { ToolbarButton } from '~/renderer/components/ToolbarButton';
-import { icons } from '~/renderer/constants';
 import { StyledContainer } from './style';
+import { icons } from '~/renderer/constants/icons';
 
 export const NavigationButtons = observer(() => {
   const page = store.pages.current;

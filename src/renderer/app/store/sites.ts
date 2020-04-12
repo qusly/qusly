@@ -2,8 +2,8 @@ import { observable, action } from 'mobx';
 
 import store from '.';
 import { setPassword, getPassword, deletePassword } from '~/utils/credentials';
-import { Database } from '~/renderer/models';
 import { ISite } from '~/interfaces';
+import { Database } from '~/renderer/models/database';
 
 export class SitesStore {
   public db = new Database<ISite>('sites');

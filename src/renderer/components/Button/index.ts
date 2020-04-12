@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
-
-import { robotoRegular } from '~/renderer/mixins';
+import { robotoRegular } from '~/renderer/mixins/typography';
 
 export interface IButtonProps {
   label: string;

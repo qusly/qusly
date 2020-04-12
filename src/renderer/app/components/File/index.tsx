@@ -4,8 +4,8 @@ import { selectableItem } from 'rectangle-selection';
 
 import store from '~/renderer/app/store';
 import { IFile } from '~/interfaces';
-import { resizeTextarea, selectFileName } from '~/renderer/app/utils';
 import { StyledFile, Label, Icon, Input } from './style';
+import { resizeTextarea, selectFileName } from '../../utils/input';
 
 interface Props {
   data: IFile;

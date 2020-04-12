@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components';
-
-import { transparency, icons } from '~/renderer/constants';
-import { centerIcon, robotoMedium, singleLine } from '~/renderer/mixins';
+import { transparency } from '~/renderer/constants/transparency';
+import { centerIcon } from '~/renderer/mixins/images';
+import { singleLine, robotoMedium } from '~/renderer/mixins/typography';
+import { icons } from '~/renderer/constants/icons';
 
 export const StyledItem = styled.div`
   width: 100%;
@@ -18,7 +19,7 @@ export const Icon = styled.div`
   height: 32px;
   ${centerIcon(32)};
 
-  ${({ icon, opacity }: { icon: string, opacity: number }) => css`
+  ${({ icon, opacity }: { icon: string; opacity: number }) => css`
     background-image: url(${icon});
     opacity: ${opacity};
   `}
@@ -49,7 +50,7 @@ export const Label = styled.div`
 
 export const Show = styled(Label)`
   margin-top: 8px;
-  color: #2196F3;
+  color: #2196f3;
   cursor: pointer;
 `;
 

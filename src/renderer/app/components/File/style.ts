@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
-
-import { icons } from '~/renderer/constants';
-import { centerIcon, robotoRegular, customInput } from '~/renderer/mixins';
+import { icons } from '~/renderer/constants/icons';
+import { centerIcon } from '~/renderer/mixins/images';
+import { customInput } from '~/renderer/mixins/input';
 
 interface Props {
   selected: boolean;

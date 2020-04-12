@@ -3,13 +3,13 @@ import * as React from 'react';
 import { ipcRenderer } from 'electron';
 
 import store from '~/renderer/app/store';
-import {
-  TABS_PADDING,
-  defaultTabOptions,
-  TAB_ANIMATION_DURATION,
-  ADD_TAB_MARGIN_LEFT,
-} from '~/renderer/app/constants';
 import { ISite } from '~/interfaces';
+import {
+  defaultTabOptions,
+  ADD_TAB_MARGIN_LEFT,
+  TABS_PADDING,
+  TAB_ANIMATION_DURATION,
+} from '../constants/tabs';
 
 let id = 1;
 

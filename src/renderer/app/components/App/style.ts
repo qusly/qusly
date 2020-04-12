@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-
-import { TITLEBAR_HEIGHT } from '~/renderer/app/constants';
+import { TITLEBAR_HEIGHT } from '../../constants/design';
 
 export const StyledApp = styled.div`
   width: 100vw;
