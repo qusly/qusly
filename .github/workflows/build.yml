@@ -22,7 +22,7 @@ jobs:
       - name: Build the app
         uses: samuelmeuli/action-electron-builder@v1
         with:
-          github_token: ${{ secrets.GH_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
           mac_certs: ${{ secrets.mac_certs }}
           mac_certs_password: ${{ secrets.mac_certs_password }}
