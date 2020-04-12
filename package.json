@@ -1,6 +1,6 @@
 {
   "name": "qusly",
-  "version": "0.2.0-alpha",
+  "version": "0.2.0-alpha.2",
   "description": "A full-featured, elegant FTP client.",
   "keywords": [
     "typescript",
