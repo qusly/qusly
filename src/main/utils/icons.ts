@@ -1,6 +1,22 @@
-import { getExtIcon } from 'electron-ext-icon';
+import { promises as fs } from 'fs';
+import { resolve } from 'path';
+import { app } from 'electron';
+
+import { makeId } from '~/utils';
 
 export const getIcon = async (ext: string) => {
-  const img = await getExtIcon(ext, { size: 'normal' });
-  return { ext, icon: img.toDataURL() };
+  const tempPath = app.getPath('temp');
+  const filePath = resolve(tempPath, `${makeId(16)}.${ext}`);
+
+  await fs.writeFile(filePath, undefined);
+
+  let data: Electron.NativeImage;
+
+  try {
+    data = await app.getFileIcon(filePath, { size: 'normal' });
+  } catch (error) {}
+
+  await fs.unlink(filePath);
+
+  return { ext, icon: data.toDataURL() };
 };

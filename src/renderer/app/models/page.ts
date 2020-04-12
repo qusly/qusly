@@ -67,7 +67,7 @@ export class Page {
       this.files = sortFiles(files);
       this.loading = false;
 
-      this.session.tree.update(this.treeItem, this.files);
+      await this.session.tree.update(this.treeItem, this.files);
     } catch (e) {
       // TODO: handle the error
       console.error(e);

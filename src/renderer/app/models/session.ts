@@ -46,9 +46,9 @@ export class Session {
 
       this.startPath = path;
       this.status = 'connected';
-      this.tree.fetch(this.tree.items[0]);
 
-      await this.downloadClient.connect(this.site);
+      await this.tree.fetch(this.tree.items[0]);
+      // await this.downloadClient.connect(this.site);
     }
   }
 
