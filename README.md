@@ -20,10 +20,7 @@ Qusly is an FTP client, built on top of `Electron` and `React`. It aims to be be
 # Features
 
 - Supports FTP, FTPS and SFTP
-- Parallel file transfer
 - File operations
-- Details panel
-- Image preview
 - Tree explorer
 - Tabs
 
