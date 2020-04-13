@@ -7,15 +7,14 @@ import {
 } from '~/renderer/app/components/ContextMenu/style';
 import { StyledDropdown, Menu, Label, DropIcon } from './styles';
 
-export const DropdownItem = ({
-  children,
-  value,
-}: {
+interface ItemProps extends React.HTMLAttributes<HTMLDivElement> {
   children: any;
   value: string;
-}) => {
+}
+
+export const DropdownItem = ({ children, value, ...props }: ItemProps) => {
   return (
-    <StyledItem value={value}>
+    <StyledItem value={value} {...props}>
       <Text>{children}</Text>
     </StyledItem>
   );
@@ -138,12 +137,12 @@ export class Dropdown extends React.PureComponent<Props, State> {
         <DropIcon expanded={expanded} />
         <Menu visible={expanded}>
           <Items>
-            {React.Children.map(children, child => {
+            {React.Children.map(children, (child) => {
               const { props } = child;
 
               return React.cloneElement(child, {
                 selected: value === props.value,
-                onMouseDown: (e: React.MouseEvent) => e.stopPropagation(),
+                onMouseDown: (e) => e.stopPropagation(),
                 onClick: this.onItemMouseClick(props.value),
               });
             })}
