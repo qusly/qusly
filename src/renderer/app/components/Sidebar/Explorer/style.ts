@@ -4,7 +4,9 @@ import { centerIcon } from '~/renderer/mixins';
 import { icons, transparency } from '~/renderer/constants';
 
 export const StyledFolder = styled.div`
-  width: 100%;
+  width: calc(100% - 16px);
+  margin: 0 auto;
+  border-radius: 8px;
   padding: 8px;
   display: flex;
   align-items: center;
