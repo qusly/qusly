@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 import { CARD_SHADOW, EASING_FUNCTION } from '../../constants';
-import { noUserSelect, robotoBold } from '~/renderer/mixins';
+import { noUserSelect } from '~/renderer/mixins';
 
 export const StyledDialog = styled.div`
   width: 100%;
@@ -49,7 +49,6 @@ export const Title = styled.div`
   padding-bottom: 20px;
   overflow: hidden;
   text-overflow: ellipsis;
-  ${robotoBold()};
   ${noUserSelect()};
 `;
 

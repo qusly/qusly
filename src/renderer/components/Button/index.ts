@@ -17,7 +17,8 @@ export const Button = styled.div`
   color: #000;
   font-size: 12px;
   background-color: rgba(0, 0, 0, 0.08);
-  transition: 0.15s transform;
+  will-change: transform;
+  transition: 0.1s transform;
   ${robotoMedium()};
 
   &::before {
@@ -30,7 +31,7 @@ export const Button = styled.div`
     background-color: #000;
     position: absolute;
     will-change: opacity;
-    transition: 0.2s opacity;
+    transition: 0.1s opacity;
   }
 
   &:hover::before {
