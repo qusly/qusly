@@ -1,7 +1,7 @@
 import React from 'react';
 
 import store from '~/renderer/app/store';
-import { StyledFolder, Label, Chevron } from './style';
+import { Label, Chevron } from './style';
 
 interface Props {
   label: string;
@@ -28,9 +28,16 @@ export const Folder = ({ label, index, last }: Props) => {
   );
 
   return (
-    <StyledFolder onMouseUp={onMouseUp} onMouseDown={e => e.stopPropagation()}>
-      <Label>{label}</Label>
+    <>
+      <Label last={last}>{label}</Label>
       {!last && <Chevron />}
-    </StyledFolder>
+    </>
   );
+
+  // return (
+  //   <StyledFolder onMouseUp={onMouseUp} onMouseDown={e => e.stopPropagation()}>
+  //     <Label>{label}</Label>
+  //     {!last && <Chevron />}
+  //   </StyledFolder>
+  // );
 };

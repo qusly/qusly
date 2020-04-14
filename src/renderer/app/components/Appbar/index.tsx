@@ -2,13 +2,17 @@ import React from 'react';
 
 import { Tabbar } from '../Tabbar';
 import { Toolbar } from '../Toolbar';
-import { StyledAppbar } from './style';
+import { PathView } from '../PathView';
+import { StyledAppbar, Container } from './style';
 
 export const Appbar = () => {
   return (
     <StyledAppbar>
       <Tabbar />
-      <Toolbar />
+      <Container>
+        <PathView />
+        <Toolbar />
+      </Container>
     </StyledAppbar>
   );
 };

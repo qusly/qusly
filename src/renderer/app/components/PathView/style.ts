@@ -1,17 +1,19 @@
 import styled, { css } from 'styled-components';
 
 import { customInput } from '~/renderer/mixins';
-import { PRIMARY_COLOR } from '../../constants';
+import { PRIMARY_COLOR, PATHVIEW_HEIGHT } from '../../constants';
 
 export const StyledPathView = styled.div`
   width: 100%;
-  height: 30px;
-  margin-left: 10px;
+  height: ${PATHVIEW_HEIGHT}px;
   overflow: hidden;
   cursor: text;
   position: relative;
-  border-radius: 4px;
-  background-color: #f5f5f5;
+  margin-top: 8px;
+
+  /* &:hover {
+    border: 1px solid rgba(0, 0, 0, 0.06);
+  } */
 
   ${({ inputVisible }: { inputVisible: boolean }) => css`
     ${inputVisible &&
@@ -22,7 +24,6 @@ export const StyledPathView = styled.div`
 `;
 
 export const Folders = styled.div`
-  width: 100%;
   height: 100%;
   display: flex;
   align-items: center;

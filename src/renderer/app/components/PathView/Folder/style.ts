@@ -1,39 +1,34 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-import { robotoMedium, centerIcon } from '~/renderer/mixins';
+import { centerIcon, robotoMedium } from '~/renderer/mixins';
 import { icons, transparency } from '~/renderer/constants';
 
-export const StyledFolder = styled.div`
-  height: 100%;
-  display: flex;
-  align-items: center;
+export const Label = styled.div`
   cursor: pointer;
-  color: rgba(0, 0, 0, 0.54);
+  font-size: 16px;
+  padding: 8px 4px;
+  border-radius: 4px;
+
+  ${({ last }: { last: boolean }) => css`
+    ${last &&
+      css`
+        ${robotoMedium()};
+      `}
+  `}
 
   &:hover {
-    color: #000;
-    background-color: rgba(0, 0, 0, 0.06);
+    background-color: rgba(0, 0, 0, 0.04);
   }
 
-  &:first-child {
-    padding-left: 12px;
+  &::first-letter {
+    text-transform: uppercase;
   }
-
-  &:last-child {
-    color: #000;
-    ${robotoMedium()};
-  }
-`;
-
-export const Label = styled.div`
-  font-size: 14px;
-  padding: 0px 4px;
 `;
 
 export const Chevron = styled.div`
   width: 16px;
   height: 16px;
   background-image: url(${icons.chevronRight});
-  opacity: ${transparency.icons.inactive};
+  opacity: ${transparency.icons.disabled};
   ${centerIcon()};
 `;

@@ -11,10 +11,9 @@ export const BACKGROUND_COLOR = '#f0f0f2';
 export const ERROR_COLOR = '#b00020';
 
 export const TITLEBAR_HEIGHT = 24;
-
 export const TABBAR_HEIGHT = 30;
-
+export const PATHVIEW_HEIGHT = 36;
 export const TOOLBAR_HEIGHT = 46;
 export const TOOLBAR_BUTTON_SIZE = 32;
 
-export const APPBAR_HEIGHT = TABBAR_HEIGHT + TOOLBAR_HEIGHT;
+export const APPBAR_HEIGHT = TABBAR_HEIGHT + TOOLBAR_HEIGHT + PATHVIEW_HEIGHT;
