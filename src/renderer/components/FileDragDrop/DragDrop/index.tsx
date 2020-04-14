@@ -90,6 +90,10 @@ export const DragDrop = ({ onDrop, distance, children }: Props) => {
     [],
   );
 
+  React.useEffect(() => {
+    return onWindowMouseUp;
+  });
+
   return (
     <>
       <DragDropContext.Provider value={provider}>

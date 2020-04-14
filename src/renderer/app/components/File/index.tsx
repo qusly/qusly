@@ -46,7 +46,9 @@ export const File = observer(
 
         if (onMouseUp) onMouseUp(e);
 
-        page.files.onFileMouseUp(e, data);
+        if (!page.isSelecting) {
+          page.files.onFileMouseUp(e, data);
+        }
       },
       [data, onMouseUp],
     );
