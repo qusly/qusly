@@ -40,11 +40,14 @@ export const DragDrop = ({ onDrop, distance, children }: Props) => {
     window.addEventListener('mouseup', onWindowMouseUp);
   }, []);
 
-  const _onDrop = React.useCallback((data: IFileDroppableData) => {
-    if (active.current && thumbVisible.current) {
-      if (onDrop) onDrop(data);
-    }
-  }, []);
+  const _onDrop = React.useCallback(
+    (data: IFileDroppableData) => {
+      if (active.current && thumbVisible.current) {
+        if (onDrop) onDrop(data);
+      }
+    },
+    [onDrop],
+  );
 
   const onWindowMouseMove = React.useCallback((e: MouseEvent) => {
     if (thumbRef.current) {
@@ -87,7 +90,7 @@ export const DragDrop = ({ onDrop, distance, children }: Props) => {
       onDrag,
       onDrop: _onDrop,
     }),
-    [],
+    [onDrop],
   );
 
   React.useEffect(() => {

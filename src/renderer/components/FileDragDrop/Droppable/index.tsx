@@ -15,16 +15,11 @@ interface Props {
 export const Droppable = ({ data, children }: Props) => {
   const context = React.useContext(DragDropContext);
 
-  const onMouseDown = React.useCallback(
-    (e: React.MouseEvent) => {
-      context.onDrag(e);
-    },
-    [context],
-  );
+  const onMouseDown = context.onDrag;
 
   const onMouseUp = React.useCallback(() => {
     context.onDrop(data);
-  }, [data]);
+  }, [context, data]);
 
   const provided = React.useMemo<IDraggableProvided>(() => {
     return {
