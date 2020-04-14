@@ -26,7 +26,7 @@ export const Titlebar = observer(() => {
     <StyledTitlebar>
       <Handle />
       {isDarwin && <TrafficButtons />}
-      <Title>{!tab ? 'Qusly' : `${tab.title} - Qusly`}</Title>
+      <Title>{!tab ? 'Qusly' : tab.title}</Title>
       {store.updateInfo.available && (
         <ToolbarButton icon={icons.downloadOutline} onClick={onUpdateClick} />
       )}

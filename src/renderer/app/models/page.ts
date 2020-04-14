@@ -45,7 +45,7 @@ export class Page {
     await this.session.prepare();
 
     this.history.push(path ?? this.session.startingDir, false);
-    this.updateTabTitle();
+    this.updateTabData();
 
     await this.files.fetch();
   }
@@ -53,16 +53,16 @@ export class Page {
   @action
   private listenHistory = (path: string) => {
     if (path && !this.loading) {
-      this.updateTabTitle();
+      this.updateTabData();
       this.files.fetch();
     }
   };
 
   @action
-  public updateTabTitle(path?: string) {
-    const _path = path ?? this.history.path;
+  private updateTabData() {
+    const path = this.history.path;
     const { host } = this.session.config;
 
-    this.tab.title = _path ? `${_path} - ${host}` : host;
+    this.tab.title = path ? `${path} - ${host}` : host;
   }
 }

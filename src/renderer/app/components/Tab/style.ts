@@ -78,7 +78,14 @@ export const StyledTitle = styled.div`
   transform: translateZ(0);
   ${body2()};
   font-size: 13px;
-  transition: 0.2s margin-left;
+  margin-left: 12px;
+`;
+
+export const StyledIcon = styled.div`
+  height: 16px;
+  min-width: 16px;
+  transition: 0.2s opacity, 0.2s min-width;
+  ${centerIcon()};
 `;
 
 interface ContentProps {

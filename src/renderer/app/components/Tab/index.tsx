@@ -13,7 +13,9 @@ import {
   StyledBorder,
   StyledOverlay,
   TabContainer,
+  StyledIcon,
 } from './style';
+import { icons } from '~/renderer/constants';
 
 const removeTab = (tab: Tab) => () => {
   tab.close();
@@ -55,12 +57,16 @@ const onContextMenu = (tab: Tab) => (e: React.MouseEvent) => {
 const Content = observer(({ tab }: { tab: Tab }) => {
   return (
     <StyledContent collapsed={tab.isExpanded}>
-      {tab.loading && (
+      {tab.loading ? (
         <Preloader thickness={6} size={16} style={{ minWidth: 16 }} />
+      ) : (
+        <StyledIcon
+          style={{
+            backgroundImage: `url(${icons.folderOutline})`,
+          }}
+        />
       )}
-      <StyledTitle style={{ marginLeft: tab.loading ? 8 : 0 }}>
-        {tab.title}
-      </StyledTitle>
+      <StyledTitle>{tab.title}</StyledTitle>
     </StyledContent>
   );
 });
