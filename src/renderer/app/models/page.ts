@@ -51,7 +51,7 @@ export class Page {
   }
 
   @action
-  public listenHistory = (path: string) => {
+  private listenHistory = (path: string) => {
     if (path && !this.loading) {
       this.updateTabTitle();
       this.files.fetch();

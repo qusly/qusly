@@ -13,6 +13,10 @@ import {
   MenuDivider,
 } from './style';
 
+const onItemMouseDown = (e: React.MouseEvent) => {
+  e.stopPropagation();
+};
+
 const Item = ({
   data,
   forceIcon,
@@ -22,17 +26,14 @@ const Item = ({
 }) => {
   const { onSelect, disabled, icon, iconSize, accelerator, label } = data;
 
-  const onClick = React.useCallback(
-    (e: React.MouseEvent) => {
-      store.contextMenu.visible = false;
-      if (onSelect && !disabled) onSelect();
-    },
-    [onSelect],
-  );
+  const onClick = React.useCallback(() => {
+    store.contextMenu.visible = false;
+    if (onSelect && !disabled) onSelect();
+  }, [onSelect]);
 
   return (
     <StyledItem
-      onMouseDown={e => e.stopPropagation()}
+      onMouseDown={onItemMouseDown}
       onClick={onClick}
       disabled={disabled}
     >
