@@ -35,7 +35,7 @@ export const Button = styled.div`
   }
 
   &:hover::before {
-    opacity: 0.08;
+    opacity: 0.06;
   }
 
   &:active {

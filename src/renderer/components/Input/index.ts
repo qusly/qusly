@@ -23,7 +23,11 @@ export const Input = styled.input`
 
   &:hover,
   &:focus {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.12);
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 2px rgba(100, 181, 246, 0.54);
   }
 
   &::placeholder {
