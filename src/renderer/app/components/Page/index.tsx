@@ -4,7 +4,7 @@ import { Selectable } from 'rectangle-selection';
 
 import store from '../../store';
 import { File } from '../File';
-import { DragDrop, Droppable } from '~/renderer/components/FileDragDrop';
+import { DragDrop, Droppable } from '../Files/DragDrop';
 import { getPageContextMenu } from '../ContextMenu/Page';
 import { StyledPage, Grid } from './style';
 
