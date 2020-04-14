@@ -4,10 +4,8 @@ import { centerIcon } from '~/renderer/mixins';
 import { icons, transparency } from '~/renderer/constants';
 
 export const StyledFolder = styled.div`
-  width: calc(100% - 16px);
-  margin: 0 auto;
-  border-radius: 8px;
-  padding: 8px;
+  width: 100%;
+  height: 36px;
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -18,25 +16,32 @@ export const StyledFolder = styled.div`
 `;
 
 export const ExpandIcon = styled.div`
-  width: 20px;
-  height: 20px;
+  min-width: 24px;
+  height: 24px;
   background-image: url(${icons.expand});
   opacity: ${transparency.icons.inactive};
-  margin-right: 8px;
-  ${centerIcon()};
+  cursor: default;
+  ${centerIcon(18)};
 
   ${({ expanded }: { expanded: boolean }) => css`
     transform: rotate(${expanded ? 0 : -90}deg);
   `}
+
+  &:hover {
+    opacity: 1;
+  }
 `;
 
 export const Icon = styled.div`
-  width: 18px;
+  min-width: 18px;
   height: 18px;
-  background-image: url(${icons.folder});
-  opacity: ${transparency.icons.inactive};
-  margin-right: 6px;
-  ${centerIcon()};
+  /* margin-left: 4px; */
+  background-color: #90a4ae;
+  ${centerIcon('contain', true)};
+
+  ${({ expanded }: { expanded: boolean }) => css`
+    mask-image: url(${expanded ? icons.folderOpen : icons.folder});
+  `}
 `;
 
 export const Label = styled.div`
@@ -44,5 +49,6 @@ export const Label = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  flex: 1;
+  margin-left: 6px;
+  /* flex: 1; */
 `;

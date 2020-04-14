@@ -11,6 +11,7 @@ export const StyledSidebar = styled.div`
 
 export const Content = styled.div`
   height: calc(100% - 48px);
+  overflow-x: hidden;
   overflow-y: auto;
 
   ${noButtons({

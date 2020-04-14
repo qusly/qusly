@@ -14,19 +14,28 @@ interface IFolderProps {
 
 const Folder = observer(({ data, depth }: IFolderProps) => {
   const onClick = React.useCallback(() => {
-    if (!data.expanded) {
-      store.sessions.current.tree.fetch(data);
-    }
+    store.pages.current.history.push(data.path);
+  }, [data.path]);
 
-    data.expanded = !data.expanded;
-  }, [data]);
+  const onExpandClick = React.useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+
+      data.expanded = !data.expanded;
+
+      if (data.expanded) {
+        store.sessions.current.tree.fetch(data);
+      }
+    },
+    [data.expanded],
+  );
 
   return (
     <>
-      <StyledFolder onClick={onClick} style={{ paddingLeft: depth * 16 + 16 }}>
-        <ExpandIcon expanded={data.expanded} />
-        <Icon />
-        <Label>{data.path}</Label>
+      <StyledFolder onClick={onClick} style={{ paddingLeft: depth * 16 }}>
+        <ExpandIcon expanded={data.expanded} onClick={onExpandClick} />
+        <Icon expanded={data.expanded} />
+        <Label>{data.name}</Label>
       </StyledFolder>
       {data.expanded &&
         data?.children?.map(r => (
@@ -44,7 +53,7 @@ export default observer(() => {
       <Header>Explorer</Header>
       <Content>
         {session?.tree.items.map(r => (
-          <Folder key={r.path} data={r} depth={0} />
+          <Folder key={r.path} data={r} depth={1} />
         ))}
       </Content>
     </SidebarPage>
