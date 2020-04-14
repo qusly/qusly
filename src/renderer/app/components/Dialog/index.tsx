@@ -91,8 +91,8 @@ export const Dialog = observer(() => {
   const { visible } = store.dialog;
 
   return (
-    <StyledDialog visible={visible} onClick={onBackgroundClick}>
-      <Container visible={visible} onClick={onContainerClick}>
+    <StyledDialog visible={visible} onMouseUp={onBackgroundClick}>
+      <Container visible={visible} onMouseUp={onContainerClick}>
         <Content />
       </Container>
     </StyledDialog>
